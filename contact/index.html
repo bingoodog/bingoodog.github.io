@@ -16,17 +16,21 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="https://bingoodog.github.io/archives/2024/04/index.html">
+    <meta name="description" content="欢迎留言">
+<meta property="og:type" content="website">
+<meta property="og:title" content="留言板">
+<meta property="og:url" content="https://bingoodog.github.io/contact/index.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
+<meta property="og:description" content="欢迎留言">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-13T16:03:19.000Z">
+<meta property="article:modified_time" content="2024-04-13T16:16:19.648Z">
 <meta property="article:author" content="bin">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>归档 - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>留言板 - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +214,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="归档"></span>
+            <span id="subtitle" data-typed-text="留言板"></span>
           
         </div>
 
@@ -237,35 +241,56 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">共计 3 篇文章</p>
-  <hr>
+<article class="page-content">
+  <p>欢迎留言</p>
+
+
   
   
-    
+  
+    <article id="comments" lazyload>
       
-      <p class="h5">2024</p>
-    
-    <a href="/2024/04/13/test/" class="list-group-item list-group-item-action">
-      <time>04-13</time>
-      <div class="list-group-item-title">test</div>
-    </a>
-  
-    
-    <a href="/2024/04/06/My-New-Post/" class="list-group-item list-group-item-action">
-      <time>04-06</time>
-      <div class="list-group-item-title">My New Post</div>
-    </a>
-  
-    
-    <a href="/2024/04/06/hello-world/" class="list-group-item list-group-item-action">
-      <time>04-06</time>
-      <div class="list-group-item-title">hello-world</div>
-    </a>
-  
-</div>
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"bingoodog/bingoodog.github.io","repo-id":"R_kgDOLqprKw","category":"Announcements","category-id":"DIC_kwDOLqprK84Ceo-w","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"bottom","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
 
 
+    </article>
+  
+
+
+</article>
 
 
 
