@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>test</title>
+    <link href="/2024/04/13/test/"/>
+    <url>/2024/04/13/test/</url>
+    
+    <content type="html"><![CDATA[<p>这是一个测试的md</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>hexo_fig</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>测试</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>My New Post</title>
     <link href="/2024/04/06/My-New-Post/"/>
     <url>/2024/04/06/My-New-Post/</url>
