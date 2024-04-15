@@ -16,22 +16,22 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是一个测试的md">
+    <meta name="description" content="开放课题的申请初稿">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test">
-<meta property="og:url" content="https://bingoodog.github.io/2024/04/13/test/index.html">
+<meta property="og:title" content="开放课题申请">
+<meta property="og:url" content="https://bingoodog.github.io/2024/04/13/%E5%BC%80%E6%94%BE%E8%AF%BE%E9%A2%98/index.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="这是一个测试的md">
+<meta property="og:description" content="开放课题的申请初稿">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-13T11:55:30.000Z">
-<meta property="article:modified_time" content="2024-04-13T12:04:36.510Z">
+<meta property="article:modified_time" content="2024-04-14T11:47:15.816Z">
 <meta property="article:author" content="bin">
 <meta property="article:tag" content="测试">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>test - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>开放课题申请 - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -92,7 +92,20 @@
 
 
 <body>
-  
+  <div>
+	<div class='real_mask' style="
+		background-color: rgba(0,0,0,0.3);
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		z-index: -777;
+	"></div>
+	<div id="banner_video_insert">
+	</div>	
+	<div id='vvd_banner_img'>
+	</div>
+</div>
+<div id="banner"></div>
 
   <header>
     
@@ -221,13 +234,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/bg/blog.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('https://uipv4.zywvvd.com:33030/HexoFiles/new/bg-trans.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="test"></span>
+            <span id="subtitle" data-typed-text="开放课题申请"></span>
           
         </div>
 
@@ -250,7 +263,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8 字
+          777 字
         
       </span>
     
@@ -261,7 +274,7 @@
         
         
         
-          1 分钟
+          7 分钟
         
       </span>
     
@@ -281,6 +294,71 @@
 
 </div>
 
+	<script type="text/javascript" src="/vvd_js/jquery.js"></script>
+
+	<div class="banner" id='banner' >
+
+		<div class="full-bg-img" >
+
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/vvd_js/video_url.json', function(data){
+						if (true){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+							set_video_attr('banner_img_item')
+
+							if (!isMobile) {
+								video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+								document.getElementById("banner_video_insert").innerHTML = video_html_res;
+								set_video_attr('video_item')
+							}
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+			</div>
+		</div>
+    </div>
   </header>
 
   <main>
@@ -298,12 +376,26 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">test</h1>
+            <h1 id="seo-header">开放课题申请</h1>
             
             
               <div class="markdown-body">
                 
-                <p>这是一个测试的md</p>
+                <p>课题意义：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">湖泊生态系统对维护生物多样性、提供饮用水资源及休闲娱乐等方面发挥着不可替代的作用。然而，水体污染导致的富营养化已成为全球性环境问题。叶绿素<span class="hljs-selector-tag">a</span>浓度是反映水体富营养化程度的关键指标。传统的监测方法依赖大量手工取样和实验室分析，费时费力且无法实现实时监测。随着遥感技术的发展，利用空间光学遥感进行叶绿素<span class="hljs-selector-tag">a</span>浓度的远程监测成为一种新趋势。但现有方法在精度和适应性方面仍存在不足，难以满足实际应用需求。AI技术，特别是深度学习，为解决这一问题提供了新的可能。本项目提出使用亚马逊Autogluon智能框架，结合最新的光学遥感技术，开发出一种新的叶绿素<span class="hljs-selector-tag">a</span>浓度反演模型，以提供更加准确和实用的湖泊水体监测方法。<br></code></pre></td></tr></table></figure>
+
+<p>研究目标：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">本项目旨在开发一种基于亚马逊Autogluon的智能框架，通过光学遥感数据快速、准确反演湖泊水体叶绿素<span class="hljs-selector-tag">a</span>浓度，提升现有技术的精确性和普适性，以支持环境监测和水质管理。<br></code></pre></td></tr></table></figure>
+
+<p>研究内容：</p>
+<p>（1）研究并选择适合湖泊水体叶绿素a浓度反演的遥感数据类型和特征；<br>（2）基于亚马逊Autogluon，开发适合的数据预处理和模型训练流程，利用深度学习技术处理复杂的遥感数据；<br>（3）构建和训练多种机器学习模型，评估其在叶绿素a浓度反演中的表现，并选出最优模型；<br>（4）通过实地采集的湖泊水样数据验证模型准确性，分析模型在不同类型的湖泊环境中的适用性和稳定性；<br>（5）综合研究结果，形成一套完整的叶绿素a浓度反演方法论，并开发相应的软件或工具，提升湖泊水质监测的效率和准确性。</p>
+<p>考核指标：</p>
+<p>（1）成功开发基于亚马逊Autogluon的叶绿素a浓度反演模型；<br>（2）模型在多个湖泊数据集上的平均准确率达到90%以上；<br>（3）发表至少5篇相关领域的高水平科学论文；<br>（4）形成一套完整的操作手册，包括软件工具或平台，用于湖泊水质的实时监测和分析。</p>
+<p>预期成果：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">包括技术文件类成果、高水平文章、实物类成果，具体为基于亚马逊Autogluon的叶绿素<span class="hljs-selector-tag">a</span>浓度反演模型，相关的科学论文发表，以及开发的软件工具或平台，用于辅助环境科学家和管理部门更有效地监测和管理湖泊水质。<br></code></pre></td></tr></table></figure>
+
+<p>主题词：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">湖泊水体、叶绿素<span class="hljs-selector-tag">a</span>浓度、空间光学遥感、亚马逊Autogluon、智能框架    <br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -349,8 +441,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>test</div>
-      <div>https://bingoodog.github.io/2024/04/13/test/</div>
+      <div>开放课题申请</div>
+      <div>https://bingoodog.github.io/2024/04/13/开放课题/</div>
     </div>
     <div class="license-meta">
       
@@ -398,8 +490,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/06/My-New-Post/" title="My New Post">
-                        <span class="hidden-mobile">My New Post</span>
+                      <a href="/2024/04/06/%E5%B8%B8%E7%94%A8%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" title="评价指标">
+                        <span class="hidden-mobile">评价指标</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
