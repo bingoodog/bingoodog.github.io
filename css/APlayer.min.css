@@ -72,7 +72,7 @@
 
 .aplayer.aplayer-fixed {
     position: fixed;
-    bottom: 0px;
+    bottom: 350px;
     left: 0;
     right: 0;
     margin: 0;
@@ -90,7 +90,7 @@
 
 .aplayer.aplayer-fixed .aplayer-body {
     position: fixed;
-    bottom: 0px;
+    bottom: 350px;
     left: 0;
     right: 0;
     margin: 0;
@@ -124,7 +124,7 @@
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
     transition: all .3s ease;
-    bottom: 0px;
+    bottom: 350px;
     border-bottom: none;
     border-top: 1px solid #e9e9e9
 }
