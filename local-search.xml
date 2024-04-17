@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>My First Post</title>
+    <link href="/2024/04/17/My-First-Post/"/>
+    <url>/2024/04/17/My-First-Post/</url>
+    
+    <content type="html"><![CDATA[<!-- 写一个blog通用目录 --><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><pre><code class="hljs">    介绍一下hexo是一个基于Node.js的静态博客框架，使用Markdown编写文章，然后通过hexo生成静态网页。hexo有很多主题可以选择，可以根据自己的喜好选择一个合适的主题。</code></pre><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre><code class="hljs">    安装hexo需要先安装Node.js和Git，然后使用npm安装hexo。</code></pre><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><pre><code class="hljs">    配置hexo需要修改一些配置文件，比如_config.yml。</code></pre><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code class="hljs">    使用hexo需要先新建一个博客文件，然后使用hexo命令生成静态网页。    hexo有很多主题可以选择，可以根据自己的喜好选择一个合适的主题。</code></pre><h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><pre><code class="hljs">    发布博客需要先将生成的静态网页上传到GitHub或者其他代码托管平台。</code></pre><h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>结语部分是对文章的总结和评价。</p><h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>参考资料部分是列出文章中引用的资料链接。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>开放课题申请</title>
     <link href="/2024/04/13/%E5%BC%80%E6%94%BE%E8%AF%BE%E9%A2%98/"/>
     <url>/2024/04/13/%E5%BC%80%E6%94%BE%E8%AF%BE%E9%A2%98/</url>
