@@ -16,21 +16,25 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是一篇blog。">
+    <meta name="description" content="红边波段补全">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My First Post">
-<meta property="og:url" content="https://bingoodog.github.io/2024/04/17/My-First-Post/index.html">
+<meta property="og:title" content="Landsat-8 to Sentinel-2">
+<meta property="og:url" content="https://bingoodog.github.io/2024/05/29/Landsat-8%20to%20Sentinel-2/index.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="这是一篇blog。">
+<meta property="og:description" content="红边波段补全">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-04-17T04:51:52.000Z">
-<meta property="article:modified_time" content="2024-04-24T07:33:29.626Z">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17169506560661716950655983.png">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17169510320691716951031563.png">
+<meta property="article:published_time" content="2024-05-29T02:23:12.000Z">
+<meta property="article:modified_time" content="2024-05-29T03:11:31.584Z">
 <meta property="article:author" content="bin">
+<meta property="article:tag" content="Remote Sensing">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17169506560661716950655983.png">
   
   
   
-  <title>My First Post - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>Landsat-8 to Sentinel-2 - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -263,7 +267,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="My First Post"></span>
+            <span id="subtitle" data-typed-text="Landsat-8 to Sentinel-2"></span>
           
         </div>
 
@@ -274,8 +278,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-17 12:51" pubdate>
-          2024年4月17日 下午
+        <time datetime="2024-05-29 10:23" pubdate>
+          2024年5月29日 上午
         </time>
       </span>
     
@@ -286,7 +290,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          156 字
+          1k 字
         
       </span>
     
@@ -297,7 +301,7 @@
         
         
         
-          2 分钟
+          9 分钟
         
       </span>
     
@@ -407,12 +411,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">My First Post</h1>
+            <h1 id="seo-header">Landsat-8 to Sentinel-2</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年4月24日 下午
+                    本文最后更新于 2024年5月29日 上午
                   
                 
               </p>
@@ -420,17 +424,48 @@
             
               <div class="markdown-body">
                 
-                <!-- 写一个blog通用目录 -->
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><pre><code class="hljs">    hexo是一个基于Node.js的静态博客框架，使用Markdown编写文章，然后通过hexo生成静态网页。hexo有很多主题可以选择，可以根据自己的喜好选择一个合适的主题。
-</code></pre>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre><code class="hljs">    安装hexo需要先安装Node.js和Git，然后使用npm安装hexo。
-</code></pre>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><pre><code class="hljs">    配置hexo需要修改一些配置文件，比如_config.yml。
-</code></pre>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code class="hljs">    新建一个博客文件，然后使用hexo命令生成静态网页。
-</code></pre>
-<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><pre><code class="hljs">    发布博客需要先将生成的静态网页上传到GitHub或者其他代码托管平台。
-</code></pre>
+                <!-- 写一个目录 -->
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li><a href="#1">1.协调反射率</a></li>
+<li><a href="#2">2.红边波段补全</a></li>
+<li><a href="#3">3.下游产品的影响</a></li>
+<li><a href="#4">4.长时序高分辨率定量遥感应用</a></li>
+</ul>
+<h2 id="1-协调反射率（可用方案）"><a href="#1-协调反射率（可用方案）" class="headerlink" title="1.协调反射率（可用方案）"></a>1.协调反射率<a id="1"></a>（可用方案）</h2><h3 id="1-1-Sen2like（https-github-com-senbox-org-sen2like）"><a href="#1-1-Sen2like（https-github-com-senbox-org-sen2like）" class="headerlink" title="1.1 Sen2like（https://github.com/senbox-org/sen2like）"></a>1.1 Sen2like（<a target="_blank" rel="noopener" href="https://github.com/senbox-org/sen2like%EF%BC%89">https://github.com/senbox-org/sen2like）</a></h3><!-- 首行空两格 -->
+<p style="text-indent: 2em;">Sen2Like处理器是一个旨在结合Sentinel-2和Landsat-8数据，创建多时相无缝地表反射率数据集的工具。它使用Sentinel-2作为参考任务，并结合所有输入数据来创建一个虚拟星座。此外，Sen2Like还涉及几何校正、方向效应校正和数据融合等方面的处理。
+        
+<h3 id="1-2-HLS-https-search-earthdata-nasa-gov-search-q-9HLSS30-9"><a href="#1-2-HLS-https-search-earthdata-nasa-gov-search-q-9HLSS30-9" class="headerlink" title="1.2 HLS(https://search.earthdata.nasa.gov/search?q=%9HLSS30%9)"></a>1.2 HLS(<a target="_blank" rel="noopener" href="https://search.earthdata.nasa.gov/search?q=%259HLSS30%259">https://search.earthdata.nasa.gov/search?q=%9HLSS30%9</a>)</h3><p style="text-indent: 2em;">Harmonized Landsat Sentinel-2 (HLS) 项目提供了一致的地表反射率（SR）数据，这些数据来源于美国宇航局（NASA）和美国地质调查局（USGS）联合发射的Landsat 8和Landsat 9卫星上的操作型陆地成像仪（OLI），以及欧洲哥白尼Sentinel-2A和Sentinel-2B卫星上的多光谱仪（MSI）。通过综合测量，该项目能够每2到3天以30米的空间分辨率对全球陆地进行观测。HLSS30和HLSL30产品以相同的分辨率和军事网格参考系统（MGRS）的瓦片形式进行网格化，并且这些产品可以“堆叠”用于时间序列分析。
+
+<h3 id="1-3-SpecHomo（https-github-com-GFZ-spechomo）"><a href="#1-3-SpecHomo（https-github-com-GFZ-spechomo）" class="headerlink" title="1.3 SpecHomo（https://github.com/GFZ/spechomo）"></a>1.3 SpecHomo（<a target="_blank" rel="noopener" href="https://github.com/GFZ/spechomo%EF%BC%89">https://github.com/GFZ/spechomo）</a></h3><p style="text-indent: 2em;">SpecHomo用于多光谱卫星数据的光谱同质化。它可以将一个传感器的光谱信息转换为另一个传感器的光谱域。SpecHomo提供了不同的机器学习技术来预测目标传感器的光谱信息。目前，已经实现了多元线性回归、多元二次回归和随机森林回归。为了与最简单的同质化方法进行简单比较，还实现了线性光谱插值。
+
+<p style="text-indent: 2em;">与之前的光谱同质化技术相比，SpecHomo不仅允许应用全局（波段式）转换，即使用相同的预测系数对光谱波段的所有灰度值进行转换。它还通过使用针对各种光谱集群专门训练的预测系数，区分了不同地表覆盖类型的个体光谱特性。这提高了预测光谱信息的准确性。此外，SpecHomo不仅可以用于同质化已经相似的光谱定义，还允许预测单方面缺失的波段，例如Landsat-8数据中不存在的红边波段。
+
+<p style="text-indent: 2em;">预测精度以及对后续产品（如光谱指数或分类）的影响需要考虑光谱波长、源和目标传感器的光谱特性相似度、光谱位置以及光谱特征形状等多个因素。这些因素共同决定了协调后图像数据的质量和预测的准确性。
+
+<h3 id="1-4-ESRCNN（https-github-com-MrCPlusPlus-ESRCNN-for-Landsat8-Sentinel2-Fusion）"><a href="#1-4-ESRCNN（https-github-com-MrCPlusPlus-ESRCNN-for-Landsat8-Sentinel2-Fusion）" class="headerlink" title="1.4 ESRCNN（https://github.com/MrCPlusPlus/ESRCNN-for-Landsat8-Sentinel2-Fusion）"></a>1.4 ESRCNN（<a target="_blank" rel="noopener" href="https://github.com/MrCPlusPlus/ESRCNN-for-Landsat8-Sentinel2-Fusion%EF%BC%89">https://github.com/MrCPlusPlus/ESRCNN-for-Landsat8-Sentinel2-Fusion）</a></h3><p style="text-indent: 2em;">超分辨率卷积神经网络（ESRCNN），专门用于混合Landsat-8 Operational Land Imager（OLI）和Sentinel-2 Multispectral Imager（MSI）数据。精度评估显示，融合网络的性能受输入的辅助Sentinel-2图像的数量和辅助Sentinel-2图像与目标Landsat-8图像之间的时间间隔（即图像采集日期的差异）的影响。
+
+<h3 id="1-5-CGAN（https-github-com-Rohit18-Landsat8-Sentinel2-Fusion）"><a href="#1-5-CGAN（https-github-com-Rohit18-Landsat8-Sentinel2-Fusion）" class="headerlink" title="1.5 CGAN（https://github.com/Rohit18/Landsat8-Sentinel2-Fusion）"></a>1.5 CGAN（<a target="_blank" rel="noopener" href="https://github.com/Rohit18/Landsat8-Sentinel2-Fusion%EF%BC%89">https://github.com/Rohit18/Landsat8-Sentinel2-Fusion）</a></h3><p style="text-indent: 2em;">生成对抗网络（GAN）能够以监督的方式学习目标数据集（Sentinel-2）的数据分布，并将来自输入数据集（Landsat 8）的样本转换为复制目标数据集（Sentinel-2）中相应样本的样本。我们将训练一个GAN来学习红边波段的数据分布，这些信息来自与Sentinel-2红边波段信息最接近的Landsat 8波段（绿波段用于红边1，近红外波段用于红边2和红边3）。
+
+<h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><h3 id="1-1-Sen2like"><a href="#1-1-Sen2like" class="headerlink" title="1.1 Sen2like"></a>1.1 Sen2like</h3><p>L2H_30m。需要同区域的Sentinel-2进行融合得到L2F_10_20m    </p>
+<div style="text-align:center;">
+    <img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17169506560661716950655983.png" srcset="/img/loading.gif" lazyload 
+    style="width:80%;height:auto;">
+</div>
+
+<h3 id="1-2-SpecHomo"><a href="#1-2-SpecHomo" class="headerlink" title="1.2 SpecHomo"></a>1.2 SpecHomo</h3><p>30m。QR:Quadratic Regression、LR:Linear Regression、L8C2L2</p>
+<div style="text-align:center;">
+    <img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17169510320691716951031563.png" srcset="/img/loading.gif" lazyload 
+    style="width:80%;height:auto;">
+</div>
+
+<h3 id="1-3-CGAN"><a href="#1-3-CGAN" class="headerlink" title="1.3 CGAN"></a>1.3 CGAN</h3><p style="text-indent: 2em;">使用fastai中集成的GAN进行训练。版本太老，重新使用最新的fastai.vision.gan方法重写模型。模型训练数据组织形式未知。
+
+<h3 id="1-4-ESRCNN"><a href="#1-4-ESRCNN" class="headerlink" title="1.4 ESRCNN"></a>1.4 ESRCNN</h3><p>超分辨率网络，学习源码，暂无思路。</p>
+<h3 id="1-5-其他方法"><a href="#1-5-其他方法" class="headerlink" title="1.5 其他方法"></a>1.5 其他方法</h3><p><a target="_blank" rel="noopener" href="https://github.com/wawancenggoro/cnn_l8_s2">cnn_l8_s2</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/venkatesh-thiru/Deep-Harmonization">deep-harmonization</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/egronskaya/Super-Resolution-for-Satellite-Imagery">Super-Resolution-for-Satellite-Imagery</a></p>
+<!-- 清理缓存并发布 -->
+<!-- hexo clean && hexo g && hexo d -->
 
                 
               </div>
@@ -440,6 +475,13 @@
               <div class="post-metas my-3">
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Remote-Sensing/" class="print-no-link">#Remote Sensing</a>
+      
+    </div>
+  
 </div>
 
 
@@ -448,8 +490,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>My First Post</div>
-      <div>https://bingoodog.github.io/2024/04/17/My-First-Post/</div>
+      <div>Landsat-8 to Sentinel-2</div>
+      <div>https://bingoodog.github.io/2024/05/29/Landsat-8 to Sentinel-2/</div>
     </div>
     <div class="license-meta">
       
@@ -461,7 +503,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月17日</div>
+          <div>2024年5月29日</div>
         </div>
       
       
@@ -493,18 +535,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/05/29/Landsat-8%20to%20Sentinel-2/" title="Landsat-8 to Sentinel-2">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Landsat-8 to Sentinel-2</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/04/13/%E5%BC%80%E6%94%BE%E8%AF%BE%E9%A2%98/" title="开放课题申请">
-                        <span class="hidden-mobile">开放课题申请</span>
+                      <a href="/2024/04/17/My-First-Post/" title="My First Post">
+                        <span class="hidden-mobile">My First Post</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
