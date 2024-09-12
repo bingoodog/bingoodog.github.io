@@ -19,32 +19,21 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ENVI处理GF1_WFV">
+    <meta name="description" content="使用6S对GF1进行大气校正">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GF1_WFV预处理">
-<meta property="og:url" content="https://bingoodog.github.io/2024/09/01/GF1-WFV%E9%A2%84%E5%A4%84%E7%90%86/index.html">
+<meta property="og:title" content="GF1_6S">
+<meta property="og:url" content="https://bingoodog.github.io/2024/09/12/GF1-6S/index.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="ENVI处理GF1_WFV">
+<meta property="og:description" content="使用6S对GF1进行大气校正">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252611594571725261159281.png">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252615054511725261504759.png">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252617108761725261710852.png">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252619484511725261948302.png">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252623984511725262398330.png">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252627475941725262747542.png">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252631695851725263169511.png">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252635064491725263505578.png">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252637546541725263754634.png">
-<meta property="article:published_time" content="2024-09-01T14:10:06.000Z">
-<meta property="article:modified_time" content="2024-09-02T11:52:07.486Z">
+<meta property="article:published_time" content="2024-09-12T12:47:58.000Z">
+<meta property="article:modified_time" content="2024-09-12T13:00:48.657Z">
 <meta property="article:author" content="bin">
-<meta property="article:tag" content="Remote Sensing">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252611594571725261159281.png">
   
   
   
-  <title>GF1_WFV预处理 - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>GF1_6S - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -274,7 +263,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="GF1_WFV预处理"></span>
+            <span id="subtitle" data-typed-text="GF1_6S"></span>
           
         </div>
 
@@ -285,8 +274,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-01 22:10" pubdate>
-          2024年9月1日 晚上
+        <time datetime="2024-09-12 20:47" pubdate>
+          2024年9月12日 晚上
         </time>
       </span>
     
@@ -297,7 +286,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          340 字
+          482 字
         
       </span>
     
@@ -308,7 +297,7 @@
         
         
         
-          3 分钟
+          5 分钟
         
       </span>
     
@@ -419,12 +408,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">GF1_WFV预处理</h1>
+            <h1 id="seo-header">GF1_6S</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2024年9月2日 晚上
+                    本文最后更新于 2024年9月12日 晚上
                   
                 
               </p>
@@ -432,42 +421,20 @@
             
               <div class="markdown-body">
                 
-                <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
-<li><a href="#1%E8%BE%85%E5%8A%A9%E6%95%B0%E6%8D%AE">1.辅助数据</a></li>
-<li><a href="#2%E6%AD%A3%E5%B0%84%E6%A0%A1%E6%AD%A3">2.正射校正</a></li>
-<li><a href="#3%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3">3.大气校正</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
-</ul>
-<h2 id="1、辅助数据"><a href="#1、辅助数据" class="headerlink" title="1、辅助数据"></a>1、辅助数据</h2><p>在进行GF1_WFV预处理之前，需要辅助数据：</p>
-<ul>
-<li>参考影像数据：Landsat8全色波段拼接影像。</li>
-<li>DEM数据：数字高程模型数据。</li>
-</ul>
-<p>从服务器下载辅助数据到本地：<br><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252611594571725261159281.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="2、正射校正"><a href="#2、正射校正" class="headerlink" title="2、正射校正"></a>2、正射校正</h2><p>2.1、安装插件（App store搜索框搜关键词）：<strong>中国国产卫星支持工具</strong>；<strong>ENVI55自动找点正射校正批处理工具</strong></p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252615054511725261504759.png" srcset="/img/loading.gif" lazyload></p>
-<p>2.2、批量正射校正</p>
-<p>a.使用国产卫星支持工具打开GF1_WFV数据，自动识别元数据。</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252617108761725261710852.png" srcset="/img/loading.gif" lazyload></p>
-<p>b.批量正射校正</p>
-<p>打开RPC Orthorectification Using Reference Image Batch，</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252619484511725261948302.png" srcset="/img/loading.gif" lazyload></p>
-<p>导入数据设置参数（注意<strong>DEM不要使用ENVI自带</strong>的，使用从服务器下载的。<strong>输出大小选择16</strong>。设置输出路径，其他保持不变）</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252623984511725262398330.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="3、大气校正"><a href="#3、大气校正" class="headerlink" title="3、大气校正"></a>3、大气校正</h2><p>3.1、辐射定标</p>
-<p>a.安装插件（App store搜索框搜关键词）：新版图像批处理工具包V5.5</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252627475941725262747542.png" srcset="/img/loading.gif" lazyload></p>
-<p>b.批量辐射定标（QUAC大气校正不应用Flaash设置）：选择批量正射校正后的数据，参数保持默认，设置输出路径。</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252631695851725263169511.png" srcset="/img/loading.gif" lazyload></p>
-<p>c.批量快速大气校正（QUAC）：批量选择定标后的数据，其他参数默认，设置输出路径。</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252635064491725263505578.png" srcset="/img/loading.gif" lazyload></p>
-<p>d.上传QUAC结果</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/img/17252637546541725263754634.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/enviidl/p/16553338.html">大气校正</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/enviidl/p/16542676.html">正射校正</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42121168/article/details/115464531">高分数据预处理</a></li>
-</ul>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在处理GF1号数据，主要使用6S大气校正进行处理。具体代码参见<a target="_blank" rel="noopener" href="https://github.com/Zhaoguanhua/AtmosphericCorrection">Zhaoguanhua</a>大佬的实现。</p>
+<h2 id="明确参数的意义"><a href="#明确参数的意义" class="headerlink" title="明确参数的意义"></a>明确参数的意义</h2><p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/VickyChenVC/article/details/107861708">6S大气校正原理</a></p>
+<h2 id="6S参数的设置"><a href="#6S参数的设置" class="headerlink" title="6S参数的设置"></a>6S参数的设置</h2><p>优先读取头文件信息参数。2022年之后的GF1数据应该是改版了。可以用ENVI的国产卫星工具打开，能正常识别参数。或者在<a target="_blank" rel="noopener" href="https://data.cresda.cn/#/home">陆地观测卫星</a>查看影像具体信息。可以自行对比头文件在考虑是否修改。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 传感器类型 自定义</span><br>s.geometry = Geometry.User()<br>s.geometry.solar_z = <span class="hljs-number">90</span>-<span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SolarZenith&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br>s.geometry.solar_a = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SolarAzimuth&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br><span class="hljs-comment"># s.geometry.view_z = float(dom.getElementsByTagName(&#x27;SatelliteZenith&#x27;)[0].firstChild.data)</span><br><span class="hljs-comment"># s.geometry.view_a = float(dom.getElementsByTagName(&#x27;SatelliteAzimuth&#x27;)[0].firstChild.data)</span><br>s.geometry.view_z = <span class="hljs-number">0</span><br>s.geometry.view_a = <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<p>考虑调整为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 传感器类型 自定义</span><br>s.geometry = Geometry.User()<br><span class="hljs-comment"># 2022年之后的数据头文件中SolarZenith为太阳天顶角。不需要90-</span><br><span class="hljs-comment"># s.geometry.solar_z = 90-float(dom.getElementsByTagName(&#x27;SolarZenith&#x27;)[0].firstChild.data)</span><br>s.geometry.solar_z = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SolarZenith&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br>s.geometry.solar_a = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SolarAzimuth&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br><span class="hljs-comment"># 读取头文件信息进行计算</span><br>s.geometry.view_z = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SatelliteZenith&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br>s.geometry.view_a = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SatelliteAzimuth&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br><span class="hljs-comment"># s.geometry.view_z = 0</span><br><span class="hljs-comment"># s.geometry.view_a = 0</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="其他参数设置"><a href="#其他参数设置" class="headerlink" title="其他参数设置"></a>其他参数设置</h2><p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/VickyChenVC/article/details/107861708">6S大气校正原理</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 气溶胶类型大陆</span><br>s.aero_profile = AtmosProfile.PredefinedType(AeroProfile.Continental)<br><br><span class="hljs-comment"># 下垫面类型</span><br>s.ground_reflectance = GroundReflectance.HomogeneousLambertian(<span class="hljs-number">0.36</span>)<br><br><span class="hljs-comment"># 550nm气溶胶光学厚度,对应能见度为40km</span><br>s.aot550 = <span class="hljs-number">0.14497</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="json文件更新"><a href="#json文件更新" class="headerlink" title="json文件更新"></a>json文件更新</h2><p>定标系数以及光谱响应函数下载：<a target="_blank" rel="noopener" href="https://www.cresda.com/zgzywxyyzx/zlxz/article/20240416163618563132683.html">资源卫星应用中心</a></p>
+<p>具体更新方法：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_15038823/article/details/140120644?spm=1001.2101.3001.6650.2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~YuanLiJiHua~Position-2-140120644-blog-110977519.235%5Ev43%5Epc_blog_bottom_relevance_base7">自定义光谱响应函数</a></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">在“RadiometricCorrectionParameter.json”的相应位置添加不同传感器、不同波段对应的Gain、Offset值，以及高分六号的光谱响应函数（SRF）数值，SRF需要按照官网提供的1nm间隔插值制作为2.5nm间隔的<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -477,13 +444,6 @@
               <div class="post-metas my-3">
   
   
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Remote-Sensing/" class="print-no-link">#Remote Sensing</a>
-      
-    </div>
-  
 </div>
 
 
@@ -492,8 +452,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>GF1_WFV预处理</div>
-      <div>https://bingoodog.github.io/2024/09/01/GF1-WFV预处理/</div>
+      <div>GF1_6S</div>
+      <div>https://bingoodog.github.io/2024/09/12/GF1-6S/</div>
     </div>
     <div class="license-meta">
       
@@ -505,7 +465,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月1日</div>
+          <div>2024年9月12日</div>
         </div>
       
       
@@ -537,18 +497,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/12/GF1-6S/" title="GF1_6S">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">GF1_6S</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/06/06/Python-learn/" title="Python-learn">
-                        <span class="hidden-mobile">Python-learn</span>
+                      <a href="/2024/09/01/GF1-WFV%E9%A2%84%E5%A4%84%E7%90%86/" title="GF1_WFV预处理">
+                        <span class="hidden-mobile">GF1_WFV预处理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
