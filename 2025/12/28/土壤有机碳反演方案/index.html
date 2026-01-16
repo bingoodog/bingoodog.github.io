@@ -19,21 +19,28 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="使用icor对sentinel2进行大气校正">
+    <meta name="description" content="本文介绍基于遥感和人工智能方法的土壤有机碳时空演变分析研究方案。归纳总结了土壤有机碳反演的研究目标、数据来源、技术路线、可行性分析及预期成果。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sentinel2大气校正_icor">
-<meta property="og:url" content="https://bingoodog.github.io/2024/10/17/sentinel2%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3_icor/index.html">
+<meta property="og:title" content="土壤有机碳反演方案">
+<meta property="og:url" content="https://bingoodog.github.io/2025/12/28/%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3%E5%8F%8D%E6%BC%94%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="使用icor对sentinel2进行大气校正">
+<meta property="og:description" content="本文介绍基于遥感和人工智能方法的土壤有机碳时空演变分析研究方案。归纳总结了土壤有机碳反演的研究目标、数据来源、技术路线、可行性分析及预期成果。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-10-17T12:24:30.000Z">
-<meta property="article:modified_time" content="2026-01-16T03:12:33.668Z">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260116131109469_1768540269494.png">
+<meta property="article:published_time" content="2025-12-28T04:59:10.000Z">
+<meta property="article:modified_time" content="2026-01-16T05:24:29.955Z">
 <meta property="article:author" content="bin">
+<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="土壤有机碳">
+<meta property="article:tag" content="数字土壤制图">
+<meta property="article:tag" content="时空分析">
+<meta property="article:tag" content="遥感反演">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260116131109469_1768540269494.png">
   
   
   
-  <title>sentinel2大气校正_icor - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>土壤有机碳反演方案 - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -267,7 +274,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="sentinel2大气校正_icor"></span>
+            <span id="subtitle" data-typed-text="土壤有机碳反演方案"></span>
           
         </div>
 
@@ -278,8 +285,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-10-17 20:24" pubdate>
-          2024年10月17日 晚上
+        <time datetime="2025-12-28 12:59" pubdate>
+          2025年12月28日 下午
         </time>
       </span>
     
@@ -290,7 +297,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          2k 字
         
       </span>
     
@@ -301,7 +308,7 @@
         
         
         
-          1 分钟
+          17 分钟
         
       </span>
     
@@ -412,12 +419,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">sentinel2大气校正_icor</h1>
+            <h1 id="seo-header">土壤有机碳反演方案</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年1月16日 上午
+                    本文最后更新于 2026年1月16日 下午
                   
                 
               </p>
@@ -425,7 +432,220 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="基于遥感和人工智能方法的土壤有机碳时空演变分析研究"><a href="#基于遥感和人工智能方法的土壤有机碳时空演变分析研究" class="headerlink" title="基于遥感和人工智能方法的土壤有机碳时空演变分析研究"></a>基于遥感和人工智能方法的土壤有机碳时空演变分析研究</h1><h2 id="1-研究目标"><a href="#1-研究目标" class="headerlink" title="1. 研究目标"></a>1. 研究目标</h2><ol>
+<li><strong>构建数据集</strong>：建立”星-地”一体化的SOC反演特征数据库</li>
+<li><strong>模型开发</strong>：比较并优选适用于该区域的AI反演模型（如RF, XGBoost）</li>
+<li><strong>时空制图</strong>：生成过去25年（2000-2025）表层（0-10 cm或0-30cm）SOC空间分布图（分辨率500m&#x2F;1km）</li>
+<li><strong>归因分析</strong>：解析气候变化（降水、温度）与人类活动（放牧、开垦）对SOC变化的相对贡献</li>
+</ol>
+<h2 id="2-数据来源"><a href="#2-数据来源" class="headerlink" title="2. 数据来源"></a>2. 数据来源</h2><p>基于SCORPAN模型理论框架选取环境变量。数字土壤制图反映的是土壤的空间分布特征和规律，土壤的空间分布是土壤形成与发展过程的体现，因而，数字土壤制图的一个理论基础是土壤成土因子学说。该学说认为土壤是母质、气候、生物、地形和时间5个成土因素综合作用的产物。</p>
+<h3 id="表-1-SCORPAN特征分类体系"><a href="#表-1-SCORPAN特征分类体系" class="headerlink" title="表 1 SCORPAN特征分类体系"></a>表 1 SCORPAN特征分类体系</h3><table>
+<thead>
+<tr>
+<th>SCORPAN</th>
+<th>适用变量</th>
+<th>作用机制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>S（土壤）</strong></td>
+<td>① 土壤 pH<br>② 土壤质地（黏粒&#x2F;砂粒百分比）<br>③ 容重</td>
+<td>土壤普遍呈弱碱性，适宜微生物活动，提高SOC稳定性；黏粒可保护有机质不被分解；容重反映过度放牧造成的压实、根系输入减少。研究中通常可解释SOC（20-30%）的差异。</td>
+</tr>
+<tr>
+<td><strong>C（气候）</strong></td>
+<td>① 年均降水量（MAP）<br>② 年均温度（MAT）<br>③ 土壤湿度&#x2F;干旱指数</td>
+<td>呈干旱梯度，降水是植被与微生物活动的主控因子；升温促进分解，增加SOC损失。气候因子在干旱区贡献较大。</td>
+</tr>
+<tr>
+<td><strong>O（生物）</strong></td>
+<td>① NDVI&#x2F;EVI<br>② 地上生物量（AGB）或NPP<br>③ 土地利用（放牧强度）</td>
+<td>NDVI&#x2F;EVI反映生产力与根系输入；耕地化或重度放牧可使SOC下降。植被因子对SOC影响尤为显著。</td>
+</tr>
+<tr>
+<td><strong>R（地形）</strong></td>
+<td>① 高程<br>② 坡度<br>③ 坡向<br>④ 地形湿度指数（TWI）</td>
+<td>海拔影响区域气候；坡度陡峭区更易发生侵蚀导致SOC流失；TWI可反映积水和微地形湿度。</td>
+</tr>
+</tbody></table>
+<p>结合区域尺度建模对数据空间一致性、时间连续性和可获取性的要求选取数据集。数据源应完整覆盖成土因子，具备长期稳定、空间一致和多尺度适配等优势。</p>
+<h3 id="表-2-数字土壤制图通用数据源"><a href="#表-2-数字土壤制图通用数据源" class="headerlink" title="表 2 数字土壤制图通用数据源"></a>表 2 数字土壤制图通用数据源</h3><table>
+<thead>
+<tr>
+<th>数据类别</th>
+<th>具体指标&#x2F;变量</th>
+<th>数据来源</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>实测数据</td>
+<td>SOC含量 (g&#x2F;100g)</td>
+<td>① 公共数据库 (WoSIS)<br>② 文献挖掘 (从近5年发表论文中提取)<br>③ 自有采样数据</td>
+<td>作为AI模型的训练集和验证集</td>
+</tr>
+<tr>
+<td>光学遥感</td>
+<td>植被指数 (NDVI, EVI), 裸土指数 (BSI)</td>
+<td>MODIS (MOD13Q1) 或 Landsat 8&#x2F;9</td>
+<td>表征地表植被生产力和裸露情况</td>
+</tr>
+<tr>
+<td>气候数据</td>
+<td>降水, 温度, 蒸散发, 土壤湿度</td>
+<td>ERA5-Land 或 TerraClimate</td>
+<td>关键的气候驱动因子</td>
+</tr>
+<tr>
+<td>地形数据</td>
+<td>高程, 坡度, 坡向, 地形湿度指数</td>
+<td>SRTM 或 NASA DEM</td>
+<td>影响水热再分配</td>
+</tr>
+<tr>
+<td>微波遥感</td>
+<td>后向散射系数 (VH&#x2F;VV)</td>
+<td>Sentinel-1 (SAR)</td>
+<td>补充光学遥感在云层覆盖下的缺失，反映土壤质地&#x2F;水分</td>
+</tr>
+</tbody></table>
+<p>通过检索近十年关于土壤有机碳的文献，筛选出在区域尺度上被反复证明具有重要影响的特征因子。包括：放牧压力（以畜牧密度等指标表征）、植被生产力及其变化趋势（基于NDVI&#x2F;EVI的多年时序指标）、干旱程度（如蒸散与降水的比值或干旱指数）等。这些变量可依托遥感产品或再分析气候资料进行量化，从而在模型训练时更准确地反映独特的生态过程与碳循环驱动机制，有助于提升区域SOC反演的适应性与预测精度，并增强模型对驱动机制的解释能力。</p>
+<h2 id="3-技术路线与方法"><a href="#3-技术路线与方法" class="headerlink" title="3. 技术路线与方法"></a>3. 技术路线与方法</h2><h3 id="3-1-数据与特征工程"><a href="#3-1-数据与特征工程" class="headerlink" title="3.1 数据与特征工程"></a>3.1 数据与特征工程</h3><ol>
+<li><strong>数据标准化</strong>：收集WoSIS、文献中的剖面数据，进行统一的变量标准化（单位、深度标准化）。剔除异常剖面、统一土层厚度或按深度区间标准化SOC值。环境协变量标准化处理后进行栅格化。</li>
+<li><strong>GEE处理</strong>：利用Google Earth Engine对MODIS&#x2F;Landsat数据进行去云、镶嵌、裁剪。构建多时相指标（NDVI、BSI、band ratios、短波红外波段等）。</li>
+<li><strong>时空匹配</strong>：将地面采样点的经纬度和采样时间，与遥感影像像素进行时空匹配，提取对应的光谱和环境变量。</li>
+<li><strong>特征筛选</strong>：使用递归特征消除(RFE)或皮尔逊相关性分析，剔除冗余变量，保留对SOC解释度最高的因子（通常是降水、NDVI、DEM）。</li>
+</ol>
+<h3 id="3-2-AI模型构建与优选"><a href="#3-2-AI模型构建与优选" class="headerlink" title="3.2 AI模型构建与优选"></a>3.2 AI模型构建与优选</h3><p>设计多模型对比实验，选择最优反演策略：</p>
+<ol>
+<li><strong>基准模型</strong>：随机森林 (Random Forest, RF)。适合处理高维非线性数据，且能输出特征重要性。</li>
+<li><strong>进阶模型</strong>：XGBoost &#x2F; LightGBM。在处理稀疏数据时表现优异。</li>
+<li><strong>深度学习</strong>：一维卷积神经网络 (1D-CNN)。输入光谱曲线特征，挖掘深层隐含关系。</li>
+<li><strong>验证方法</strong>：采用10折交叉验证 (10-fold CV)，使用R2 (决定系数)、RMSE (均方根误差) 和 MAE (平均绝对误差) 评价精度。</li>
+</ol>
+<h3 id="3-3-时空演变分析"><a href="#3-3-时空演变分析" class="headerlink" title="3.3 时空演变分析"></a>3.3 时空演变分析</h3><ol>
+<li><strong>反演制图</strong>：将训练好的最佳模型应用到整个区域的长时序影像上。</li>
+<li><strong>趋势分析</strong>：计算Theil-Sen Median (森氏斜率)和Mann-Kendall (MK)趋势检验，判断SOC是显著增加、减少还是稳定。公式逻辑：如果Slope &gt; 0 且 P &lt; 0.05，则为显著增加。</li>
+<li><strong>变异系数</strong>：通过计算各区域SOC含量的变异系数（CV），量化其空间异质性程度。</li>
+</ol>
+<h3 id="3-4-驱动机制归因"><a href="#3-4-驱动机制归因" class="headerlink" title="3.4 驱动机制归因"></a>3.4 驱动机制归因</h3><ol>
+<li><strong>地理探测器 (Geodetector)</strong>：用于量化不同因子（如降水、放牧）对SOC空间分布的解释力（q值）及其交互作用。</li>
+<li><strong>SHAP (SHapley Additive exPlanations) 值</strong>：用于解释AI模型，量化各因子（降水、温度、放牧强度等）对SOC的具体贡献度（正向或负向影响）。</li>
+<li><strong>结构方程模型（SEM）</strong>：量化环境因子的相对作用强度及其潜在作用路径。</li>
+</ol>
+<h2 id="4-可行性与预期难点分析"><a href="#4-可行性与预期难点分析" class="headerlink" title="4. 可行性与预期难点分析"></a>4. 可行性与预期难点分析</h2><h3 id="4-1-可行性"><a href="#4-1-可行性" class="headerlink" title="4.1 可行性"></a>4.1 可行性</h3><ol>
+<li><strong>数据可获取</strong>：GEE平台免费提供了海量遥感数据；WoSIS等全球土壤数据库提供了基础的训练样本。</li>
+<li><strong>技术成熟</strong>：Python (Scikit-learn)和GEE API使得非计算机专业人员也能搭建机器学习流程。</li>
+</ol>
+<h3 id="4-2-潜在难点及解决方案"><a href="#4-2-潜在难点及解决方案" class="headerlink" title="4.2 潜在难点及解决方案"></a>4.2 潜在难点及解决方案</h3><ol>
+<li><p><strong>跨国界数据不一致</strong></p>
+<ul>
+<li><strong>问题</strong>：草地管理政策不同，且采样数据密度不均。</li>
+<li><strong>方案</strong>：在训练样本中进行加权重采样，确保样本平衡。</li>
+</ul>
+</li>
+<li><p><strong>纯净裸土光谱获取难</strong></p>
+<ul>
+<li><strong>问题</strong>：植被覆盖遮挡了土壤光谱。</li>
+<li><strong>方案</strong>：利用早春&#x2F;晚秋植被枯黄期的影像进行建模。</li>
+</ul>
+</li>
+<li><p><strong>长时序传感器间差异</strong></p>
+<ul>
+<li><strong>问题</strong>：多源影像数据质量。</li>
+<li><strong>方案</strong>：使用融合产品，例如Harmonized Landsat-Sentinel(HLS)。</li>
+</ul>
+</li>
+</ol>
+<h2 id="5-预期成果"><a href="#5-预期成果" class="headerlink" title="5. 预期成果"></a>5. 预期成果</h2><ol>
+<li><strong>一张地图</strong>：2000-2025年SOC时空分布数据集（GeoTIFF格式）</li>
+<li><strong>一份报告</strong>：揭示气候变化与人类活动（放牧、开垦）对碳库稳定性的影响</li>
+</ol>
+<h2 id="6-时间节点"><a href="#6-时间节点" class="headerlink" title="6. 时间节点"></a>6. 时间节点</h2><h3 id="表-3-进度安排"><a href="#表-3-进度安排" class="headerlink" title="表 3 进度安排"></a>表 3 进度安排</h3><table>
+<thead>
+<tr>
+<th>编号</th>
+<th>阶段</th>
+<th>任务内容</th>
+<th>第1月</th>
+<th>第2月</th>
+<th>第3月</th>
+<th>第4月</th>
+<th>第5月</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>数据准备</td>
+<td>数据收集；数据清洗；遥感影像下载；预处理（云掩膜、大气校正）</td>
+<td>████████</td>
+<td>████</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>特征工程</td>
+<td>光谱指数、地形、气候；时间序列构建；特征筛选</td>
+<td></td>
+<td>████████</td>
+<td>████</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td>模型训练</td>
+<td>RF&#x2F;XGBoost；训练与验证</td>
+<td></td>
+<td></td>
+<td>████████</td>
+<td>████</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>SOC制图</td>
+<td>生成SOC空间图</td>
+<td></td>
+<td></td>
+<td></td>
+<td>████████</td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td>变化分析</td>
+<td>多时相差值、趋势显著性检验</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>████</td>
+</tr>
+<tr>
+<td>6</td>
+<td>驱动归因</td>
+<td>SHAP&#x2F;特征贡献；气候&#x2F;土地利用影响</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>████</td>
+</tr>
+<tr>
+<td>7</td>
+<td>成果整理</td>
+<td>图件、产品、报告撰写</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>████████</td>
+</tr>
+</tbody></table>
+
                 
               </div>
             
@@ -433,6 +653,42 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%9C%9F%E5%A3%A4%E7%A7%91%E5%AD%A6/" class="category-chain-item">土壤科学</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3/" class="print-no-link">#土壤有机碳</a>
+      
+        <a href="/tags/%E9%81%A5%E6%84%9F%E5%8F%8D%E6%BC%94/" class="print-no-link">#遥感反演</a>
+      
+        <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="print-no-link">#人工智能</a>
+      
+        <a href="/tags/%E6%97%B6%E7%A9%BA%E5%88%86%E6%9E%90/" class="print-no-link">#时空分析</a>
+      
+        <a href="/tags/%E6%95%B0%E5%AD%97%E5%9C%9F%E5%A3%A4%E5%88%B6%E5%9B%BE/" class="print-no-link">#数字土壤制图</a>
+      
+    </div>
   
 </div>
 
@@ -442,8 +698,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>sentinel2大气校正_icor</div>
-      <div>https://bingoodog.github.io/2024/10/17/sentinel2大气校正_icor/</div>
+      <div>土壤有机碳反演方案</div>
+      <div>https://bingoodog.github.io/2025/12/28/土壤有机碳反演方案/</div>
     </div>
     <div class="license-meta">
       
@@ -455,7 +711,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年10月17日</div>
+          <div>2025年12月28日</div>
         </div>
       
       
@@ -487,9 +743,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/12/28/%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3%E5%8F%8D%E6%BC%94%E6%96%B9%E6%A1%88/" title="土壤有机碳反演方案">
+                      <a href="/2026/01/15/%E5%85%A8%E7%90%83%E7%9F%BF%E7%89%A9%E7%BB%93%E5%90%88%E6%80%81%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3%E5%82%A8%E9%87%8F%E4%B8%8E%E5%9B%BA%E7%A2%B3%E6%BD%9C%E5%8A%9B%E7%A0%94%E7%A9%B6/" title="全球矿物结合态土壤有机碳储量与固碳潜力研究">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">土壤有机碳反演方案</span>
+                        <span class="hidden-mobile">全球矿物结合态土壤有机碳储量与固碳潜力研究</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -497,8 +753,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/09/12/GF1-6S/" title="GF1_6S">
-                        <span class="hidden-mobile">GF1_6S</span>
+                      <a href="/2024/10/17/sentinel2%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3_icor/" title="sentinel2大气校正_icor">
+                        <span class="hidden-mobile">sentinel2大气校正_icor</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -20,8 +20,8 @@
   <meta name="keywords" content="">
   
     <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="https://bingoodog.github.io/archives/2026/01/index.html">
+<meta property="og:title" content="天上繁星无数，也许有一颗是我的名字">
+<meta property="og:url" content="https://bingoodog.github.io/page/2/index.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="bin">
@@ -29,7 +29,7 @@
   
   
   
-  <title>归档 - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -127,7 +127,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 100vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -253,17 +253,21 @@
 <div id="banner" class="banner" parallax=true
      style="background: url('https://uipv4.zywvvd.com:33030/HexoFiles/new/bg-trans.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="归档"></span>
+            <span id="subtitle" data-typed-text="保持前进"></span>
           
         </div>
 
         
       </div>
 
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
       
     </div>
   </div>
@@ -342,36 +346,54 @@
     
       <div class="container nopadding-x-md">
         <div id="board"
-          >
+          style="margin-top: 0">
           
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">共计 11 篇文章</p>
-  <hr>
-  
-  
+
+  <div class="row mx-auto index-card">
     
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/04/06/%E5%B8%B8%E7%94%A8%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" target="_self">
+          评价指标
+        </a>
+      </h2>
+
       
-      <p class="h5">2026</p>
-    
-    <a href="/2026/01/16/hello-world/" class="list-group-item list-group-item-action">
-      <time>01-16</time>
-      <div class="list-group-item-title">hello-world</div>
-    </a>
-  
-    
-    <a href="/2026/01/15/%E5%85%A8%E7%90%83%E7%9F%BF%E7%89%A9%E7%BB%93%E5%90%88%E6%80%81%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3%E5%82%A8%E9%87%8F%E4%B8%8E%E5%9B%BA%E7%A2%B3%E6%BD%9C%E5%8A%9B%E7%A0%94%E7%A9%B6/" class="list-group-item list-group-item-action">
-      <time>01-15</time>
-      <div class="list-group-item-title">全球矿物结合态土壤有机碳储量与固碳潜力研究</div>
-    </a>
-  
-</div>
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/04/06/%E5%B8%B8%E7%94%A8%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" target="_self">
+        <div>
+          评价指标
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-04-06 21:55" pubdate>
+              2024-04-06
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
 
 
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </span>
+  </nav>
 
 
 
@@ -490,7 +512,37 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        typing(text);
+        jQuery.ajax({
+          type: 'GET',
+          url: 'https://uipv4.zywvvd.com:33044/',
+          headers: {},
+          dataType: 'json',
+          success: function(result) {
+            var apiText;
+            if (result) {
+              var keys = 'hitokoto'.split(',');
+              if (result instanceof Array) {
+                result = result[0];
+              }
+              for (const k of keys) {
+                var value = result[k];
+                if (typeof value === 'string') {
+                  apiText = value;
+                  break;
+                } else if (value instanceof Object) {
+                  result = value;
+                }
+              }
+            }
+            apiText ? typing(apiText) : typing(text);
+          },
+          error: function(xhr, status, error) {
+            if (error) {
+              console.error('Failed to request https://uipv4.zywvvd.com:33044/:', error);
+            }
+            typing(text);
+          }
+        })
       
     })(window, document);
   </script>
