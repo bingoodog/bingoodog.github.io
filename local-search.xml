@@ -33,19 +33,6 @@
   
   
   <entry>
-    <title>hello-world</title>
-    <link href="/2026/01/16/hello-world/"/>
-    <url>/2026/01/16/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>!<span id="more"></span>This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>全球矿物结合态土壤有机碳储量与固碳潜力研究</title>
     <link href="/2026/01/15/%E5%85%A8%E7%90%83%E7%9F%BF%E7%89%A9%E7%BB%93%E5%90%88%E6%80%81%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3%E5%82%A8%E9%87%8F%E4%B8%8E%E5%9B%BA%E7%A2%B3%E6%BD%9C%E5%8A%9B%E7%A0%94%E7%A9%B6/"/>
     <url>/2026/01/15/%E5%85%A8%E7%90%83%E7%9F%BF%E7%89%A9%E7%BB%93%E5%90%88%E6%80%81%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3%E5%82%A8%E9%87%8F%E4%B8%8E%E5%9B%BA%E7%A2%B3%E6%BD%9C%E5%8A%9B%E7%A0%94%E7%A9%B6/</url>
@@ -80,8 +67,8 @@
   
   <entry>
     <title>土壤有机碳反演方案</title>
-    <link href="/2025/12/28/%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3%E5%8F%8D%E6%BC%94%E6%96%B9%E6%A1%88/"/>
-    <url>/2025/12/28/%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3%E5%8F%8D%E6%BC%94%E6%96%B9%E6%A1%88/</url>
+    <link href="/2025/12/07/%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3%E5%8F%8D%E6%BC%94%E6%96%B9%E6%A1%88/"/>
+    <url>/2025/12/07/%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3%E5%8F%8D%E6%BC%94%E6%96%B9%E6%A1%88/</url>
     
     <content type="html"><![CDATA[<h1 id="基于遥感和人工智能方法的土壤有机碳时空演变分析研究"><a href="#基于遥感和人工智能方法的土壤有机碳时空演变分析研究" class="headerlink" title="基于遥感和人工智能方法的土壤有机碳时空演变分析研究"></a>基于遥感和人工智能方法的土壤有机碳时空演变分析研究</h1><h2 id="1-研究目标"><a href="#1-研究目标" class="headerlink" title="1. 研究目标"></a>1. 研究目标</h2><ol><li><strong>构建数据集</strong>：建立”星-地”一体化的SOC反演特征数据库</li><li><strong>模型开发</strong>：比较并优选适用于该区域的AI反演模型（如RF, XGBoost）</li><li><strong>时空制图</strong>：生成过去25年（2000-2025）表层（0-10 cm或0-30cm）SOC空间分布图（分辨率500m&#x2F;1km）</li><li><strong>归因分析</strong>：解析气候变化（降水、温度）与人类活动（放牧、开垦）对SOC变化的相对贡献</li></ol><h2 id="2-数据来源"><a href="#2-数据来源" class="headerlink" title="2. 数据来源"></a>2. 数据来源</h2><p>基于SCORPAN模型理论框架选取环境变量。数字土壤制图反映的是土壤的空间分布特征和规律，土壤的空间分布是土壤形成与发展过程的体现，因而，数字土壤制图的一个理论基础是土壤成土因子学说。该学说认为土壤是母质、气候、生物、地形和时间5个成土因素综合作用的产物。</p><h3 id="表-1-SCORPAN特征分类体系"><a href="#表-1-SCORPAN特征分类体系" class="headerlink" title="表 1 SCORPAN特征分类体系"></a>表 1 SCORPAN特征分类体系</h3><table><thead><tr><th>SCORPAN</th><th>适用变量</th><th>作用机制</th></tr></thead><tbody><tr><td><strong>S（土壤）</strong></td><td>① 土壤 pH<br>② 土壤质地（黏粒&#x2F;砂粒百分比）<br>③ 容重</td><td>土壤普遍呈弱碱性，适宜微生物活动，提高SOC稳定性；黏粒可保护有机质不被分解；容重反映过度放牧造成的压实、根系输入减少。研究中通常可解释SOC（20-30%）的差异。</td></tr><tr><td><strong>C（气候）</strong></td><td>① 年均降水量（MAP）<br>② 年均温度（MAT）<br>③ 土壤湿度&#x2F;干旱指数</td><td>呈干旱梯度，降水是植被与微生物活动的主控因子；升温促进分解，增加SOC损失。气候因子在干旱区贡献较大。</td></tr><tr><td><strong>O（生物）</strong></td><td>① NDVI&#x2F;EVI<br>② 地上生物量（AGB）或NPP<br>③ 土地利用（放牧强度）</td><td>NDVI&#x2F;EVI反映生产力与根系输入；耕地化或重度放牧可使SOC下降。植被因子对SOC影响尤为显著。</td></tr><tr><td><strong>R（地形）</strong></td><td>① 高程<br>② 坡度<br>③ 坡向<br>④ 地形湿度指数（TWI）</td><td>海拔影响区域气候；坡度陡峭区更易发生侵蚀导致SOC流失；TWI可反映积水和微地形湿度。</td></tr></tbody></table><p>结合区域尺度建模对数据空间一致性、时间连续性和可获取性的要求选取数据集。数据源应完整覆盖成土因子，具备长期稳定、空间一致和多尺度适配等优势。</p><h3 id="表-2-数字土壤制图通用数据源"><a href="#表-2-数字土壤制图通用数据源" class="headerlink" title="表 2 数字土壤制图通用数据源"></a>表 2 数字土壤制图通用数据源</h3><table><thead><tr><th>数据类别</th><th>具体指标&#x2F;变量</th><th>数据来源</th><th>作用</th></tr></thead><tbody><tr><td>实测数据</td><td>SOC含量 (g&#x2F;100g)</td><td>① 公共数据库 (WoSIS)<br>② 文献挖掘 (从近5年发表论文中提取)<br>③ 自有采样数据</td><td>作为AI模型的训练集和验证集</td></tr><tr><td>光学遥感</td><td>植被指数 (NDVI, EVI), 裸土指数 (BSI)</td><td>MODIS (MOD13Q1) 或 Landsat 8&#x2F;9</td><td>表征地表植被生产力和裸露情况</td></tr><tr><td>气候数据</td><td>降水, 温度, 蒸散发, 土壤湿度</td><td>ERA5-Land 或 TerraClimate</td><td>关键的气候驱动因子</td></tr><tr><td>地形数据</td><td>高程, 坡度, 坡向, 地形湿度指数</td><td>SRTM 或 NASA DEM</td><td>影响水热再分配</td></tr><tr><td>微波遥感</td><td>后向散射系数 (VH&#x2F;VV)</td><td>Sentinel-1 (SAR)</td><td>补充光学遥感在云层覆盖下的缺失，反映土壤质地&#x2F;水分</td></tr></tbody></table><p>通过检索近十年关于土壤有机碳的文献，筛选出在区域尺度上被反复证明具有重要影响的特征因子。包括：放牧压力（以畜牧密度等指标表征）、植被生产力及其变化趋势（基于NDVI&#x2F;EVI的多年时序指标）、干旱程度（如蒸散与降水的比值或干旱指数）等。这些变量可依托遥感产品或再分析气候资料进行量化，从而在模型训练时更准确地反映独特的生态过程与碳循环驱动机制，有助于提升区域SOC反演的适应性与预测精度，并增强模型对驱动机制的解释能力。</p><h2 id="3-技术路线与方法"><a href="#3-技术路线与方法" class="headerlink" title="3. 技术路线与方法"></a>3. 技术路线与方法</h2><h3 id="3-1-数据与特征工程"><a href="#3-1-数据与特征工程" class="headerlink" title="3.1 数据与特征工程"></a>3.1 数据与特征工程</h3><ol><li><strong>数据标准化</strong>：收集WoSIS、文献中的剖面数据，进行统一的变量标准化（单位、深度标准化）。剔除异常剖面、统一土层厚度或按深度区间标准化SOC值。环境协变量标准化处理后进行栅格化。</li><li><strong>GEE处理</strong>：利用Google Earth Engine对MODIS&#x2F;Landsat数据进行去云、镶嵌、裁剪。构建多时相指标（NDVI、BSI、band ratios、短波红外波段等）。</li><li><strong>时空匹配</strong>：将地面采样点的经纬度和采样时间，与遥感影像像素进行时空匹配，提取对应的光谱和环境变量。</li><li><strong>特征筛选</strong>：使用递归特征消除(RFE)或皮尔逊相关性分析，剔除冗余变量，保留对SOC解释度最高的因子（通常是降水、NDVI、DEM）。</li></ol><h3 id="3-2-AI模型构建与优选"><a href="#3-2-AI模型构建与优选" class="headerlink" title="3.2 AI模型构建与优选"></a>3.2 AI模型构建与优选</h3><p>设计多模型对比实验，选择最优反演策略：</p><ol><li><strong>基准模型</strong>：随机森林 (Random Forest, RF)。适合处理高维非线性数据，且能输出特征重要性。</li><li><strong>进阶模型</strong>：XGBoost &#x2F; LightGBM。在处理稀疏数据时表现优异。</li><li><strong>深度学习</strong>：一维卷积神经网络 (1D-CNN)。输入光谱曲线特征，挖掘深层隐含关系。</li><li><strong>验证方法</strong>：采用10折交叉验证 (10-fold CV)，使用R2 (决定系数)、RMSE (均方根误差) 和 MAE (平均绝对误差) 评价精度。</li></ol><h3 id="3-3-时空演变分析"><a href="#3-3-时空演变分析" class="headerlink" title="3.3 时空演变分析"></a>3.3 时空演变分析</h3><ol><li><strong>反演制图</strong>：将训练好的最佳模型应用到整个区域的长时序影像上。</li><li><strong>趋势分析</strong>：计算Theil-Sen Median (森氏斜率)和Mann-Kendall (MK)趋势检验，判断SOC是显著增加、减少还是稳定。公式逻辑：如果Slope &gt; 0 且 P &lt; 0.05，则为显著增加。</li><li><strong>变异系数</strong>：通过计算各区域SOC含量的变异系数（CV），量化其空间异质性程度。</li></ol><h3 id="3-4-驱动机制归因"><a href="#3-4-驱动机制归因" class="headerlink" title="3.4 驱动机制归因"></a>3.4 驱动机制归因</h3><ol><li><strong>地理探测器 (Geodetector)</strong>：用于量化不同因子（如降水、放牧）对SOC空间分布的解释力（q值）及其交互作用。</li><li><strong>SHAP (SHapley Additive exPlanations) 值</strong>：用于解释AI模型，量化各因子（降水、温度、放牧强度等）对SOC的具体贡献度（正向或负向影响）。</li><li><strong>结构方程模型（SEM）</strong>：量化环境因子的相对作用强度及其潜在作用路径。</li></ol><h2 id="4-可行性与预期难点分析"><a href="#4-可行性与预期难点分析" class="headerlink" title="4. 可行性与预期难点分析"></a>4. 可行性与预期难点分析</h2><h3 id="4-1-可行性"><a href="#4-1-可行性" class="headerlink" title="4.1 可行性"></a>4.1 可行性</h3><ol><li><strong>数据可获取</strong>：GEE平台免费提供了海量遥感数据；WoSIS等全球土壤数据库提供了基础的训练样本。</li><li><strong>技术成熟</strong>：Python (Scikit-learn)和GEE API使得非计算机专业人员也能搭建机器学习流程。</li></ol><h3 id="4-2-潜在难点及解决方案"><a href="#4-2-潜在难点及解决方案" class="headerlink" title="4.2 潜在难点及解决方案"></a>4.2 潜在难点及解决方案</h3><ol><li><p><strong>跨国界数据不一致</strong></p><ul><li><strong>问题</strong>：草地管理政策不同，且采样数据密度不均。</li><li><strong>方案</strong>：在训练样本中进行加权重采样，确保样本平衡。</li></ul></li><li><p><strong>纯净裸土光谱获取难</strong></p><ul><li><strong>问题</strong>：植被覆盖遮挡了土壤光谱。</li><li><strong>方案</strong>：利用早春&#x2F;晚秋植被枯黄期的影像进行建模。</li></ul></li><li><p><strong>长时序传感器间差异</strong></p><ul><li><strong>问题</strong>：多源影像数据质量。</li><li><strong>方案</strong>：使用融合产品，例如Harmonized Landsat-Sentinel(HLS)。</li></ul></li></ol><h2 id="5-预期成果"><a href="#5-预期成果" class="headerlink" title="5. 预期成果"></a>5. 预期成果</h2><ol><li><strong>一张地图</strong>：2000-2025年SOC时空分布数据集（GeoTIFF格式）</li><li><strong>一份报告</strong>：揭示气候变化与人类活动（放牧、开垦）对碳库稳定性的影响</li></ol><h2 id="6-时间节点"><a href="#6-时间节点" class="headerlink" title="6. 时间节点"></a>6. 时间节点</h2><h3 id="表-3-进度安排"><a href="#表-3-进度安排" class="headerlink" title="表 3 进度安排"></a>表 3 进度安排</h3><table><thead><tr><th>编号</th><th>阶段</th><th>任务内容</th><th>第1月</th><th>第2月</th><th>第3月</th><th>第4月</th><th>第5月</th></tr></thead><tbody><tr><td>1</td><td>数据准备</td><td>数据收集；数据清洗；遥感影像下载；预处理（云掩膜、大气校正）</td><td>████████</td><td>████</td><td></td><td></td><td></td></tr><tr><td>2</td><td>特征工程</td><td>光谱指数、地形、气候；时间序列构建；特征筛选</td><td></td><td>████████</td><td>████</td><td></td><td></td></tr><tr><td>3</td><td>模型训练</td><td>RF&#x2F;XGBoost；训练与验证</td><td></td><td></td><td>████████</td><td>████</td><td></td></tr><tr><td>4</td><td>SOC制图</td><td>生成SOC空间图</td><td></td><td></td><td></td><td>████████</td><td></td></tr><tr><td>5</td><td>变化分析</td><td>多时相差值、趋势显著性检验</td><td></td><td></td><td></td><td></td><td>████</td></tr><tr><td>6</td><td>驱动归因</td><td>SHAP&#x2F;特征贡献；气候&#x2F;土地利用影响</td><td></td><td></td><td></td><td></td><td>████</td></tr><tr><td>7</td><td>成果整理</td><td>图件、产品、报告撰写</td><td></td><td></td><td></td><td></td><td>████████</td></tr></tbody></table>]]></content>
     
@@ -95,9 +82,9 @@
     
     <tags>
       
-      <tag>土壤有机碳</tag>
-      
       <tag>遥感反演</tag>
+      
+      <tag>土壤有机碳</tag>
       
       <tag>人工智能</tag>
       
@@ -112,26 +99,35 @@
   
   
   <entry>
-    <title>sentinel2大气校正_icor</title>
-    <link href="/2024/10/17/sentinel2%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3_icor/"/>
-    <url>/2024/10/17/sentinel2%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3_icor/</url>
+    <title>高分一号(GF-1)卫星数据的大气校正实践 - 基于py6s模型</title>
+    <link href="/2024/09/30/%E9%AB%98%E5%88%86%E4%B8%80%E5%8F%B7%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3/"/>
+    <url>/2024/09/30/%E9%AB%98%E5%88%86%E4%B8%80%E5%8F%B7%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3/</url>
     
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>GF1_6S</title>
-    <link href="/2024/09/12/GF1-6S/"/>
-    <url>/2024/09/12/GF1-6S/</url>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在处理GF1号数据，主要使用6S大气校正进行处理。具体代码参见<a href="https://github.com/Zhaoguanhua/AtmosphericCorrection">Zhaoguanhua</a>大佬的实现。</p><h2 id="明确参数的意义"><a href="#明确参数的意义" class="headerlink" title="明确参数的意义"></a>明确参数的意义</h2><p>参考<a href="https://blog.csdn.net/VickyChenVC/article/details/107861708">6S大气校正原理</a></p><h2 id="6S参数的设置"><a href="#6S参数的设置" class="headerlink" title="6S参数的设置"></a>6S参数的设置</h2><p>优先读取头文件信息参数。2022年之后的GF1数据应该是改版了。可以用ENVI的国产卫星工具打开，能正常识别参数。或者在<a href="https://data.cresda.cn/#/home">陆地观测卫星</a>查看影像具体信息。可以自行对比头文件在考虑是否修改。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 传感器类型 自定义</span><br>s.geometry = Geometry.User()<br>s.geometry.solar_z = <span class="hljs-number">90</span>-<span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SolarZenith&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br>s.geometry.solar_a = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SolarAzimuth&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br><span class="hljs-comment"># s.geometry.view_z = float(dom.getElementsByTagName(&#x27;SatelliteZenith&#x27;)[0].firstChild.data)</span><br><span class="hljs-comment"># s.geometry.view_a = float(dom.getElementsByTagName(&#x27;SatelliteAzimuth&#x27;)[0].firstChild.data)</span><br>s.geometry.view_z = <span class="hljs-number">0</span><br>s.geometry.view_a = <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure><p>考虑调整为：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 传感器类型 自定义</span><br>s.geometry = Geometry.User()<br><span class="hljs-comment"># 2022年之后的数据头文件中SolarZenith为太阳天顶角。不需要90-</span><br><span class="hljs-comment"># s.geometry.solar_z = 90-float(dom.getElementsByTagName(&#x27;SolarZenith&#x27;)[0].firstChild.data)</span><br>s.geometry.solar_z = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SolarZenith&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br>s.geometry.solar_a = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SolarAzimuth&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br><span class="hljs-comment"># 读取头文件信息进行计算</span><br>s.geometry.view_z = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SatelliteZenith&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br>s.geometry.view_a = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SatelliteAzimuth&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br><span class="hljs-comment"># s.geometry.view_z = 0</span><br><span class="hljs-comment"># s.geometry.view_a = 0</span><br></code></pre></td></tr></table></figure><h2 id="其他参数设置"><a href="#其他参数设置" class="headerlink" title="其他参数设置"></a>其他参数设置</h2><p>参考<a href="https://blog.csdn.net/VickyChenVC/article/details/107861708">6S大气校正原理</a></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 气溶胶类型大陆</span><br>s.aero_profile = AtmosProfile.PredefinedType(AeroProfile.Continental)<br><br><span class="hljs-comment"># 下垫面类型</span><br>s.ground_reflectance = GroundReflectance.HomogeneousLambertian(<span class="hljs-number">0.36</span>)<br><br><span class="hljs-comment"># 550nm气溶胶光学厚度,对应能见度为40km</span><br>s.aot550 = <span class="hljs-number">0.14497</span><br></code></pre></td></tr></table></figure><h2 id="json文件更新"><a href="#json文件更新" class="headerlink" title="json文件更新"></a>json文件更新</h2><p>定标系数以及光谱响应函数下载：<a href="https://www.cresda.com/zgzywxyyzx/zlxz/article/20240416163618563132683.html">资源卫星应用中心</a></p><p>具体更新方法：<a href="https://blog.csdn.net/qq_15038823/article/details/140120644?spm=1001.2101.3001.6650.2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~YuanLiJiHua~Position-2-140120644-blog-110977519.235%5Ev43%5Epc_blog_bottom_relevance_base7">自定义光谱响应函数</a></p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">在“RadiometricCorrectionParameter.json”的相应位置添加不同传感器、不同波段对应的Gain、Offset值，以及高分六号的光谱响应函数（SRF）数值，SRF需要按照官网提供的1nm间隔插值制作为2.5nm间隔的<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="高分一号大气校正实践指南"><a href="#高分一号大气校正实践指南" class="headerlink" title="高分一号大气校正实践指南"></a>高分一号大气校正实践指南</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>高分一号(GF-1)卫星是我国高分辨率对地观测系统重大专项的首发星，其数据在大气校正处理中需要注意一些特殊参数设置。本文将详细介绍基于py6s模型的大气校正方法，重点关注2022年后数据格式变化带来的参数调整。</p><blockquote><p>参考实现：<a href="https://github.com/Zhaoguanhua/AtmosphericCorrection">Zhaoguanhua&#x2F;AtmosphericCorrection</a></p></blockquote><h2 id="一、6S模型参数详解"><a href="#一、6S模型参数详解" class="headerlink" title="一、6S模型参数详解"></a>一、6S模型参数详解</h2><h3 id="1-1-几何参数设置"><a href="#1-1-几何参数设置" class="headerlink" title="1.1 几何参数设置"></a>1.1 几何参数设置</h3><p>6S模型中的几何参数对校正结果影响显著，需要特别注意高分一号数据头文件的变化：</p><ul><li><strong>2022年前数据</strong>：SolarZenith存储的是太阳高度角，需要转换为天顶角(90-高度角)</li><li><strong>2022年后数据</strong>：SolarZenith直接存储太阳天顶角，无需转换</li></ul><p>建议处理流程：</p><ol><li>使用ENVI国产卫星工具或<a href="https://data.cresda.cn/#/home">陆地观测卫星数据服务平台</a>确认数据版本</li><li>根据数据采集时间选择正确的参数处理方式</li></ol><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 几何参数设置示例</span><br>s.geometry = Geometry.User()<br><br><span class="hljs-comment"># 太阳位置参数</span><br><span class="hljs-comment"># 注意：2022年后数据SolarZenith已经是天顶角，无需90-转换</span><br>s.geometry.solar_z = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SolarZenith&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br>s.geometry.solar_a = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SolarAzimuth&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br><br><span class="hljs-comment"># 卫星观测几何参数</span><br><span class="hljs-comment"># 建议使用实际观测角度而非默认值(0,0)</span><br>s.geometry.view_z = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SatelliteZenith&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br>s.geometry.view_a = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SatelliteAzimuth&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br></code></pre></td></tr></table></figure><blockquote><p>参考阅读：<a href="https://blog.csdn.net/VickyChenVC/article/details/107861708">6S大气校正原理详解</a></p></blockquote><h3 id="1-2-大气与地表参数"><a href="#1-2-大气与地表参数" class="headerlink" title="1.2 大气与地表参数"></a>1.2 大气与地表参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 气溶胶类型设置</span><br><span class="hljs-comment"># 大陆型气溶胶适用于大多数内陆地区</span><br>s.aero_profile = AtmosProfile.PredefinedType(AeroProfile.Continental)<br><br><span class="hljs-comment"># 下垫面反射率</span><br><span class="hljs-comment"># 0.36为典型植被覆盖区值，可根据实际地表类型调整</span><br>s.ground_reflectance = GroundReflectance.HomogeneousLambertian(<span class="hljs-number">0.36</span>)<br><br><span class="hljs-comment"># 气溶胶光学厚度(AOT)</span><br><span class="hljs-comment"># 此值对应能见度约40km，晴天条件</span><br><span class="hljs-comment"># 可通过MODIS等气溶胶产品获取更精确值</span><br>s.aot550 = <span class="hljs-number">0.14497</span><br></code></pre></td></tr></table></figure><p><strong>参数选择建议</strong>：</p><ol><li>沿海地区考虑使用海洋型气溶胶(AeroProfile.Maritime)</li><li>城市区域可考虑使用城市型气溶胶(AeroProfile.Urban)</li><li>气溶胶光学厚度建议使用同步的MODIS或VIIRS产品</li></ol><h2 id="二、光谱响应函数更新"><a href="#二、光谱响应函数更新" class="headerlink" title="二、光谱响应函数更新"></a>二、光谱响应函数更新</h2><p>高分一号卫星的光谱响应函数(SRF)是大气校正的关键参数，需要定期更新以确保精度。</p><h3 id="2-1-获取最新参数"><a href="#2-1-获取最新参数" class="headerlink" title="2.1 获取最新参数"></a>2.1 获取最新参数</h3><p>官方资源下载：</p><ul><li><a href="https://www.cresda.com/zgzywxyyzx/zlxz/article/20240416163618563132683.html">定标系数与光谱响应函数</a></li><li><a href="https://data.cresda.cn/#/home">资源卫星应用中心数据下载</a></li></ul><h3 id="2-2-配置文件更新方法"><a href="#2-2-配置文件更新方法" class="headerlink" title="2.2 配置文件更新方法"></a>2.2 配置文件更新方法</h3><ol><li>编辑<code>RadiometricCorrectionParameter.json</code>文件</li><li>添加对应传感器和波段的参数：<ul><li>增益(Gain)和偏移(Offset)值</li><li>插值后的光谱响应函数(2.5nm间隔)</li></ul></li></ol><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-comment">// 示例配置结构</span><br><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;GF1&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;band1&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;gain&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.123</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;offset&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.045</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;srf&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-number">0.001</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.002</span><span class="hljs-punctuation">,</span> ...<span class="hljs-punctuation">]</span> <span class="hljs-comment">// 2.5nm间隔的SRF值</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-comment">// 其他波段...</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure><blockquote><p>详细教程参考：<a href="https://blog.csdn.net/qq_15038823/article/details/140120644">高分卫星光谱响应函数自定义方法</a></p></blockquote>]]></content>
     
     
+    <categories>
+      
+      <category>遥感数据处理</category>
+      
+      <category>大气校正</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>py6s</tag>
+      
+      <tag>GF-1</tag>
+      
+      <tag>大气校正</tag>
+      
+      <tag>光谱响应函数</tag>
+      
+      <tag>遥感反演</tag>
+      
+    </tags>
     
   </entry>
   
@@ -157,25 +153,6 @@
   
   
   <entry>
-    <title>Python-learn</title>
-    <link href="/2024/06/06/Python-learn/"/>
-    <url>/2024/06/06/Python-learn/</url>
-    
-    <content type="html"><![CDATA[<p>Python中的类和对象</p><!-- 解释python中的类 --><p>举个例子</p>]]></content>
-    
-    
-    
-    <tags>
-      
-      <tag>Python</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Landsat-8 to Sentinel-2</title>
     <link href="/2024/05/29/Landsat-8%20to%20Sentinel-2/"/>
     <url>/2024/05/29/Landsat-8%20to%20Sentinel-2/</url>
@@ -189,57 +166,6 @@
       <tag>Remote Sensing</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>My First Post</title>
-    <link href="/2024/04/17/My-First-Post/"/>
-    <url>/2024/04/17/My-First-Post/</url>
-    
-    <content type="html"><![CDATA[<!-- 写一个blog通用目录 --><h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><pre><code class="hljs">    hexo是一个基于Node.js的静态博客框架，使用Markdown编写文章，然后通过hexo生成静态网页。hexo有很多主题可以选择，可以根据自己的喜好选择一个合适的主题。</code></pre><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre><code class="hljs">    安装hexo需要先安装Node.js和Git，然后使用npm安装hexo。</code></pre><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><pre><code class="hljs">    配置hexo需要修改一些配置文件，比如_config.yml。</code></pre><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code class="hljs">    新建一个博客文件，然后使用hexo命令生成静态网页。</code></pre><h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><pre><code class="hljs">    发布博客需要先将生成的静态网页上传到GitHub或者其他代码托管平台。</code></pre>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>开放课题申请</title>
-    <link href="/2024/04/13/%E5%BC%80%E6%94%BE%E8%AF%BE%E9%A2%98/"/>
-    <url>/2024/04/13/%E5%BC%80%E6%94%BE%E8%AF%BE%E9%A2%98/</url>
-    
-    <content type="html"><![CDATA[<p>课题意义：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs css">湖泊生态系统对维护生物多样性、提供饮用水资源及休闲娱乐等方面发挥着不可替代的作用。然而，水体污染导致的富营养化已成为全球性环境问题。叶绿素<span class="hljs-selector-tag">a</span>浓度是反映水体富营养化程度的关键指标。传统的监测方法依赖大量手工取样和实验室分析，费时费力且无法实现实时监测。<br>随着遥感技术的发展，利用空间光学遥感进行叶绿素<span class="hljs-selector-tag">a</span>浓度的远程监测成为一种新趋势。但现有方法在精度和适应性方面仍存在不足，难以满足实际应用需求。AI技术，特别是深度学习，为解决这一问题提供了新的可能。本项目提出使用亚马逊Autogluon智能框架，结合最新的光学遥感技术，开发出一种新的叶绿素<span class="hljs-selector-tag">a</span>浓度反演模型，以提供更加准确和实用的湖泊水体监测方法。<br></code></pre></td></tr></table></figure><p>研究目标：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">本项目旨在开发一种基于亚马逊Autogluon的智能框架，通过光学遥感数据快速、准确反演湖泊水体叶绿素<span class="hljs-selector-tag">a</span>浓度，提升现有技术的精确性和普适性，以支持环境监测和水质管理。<br></code></pre></td></tr></table></figure><p>研究内容：</p><p>（1）研究并选择适合湖泊水体叶绿素a浓度反演的遥感数据类型和特征；<br>（2）基于亚马逊Autogluon，开发适合的数据预处理和模型训练流程，利用深度学习技术处理复杂的遥感数据；<br>（3）构建和训练多种机器学习模型，评估其在叶绿素a浓度反演中的表现，并选出最优模型；<br>（4）通过实地采集的湖泊水样数据验证模型准确性，分析模型在不同类型的湖泊环境中的适用性和稳定性；<br>（5）综合研究结果，形成一套完整的叶绿素a浓度反演方法论，并开发相应的软件或工具，提升湖泊水质监测的效率和准确性。</p><p>考核指标：</p><p>（1）成功开发基于亚马逊Autogluon的叶绿素a浓度反演模型；<br>（2）模型在多个湖泊数据集上的平均准确率达到90%以上；<br>（3）发表至少1篇相关领域的高水平科学论文；<br>（4）形成一套完整的操作手册，包括软件工具或平台，用于湖泊水质的实时监测和分析。</p><p>预期成果：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">包括技术文件类成果、高水平文章、实物类成果，具体为基于亚马逊Autogluon的叶绿素<span class="hljs-selector-tag">a</span>浓度反演模型，相关的科学论文发表，以及开发的软件工具或平台，用于辅助环境科学家和管理部门更有效地监测和管理湖泊水质。<br></code></pre></td></tr></table></figure><p>主题词：</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">湖泊水体、叶绿素<span class="hljs-selector-tag">a</span>浓度、空间光学遥感、亚马逊Autogluon、智能框架    <br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    <categories>
-      
-      <category>hexo_fig</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>测试</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>评价指标</title>
-    <link href="/2024/04/06/%E5%B8%B8%E7%94%A8%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/"/>
-    <url>/2024/04/06/%E5%B8%B8%E7%94%A8%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/</url>
-    
-    <content type="html"><![CDATA[<h2 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h2><span id="more"></span><p><strong>均方根误差</strong>：</p><p>$RMSE &#x3D; \sqrt{\frac{1}{n} \sum_{i&#x3D;1}^{n} (y_i - \hat{y_i})^2}$</p><p><strong>平均平方误差</strong>：</p><p>$MSE &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} (y_i - \hat{y_i})^2$</p><p><strong>平均绝对误差</strong>：</p><p>$MAE &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} |y_i - \hat{y_i}|$</p><p><strong>R^2</strong>：</p><p>$R^2 &#x3D; 1 - \frac{\sum_{i&#x3D;1}^{n} (y_i - \hat{y_i})^2}{\sum_{i&#x3D;1}^{n} (y_i - \bar{y})^2}$</p><p><strong>皮尔森相关系数</strong>：</p><p>$PearsonR &#x3D; \frac{\sum_{i&#x3D;1}^{n} (y_i - \bar{y})(\hat{y_i} - \bar{\hat{y}})}{\sqrt{\sum_{i&#x3D;1}^{n} (y_i - \bar{y})^2} \sqrt{\sum_{i&#x3D;1}^{n} (\hat{y_i} - \bar{\hat{y}})^2}}$</p><p><strong>中位数绝对误差</strong>：</p><p>$MedAE &#x3D; median(|y_i - \hat{y_i}|)$</p><p><strong>符号说明</strong>：</p><p>$n$：测试数据集中的样本数量</p><p>$y_i$：第 $i$ 个样本的真实值</p><p>$\hat{y_i}$：第 $i$ 个样本的预测值</p><p>$\bar{y}$：测试数据集的真实值的平均值</p><p>$\bar{\hat{y}}$：测试数据集的预测值的平均值</p><p><strong>注意</strong>：</p><ul><li>对于值越高代表越差的指标，AutoGluon 会将其值打印为负值。</li><li>在实际应用中，需要根据具体的业务需求选择合适的评价指标。</li></ul><p><strong>参考资料</strong>：</p><ul><li>AutoGluon 文档: <a href="https://auto.gluon.ai/stable/index.html">autogluon</a></li></ul>]]></content>
-    
-    
     
   </entry>
   
