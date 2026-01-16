@@ -82,9 +82,9 @@
     
     <tags>
       
-      <tag>遥感反演</tag>
-      
       <tag>土壤有机碳</tag>
+      
+      <tag>遥感反演</tag>
       
       <tag>人工智能</tag>
       
@@ -99,7 +99,7 @@
   
   
   <entry>
-    <title>高分一号(GF-1)卫星数据的大气校正实践 - 基于py6s模型</title>
+    <title>高分一号(GF-1)大气校正-基于py6s模型</title>
     <link href="/2024/09/30/%E9%AB%98%E5%88%86%E4%B8%80%E5%8F%B7%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3/"/>
     <url>/2024/09/30/%E9%AB%98%E5%88%86%E4%B8%80%E5%8F%B7%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3/</url>
     
@@ -117,6 +117,8 @@
     
     <tags>
       
+      <tag>遥感反演</tag>
+      
       <tag>py6s</tag>
       
       <tag>GF-1</tag>
@@ -124,8 +126,6 @@
       <tag>大气校正</tag>
       
       <tag>光谱响应函数</tag>
-      
-      <tag>遥感反演</tag>
       
     </tags>
     
