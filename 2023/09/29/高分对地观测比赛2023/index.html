@@ -19,25 +19,29 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="红边波段补全">
+    <meta name="description" content="高分对地观测比赛-水体参数反演方案分享">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Landsat-8 to Sentinel-2">
-<meta property="og:url" content="https://bingoodog.github.io/2024/05/29/Landsat-8%20to%20Sentinel-2/index.html">
+<meta property="og:title" content="高分对地观测比赛水体赛道-实现方案分享">
+<meta property="og:url" content="https://bingoodog.github.io/2023/09/29/%E9%AB%98%E5%88%86%E5%AF%B9%E5%9C%B0%E8%A7%82%E6%B5%8B%E6%AF%94%E8%B5%9B2023/index.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="红边波段补全">
+<meta property="og:description" content="高分对地观测比赛-水体参数反演方案分享">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134350485_1752558230503.png">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134418554_1752558258574.png">
-<meta property="article:published_time" content="2024-05-29T02:23:12.000Z">
-<meta property="article:modified_time" content="2025-07-15T05:44:37.462Z">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260116201103814_1768565463830.png">
+<meta property="article:published_time" content="2023-09-29T11:58:28.000Z">
+<meta property="article:modified_time" content="2026-01-16T12:38:26.129Z">
 <meta property="article:author" content="bin">
-<meta property="article:tag" content="Remote Sensing">
+<meta property="article:tag" content="K折交叉验证">
+<meta property="article:tag" content="MLP">
+<meta property="article:tag" content="叶绿素">
+<meta property="article:tag" content="悬浮物">
+<meta property="article:tag" content="水质参数反演">
+<meta property="article:tag" content="遗传算法">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134350485_1752558230503.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260116201103814_1768565463830.png">
   
   
   
-  <title>Landsat-8 to Sentinel-2 - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>高分对地观测比赛水体赛道-实现方案分享 - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -271,7 +275,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Landsat-8 to Sentinel-2"></span>
+            <span id="subtitle" data-typed-text="高分对地观测比赛水体赛道-实现方案分享"></span>
           
         </div>
 
@@ -282,8 +286,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-29 10:23" pubdate>
-          2024年5月29日 上午
+        <time datetime="2023-09-29 19:58" pubdate>
+          2023年9月29日 晚上
         </time>
       </span>
     
@@ -294,7 +298,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          2.9k 字
         
       </span>
     
@@ -305,7 +309,7 @@
         
         
         
-          9 分钟
+          24 分钟
         
       </span>
     
@@ -416,12 +420,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Landsat-8 to Sentinel-2</h1>
+            <h1 id="seo-header">高分对地观测比赛水体赛道-实现方案分享</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2025年7月15日 下午
+                    本文最后更新于 2026年1月16日 晚上
                   
                 
               </p>
@@ -429,46 +433,55 @@
             
               <div class="markdown-body">
                 
-                <!-- 写一个目录 -->
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
-<li><a href="#1">1.协调反射率</a></li>
-<li><a href="#2">2.红边波段补全</a></li>
-<li><a href="#3">3.下游产品的影响</a></li>
-<li><a href="#4">4.长时序高分辨率定量遥感应用</a></li>
-</ul>
-<h2 id="1-协调反射率（可用方案）"><a href="#1-协调反射率（可用方案）" class="headerlink" title="1.协调反射率（可用方案）"></a>1.协调反射率<a id="1"></a>（可用方案）</h2><h3 id="1-1-Sen2like（https-github-com-senbox-org-sen2like）"><a href="#1-1-Sen2like（https-github-com-senbox-org-sen2like）" class="headerlink" title="1.1 Sen2like（https://github.com/senbox-org/sen2like）"></a>1.1 Sen2like（<a target="_blank" rel="noopener" href="https://github.com/senbox-org/sen2like%EF%BC%89">https://github.com/senbox-org/sen2like）</a></h3><!-- 首行空两格 -->
-<p style="text-indent: 2em;">Sen2Like处理器是一个旨在结合Sentinel-2和Landsat-8数据，创建多时相无缝地表反射率数据集的工具。它使用Sentinel-2作为参考任务，并结合所有输入数据来创建一个虚拟星座。此外，Sen2Like还涉及几何校正、方向效应校正和数据融合等方面的处理。
-        
-<h3 id="1-2-HLS-https-search-earthdata-nasa-gov-search-q-9HLSS30-9"><a href="#1-2-HLS-https-search-earthdata-nasa-gov-search-q-9HLSS30-9" class="headerlink" title="1.2 HLS(https://search.earthdata.nasa.gov/search?q=%9HLSS30%9)"></a>1.2 HLS(<a target="_blank" rel="noopener" href="https://search.earthdata.nasa.gov/search?q=%259HLSS30%259">https://search.earthdata.nasa.gov/search?q=%9HLSS30%9</a>)</h3><p style="text-indent: 2em;">Harmonized Landsat Sentinel-2 (HLS) 项目提供了一致的地表反射率（SR）数据，这些数据来源于美国宇航局（NASA）和美国地质调查局（USGS）联合发射的Landsat 8和Landsat 9卫星上的操作型陆地成像仪（OLI），以及欧洲哥白尼Sentinel-2A和Sentinel-2B卫星上的多光谱仪（MSI）。通过综合测量，该项目能够每2到3天以30米的空间分辨率对全球陆地进行观测。HLSS30和HLSL30产品以相同的分辨率和军事网格参考系统（MGRS）的瓦片形式进行网格化，并且这些产品可以“堆叠”用于时间序列分析。
-
-<h3 id="1-3-SpecHomo（https-github-com-GFZ-spechomo）"><a href="#1-3-SpecHomo（https-github-com-GFZ-spechomo）" class="headerlink" title="1.3 SpecHomo（https://github.com/GFZ/spechomo）"></a>1.3 SpecHomo（<a target="_blank" rel="noopener" href="https://github.com/GFZ/spechomo%EF%BC%89">https://github.com/GFZ/spechomo）</a></h3><p style="text-indent: 2em;">SpecHomo用于多光谱卫星数据的光谱同质化。它可以将一个传感器的光谱信息转换为另一个传感器的光谱域。SpecHomo提供了不同的机器学习技术来预测目标传感器的光谱信息。目前，已经实现了多元线性回归、多元二次回归和随机森林回归。为了与最简单的同质化方法进行简单比较，还实现了线性光谱插值。
-<p style="text-indent: 2em;">与之前的光谱同质化技术相比，SpecHomo不仅允许应用全局（波段式）转换，即使用相同的预测系数对光谱波段的所有灰度值进行转换。它还通过使用针对各种光谱集群专门训练的预测系数，区分了不同地表覆盖类型的个体光谱特性。这提高了预测光谱信息的准确性。此外，SpecHomo不仅可以用于同质化已经相似的光谱定义，还允许预测单方面缺失的波段，例如Landsat-8数据中不存在的红边波段。
-<p style="text-indent: 2em;">预测精度以及对后续产品（如光谱指数或分类）的影响需要考虑光谱波长、源和目标传感器的光谱特性相似度、光谱位置以及光谱特征形状等多个因素。这些因素共同决定了协调后图像数据的质量和预测的准确性。
-
-<h3 id="1-4-ESRCNN（https-github-com-MrCPlusPlus-ESRCNN-for-Landsat8-Sentinel2-Fusion）"><a href="#1-4-ESRCNN（https-github-com-MrCPlusPlus-ESRCNN-for-Landsat8-Sentinel2-Fusion）" class="headerlink" title="1.4 ESRCNN（https://github.com/MrCPlusPlus/ESRCNN-for-Landsat8-Sentinel2-Fusion）"></a>1.4 ESRCNN（<a target="_blank" rel="noopener" href="https://github.com/MrCPlusPlus/ESRCNN-for-Landsat8-Sentinel2-Fusion%EF%BC%89">https://github.com/MrCPlusPlus/ESRCNN-for-Landsat8-Sentinel2-Fusion）</a></h3><p style="text-indent: 2em;">超分辨率卷积神经网络（ESRCNN），专门用于混合Landsat-8 Operational Land Imager（OLI）和Sentinel-2 Multispectral Imager（MSI）数据。精度评估显示，融合网络的性能受输入的辅助Sentinel-2图像的数量和辅助Sentinel-2图像与目标Landsat-8图像之间的时间间隔（即图像采集日期的差异）的影响。
-
-<h3 id="1-5-CGAN（https-github-com-Rohit18-Landsat8-Sentinel2-Fusion）"><a href="#1-5-CGAN（https-github-com-Rohit18-Landsat8-Sentinel2-Fusion）" class="headerlink" title="1.5 CGAN（https://github.com/Rohit18/Landsat8-Sentinel2-Fusion）"></a>1.5 CGAN（<a target="_blank" rel="noopener" href="https://github.com/Rohit18/Landsat8-Sentinel2-Fusion%EF%BC%89">https://github.com/Rohit18/Landsat8-Sentinel2-Fusion）</a></h3><p style="text-indent: 2em;">生成对抗网络（GAN）能够以监督的方式学习目标数据集（Sentinel-2）的数据分布，并将来自输入数据集（Landsat 8）的样本转换为复制目标数据集（Sentinel-2）中相应样本的样本。我们将训练一个GAN来学习红边波段的数据分布，这些信息来自与Sentinel-2红边波段信息最接近的Landsat 8波段（绿波段用于红边1，近红外波段用于红边2和红边3）。
-
-<h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><h3 id="1-1-Sen2like"><a href="#1-1-Sen2like" class="headerlink" title="1.1 Sen2like"></a>1.1 Sen2like</h3><p>L2H_30m。需要同区域的Sentinel-2进行融合得到L2F_10_20m    </p>
-<div style="text-align:center;">
-    <img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134350485_1752558230503.png" srcset="/img/loading.gif" lazyload 
-    style="width:80%;height:auto;">
+                <h1 id="基于深度学习的南漪湖水质参数反演研究"><a href="#基于深度学习的南漪湖水质参数反演研究" class="headerlink" title="基于深度学习的南漪湖水质参数反演研究"></a>基于深度学习的南漪湖水质参数反演研究</h1><p><strong>摘 要：</strong> 本研究采用多层感知器（MLP）神经网络模型、k 折交叉验证和遗传算法优化神经网络的方法，对水质参数进行反演，并生成了水质参数反演产品。实验结果表明，该方法在非线性拟合能力和泛化能力方面表现良好。</p>
+<p><strong>关键词：</strong> 水质参数反演；多层感知器；k 折交叉验证；遗传算法</p>
+<h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1 引言"></a>1 引言</h2><p>叶绿素是水体中的重要生物标志物，可以提供有关水体健康状态和环境变化的关键信息。因此，准确测量和反演叶绿素浓度对于环境监测、水质评估以及生态系统管理至关重要。在过去的几十年中，许多传统的光谱分析方法被广泛应用于叶绿素浓度反演。然而，这些方法通常依赖于复杂的光学模型和经验参数化，且对于光谱数据的处理和解释存在一定的局限性。</p>
+<p>近年来，深度学习作为一种强大的机器学习方法，逐渐在遥感数据处理领域展现出巨大的潜力。深度学习算法可以自动学习数据中的复杂特征和模式，无需依赖传统手动设计的特征提取方法。这为叶绿素浓度反演提供了一种新的可能性，通过光谱数据学习光谱特征与叶绿素浓度之间的关系。</p>
+<p>本文旨在基于深度学习方法探索光谱数据与叶绿素浓度之间的关系，并实现高精度的叶绿素浓度反演。针对该问题，本文提出了一种基于深度学习的反演模型，通过捕捉光谱数据中的潜在特征并建立与水质参数之间的映射关系，并对反演结果进行分析以验证其有效性。</p>
+<h2 id="2-数据处理"><a href="#2-数据处理" class="headerlink" title="2 数据处理"></a>2 数据处理</h2><h3 id="2-1-实测数据处理"><a href="#2-1-实测数据处理" class="headerlink" title="2.1 实测数据处理"></a>2.1 实测数据处理</h3><p>采用高斯核回归平滑和等效反射率转换来处理实测光谱数据。具体步骤如下：将实测光谱数据进行高斯核回归平滑，以去除噪声和杂波。使用光谱响应函数将实测光谱数据转换为等效反射率数据。</p>
+<h3 id="2-2-影像数据处理"><a href="#2-2-影像数据处理" class="headerlink" title="2.2 影像数据处理"></a>2.2 影像数据处理</h3><p>影像数据处理主要包括辐射定标和大气校正以及正射校正等步骤。对影像数据进行辐射定标，将原始影像数据转换为辐射亮度数据。使用大气校正方法，消除大气吸收和散射对影像的影响。进行正射校正，以消除地形和倾斜度对影像的影响。使得影像数据更加准确和可靠，方便后续的处理和分析。</p>
+<h3 id="2-3-水体提取"><a href="#2-3-水体提取" class="headerlink" title="2.3 水体提取"></a>2.3 水体提取</h3><p>水体提取是水质参数反演的前提步骤，本文使用 EIseg 高精度分割模型进行水体提取。使用马尔可夫优化方法对分割结果进行进一步的优化和精细化处理，以提高水体提取的准确性。</p>
+<h3 id="2-4-水面遥感反射率估算方法"><a href="#2-4-水面遥感反射率估算方法" class="headerlink" title="2.4 水面遥感反射率估算方法"></a>2.4 水面遥感反射率估算方法</h3><p>FLAASH 处理后的地表反射率，需要去除天空光的影响，才能获得遥感反射率。</p>
+<p>$$<br>R_{\mathrm{rs}}^c(\lambda)&#x3D;\frac{\rho(\lambda)-\min(\rho_{\mathrm{NIR}},\rho_{\mathrm{SWIR}})}{\pi}<br>$$</p>
+<p>其中，$R_{\mathrm{rs}}^c(\lambda)$ 代表图像上近似估计的遥感反射率，$\rho(\lambda)$ 表示地表反射率，$\min(\rho_{\mathrm{NIR}},\rho_{\mathrm{SWIR}})$ 表示近红外和短波红外地表反射率的较小值。考虑到高分一号数据的特性，本文将地表反射率值除以 $\pi$ 近似估计为遥感反射率。</p>
+<h3 id="2-5-经验线性校正"><a href="#2-5-经验线性校正" class="headerlink" title="2.5 经验线性校正"></a>2.5 经验线性校正</h3><p>高分一号与哨兵二号的波段设置接近，且哨兵二号影像时空分辨率较高，使用与实测数据同步的哨兵二号影像建立经验线性模型来校正哨兵二号的反射率值，以校正之后的哨兵二号影像为基准，对高分一号影像进行相对辐射归一化校正，得到校正之后的高分一号反射率值用于后续模型训练与推理。</p>
+<p>综上所述，本文对实测数据和影像数据进行了预处理，为后续的水质参数反演提供了可靠的数据基础。</p>
+<h2 id="3-研究方法"><a href="#3-研究方法" class="headerlink" title="3 研究方法"></a>3 研究方法</h2><h3 id="3-1-MLP-神经网络原理"><a href="#3-1-MLP-神经网络原理" class="headerlink" title="3.1 MLP 神经网络原理"></a>3.1 MLP 神经网络原理</h3><p>多层感知器（MLP）神经网络是一种前向反馈神经网络，由输入层、隐藏层和输出层组成。每一层都包括多个神经元，神经元之间通过权重进行连接，通过激活函数将输入信号转换为输出信号。</p>
+<p>在 MLP 神经网络中，输入层接收输入数据，隐藏层进行特征提取和抽象，输出层进行结果输出。通过不断调整权重和偏置，使得神经网络能够学习输入数据的特征和规律，实现对复杂问题的建模和预测。</p>
+<h3 id="3-2-k-折交叉验证"><a href="#3-2-k-折交叉验证" class="headerlink" title="3.2 k 折交叉验证"></a>3.2 k 折交叉验证</h3><p>k 折交叉验证是一种常用的评估方法，用于评估机器学习模型的泛化能力和预测精度。通过将数据集分为 k 个子集，每次用其中 k-1 个子集作为训练集，剩余一个子集作为测试集，进行模型训练和评估。重复 k 次，每次选取不同的测试集，最终得到平均交叉验证误差，以评估模型的泛化能力和预测精度。</p>
+<h3 id="3-3-遗传算法原理"><a href="#3-3-遗传算法原理" class="headerlink" title="3.3 遗传算法原理"></a>3.3 遗传算法原理</h3><p>遗传算法是一种基于自然选择和遗传机制的优化算法，常用于求解复杂问题的全局最优解。遗传算法模拟生物进化的过程，通过选择、交叉和变异等操作，不断优化和进化种群中的优秀个体，最终得到全局最优解。</p>
+<h3 id="3-4-遗传算法优化神经网络"><a href="#3-4-遗传算法优化神经网络" class="headerlink" title="3.4 遗传算法优化神经网络"></a>3.4 遗传算法优化神经网络</h3><p>在本文中，使用遗传算法对神经网络的超参数进行优化，以提高模型的泛化能力和反演精度。将神经网络隐藏层的神经元个数作为染色体，通过选择、交叉和变异等操作，优化神经网络隐藏层神经元个数。</p>
+<h3 id="3-5-技术路线"><a href="#3-5-技术路线" class="headerlink" title="3.5 技术路线"></a>3.5 技术路线</h3><p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260116200152200_1768564912227.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="4-结果与分析"><a href="#4-结果与分析" class="headerlink" title="4 结果与分析"></a>4 结果与分析</h2><h3 id="4-1-模型训练与精度评估"><a href="#4-1-模型训练与精度评估" class="headerlink" title="4.1 模型训练与精度评估"></a>4.1 模型训练与精度评估</h3><p>采用了 k 折交叉验证的方法对 MLP 神经网络模型进行训练和评估。同时，采用遗传算法对神经网络的超参数进行优化，以提高模型的泛化能力和反演精度。</p>
+<p>经过不断调整参数和优化模型，得到了反演精度较高的模型。并在测试集上进行了精度评估，使用均方误差和平均绝对误差作为评价指标来评估反演结果的精度和准确性。</p>
+<h3 id="4-2-反演产品生成"><a href="#4-2-反演产品生成" class="headerlink" title="4.2 反演产品生成"></a>4.2 反演产品生成</h3><p>将影像数据转为模型可接受的数据格式输入到模型中进行推理，并将推理结果写入 tiff 生成了水质参数反演产品，如图 1、2 所示。反演产品能够直观地反映水质参数的空间分布和变化趋势，为水质监测和管理提供重要的参考和支持。</p>
+<div align="center">
+  <img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260116200528287_1768565128331.png" srcset="/img/loading.gif" lazyload alt="叶绿素浓度分布图" />
+  <br />
+  <strong>图 1 叶绿素浓度分布图</strong>
 </div>
 
-<h3 id="1-2-SpecHomo"><a href="#1-2-SpecHomo" class="headerlink" title="1.2 SpecHomo"></a>1.2 SpecHomo</h3><p>30m。QR:Quadratic Regression、LR:Linear Regression、L8C2L2</p>
-<div style="text-align:center;">
-    <img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134418554_1752558258574.png" srcset="/img/loading.gif" lazyload 
-    style="width:80%;height:auto;">
+<div align="center">
+  <img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260116200534667_1768565134688.png" srcset="/img/loading.gif" lazyload alt="悬浮物浓度分布图" />
+  <br />
+  <strong>图 2 悬浮物浓度分布图</strong>
 </div>
 
-<h3 id="1-3-CGAN"><a href="#1-3-CGAN" class="headerlink" title="1.3 CGAN"></a>1.3 CGAN</h3><p style="text-indent: 2em;">使用fastai中集成的GAN进行训练。版本太老，重新使用最新的fastai.vision.gan方法重写模型。模型训练数据组织形式未知。
-
-<h3 id="1-4-ESRCNN"><a href="#1-4-ESRCNN" class="headerlink" title="1.4 ESRCNN"></a>1.4 ESRCNN</h3><p>超分辨率网络，学习源码，暂无思路。</p>
-<h3 id="1-5-其他方法"><a href="#1-5-其他方法" class="headerlink" title="1.5 其他方法"></a>1.5 其他方法</h3><p><a target="_blank" rel="noopener" href="https://github.com/wawancenggoro/cnn_l8_s2">cnn_l8_s2</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/venkatesh-thiru/Deep-Harmonization">deep-harmonization</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/egronskaya/Super-Resolution-for-Satellite-Imagery">Super-Resolution-for-Satellite-Imagery</a></p>
-<!-- 清理缓存并发布 -->
-<!-- hexo clean && hexo g && hexo d -->
+<p>综上所述，本文基于 MLP 神经网络模型反演了水质参数，并生成了水质参数反演产品。这一方法具有一定的反演精度和可靠性，能够为水质监测和管理提供重要的参考和支持。</p>
+<h2 id="5-结论"><a href="#5-结论" class="headerlink" title="5 结论"></a>5 结论</h2><p>本文采用了基于 MLP 神经网络模型、k 折交叉验证和遗传算法优化神经网络的方法，对水质参数进行反演，并生成了水质参数反演产品。</p>
+<p>在 MLP 神经网络模型中，采用了多层结构，隐藏层数目通过遗传算法确定。使用 LeakyReLU 激活函数和 Adam 优化算法，对神经网络进行训练和优化。在评估函数方面，使用了均方误差和平均绝对误差作为反演精度的评价指标。</p>
+<p>通过对 MLP 神经网络模型的训练和调优，得到了反演精度较好的结果。根据反演结果生成了水质参数反演产品，能够直观地反映水质参数的空间分布和变化趋势。</p>
+<p>在本文的研究过程中还存在一些不足之处。由于数据量和监测点分布的限制，反演结果存在一定的不确定性和局限性。水面遥感反射率的计算使用的是一种经验线性估计算法，和实测值之间存在一定的偏差，反演结果很大程度上由数据的精度决定，应该构建具有物理意义的模型来校正 FLAASH 大气校正的结果。使用的是基于 MLP 神经网络的反演模型，对于较为复杂的水质参数反演问题，可能需要采用更加高级的模型和算法。最后，生成的反演结果仅仅是一种预测结果，需要进一步结合实际监测数据和情况进行分析和验证。</p>
+<p>综上所述，本文采用了基于 MLP 神经网络的反演模型和 k 折交叉验证、遗传算法的评估方法，对水质参数进行反演，并生成了水质参数反演产品。这一方法具有较强的非线性拟合能力和泛化能力，能够有效提高水质参数反演的精度和可靠性。同时，研究存在一些不足和局限性，需要进一步完善和优化。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] 徐逸, 董轩妍, 王俊杰. 4 种机器学习模型反演太湖叶绿素 a 浓度的比较[J]. 水生态学杂志, 2019, 40(04): 48-57.</p>
+<p>[2] 董舜丹. 基于深度学习的南海近海海域叶绿素a浓度反演研究[D]. 桂林理工大学, 2022</p>
+<p>[3] 熊远康, 范冬林, 何宏昌, 等. 基于Landsat 8影像的Himawari-8叶绿素a空间降尺度研究[J]. 中国环境科学, 2022, 42(11): 5341-5350.</p>
+<p>[4] 于博文. 基于深度学习的VIIRS卫星全球海洋叶绿素a浓度反演[D]. 中国地质大学(北京), 2019</p>
+<p>[5] 孙茜童. 基于深度学习的叶绿素浓度反演研究[D]. 长春理工大学, 2022</p>
+<p>[6] 卢雪梅, 苏华. 基于OLCI数据的福建近海悬浮物浓度遥感反演[J]. 环境科学学报, 2020, 40(08): 2819-2827.</p>
+<p>[7] 谢婷婷, 陈芸芝, 卢文芳, 等. 面向GF-1 WFV数据的闽江下游叶绿素a反演模型研究[J]. 环境科学学报, 2019, 39(12): 4276-4283.</p>
+<p>[8] 王林, 王祥, 王新新, 等. 基于Sentinel-3 OLCI影像的秦皇岛海域悬浮物浓度遥感反演[J]. 中国环境科学, 2022, 42(08): 3867-3875.</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这时候刚开始接触定量遥感，很多东西都是摸索着做的，这里的方案现在看来全是漏洞。不过，先完成在完善吧。🤣</p>
 
                 
               </div>
@@ -477,11 +490,42 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AB%9E%E8%B5%9B/" class="category-chain-item">竞赛</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Remote-Sensing/" class="print-no-link">#Remote Sensing</a>
+        <a href="/tags/%E6%B0%B4%E8%B4%A8%E5%8F%82%E6%95%B0%E5%8F%8D%E6%BC%94/" class="print-no-link">#水质参数反演</a>
+      
+        <a href="/tags/%E5%8F%B6%E7%BB%BF%E7%B4%A0/" class="print-no-link">#叶绿素</a>
+      
+        <a href="/tags/%E6%82%AC%E6%B5%AE%E7%89%A9/" class="print-no-link">#悬浮物</a>
+      
+        <a href="/tags/MLP/" class="print-no-link">#MLP</a>
+      
+        <a href="/tags/K%E6%8A%98%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81/" class="print-no-link">#K折交叉验证</a>
+      
+        <a href="/tags/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/" class="print-no-link">#遗传算法</a>
       
     </div>
   
@@ -493,8 +537,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Landsat-8 to Sentinel-2</div>
-      <div>https://bingoodog.github.io/2024/05/29/Landsat-8 to Sentinel-2/</div>
+      <div>高分对地观测比赛水体赛道-实现方案分享</div>
+      <div>https://bingoodog.github.io/2023/09/29/高分对地观测比赛2023/</div>
     </div>
     <div class="license-meta">
       
@@ -506,7 +550,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年5月29日</div>
+          <div>2023年9月29日</div>
         </div>
       
       
@@ -538,21 +582,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/01/%E9%AB%98%E5%88%86%E4%B8%80%E5%8F%B7%E9%A2%84%E5%A4%84%E7%90%86/" title="高分一号（GF-1 WFV）批量预处理（ENVI）">
+                      <a href="/2024/05/29/Landsat-8%20to%20Sentinel-2/" title="Landsat-8 to Sentinel-2">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">高分一号（GF-1 WFV）批量预处理（ENVI）</span>
+                        <span class="hidden-mobile">Landsat-8 to Sentinel-2</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2023/09/29/%E9%AB%98%E5%88%86%E5%AF%B9%E5%9C%B0%E8%A7%82%E6%B5%8B%E6%AF%94%E8%B5%9B2023/" title="高分对地观测比赛水体赛道-实现方案分享">
-                        <span class="hidden-mobile">高分对地观测比赛水体赛道-实现方案分享</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>
@@ -650,6 +688,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -874,6 +918,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
 
