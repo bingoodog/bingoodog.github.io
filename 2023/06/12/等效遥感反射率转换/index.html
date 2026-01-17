@@ -19,25 +19,26 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="红边波段补全">
+    <meta name="description" content="介绍使用光谱响应函数将高光谱反射率转换为等效遥感反射率的原理、方法和Python代码实现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Landsat-8 to Sentinel-2">
-<meta property="og:url" content="https://bingoodog.github.io/2024/05/29/Landsat-8%20to%20Sentinel-2/index.html">
+<meta property="og:title" content="等效遥感反射率转换：从实测光谱到传感器波段的实现">
+<meta property="og:url" content="https://bingoodog.github.io/2023/06/12/%E7%AD%89%E6%95%88%E9%81%A5%E6%84%9F%E5%8F%8D%E5%B0%84%E7%8E%87%E8%BD%AC%E6%8D%A2/index.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="红边波段补全">
+<meta property="og:description" content="介绍使用光谱响应函数将高光谱反射率转换为等效遥感反射率的原理、方法和Python代码实现">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134350485_1752558230503.png">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134418554_1752558258574.png">
-<meta property="article:published_time" content="2024-05-29T02:23:12.000Z">
-<meta property="article:modified_time" content="2025-07-15T05:44:37.462Z">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260117185013109_1768647013132.png">
+<meta property="article:published_time" content="2023-06-12T09:45:25.000Z">
+<meta property="article:modified_time" content="2026-01-17T11:12:15.823Z">
 <meta property="article:author" content="bin">
-<meta property="article:tag" content="Remote Sensing">
+<meta property="article:tag" content="光谱响应函数">
+<meta property="article:tag" content="等效遥感反射率转换">
+<meta property="article:tag" content="高光谱反射率">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134350485_1752558230503.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260117185013109_1768647013132.png">
   
   
   
-  <title>Landsat-8 to Sentinel-2 - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>等效遥感反射率转换：从实测光谱到传感器波段的实现 - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -271,7 +272,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Landsat-8 to Sentinel-2"></span>
+            <span id="subtitle" data-typed-text="等效遥感反射率转换：从实测光谱到传感器波段的实现"></span>
           
         </div>
 
@@ -282,8 +283,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-29 10:23" pubdate>
-          2024年5月29日 上午
+        <time datetime="2023-06-12 17:45" pubdate>
+          2023年6月12日 下午
         </time>
       </span>
     
@@ -294,7 +295,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          1.1k 字
         
       </span>
     
@@ -416,12 +417,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Landsat-8 to Sentinel-2</h1>
+            <h1 id="seo-header">等效遥感反射率转换：从实测光谱到传感器波段的实现</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2025年7月15日 下午
+                    本文最后更新于 2026年1月17日 晚上
                   
                 
               </p>
@@ -429,47 +430,110 @@
             
               <div class="markdown-body">
                 
-                <!-- 写一个目录 -->
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
-<li><a href="#1">1.协调反射率</a></li>
-<li><a href="#2">2.红边波段补全</a></li>
-<li><a href="#3">3.下游产品的影响</a></li>
-<li><a href="#4">4.长时序高分辨率定量遥感应用</a></li>
+                <h2 id="📖-背景与意义"><a href="#📖-背景与意义" class="headerlink" title="📖 背景与意义"></a>📖 背景与意义</h2><p>在遥感应用中，由于光谱分辨率、空间分辨率、大气影响等因素，野外实验获取的地面实测高光谱数据与卫星影像光谱数据存在一定差异。实现两者的有效转换和比对对于确保遥感数据质量和水质反演精度具有重要意义。</p>
+<p>光谱重采样技术可以将实测反射率数据拟合到传感器特定波段宽度，而大气校正可以降低卫星影像的大气影响。通过等效反射率转换，我们能够实现<strong>星地准同步观测的统一</strong>，为后续的水质参数反演提供可靠的数据基础<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="孔祥生, 张安定, 钱永刚, 董宇阳. (2011). 地物光谱反射率测量与行星反射率计算联合教学设计与实践. *测绘科学*, 36(5), 234-236. DOI: 10.16251/j.cnki.1009-2307.2011.05.087">[1]</span></a></sup>。</p>
+<h2 id="🧮-理论基础"><a href="#🧮-理论基础" class="headerlink" title="🧮 理论基础"></a>🧮 理论基础</h2><h3 id="转换公式"><a href="#转换公式" class="headerlink" title="转换公式"></a>转换公式</h3><p>等效遥感反射率转换的核心公式如下：</p>
+<p>$$<br>\rho_{rs}(\lambda_i) &#x3D; \frac{\int_{\lambda_1}^{\lambda_2} \rho(\lambda) \cdot SRF(\lambda)  d\lambda}{\int_{\lambda_1}^{\lambda_2} SRF(\lambda)  d\lambda}<br>$$</p>
+<p><strong>公式参数说明：</strong></p>
+<ul>
+<li>$\rho_{rs}(\lambda_i)$：传感器第 $i$ 波段中心波长 $\lambda_i$ 处的窄波段反射率</li>
+<li>$\rho(\lambda)$：实测光谱在波长 $\lambda$ 处的反射率</li>
+<li>$\lambda_1, \lambda_2$：传感器第 $i$ 波段的波长范围</li>
+<li>$SRF(\lambda)$：传感器的光谱响应函数</li>
 </ul>
-<h2 id="1-协调反射率（可用方案）"><a href="#1-协调反射率（可用方案）" class="headerlink" title="1.协调反射率（可用方案）"></a>1.协调反射率<a id="1"></a>（可用方案）</h2><h3 id="1-1-Sen2like（https-github-com-senbox-org-sen2like）"><a href="#1-1-Sen2like（https-github-com-senbox-org-sen2like）" class="headerlink" title="1.1 Sen2like（https://github.com/senbox-org/sen2like）"></a>1.1 Sen2like（<a target="_blank" rel="noopener" href="https://github.com/senbox-org/sen2like%EF%BC%89">https://github.com/senbox-org/sen2like）</a></h3><!-- 首行空两格 -->
-<p style="text-indent: 2em;">Sen2Like处理器是一个旨在结合Sentinel-2和Landsat-8数据，创建多时相无缝地表反射率数据集的工具。它使用Sentinel-2作为参考任务，并结合所有输入数据来创建一个虚拟星座。此外，Sen2Like还涉及几何校正、方向效应校正和数据融合等方面的处理。
-        
-<h3 id="1-2-HLS-https-search-earthdata-nasa-gov-search-q-9HLSS30-9"><a href="#1-2-HLS-https-search-earthdata-nasa-gov-search-q-9HLSS30-9" class="headerlink" title="1.2 HLS(https://search.earthdata.nasa.gov/search?q=%9HLSS30%9)"></a>1.2 HLS(<a target="_blank" rel="noopener" href="https://search.earthdata.nasa.gov/search?q=%259HLSS30%259">https://search.earthdata.nasa.gov/search?q=%9HLSS30%9</a>)</h3><p style="text-indent: 2em;">Harmonized Landsat Sentinel-2 (HLS) 项目提供了一致的地表反射率（SR）数据，这些数据来源于美国宇航局（NASA）和美国地质调查局（USGS）联合发射的Landsat 8和Landsat 9卫星上的操作型陆地成像仪（OLI），以及欧洲哥白尼Sentinel-2A和Sentinel-2B卫星上的多光谱仪（MSI）。通过综合测量，该项目能够每2到3天以30米的空间分辨率对全球陆地进行观测。HLSS30和HLSL30产品以相同的分辨率和军事网格参考系统（MGRS）的瓦片形式进行网格化，并且这些产品可以“堆叠”用于时间序列分析。
+<h2 id="🛠️-Python代码实现"><a href="#🛠️-Python代码实现" class="headerlink" title="🛠️ Python代码实现"></a>🛠️ Python代码实现</h2><p>以下代码实现了从高光谱反射率到等效遥感反射率的完整转换过程：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">## 等效遥感反射率计算##</span><br><br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-comment"># 手动输入文件名</span><br>inputrrs = <span class="hljs-string">r&quot;\实测.xlsx&quot;</span>  <span class="hljs-comment"># 高光谱反射率excel文件名</span><br>inputSRF = <span class="hljs-string">r&quot;\WFV1.xlsx&quot;</span>  <span class="hljs-comment"># 卫星光谱响应函数excel文件名</span><br>output = <span class="hljs-string">r&quot;\WFV1.xlsx&quot;</span>  <span class="hljs-comment"># 设置输出等效遥感反射率文件名</span><br><br><span class="hljs-comment"># 读取数据</span><br><span class="hljs-keyword">try</span>:<br>    Rrs = pd.read_excel(inputrrs, header=<span class="hljs-literal">None</span>).values  <span class="hljs-comment"># 读取高光谱遥感反射率Rrs</span><br>    SRF = pd.read_excel(inputSRF, header=<span class="hljs-literal">None</span>).values  <span class="hljs-comment"># 读取传感器光谱响应函数SRF</span><br><span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;&gt;&gt;&gt;&gt;读取失败，请检查Rrs与SRF的excel文件名是否有误&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#x27;</span>)<br>    <span class="hljs-keyword">raise</span> e<br><br>sn = Rrs[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:]  <span class="hljs-comment"># 站点名station name</span><br>bn = SRF[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:]  <span class="hljs-comment"># 波段名band name</span><br><br>Rrs = Rrs[<span class="hljs-number">1</span>:, :].astype(<span class="hljs-built_in">float</span>)<br>SRF = SRF[<span class="hljs-number">1</span>:, :].astype(<span class="hljs-built_in">float</span>)<br><br>c1 = Rrs.shape[<span class="hljs-number">1</span>]  <span class="hljs-comment"># 高光谱反射率矩阵大小</span><br>c2 = SRF.shape[<span class="hljs-number">1</span>]  <span class="hljs-comment"># SRF矩阵大小</span><br><br><span class="hljs-comment"># 将光谱响应函数中可能存在的NaN值与小于0的值变为0</span><br>SRF[np.isnan(SRF)] = <span class="hljs-number">0</span><br>SRF[SRF &lt; <span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br>Rrs[np.isnan(Rrs)] = <span class="hljs-number">0</span><br>Rrs[Rrs &lt; <span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br><br><span class="hljs-comment"># 计算等效Rrs</span><br>er = np.zeros((c2 - <span class="hljs-number">1</span>, c1 - <span class="hljs-number">1</span>))  <span class="hljs-comment"># 创建存储等效Rrs的矩阵</span><br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, c2):<br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, c1):<br>        l1 = np.nonzero(SRF[:, i])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]  <span class="hljs-comment"># 积分下限</span><br>        l2 = np.nonzero(SRF[:, i])[<span class="hljs-number">0</span>][-<span class="hljs-number">1</span>]  <span class="hljs-comment"># 积分上限</span><br>        er[i - <span class="hljs-number">1</span>, j - <span class="hljs-number">1</span>] = (np.trapz(Rrs[np.where(Rrs[:, <span class="hljs-number">0</span>] == SRF[l1, <span class="hljs-number">0</span>])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]:np.where(Rrs[:, <span class="hljs-number">0</span>] == SRF[l2, <span class="hljs-number">0</span>])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] + <span class="hljs-number">1</span>, j] * SRF[l1:l2 + <span class="hljs-number">1</span>, i], dx=<span class="hljs-number">1</span>)) / (np.trapz(SRF[l1:l2 + <span class="hljs-number">1</span>, i], dx=<span class="hljs-number">1</span>))<br><br><span class="hljs-comment"># 数据保存</span><br><span class="hljs-comment"># 创建标好站点名和波段名的excel</span><br>temp = np.empty((c2, c1), dtype=<span class="hljs-built_in">object</span>)<br>temp[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:] = sn  <span class="hljs-comment"># 第一行是站点名</span><br>temp[<span class="hljs-number">1</span>:, <span class="hljs-number">0</span>] = bn  <span class="hljs-comment"># 第一列是波段名</span><br>temp[<span class="hljs-number">1</span>:, <span class="hljs-number">1</span>:] = er<br><br><span class="hljs-comment"># 输出</span><br>df = pd.DataFrame(temp)<br>df.to_excel(output, index=<span class="hljs-literal">False</span>, header=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure>
 
-<h3 id="1-3-SpecHomo（https-github-com-GFZ-spechomo）"><a href="#1-3-SpecHomo（https-github-com-GFZ-spechomo）" class="headerlink" title="1.3 SpecHomo（https://github.com/GFZ/spechomo）"></a>1.3 SpecHomo（<a target="_blank" rel="noopener" href="https://github.com/GFZ/spechomo%EF%BC%89">https://github.com/GFZ/spechomo）</a></h3><p style="text-indent: 2em;">SpecHomo用于多光谱卫星数据的光谱同质化。它可以将一个传感器的光谱信息转换为另一个传感器的光谱域。SpecHomo提供了不同的机器学习技术来预测目标传感器的光谱信息。目前，已经实现了多元线性回归、多元二次回归和随机森林回归。为了与最简单的同质化方法进行简单比较，还实现了线性光谱插值。
-<p style="text-indent: 2em;">与之前的光谱同质化技术相比，SpecHomo不仅允许应用全局（波段式）转换，即使用相同的预测系数对光谱波段的所有灰度值进行转换。它还通过使用针对各种光谱集群专门训练的预测系数，区分了不同地表覆盖类型的个体光谱特性。这提高了预测光谱信息的准确性。此外，SpecHomo不仅可以用于同质化已经相似的光谱定义，还允许预测单方面缺失的波段，例如Landsat-8数据中不存在的红边波段。
-<p style="text-indent: 2em;">预测精度以及对后续产品（如光谱指数或分类）的影响需要考虑光谱波长、源和目标传感器的光谱特性相似度、光谱位置以及光谱特征形状等多个因素。这些因素共同决定了协调后图像数据的质量和预测的准确性。
-
-<h3 id="1-4-ESRCNN（https-github-com-MrCPlusPlus-ESRCNN-for-Landsat8-Sentinel2-Fusion）"><a href="#1-4-ESRCNN（https-github-com-MrCPlusPlus-ESRCNN-for-Landsat8-Sentinel2-Fusion）" class="headerlink" title="1.4 ESRCNN（https://github.com/MrCPlusPlus/ESRCNN-for-Landsat8-Sentinel2-Fusion）"></a>1.4 ESRCNN（<a target="_blank" rel="noopener" href="https://github.com/MrCPlusPlus/ESRCNN-for-Landsat8-Sentinel2-Fusion%EF%BC%89">https://github.com/MrCPlusPlus/ESRCNN-for-Landsat8-Sentinel2-Fusion）</a></h3><p style="text-indent: 2em;">超分辨率卷积神经网络（ESRCNN），专门用于混合Landsat-8 Operational Land Imager（OLI）和Sentinel-2 Multispectral Imager（MSI）数据。精度评估显示，融合网络的性能受输入的辅助Sentinel-2图像的数量和辅助Sentinel-2图像与目标Landsat-8图像之间的时间间隔（即图像采集日期的差异）的影响。
-
-<h3 id="1-5-CGAN（https-github-com-Rohit18-Landsat8-Sentinel2-Fusion）"><a href="#1-5-CGAN（https-github-com-Rohit18-Landsat8-Sentinel2-Fusion）" class="headerlink" title="1.5 CGAN（https://github.com/Rohit18/Landsat8-Sentinel2-Fusion）"></a>1.5 CGAN（<a target="_blank" rel="noopener" href="https://github.com/Rohit18/Landsat8-Sentinel2-Fusion%EF%BC%89">https://github.com/Rohit18/Landsat8-Sentinel2-Fusion）</a></h3><p style="text-indent: 2em;">生成对抗网络（GAN）能够以监督的方式学习目标数据集（Sentinel-2）的数据分布，并将来自输入数据集（Landsat 8）的样本转换为复制目标数据集（Sentinel-2）中相应样本的样本。我们将训练一个GAN来学习红边波段的数据分布，这些信息来自与Sentinel-2红边波段信息最接近的Landsat 8波段（绿波段用于红边1，近红外波段用于红边2和红边3）。
-
-<h2 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h2><h3 id="1-1-Sen2like"><a href="#1-1-Sen2like" class="headerlink" title="1.1 Sen2like"></a>1.1 Sen2like</h3><p>L2H_30m。需要同区域的Sentinel-2进行融合得到L2F_10_20m    </p>
-<div style="text-align:center;">
-    <img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134350485_1752558230503.png" srcset="/img/loading.gif" lazyload 
-    style="width:80%;height:auto;">
-</div>
-
-<h3 id="1-2-SpecHomo"><a href="#1-2-SpecHomo" class="headerlink" title="1.2 SpecHomo"></a>1.2 SpecHomo</h3><p>30m。QR:Quadratic Regression、LR:Linear Regression、L8C2L2</p>
-<div style="text-align:center;">
-    <img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134418554_1752558258574.png" srcset="/img/loading.gif" lazyload 
-    style="width:80%;height:auto;">
-</div>
-
-<h3 id="1-3-CGAN"><a href="#1-3-CGAN" class="headerlink" title="1.3 CGAN"></a>1.3 CGAN</h3><p style="text-indent: 2em;">使用fastai中集成的GAN进行训练。版本太老，重新使用最新的fastai.vision.gan方法重写模型。模型训练数据组织形式未知。
-
-<h3 id="1-4-ESRCNN"><a href="#1-4-ESRCNN" class="headerlink" title="1.4 ESRCNN"></a>1.4 ESRCNN</h3><p>超分辨率网络，学习源码，暂无思路。</p>
-<h3 id="1-5-其他方法"><a href="#1-5-其他方法" class="headerlink" title="1.5 其他方法"></a>1.5 其他方法</h3><p><a target="_blank" rel="noopener" href="https://github.com/wawancenggoro/cnn_l8_s2">cnn_l8_s2</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/venkatesh-thiru/Deep-Harmonization">deep-harmonization</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/egronskaya/Super-Resolution-for-Satellite-Imagery">Super-Resolution-for-Satellite-Imagery</a></p>
-<!-- 清理缓存并发布 -->
-<!-- hexo clean && hexo g && hexo d -->
-
+<h2 id="📊-数据格式示例"><a href="#📊-数据格式示例" class="headerlink" title="📊 数据格式示例"></a>📊 数据格式示例</h2><h3 id="1-高光谱反射率数据-实测-xlsx"><a href="#1-高光谱反射率数据-实测-xlsx" class="headerlink" title="1. 高光谱反射率数据 (实测.xlsx)"></a>1. 高光谱反射率数据 (<code>实测.xlsx</code>)</h3><table>
+<thead>
+<tr>
+<th>WaveLength</th>
+<th>Station 1</th>
+<th>Station 2</th>
+<th>Station 3</th>
+<th>Station 4</th>
+<th>Station 5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>400</td>
+<td>0.0098442</td>
+<td>0.0097718</td>
+<td>0.0096756</td>
+<td>0.0102083</td>
+<td>0.0100013</td>
+</tr>
+<tr>
+<td>401</td>
+<td>0.0097854</td>
+<td>0.0097617</td>
+<td>0.0096686</td>
+<td>0.0101987</td>
+<td>0.0099884</td>
+</tr>
+</tbody></table>
+<h3 id="2-光谱响应函数-SRF-xlsx"><a href="#2-光谱响应函数-SRF-xlsx" class="headerlink" title="2. 光谱响应函数 (SRF.xlsx)"></a>2. 光谱响应函数 (<code>SRF.xlsx</code>)</h3><table>
+<thead>
+<tr>
+<th>波长&#x2F;nm</th>
+<th>B1</th>
+<th>B2</th>
+<th>B3</th>
+<th>B4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>400</td>
+<td>0.000282</td>
+<td>0.000558</td>
+<td>0.000706</td>
+<td>0.000130</td>
+</tr>
+<tr>
+<td>401</td>
+<td>0.000269</td>
+<td>0.000488</td>
+<td>0.000757</td>
+<td>0.000114</td>
+</tr>
+</tbody></table>
+<h3 id="3-输出结果-WFV1-xlsx"><a href="#3-输出结果-WFV1-xlsx" class="headerlink" title="3. 输出结果 (WFV1.xlsx)"></a>3. 输出结果 (<code>WFV1.xlsx</code>)</h3><table>
+<thead>
+<tr>
+<th>站点</th>
+<th>B1</th>
+<th>B2</th>
+<th>B3</th>
+<th>B4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Station 1</td>
+<td>0.013824</td>
+<td>0.024703</td>
+<td>0.017775</td>
+<td>0.008289</td>
+</tr>
+<tr>
+<td>Station 2</td>
+<td>0.016768</td>
+<td>0.022395</td>
+<td>0.016537</td>
+<td>0.003900</td>
+</tr>
+</tbody></table>
+<h2 id="💡-应用价值与注意事项"><a href="#💡-应用价值与注意事项" class="headerlink" title="💡 应用价值与注意事项"></a>💡 应用价值与注意事项</h2><h3 id="🌟-技术优势"><a href="#🌟-技术优势" class="headerlink" title="🌟 技术优势"></a>🌟 技术优势</h3><ol>
+<li><strong>数据替代性</strong>：当缺少同步过境影像或影像质量不佳时，可用等效反射率替代影像反射率进行水质反演</li>
+<li><strong>效率提升</strong>：只需人工测量水质参数，通过影像反射率即可完成反演，减少实测光谱工作量</li>
+<li><strong>精度改善</strong>：结合实测光谱与遥感影像反射率，能有效提升水质反演的精度和可靠性</li>
+</ol>
+<h3 id="⚠️-注意事项"><a href="#⚠️-注意事项" class="headerlink" title="⚠️ 注意事项"></a>⚠️ 注意事项</h3><ol>
+<li><strong>大气校正影响</strong>：大气校正对影像反射率的影响非常大，转换后仍需进一步校正</li>
+<li><strong>传感器特性</strong>：需考虑不同传感器的特性和响应函数差异</li>
+<li><strong>环境因素</strong>：实际应用中还需考虑水体类型、气象条件等环境因素的影响</li>
+</ol>
+<h2 id="📚-参考文献"><a href="#📚-参考文献" class="headerlink" title="📚 参考文献"></a>📚 参考文献</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>孔祥生, 张安定, 钱永刚, 董宇阳. (2011). 地物光谱反射率测量与行星反射率计算联合教学设计与实践. <em>测绘科学</em>, 36(5), 234-236. DOI: 10.16251&#x2F;j.cnki.1009-2307.2011.05.087
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -477,11 +541,36 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%81%A5%E6%84%9F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="category-chain-item">遥感数据处理</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Remote-Sensing/" class="print-no-link">#Remote Sensing</a>
+        <a href="/tags/%E7%AD%89%E6%95%88%E9%81%A5%E6%84%9F%E5%8F%8D%E5%B0%84%E7%8E%87%E8%BD%AC%E6%8D%A2/" class="print-no-link">#等效遥感反射率转换</a>
+      
+        <a href="/tags/%E5%85%89%E8%B0%B1%E5%93%8D%E5%BA%94%E5%87%BD%E6%95%B0/" class="print-no-link">#光谱响应函数</a>
+      
+        <a href="/tags/%E9%AB%98%E5%85%89%E8%B0%B1%E5%8F%8D%E5%B0%84%E7%8E%87/" class="print-no-link">#高光谱反射率</a>
       
     </div>
   
@@ -493,8 +582,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Landsat-8 to Sentinel-2</div>
-      <div>https://bingoodog.github.io/2024/05/29/Landsat-8 to Sentinel-2/</div>
+      <div>等效遥感反射率转换：从实测光谱到传感器波段的实现</div>
+      <div>https://bingoodog.github.io/2023/06/12/等效遥感反射率转换/</div>
     </div>
     <div class="license-meta">
       
@@ -506,7 +595,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年5月29日</div>
+          <div>2023年6月12日</div>
         </div>
       
       
@@ -538,21 +627,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/01/%E9%AB%98%E5%88%86%E4%B8%80%E5%8F%B7%E9%A2%84%E5%A4%84%E7%90%86/" title="高分一号（GF-1 WFV）批量预处理（ENVI）">
+                      <a href="/2023/09/29/%E9%AB%98%E5%88%86%E5%AF%B9%E5%9C%B0%E8%A7%82%E6%B5%8B%E6%AF%94%E8%B5%9B2023/" title="高分对地观测比赛水体赛道-实现方案分享">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">高分一号（GF-1 WFV）批量预处理（ENVI）</span>
+                        <span class="hidden-mobile">高分对地观测比赛水体赛道-实现方案分享</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2023/09/29/%E9%AB%98%E5%88%86%E5%AF%B9%E5%9C%B0%E8%A7%82%E6%B5%8B%E6%AF%94%E8%B5%9B2023/" title="高分对地观测比赛水体赛道-实现方案分享">
-                        <span class="hidden-mobile">高分对地观测比赛水体赛道-实现方案分享</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>
@@ -650,6 +733,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -874,6 +963,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
 
