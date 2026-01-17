@@ -19,27 +19,28 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="利用 ENVI 对 GF-1 WFV 数据进行批量正射校正、辐射定标与 QUAC 大气校正。">
+    <meta name="description" content="本文解读了Nature Communications上关于全球矿物结合态土壤有机碳储量与固碳潜力的研究，揭示了土壤碳固存的巨大潜力和管理策略。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="高分一号（GF-1 WFV）批量预处理（ENVI）">
-<meta property="og:url" content="https://bingoodog.github.io/2024/09/01/GF-1%E9%A2%84%E5%A4%84%E7%90%86/index.html">
+<meta property="og:title" content="全球矿物结合态土壤有机碳储量与固碳潜力研究">
+<meta property="og:url" content="https://bingoodog.github.io/links/global-mineral-associated-soil-organic-carbon.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="利用 ENVI 对 GF-1 WFV 数据进行批量正射校正、辐射定标与 QUAC 大气校正。">
+<meta property="og:description" content="本文解读了Nature Communications上关于全球矿物结合态土壤有机碳储量与固碳潜力的研究，揭示了土壤碳固存的巨大潜力和管理策略。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133320766_1752557600800.png">
-<meta property="article:published_time" content="2024-09-01T14:10:06.000Z">
-<meta property="article:modified_time" content="2026-01-16T11:54:26.832Z">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260115224035223_1768488035245.png">
+<meta property="article:published_time" content="2026-01-15T14:13:49.000Z">
+<meta property="article:modified_time" content="2026-01-17T14:54:25.069Z">
 <meta property="article:author" content="bin">
-<meta property="article:tag" content="ENVI">
-<meta property="article:tag" content="GF-1">
-<meta property="article:tag" content="QUAC">
-<meta property="article:tag" content="批处理">
+<meta property="article:tag" content="土壤有机碳">
+<meta property="article:tag" content="土壤管理">
+<meta property="article:tag" content="气候变化">
+<meta property="article:tag" content="矿物结合态有机碳">
+<meta property="article:tag" content="碳固存潜力">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133320766_1752557600800.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260115224035223_1768488035245.png">
   
   
   
-  <title>高分一号（GF-1 WFV）批量预处理（ENVI） - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>全球矿物结合态土壤有机碳储量与固碳潜力研究 - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -273,7 +274,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="高分一号（GF-1 WFV）批量预处理（ENVI）"></span>
+            <span id="subtitle" data-typed-text="全球矿物结合态土壤有机碳储量与固碳潜力研究"></span>
           
         </div>
 
@@ -284,8 +285,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-01 22:10" pubdate>
-          2024年9月1日 晚上
+        <time datetime="2026-01-15 22:13" pubdate>
+          2026年1月15日 晚上
         </time>
       </span>
     
@@ -296,7 +297,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          736 字
+          3k 字
         
       </span>
     
@@ -307,7 +308,7 @@
         
         
         
-          7 分钟
+          26 分钟
         
       </span>
     
@@ -418,12 +419,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">高分一号（GF-1 WFV）批量预处理（ENVI）</h1>
+            <h1 id="seo-header">全球矿物结合态土壤有机碳储量与固碳潜力研究</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年1月16日 晚上
+                    本文最后更新于 2026年1月17日 晚上
                   
                 
               </p>
@@ -431,87 +432,155 @@
             
               <div class="markdown-body">
                 
-                <p>本文记录 <strong>GF-1 WFV</strong> 在 <strong>ENVI 5.5</strong> 下的批量预处理流程，包含：<strong>辅助数据准备 → 批量正射校正 → 批量辐射定标 → 批量 QUAC 大气校正</strong>。参数以“能批量稳定跑通”为优先，适合常规生产处理。</p>
-<hr>
-<h2 id="0-准备工作（建议先检查）"><a href="#0-准备工作（建议先检查）" class="headerlink" title="0. 准备工作（建议先检查）"></a>0. 准备工作（建议先检查）</h2><ul>
-<li><strong>软件&#x2F;版本</strong>：ENVI 5.5（或同系列版本，菜单名称可能略有差异）</li>
-<li><strong>输入数据</strong>：GF1_WFV 原始影像（确保元数据齐全）</li>
-<li><strong>输出规划</strong>：建议分阶段输出到不同文件夹，避免覆盖与回溯困难，例如：<ul>
-<li><code>01_ortho/</code>（正射）</li>
-<li><code>02_calib/</code>（定标）</li>
-<li><code>03_quac/</code>（大气校正）</li>
+                <h2 id="引言：土壤碳——气候变化的隐形调节器"><a href="#引言：土壤碳——气候变化的隐形调节器" class="headerlink" title="引言：土壤碳——气候变化的隐形调节器"></a>引言：土壤碳——气候变化的隐形调节器</h2><p>当我们讨论应对气候变化的策略时，往往聚焦于减少化石燃料排放、发展可再生能源或保护森林等地上生态系统。然而，我们脚下的土壤，作为陆地生态系统中最大的有机碳库，正默默扮演着气候变化调节器的关键角色。土壤有机碳总量超过大气和植被碳的总和，其微小变化都可能对全球碳循环产生深远影响。</p>
+<p>在土壤有机碳的复杂世界中，矿物结合态有机碳（Mineral-Associated Organic Carbon, MOC）是其中最稳定的组分。它通过与土壤矿物的化学和物理结合，形成了一个可以保存数百年甚至数千年的碳储存库。这种稳定的碳储存形式，对于理解土壤碳的长期固存机制和评估土壤固碳潜力至关重要。</p>
+<p>今天，我将为大家解读一篇发表在《Nature Communications》上的重要研究——《Global stocks and capacity of mineral-associated soil organic carbon》。这项研究首次提供了全球尺度上矿物结合态有机碳储量及其储存容量的定量评估，为我们理解土壤碳固存潜力和制定有效的土壤碳管理策略提供了科学依据。</p>
+<h2 id="研究概述"><a href="#研究概述" class="headerlink" title="研究概述"></a>研究概述</h2><h3 id="文章基本信息"><a href="#文章基本信息" class="headerlink" title="文章基本信息"></a>文章基本信息</h3><p><strong>原文标题</strong>：Global stocks and capacity of mineral-associated soil organic carbon<br><strong>期刊名称</strong>：Nature Communications<br><strong>期刊级别</strong>：JCR分区 Q1；中科院分区 1区<br><strong>影响因子</strong>：15.7<br><strong>原文链接</strong>：<a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41467-022-31540-9">https://www.nature.com/articles/s41467-022-31540-9</a><br><strong>文章DOI</strong>：<a target="_blank" rel="noopener" href="https://doi.org/10.1038/s41467-022-31540-9">https://doi.org/10.1038/s41467-022-31540-9</a></p>
+<h3 id="核心观点"><a href="#核心观点" class="headerlink" title="核心观点"></a>核心观点</h3><p>这项研究基于全球1144个土壤剖面数据，揭示了矿物结合态有机碳的全球分布格局和固碳潜力：</p>
+<ul>
+<li>全球非多年冻土矿质土壤1米深度范围内，矿物结合态有机碳储量约为899 Pg C</li>
+<li>目前仅利用了矿物结合态碳理论储存容量的42%（表层土壤）和21%（深层土壤）</li>
+<li>农业管理区域和深层土壤表现出最显著的矿物结合态碳”不饱和”状态</li>
+<li>距离矿物学储存容量越远的土壤，其碳积累效率越高</li>
+</ul>
+<h2 id="研究背景：为什么关注矿物结合态有机碳？"><a href="#研究背景：为什么关注矿物结合态有机碳？" class="headerlink" title="研究背景：为什么关注矿物结合态有机碳？"></a>研究背景：为什么关注矿物结合态有机碳？</h2><h3 id="土壤有机碳的重要性"><a href="#土壤有机碳的重要性" class="headerlink" title="土壤有机碳的重要性"></a>土壤有机碳的重要性</h3><p>土壤有机碳（SOC）是陆地生态系统的核心组成部分，支持着以下关键生态功能：</p>
+<ul>
+<li>营养循环：为植物生长提供必需的养分</li>
+<li>水分保持：增强土壤的持水能力，提高抗旱性</li>
+<li>抗侵蚀能力：改善土壤结构，减少水土流失</li>
+<li>碳储存：作为全球最大的陆地碳库，调节大气CO₂浓度</li>
+</ul>
+<h3 id="矿物结合态有机碳的特殊性"><a href="#矿物结合态有机碳的特殊性" class="headerlink" title="矿物结合态有机碳的特殊性"></a>矿物结合态有机碳的特殊性</h3><p>矿物关联有机碳（MOC）通过与矿物的化学和物理交互，构成了SOC的一半以上。与颗粒有机碳（POC）相比，MOC具有以下特点：</p>
+<ul>
+<li><strong>稳定性高</strong>：周转时间长达100-10000年，比POC长约1000倍</li>
+<li><strong>受保护程度高</strong>：与矿物的结合限制了微生物的分解作用</li>
+<li><strong>长期固存潜力大</strong>：是实现长期土壤碳固存的关键组分</li>
+</ul>
+<h3 id="研究的紧迫性"><a href="#研究的紧迫性" class="headerlink" title="研究的紧迫性"></a>研究的紧迫性</h3><p>尽管MOC对长期碳固存至关重要，但全球范围内MOC的现有库存与矿物学最大容量尚未被量化，这限制了我们对以下问题的判断：</p>
+<ul>
+<li>全球土壤的固碳潜力有多大？</li>
+<li>哪些区域的土壤具有最高的固碳效率？</li>
+<li>如何制定优先的土壤碳管理策略？</li>
+</ul>
+<h2 id="研究目标与方法"><a href="#研究目标与方法" class="headerlink" title="研究目标与方法"></a>研究目标与方法</h2><h3 id="研究目标"><a href="#研究目标" class="headerlink" title="研究目标"></a>研究目标</h3><p>本研究旨在：</p>
+<ol>
+<li>量化全球矿物结合态有机碳（MOC）的储量</li>
+<li>评估全球矿物结合态有机碳的最大储存容量（MOCmax）</li>
+<li>分析不同生态系统和土壤深度下的矿物结合态碳饱和度（%C saturation）</li>
+<li>探讨矿物结合态碳饱和度与碳积累效率的关系</li>
+</ol>
+<h3 id="研究方法"><a href="#研究方法" class="headerlink" title="研究方法"></a>研究方法</h3><h4 id="1-数据收集与分类"><a href="#1-数据收集与分类" class="headerlink" title="1. 数据收集与分类"></a>1. 数据收集与分类</h4><ul>
+<li><strong>土壤剖面数据</strong>：收集了全球1144个分布广泛的土壤剖面数据，覆盖多种生物群落、气候和地表覆盖类型</li>
+<li><strong>管理干预数据</strong>：分析了103项涉及不同管理措施的土壤碳积累观测结果</li>
+<li><strong>矿物类型分类</strong>：根据土壤主导矿物类型将样点分为：<ul>
+<li>高活性矿物（HM）：如伊利石、蒙脱石等</li>
+<li>低活性矿物（LM）：如高岭石、三水铝石等</li>
 </ul>
 </li>
 </ul>
-<hr>
-<h2 id="1-辅助数据"><a href="#1-辅助数据" class="headerlink" title="1. 辅助数据"></a>1. 辅助数据</h2><p>在进行 GF1_WFV 预处理前，需要准备以下辅助数据：</p>
-<h3 id="1-1-参考影像"><a href="#1-1-参考影像" class="headerlink" title="1.1 参考影像"></a>1.1 参考影像</h3><ul>
-<li><strong>Landsat 8 全色波段拼接影像</strong>（用于自动找点&#x2F;配准参考）</li>
+<h4 id="2-矿物结合态碳最大容量（MOCmax）估算"><a href="#2-矿物结合态碳最大容量（MOCmax）估算" class="headerlink" title="2. 矿物结合态碳最大容量（MOCmax）估算"></a>2. 矿物结合态碳最大容量（MOCmax）估算</h4><ul>
+<li>使用观测数据的95%上分位数（95th quantile）推估不同矿物类型的MOCmax</li>
+<li>高活性矿物（HM）的MOCmax约为86 ± 9 mg C g⁻¹</li>
+<li>低活性矿物（LM）的MOCmax约为48 ± 6 mg C g⁻¹</li>
 </ul>
-<h3 id="1-2-DEM"><a href="#1-2-DEM" class="headerlink" title="1.2 DEM"></a>1.2 DEM</h3><ul>
-<li><strong>数字高程模型（DEM）</strong>  <blockquote>
-<p>注意：<strong>建议使用外部下载的 DEM</strong>，不要使用 ENVI 自带 DEM（在部分区域&#x2F;分辨率条件下更容易出现匹配或精度问题）。</p>
-</blockquote>
-</li>
+<h4 id="3-全球尺度预测"><a href="#3-全球尺度预测" class="headerlink" title="3. 全球尺度预测"></a>3. 全球尺度预测</h4><ul>
+<li>应用随机森林机器学习模型（R²&#x3D;0.60）预测MOC分布</li>
+<li>生成0.5°分辨率的全球MOC和MOCmax地图</li>
+<li>排除苔原、泥炭地和沙漠等特殊生态系统</li>
 </ul>
-<p>从服务器下载辅助数据到本地（示例）：</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133253415_1752557573445.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h2 id="2-正射校正（批处理）"><a href="#2-正射校正（批处理）" class="headerlink" title="2. 正射校正（批处理）"></a>2. 正射校正（批处理）</h2><h3 id="2-1-安装插件"><a href="#2-1-安装插件" class="headerlink" title="2.1 安装插件"></a>2.1 安装插件</h3><p>在 ENVI <strong>App Store</strong> 搜索并安装以下插件：</p>
+<h4 id="4-矿物结合态碳饱和度计算"><a href="#4-矿物结合态碳饱和度计算" class="headerlink" title="4. 矿物结合态碳饱和度计算"></a>4. 矿物结合态碳饱和度计算</h4><ul>
+<li>计算公式：%C saturation &#x3D; 观测MOC &#x2F; MOCmax</li>
+<li>分析不同生态系统、土壤深度和管理方式下的饱和度差异</li>
+</ul>
+<h2 id="研究结果：全球矿物结合态有机碳的分布与潜力"><a href="#研究结果：全球矿物结合态有机碳的分布与潜力" class="headerlink" title="研究结果：全球矿物结合态有机碳的分布与潜力"></a>研究结果：全球矿物结合态有机碳的分布与潜力</h2><h3 id="1-全球矿物结合态有机碳储量"><a href="#1-全球矿物结合态有机碳储量" class="headerlink" title="1. 全球矿物结合态有机碳储量"></a>1. 全球矿物结合态有机碳储量</h3><p>研究结果显示，在非永久冻土的矿质土壤1米深度范围内：</p>
 <ul>
-<li><strong>中国国产卫星支持工具</strong></li>
-<li><strong>ENVI55 自动找点正射校正批处理工具</strong></li>
+<li>矿物结合态有机碳总储量约为899 Pg C（5-95%置信区间：668-1074 Pg C）</li>
+<li>表层土壤（0-30 cm）：约448 Pg C</li>
+<li>深层土壤（30-100 cm）：约451 Pg C</li>
 </ul>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133320766_1752557600800.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="2-2-打开数据并自动识别元数据"><a href="#2-2-打开数据并自动识别元数据" class="headerlink" title="2.2 打开数据并自动识别元数据"></a>2.2 打开数据并自动识别元数据</h3><p>使用 <strong>中国国产卫星支持工具</strong> 打开 GF1_WFV 数据，确认系统已自动识别元数据（RPC 等信息）。</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133341888_1752557621905.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="2-3-批量正射：RPC-Orthorectification"><a href="#2-3-批量正射：RPC-Orthorectification" class="headerlink" title="2.3 批量正射：RPC Orthorectification"></a>2.3 批量正射：RPC Orthorectification</h3><p>打开工具：<strong>RPC Orthorectification Using Reference Image Batch</strong>。</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133453595_1752557693616.png" srcset="/img/loading.gif" lazyload></p>
-<h4 id="参数设置要点（建议）"><a href="#参数设置要点（建议）" class="headerlink" title="参数设置要点（建议）"></a>参数设置要点（建议）</h4><ul>
-<li><strong>输入数据</strong>：选择 GF1_WFV 影像（可多景）</li>
-<li><strong>Reference Image</strong>：Landsat 8 全色拼接影像</li>
-<li><strong>DEM</strong>：选择从服务器下载的 DEM（不建议用 ENVI 自带 DEM）</li>
-<li><strong>输出像元大小&#x2F;参数</strong>：<strong>输出大小选择 16</strong>（按你的生产规范）</li>
-<li><strong>输出路径</strong>：指向 <code>01_ortho/</code>（建议单独目录）</li>
-<li>其余参数：可先保持默认，确保批处理稳定完成</li>
+<p>这一发现表明，深层土壤的矿物结合态碳储量与表层土壤相当，强调了深层土壤在全球碳循环中的重要性。</p>
+<h3 id="2-全球矿物结合态碳容量与饱和度"><a href="#2-全球矿物结合态碳容量与饱和度" class="headerlink" title="2. 全球矿物结合态碳容量与饱和度"></a>2. 全球矿物结合态碳容量与饱和度</h3><ul>
+<li><strong>全球MOCmax总量</strong>：约4596 Pg C ± 453 Pg C（1米深度，排除特殊生态系统）</li>
+<li><strong>平均饱和度</strong>：仅约40%（±95% CI）</li>
+<li><strong>表层土壤</strong>：饱和度约42%</li>
+<li><strong>深层土壤</strong>：饱和度仅约21%</li>
 </ul>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133533797_1752557733814.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h2 id="3-大气校正（定标-QUAC）"><a href="#3-大气校正（定标-QUAC）" class="headerlink" title="3. 大气校正（定标 + QUAC）"></a>3. 大气校正（定标 + QUAC）</h2><h3 id="3-1-批量辐射定标"><a href="#3-1-批量辐射定标" class="headerlink" title="3.1 批量辐射定标"></a>3.1 批量辐射定标</h3><h4 id="3-1-1-安装插件"><a href="#3-1-1-安装插件" class="headerlink" title="3.1.1 安装插件"></a>3.1.1 安装插件</h4><p>在 ENVI <strong>App Store</strong> 搜索并安装：</p>
+<p>这意味着全球土壤仍具有巨大的矿物结合态碳固存潜力，尤其是深层土壤。</p>
+<h3 id="3-不同生态系统和管理方式的影响"><a href="#3-不同生态系统和管理方式的影响" class="headerlink" title="3. 不同生态系统和管理方式的影响"></a>3. 不同生态系统和管理方式的影响</h3><ul>
+<li><strong>管理生态系统 vs 自然生态系统</strong>：农业管理区域的饱和度（约31%）显著低于自然生态系统（约46%）</li>
+<li><strong>不同生态系统类型</strong>：农田 &lt; 草原 &lt; 森林</li>
+<li><strong>土壤深度效应</strong>：深层土壤的饱和度普遍低于表层土壤</li>
+</ul>
+<p>这些结果表明，农业管理活动导致了土壤矿物结合态碳的显著损失，同时也意味着农业土壤具有较大的固碳潜力。</p>
+<h3 id="4-碳积累效率与饱和度的关系"><a href="#4-碳积累效率与饱和度的关系" class="headerlink" title="4. 碳积累效率与饱和度的关系"></a>4. 碳积累效率与饱和度的关系</h3><p>研究发现，土壤碳积累效率与矿物结合态碳饱和度呈负相关：</p>
 <ul>
-<li><strong>新版图像批处理工具包 V5.5</strong></li>
+<li>当土壤碳储量仅达到矿物容量的十分之一时，其碳固存速率平均是一半容量土壤的3倍</li>
+<li>随着饱和度的增加，碳积累效率逐渐降低</li>
+<li>这一关系符合渐近线模型，表明土壤碳积累存在上限</li>
 </ul>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133940671_1752557980695.png" srcset="/img/loading.gif" lazyload></p>
-<h4 id="3-1-2-批量定标操作"><a href="#3-1-2-批量定标操作" class="headerlink" title="3.1.2 批量定标操作"></a>3.1.2 批量定标操作</h4><ul>
-<li><strong>输入数据</strong>：选择上一步正射校正输出（<code>01_ortho/</code>）</li>
-<li><strong>参数</strong>：通常保持默认即可</li>
-<li><strong>输出路径</strong>：建议指向 <code>02_calib/</code></li>
-</ul>
-<blockquote>
-<p>备注：本文流程使用 <strong>QUAC</strong> 进行大气校正，<strong>不需要</strong>按 FLAASH 的方式配置大气模型参数。</p>
-</blockquote>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134005204_1752558005232.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h3 id="3-2-批量快速大气校正（QUAC）"><a href="#3-2-批量快速大气校正（QUAC）" class="headerlink" title="3.2 批量快速大气校正（QUAC）"></a>3.2 批量快速大气校正（QUAC）</h3><ul>
-<li><strong>输入数据</strong>：选择定标后输出（<code>02_calib/</code>）</li>
-<li><strong>方法</strong>：QUAC（Quick Atmospheric Correction）</li>
-<li><strong>参数</strong>：一般保持默认</li>
-<li><strong>输出路径</strong>：建议指向 <code>03_quac/</code></li>
-</ul>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134027354_1752558027389.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h2 id="4-结果检查"><a href="#4-结果检查" class="headerlink" title="4. 结果检查"></a>4. 结果检查</h2><p>为避免“批量跑完但结果不可用”，建议抽查：</p>
+<p>这一发现对于制定土壤碳管理策略具有重要意义：距离矿物容量越远的土壤，通过管理措施增加碳储量的效率越高。</p>
+<h2 id="主要图表解析"><a href="#主要图表解析" class="headerlink" title="主要图表解析"></a>主要图表解析</h2><h3 id="Fig-1-矿物结合态碳容量与土壤质地的关系"><a href="#Fig-1-矿物结合态碳容量与土壤质地的关系" class="headerlink" title="Fig. 1: 矿物结合态碳容量与土壤质地的关系"></a>Fig. 1: 矿物结合态碳容量与土壤质地的关系</h3><p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/fig1_1768487043714.png" srcset="/img/loading.gif" lazyload></p>
+<p>该图展示了矿物结合态有机碳（MOC）与黏粒+粉砂含量（CS）的关系，按高活性矿物和低活性矿物区分：</p>
 <ul>
-<li><strong>空间位置</strong>：与参考影像叠加检查偏移（边界、道路、水体等）</li>
-<li><strong>NoData&#x2F;黑边</strong>：是否存在异常范围扩张或裁切问题</li>
-<li><strong>影像值域</strong>：定标后、QUAC 后直方图是否合理（避免全黑&#x2F;全白）</li>
+<li><strong>高活性矿物</strong>：具有更高的碳储存容量，MOC随CS增加的斜率更大</li>
+<li><strong>低活性矿物</strong>：碳储存容量较低，MOC随CS增加的斜率较小</li>
+<li><strong>95th分位数边界线</strong>：代表不同矿物类型的理论最大碳储存容量</li>
+<li><strong>自然与管理生态系统</strong>：管理生态系统普遍低于自然生态系统的碳储存水平</li>
 </ul>
+<p>这一结果清晰地展示了矿物类型对土壤碳储存容量的决定性影响。</p>
+<h3 id="Fig-2-不同生态系统和土壤深度的矿物结合态碳饱和度"><a href="#Fig-2-不同生态系统和土壤深度的矿物结合态碳饱和度" class="headerlink" title="Fig. 2: 不同生态系统和土壤深度的矿物结合态碳饱和度"></a>Fig. 2: 不同生态系统和土壤深度的矿物结合态碳饱和度</h3><p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/fig2_1768487041754.png" srcset="/img/loading.gif" lazyload></p>
+<p>箱线图显示了%C饱和度（MOC&#x2F;MOCmax）在不同条件下的分布：</p>
+<ul>
+<li><strong>管理生态系统 vs 自然生态系统</strong>：管理生态系统的饱和度显著低于自然生态系统</li>
+<li><strong>不同生态系统类型</strong>：农田 &lt; 草原 &lt; 森林</li>
+<li><strong>土壤深度效应</strong>：深层土壤的饱和度普遍低于表层土壤</li>
+</ul>
+<p>这一图表直观地展示了人类活动对土壤碳储存的影响，以及不同生态系统和土壤深度的固碳潜力差异。</p>
+<h3 id="Fig-3-环境变量对矿物结合态碳的影响"><a href="#Fig-3-环境变量对矿物结合态碳的影响" class="headerlink" title="Fig. 3: 环境变量对矿物结合态碳的影响"></a>Fig. 3: 环境变量对矿物结合态碳的影响</h3><p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/fig3_1768487040439.png" srcset="/img/loading.gif" lazyload></p>
+<p>随机森林模型的偏依赖图揭示了：</p>
+<ul>
+<li><strong>颗粒有机碳（POC）</strong>：与MOC呈正相关，是MOC的重要来源</li>
+<li><strong>年均温（MAT）</strong>：对MOC的影响受POC水平的调节</li>
+<li><strong>土壤质地</strong>：黏粒+粉砂含量是决定MOC的关键因素</li>
+</ul>
+<p>这些结果帮助我们理解了环境变量如何共同调控矿物结合态有机碳的分布。</p>
+<h3 id="Fig-4-全球矿物结合态碳容量、储量与固碳潜力"><a href="#Fig-4-全球矿物结合态碳容量、储量与固碳潜力" class="headerlink" title="Fig. 4: 全球矿物结合态碳容量、储量与固碳潜力"></a>Fig. 4: 全球矿物结合态碳容量、储量与固碳潜力</h3><p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/fig4_1768487037665.png" srcset="/img/loading.gif" lazyload></p>
+<p>这组全球地图（0.5°分辨率）展示了：</p>
+<ul>
+<li><strong>矿物结合态碳容量（MOCmax）</strong>：高值区主要分布在热带和温带湿润地区</li>
+<li><strong>当前矿物结合态碳储量（MOC）</strong>：与MOCmax的空间分布相似，但数值普遍较低</li>
+<li><strong>矿物结合态碳饱和度（%C saturation）</strong>：低饱和度区（高固碳潜力）主要分布在农业区域和干旱半干旱地区</li>
+<li><strong>碳积累效率</strong>：基于103项观测数据，展示了饱和度与碳积累速率的非线性关系</li>
+</ul>
+<p>这组地图为识别全球固碳潜力热点区域提供了可视化工具。</p>
+<h2 id="研究意义与启示"><a href="#研究意义与启示" class="headerlink" title="研究意义与启示"></a>研究意义与启示</h2><h3 id="科学意义"><a href="#科学意义" class="headerlink" title="科学意义"></a>科学意义</h3><ol>
+<li><strong>填补全球尺度空白</strong>：首次提供了全球范围内矿物结合态有机碳储量和容量的定量评估</li>
+<li><strong>深化机制理解</strong>：揭示了矿物类型、土壤深度和管理方式对矿物结合态碳分布的影响</li>
+<li><strong>建立效率框架</strong>：建立了矿物结合态碳饱和度与碳积累效率的定量关系</li>
+<li><strong>提供数据产品</strong>：生成了0.5°分辨率的全球MOC和MOCmax数据集</li>
+</ol>
+<h3 id="实践启示"><a href="#实践启示" class="headerlink" title="实践启示"></a>实践启示</h3><ol>
+<li><strong>优先管理区域</strong>：农业管理区域和深层土壤具有最高的固碳潜力，应作为土壤碳管理的优先区域</li>
+<li><strong>管理策略优化</strong>：针对不同饱和度的土壤，应采取不同的管理措施</li>
+<li><strong>深度考虑</strong>：深层土壤的固碳潜力不容忽视，应将深层土壤纳入碳管理策略</li>
+<li><strong>模型改进</strong>：研究结果可用于改进地球系统模型中的土壤碳循环模拟</li>
+</ol>
+<h2 id="数据与代码可用性"><a href="#数据与代码可用性" class="headerlink" title="数据与代码可用性"></a>数据与代码可用性</h2><p>全球矿物结合态有机碳和矿物学碳容量的栅格地图可在Zenodo免费获取：</p>
+<ul>
+<li>MOC和MOCmax栅格数据：<a target="_blank" rel="noopener" href="https://doi.org/10.5281/zenodo.6539765">https://doi.org/10.5281/zenodo.6539765</a></li>
+<li>观测合成数据：<a target="_blank" rel="noopener" href="https://doi.org/10.5281/zenodo.5987415">https://doi.org/10.5281/zenodo.5987415</a></li>
+<li>研究代码：<a target="_blank" rel="noopener" href="https://doi.org/10.5281/zenodo.6539765">https://doi.org/10.5281/zenodo.6539765</a></li>
+</ul>
+<h2 id="结论与展望"><a href="#结论与展望" class="headerlink" title="结论与展望"></a>结论与展望</h2><p>这项研究为我们理解全球土壤碳储存能力提供了重要的科学依据。研究结果表明，全球土壤仍具有巨大的矿物结合态碳固存潜力，尤其是农业管理区域和深层土壤。通过合理的土壤管理措施，我们可以充分利用这一潜力，为应对气候变化做出贡献。</p>
+<p>未来的研究方向包括：</p>
+<ol>
+<li>深入研究不同气候区和土壤类型下的矿物结合态碳形成机制</li>
+<li>开发更精确的矿物结合态碳容量预测模型</li>
+<li>评估不同管理措施对矿物结合态碳积累的长期影响</li>
+<li>将矿物结合态碳纳入国家和全球碳核算体系</li>
+</ol>
 <hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/enviidl/p/16553338.html">大气校正</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/enviidl/p/16542676.html">正射校正</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42121168/article/details/115464531">高分数据预处理</a></li>
-</ul>
+<p><strong>文章引用</strong>：<br>Georgiou, K., Jackson, R.B., Vindušková, O. et al. Global stocks and capacity of mineral-associated soil organic carbon. Nat Commun 13, 3797 (2022). <a target="_blank" rel="noopener" href="https://doi.org/10.1038/s41467-022-31540-9">https://doi.org/10.1038/s41467-022-31540-9</a></p>
 
                 
               </div>
@@ -530,15 +599,8 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E9%81%A5%E6%84%9F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="category-chain-item">遥感数据处理</a>
+  <a href="/categories/%E5%9C%9F%E5%A3%A4%E7%A7%91%E5%AD%A6/" class="category-chain-item">土壤科学</a>
   
-  
-    <span>></span>
-    
-  <a href="/categories/%E9%81%A5%E6%84%9F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3/" class="category-chain-item">大气校正</a>
-  
-  
-
   
 
       </span>
@@ -552,13 +614,15 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/GF-1/" class="print-no-link">#GF-1</a>
+        <a href="/tags/%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3/" class="print-no-link">#土壤有机碳</a>
       
-        <a href="/tags/ENVI/" class="print-no-link">#ENVI</a>
+        <a href="/tags/%E7%9F%BF%E7%89%A9%E7%BB%93%E5%90%88%E6%80%81%E6%9C%89%E6%9C%BA%E7%A2%B3/" class="print-no-link">#矿物结合态有机碳</a>
       
-        <a href="/tags/QUAC/" class="print-no-link">#QUAC</a>
+        <a href="/tags/%E7%A2%B3%E5%9B%BA%E5%AD%98%E6%BD%9C%E5%8A%9B/" class="print-no-link">#碳固存潜力</a>
       
-        <a href="/tags/%E6%89%B9%E5%A4%84%E7%90%86/" class="print-no-link">#批处理</a>
+        <a href="/tags/%E5%9C%9F%E5%A3%A4%E7%AE%A1%E7%90%86/" class="print-no-link">#土壤管理</a>
+      
+        <a href="/tags/%E6%B0%94%E5%80%99%E5%8F%98%E5%8C%96/" class="print-no-link">#气候变化</a>
       
     </div>
   
@@ -570,8 +634,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>高分一号（GF-1 WFV）批量预处理（ENVI）</div>
-      <div>https://bingoodog.github.io/2024/09/01/GF-1预处理/</div>
+      <div>全球矿物结合态土壤有机碳储量与固碳潜力研究</div>
+      <div>https://bingoodog.github.io/links/global-mineral-associated-soil-organic-carbon.html</div>
     </div>
     <div class="license-meta">
       
@@ -583,7 +647,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月1日</div>
+          <div>2026年1月15日</div>
         </div>
       
       
@@ -615,9 +679,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/30/GF-1%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3/" title="高分一号(GF-1)大气校正-基于py6s模型">
+                      <a href="/links/recent-status.html" title="近况">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">高分一号(GF-1)大气校正-基于py6s模型</span>
+                        <span class="hidden-mobile">近况</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -625,8 +689,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/29/%E9%AB%98%E5%88%86%E5%AF%B9%E5%9C%B0%E8%A7%82%E6%B5%8B%E6%AF%94%E8%B5%9B2023/" title="高分对地观测比赛水体赛道-实现方案分享">
-                        <span class="hidden-mobile">高分对地观测比赛水体赛道-实现方案分享</span>
+                      <a href="/links/soil-organic-carbon-inversion-plan.html" title="土壤有机碳反演方案">
+                        <span class="hidden-mobile">土壤有机碳反演方案</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
