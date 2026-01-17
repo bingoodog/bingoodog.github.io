@@ -19,27 +19,26 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="利用 ENVI 对 GF-1 WFV 数据进行批量正射校正、辐射定标与 QUAC 大气校正。">
+    <meta name="description" content="介绍使用光谱响应函数将高光谱反射率转换为等效遥感反射率的原理、方法和Python代码实现">
 <meta property="og:type" content="article">
-<meta property="og:title" content="高分一号（GF-1 WFV）批量预处理（ENVI）">
-<meta property="og:url" content="https://bingoodog.github.io/2024/09/01/%E9%AB%98%E5%88%86%E4%B8%80%E5%8F%B7%E9%A2%84%E5%A4%84%E7%90%86/index.html">
+<meta property="og:title" content="等效遥感反射率转换：从实测光谱到传感器波段的实现">
+<meta property="og:url" content="https://bingoodog.github.io/2023/06/12/Equivalent%20Remote%20Sensing%20Reflectance%20Conversion/index.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="利用 ENVI 对 GF-1 WFV 数据进行批量正射校正、辐射定标与 QUAC 大气校正。">
+<meta property="og:description" content="介绍使用光谱响应函数将高光谱反射率转换为等效遥感反射率的原理、方法和Python代码实现">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133320766_1752557600800.png">
-<meta property="article:published_time" content="2024-09-01T14:10:06.000Z">
-<meta property="article:modified_time" content="2026-01-16T11:54:26.832Z">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260117185013109_1768647013132.png">
+<meta property="article:published_time" content="2023-06-12T09:45:25.000Z">
+<meta property="article:modified_time" content="2026-01-17T11:12:15.823Z">
 <meta property="article:author" content="bin">
-<meta property="article:tag" content="ENVI">
-<meta property="article:tag" content="GF-1">
-<meta property="article:tag" content="QUAC">
-<meta property="article:tag" content="批处理">
+<meta property="article:tag" content="光谱响应函数">
+<meta property="article:tag" content="等效遥感反射率转换">
+<meta property="article:tag" content="高光谱反射率">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133320766_1752557600800.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260117185013109_1768647013132.png">
   
   
   
-  <title>高分一号（GF-1 WFV）批量预处理（ENVI） - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>等效遥感反射率转换：从实测光谱到传感器波段的实现 - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -273,7 +272,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="高分一号（GF-1 WFV）批量预处理（ENVI）"></span>
+            <span id="subtitle" data-typed-text="等效遥感反射率转换：从实测光谱到传感器波段的实现"></span>
           
         </div>
 
@@ -284,8 +283,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-01 22:10" pubdate>
-          2024年9月1日 晚上
+        <time datetime="2023-06-12 17:45" pubdate>
+          2023年6月12日 下午
         </time>
       </span>
     
@@ -296,7 +295,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          736 字
+          1.1k 字
         
       </span>
     
@@ -307,7 +306,7 @@
         
         
         
-          7 分钟
+          9 分钟
         
       </span>
     
@@ -418,12 +417,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">高分一号（GF-1 WFV）批量预处理（ENVI）</h1>
+            <h1 id="seo-header">等效遥感反射率转换：从实测光谱到传感器波段的实现</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年1月16日 晚上
+                    本文最后更新于 2026年1月17日 晚上
                   
                 
               </p>
@@ -431,88 +430,110 @@
             
               <div class="markdown-body">
                 
-                <p>本文记录 <strong>GF-1 WFV</strong> 在 <strong>ENVI 5.5</strong> 下的批量预处理流程，包含：<strong>辅助数据准备 → 批量正射校正 → 批量辐射定标 → 批量 QUAC 大气校正</strong>。参数以“能批量稳定跑通”为优先，适合常规生产处理。</p>
-<hr>
-<h2 id="0-准备工作（建议先检查）"><a href="#0-准备工作（建议先检查）" class="headerlink" title="0. 准备工作（建议先检查）"></a>0. 准备工作（建议先检查）</h2><ul>
-<li><strong>软件&#x2F;版本</strong>：ENVI 5.5（或同系列版本，菜单名称可能略有差异）</li>
-<li><strong>输入数据</strong>：GF1_WFV 原始影像（确保元数据齐全）</li>
-<li><strong>输出规划</strong>：建议分阶段输出到不同文件夹，避免覆盖与回溯困难，例如：<ul>
-<li><code>01_ortho/</code>（正射）</li>
-<li><code>02_calib/</code>（定标）</li>
-<li><code>03_quac/</code>（大气校正）</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="1-辅助数据"><a href="#1-辅助数据" class="headerlink" title="1. 辅助数据"></a>1. 辅助数据</h2><p>在进行 GF1_WFV 预处理前，需要准备以下辅助数据：</p>
-<h3 id="1-1-参考影像"><a href="#1-1-参考影像" class="headerlink" title="1.1 参考影像"></a>1.1 参考影像</h3><ul>
-<li><strong>Landsat 8 全色波段拼接影像</strong>（用于自动找点&#x2F;配准参考）</li>
-</ul>
-<h3 id="1-2-DEM"><a href="#1-2-DEM" class="headerlink" title="1.2 DEM"></a>1.2 DEM</h3><ul>
-<li><strong>数字高程模型（DEM）</strong>  <blockquote>
-<p>注意：<strong>建议使用外部下载的 DEM</strong>，不要使用 ENVI 自带 DEM（在部分区域&#x2F;分辨率条件下更容易出现匹配或精度问题）。</p>
-</blockquote>
-</li>
-</ul>
-<p>从服务器下载辅助数据到本地（示例）：</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133253415_1752557573445.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h2 id="2-正射校正（批处理）"><a href="#2-正射校正（批处理）" class="headerlink" title="2. 正射校正（批处理）"></a>2. 正射校正（批处理）</h2><h3 id="2-1-安装插件"><a href="#2-1-安装插件" class="headerlink" title="2.1 安装插件"></a>2.1 安装插件</h3><p>在 ENVI <strong>App Store</strong> 搜索并安装以下插件：</p>
+                <h2 id="📖-背景与意义"><a href="#📖-背景与意义" class="headerlink" title="📖 背景与意义"></a>📖 背景与意义</h2><p>在遥感应用中，由于光谱分辨率、空间分辨率、大气影响等因素，野外实验获取的地面实测高光谱数据与卫星影像光谱数据存在一定差异。实现两者的有效转换和比对对于确保遥感数据质量和水质反演精度具有重要意义。</p>
+<p>光谱重采样技术可以将实测反射率数据拟合到传感器特定波段宽度，而大气校正可以降低卫星影像的大气影响。通过等效反射率转换，我们能够实现<strong>星地准同步观测的统一</strong>，为后续的水质参数反演提供可靠的数据基础<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="孔祥生, 张安定, 钱永刚, 董宇阳. (2011). 地物光谱反射率测量与行星反射率计算联合教学设计与实践. *测绘科学*, 36(5), 234-236. DOI: 10.16251/j.cnki.1009-2307.2011.05.087">[1]</span></a></sup>。</p>
+<h2 id="🧮-理论基础"><a href="#🧮-理论基础" class="headerlink" title="🧮 理论基础"></a>🧮 理论基础</h2><h3 id="转换公式"><a href="#转换公式" class="headerlink" title="转换公式"></a>转换公式</h3><p>等效遥感反射率转换的核心公式如下：</p>
+<p>$$<br>\rho_{rs}(\lambda_i) &#x3D; \frac{\int_{\lambda_1}^{\lambda_2} \rho(\lambda) \cdot SRF(\lambda)  d\lambda}{\int_{\lambda_1}^{\lambda_2} SRF(\lambda)  d\lambda}<br>$$</p>
+<p><strong>公式参数说明：</strong></p>
 <ul>
-<li><strong>中国国产卫星支持工具</strong></li>
-<li><strong>ENVI55 自动找点正射校正批处理工具</strong></li>
+<li>$\rho_{rs}(\lambda_i)$：传感器第 $i$ 波段中心波长 $\lambda_i$ 处的窄波段反射率</li>
+<li>$\rho(\lambda)$：实测光谱在波长 $\lambda$ 处的反射率</li>
+<li>$\lambda_1, \lambda_2$：传感器第 $i$ 波段的波长范围</li>
+<li>$SRF(\lambda)$：传感器的光谱响应函数</li>
 </ul>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133320766_1752557600800.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="2-2-打开数据并自动识别元数据"><a href="#2-2-打开数据并自动识别元数据" class="headerlink" title="2.2 打开数据并自动识别元数据"></a>2.2 打开数据并自动识别元数据</h3><p>使用 <strong>中国国产卫星支持工具</strong> 打开 GF1_WFV 数据，确认系统已自动识别元数据（RPC 等信息）。</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133341888_1752557621905.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="2-3-批量正射：RPC-Orthorectification"><a href="#2-3-批量正射：RPC-Orthorectification" class="headerlink" title="2.3 批量正射：RPC Orthorectification"></a>2.3 批量正射：RPC Orthorectification</h3><p>打开工具：<strong>RPC Orthorectification Using Reference Image Batch</strong>。</p>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133453595_1752557693616.png" srcset="/img/loading.gif" lazyload></p>
-<h4 id="参数设置要点（建议）"><a href="#参数设置要点（建议）" class="headerlink" title="参数设置要点（建议）"></a>参数设置要点（建议）</h4><ul>
-<li><strong>输入数据</strong>：选择 GF1_WFV 影像（可多景）</li>
-<li><strong>Reference Image</strong>：Landsat 8 全色拼接影像</li>
-<li><strong>DEM</strong>：选择从服务器下载的 DEM（不建议用 ENVI 自带 DEM）</li>
-<li><strong>输出像元大小&#x2F;参数</strong>：<strong>输出大小选择 16</strong>（按你的生产规范）</li>
-<li><strong>输出路径</strong>：指向 <code>01_ortho/</code>（建议单独目录）</li>
-<li>其余参数：可先保持默认，确保批处理稳定完成</li>
-</ul>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133533797_1752557733814.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h2 id="3-大气校正（定标-QUAC）"><a href="#3-大气校正（定标-QUAC）" class="headerlink" title="3. 大气校正（定标 + QUAC）"></a>3. 大气校正（定标 + QUAC）</h2><h3 id="3-1-批量辐射定标"><a href="#3-1-批量辐射定标" class="headerlink" title="3.1 批量辐射定标"></a>3.1 批量辐射定标</h3><h4 id="3-1-1-安装插件"><a href="#3-1-1-安装插件" class="headerlink" title="3.1.1 安装插件"></a>3.1.1 安装插件</h4><p>在 ENVI <strong>App Store</strong> 搜索并安装：</p>
-<ul>
-<li><strong>新版图像批处理工具包 V5.5</strong></li>
-</ul>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133940671_1752557980695.png" srcset="/img/loading.gif" lazyload></p>
-<h4 id="3-1-2-批量定标操作"><a href="#3-1-2-批量定标操作" class="headerlink" title="3.1.2 批量定标操作"></a>3.1.2 批量定标操作</h4><ul>
-<li><strong>输入数据</strong>：选择上一步正射校正输出（<code>01_ortho/</code>）</li>
-<li><strong>参数</strong>：通常保持默认即可</li>
-<li><strong>输出路径</strong>：建议指向 <code>02_calib/</code></li>
-</ul>
-<blockquote>
-<p>备注：本文流程使用 <strong>QUAC</strong> 进行大气校正，<strong>不需要</strong>按 FLAASH 的方式配置大气模型参数。</p>
-</blockquote>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134005204_1752558005232.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h3 id="3-2-批量快速大气校正（QUAC）"><a href="#3-2-批量快速大气校正（QUAC）" class="headerlink" title="3.2 批量快速大气校正（QUAC）"></a>3.2 批量快速大气校正（QUAC）</h3><ul>
-<li><strong>输入数据</strong>：选择定标后输出（<code>02_calib/</code>）</li>
-<li><strong>方法</strong>：QUAC（Quick Atmospheric Correction）</li>
-<li><strong>参数</strong>：一般保持默认</li>
-<li><strong>输出路径</strong>：建议指向 <code>03_quac/</code></li>
-</ul>
-<p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134027354_1752558027389.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<h2 id="4-结果检查"><a href="#4-结果检查" class="headerlink" title="4. 结果检查"></a>4. 结果检查</h2><p>为避免“批量跑完但结果不可用”，建议抽查：</p>
-<ul>
-<li><strong>空间位置</strong>：与参考影像叠加检查偏移（边界、道路、水体等）</li>
-<li><strong>NoData&#x2F;黑边</strong>：是否存在异常范围扩张或裁切问题</li>
-<li><strong>影像值域</strong>：定标后、QUAC 后直方图是否合理（避免全黑&#x2F;全白）</li>
-</ul>
-<hr>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/enviidl/p/16553338.html">大气校正</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/enviidl/p/16542676.html">正射校正</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42121168/article/details/115464531">高分数据预处理</a></li>
-</ul>
+<h2 id="🛠️-Python代码实现"><a href="#🛠️-Python代码实现" class="headerlink" title="🛠️ Python代码实现"></a>🛠️ Python代码实现</h2><p>以下代码实现了从高光谱反射率到等效遥感反射率的完整转换过程：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">## 等效遥感反射率计算##</span><br><br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-comment"># 手动输入文件名</span><br>inputrrs = <span class="hljs-string">r&quot;\实测.xlsx&quot;</span>  <span class="hljs-comment"># 高光谱反射率excel文件名</span><br>inputSRF = <span class="hljs-string">r&quot;\WFV1.xlsx&quot;</span>  <span class="hljs-comment"># 卫星光谱响应函数excel文件名</span><br>output = <span class="hljs-string">r&quot;\WFV1.xlsx&quot;</span>  <span class="hljs-comment"># 设置输出等效遥感反射率文件名</span><br><br><span class="hljs-comment"># 读取数据</span><br><span class="hljs-keyword">try</span>:<br>    Rrs = pd.read_excel(inputrrs, header=<span class="hljs-literal">None</span>).values  <span class="hljs-comment"># 读取高光谱遥感反射率Rrs</span><br>    SRF = pd.read_excel(inputSRF, header=<span class="hljs-literal">None</span>).values  <span class="hljs-comment"># 读取传感器光谱响应函数SRF</span><br><span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;&gt;&gt;&gt;&gt;读取失败，请检查Rrs与SRF的excel文件名是否有误&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#x27;</span>)<br>    <span class="hljs-keyword">raise</span> e<br><br>sn = Rrs[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:]  <span class="hljs-comment"># 站点名station name</span><br>bn = SRF[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:]  <span class="hljs-comment"># 波段名band name</span><br><br>Rrs = Rrs[<span class="hljs-number">1</span>:, :].astype(<span class="hljs-built_in">float</span>)<br>SRF = SRF[<span class="hljs-number">1</span>:, :].astype(<span class="hljs-built_in">float</span>)<br><br>c1 = Rrs.shape[<span class="hljs-number">1</span>]  <span class="hljs-comment"># 高光谱反射率矩阵大小</span><br>c2 = SRF.shape[<span class="hljs-number">1</span>]  <span class="hljs-comment"># SRF矩阵大小</span><br><br><span class="hljs-comment"># 将光谱响应函数中可能存在的NaN值与小于0的值变为0</span><br>SRF[np.isnan(SRF)] = <span class="hljs-number">0</span><br>SRF[SRF &lt; <span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br>Rrs[np.isnan(Rrs)] = <span class="hljs-number">0</span><br>Rrs[Rrs &lt; <span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br><br><span class="hljs-comment"># 计算等效Rrs</span><br>er = np.zeros((c2 - <span class="hljs-number">1</span>, c1 - <span class="hljs-number">1</span>))  <span class="hljs-comment"># 创建存储等效Rrs的矩阵</span><br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, c2):<br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, c1):<br>        l1 = np.nonzero(SRF[:, i])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]  <span class="hljs-comment"># 积分下限</span><br>        l2 = np.nonzero(SRF[:, i])[<span class="hljs-number">0</span>][-<span class="hljs-number">1</span>]  <span class="hljs-comment"># 积分上限</span><br>        er[i - <span class="hljs-number">1</span>, j - <span class="hljs-number">1</span>] = (np.trapz(Rrs[np.where(Rrs[:, <span class="hljs-number">0</span>] == SRF[l1, <span class="hljs-number">0</span>])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]:np.where(Rrs[:, <span class="hljs-number">0</span>] == SRF[l2, <span class="hljs-number">0</span>])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] + <span class="hljs-number">1</span>, j] * SRF[l1:l2 + <span class="hljs-number">1</span>, i], dx=<span class="hljs-number">1</span>)) / (np.trapz(SRF[l1:l2 + <span class="hljs-number">1</span>, i], dx=<span class="hljs-number">1</span>))<br><br><span class="hljs-comment"># 数据保存</span><br><span class="hljs-comment"># 创建标好站点名和波段名的excel</span><br>temp = np.empty((c2, c1), dtype=<span class="hljs-built_in">object</span>)<br>temp[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:] = sn  <span class="hljs-comment"># 第一行是站点名</span><br>temp[<span class="hljs-number">1</span>:, <span class="hljs-number">0</span>] = bn  <span class="hljs-comment"># 第一列是波段名</span><br>temp[<span class="hljs-number">1</span>:, <span class="hljs-number">1</span>:] = er<br><br><span class="hljs-comment"># 输出</span><br>df = pd.DataFrame(temp)<br>df.to_excel(output, index=<span class="hljs-literal">False</span>, header=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure>
 
+<h2 id="📊-数据格式示例"><a href="#📊-数据格式示例" class="headerlink" title="📊 数据格式示例"></a>📊 数据格式示例</h2><h3 id="1-高光谱反射率数据-实测-xlsx"><a href="#1-高光谱反射率数据-实测-xlsx" class="headerlink" title="1. 高光谱反射率数据 (实测.xlsx)"></a>1. 高光谱反射率数据 (<code>实测.xlsx</code>)</h3><table>
+<thead>
+<tr>
+<th>WaveLength</th>
+<th>Station 1</th>
+<th>Station 2</th>
+<th>Station 3</th>
+<th>Station 4</th>
+<th>Station 5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>400</td>
+<td>0.0098442</td>
+<td>0.0097718</td>
+<td>0.0096756</td>
+<td>0.0102083</td>
+<td>0.0100013</td>
+</tr>
+<tr>
+<td>401</td>
+<td>0.0097854</td>
+<td>0.0097617</td>
+<td>0.0096686</td>
+<td>0.0101987</td>
+<td>0.0099884</td>
+</tr>
+</tbody></table>
+<h3 id="2-光谱响应函数-SRF-xlsx"><a href="#2-光谱响应函数-SRF-xlsx" class="headerlink" title="2. 光谱响应函数 (SRF.xlsx)"></a>2. 光谱响应函数 (<code>SRF.xlsx</code>)</h3><table>
+<thead>
+<tr>
+<th>波长&#x2F;nm</th>
+<th>B1</th>
+<th>B2</th>
+<th>B3</th>
+<th>B4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>400</td>
+<td>0.000282</td>
+<td>0.000558</td>
+<td>0.000706</td>
+<td>0.000130</td>
+</tr>
+<tr>
+<td>401</td>
+<td>0.000269</td>
+<td>0.000488</td>
+<td>0.000757</td>
+<td>0.000114</td>
+</tr>
+</tbody></table>
+<h3 id="3-输出结果-WFV1-xlsx"><a href="#3-输出结果-WFV1-xlsx" class="headerlink" title="3. 输出结果 (WFV1.xlsx)"></a>3. 输出结果 (<code>WFV1.xlsx</code>)</h3><table>
+<thead>
+<tr>
+<th>站点</th>
+<th>B1</th>
+<th>B2</th>
+<th>B3</th>
+<th>B4</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Station 1</td>
+<td>0.013824</td>
+<td>0.024703</td>
+<td>0.017775</td>
+<td>0.008289</td>
+</tr>
+<tr>
+<td>Station 2</td>
+<td>0.016768</td>
+<td>0.022395</td>
+<td>0.016537</td>
+<td>0.003900</td>
+</tr>
+</tbody></table>
+<h2 id="💡-应用价值与注意事项"><a href="#💡-应用价值与注意事项" class="headerlink" title="💡 应用价值与注意事项"></a>💡 应用价值与注意事项</h2><h3 id="🌟-技术优势"><a href="#🌟-技术优势" class="headerlink" title="🌟 技术优势"></a>🌟 技术优势</h3><ol>
+<li><strong>数据替代性</strong>：当缺少同步过境影像或影像质量不佳时，可用等效反射率替代影像反射率进行水质反演</li>
+<li><strong>效率提升</strong>：只需人工测量水质参数，通过影像反射率即可完成反演，减少实测光谱工作量</li>
+<li><strong>精度改善</strong>：结合实测光谱与遥感影像反射率，能有效提升水质反演的精度和可靠性</li>
+</ol>
+<h3 id="⚠️-注意事项"><a href="#⚠️-注意事项" class="headerlink" title="⚠️ 注意事项"></a>⚠️ 注意事项</h3><ol>
+<li><strong>大气校正影响</strong>：大气校正对影像反射率的影响非常大，转换后仍需进一步校正</li>
+<li><strong>传感器特性</strong>：需考虑不同传感器的特性和响应函数差异</li>
+<li><strong>环境因素</strong>：实际应用中还需考虑水体类型、气象条件等环境因素的影响</li>
+</ol>
+<h2 id="📚-参考文献"><a href="#📚-参考文献" class="headerlink" title="📚 参考文献"></a>📚 参考文献</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>孔祥生, 张安定, 钱永刚, 董宇阳. (2011). 地物光谱反射率测量与行星反射率计算联合教学设计与实践. <em>测绘科学</em>, 36(5), 234-236. DOI: 10.16251&#x2F;j.cnki.1009-2307.2011.05.087
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -533,13 +554,6 @@
   <a href="/categories/%E9%81%A5%E6%84%9F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="category-chain-item">遥感数据处理</a>
   
   
-    <span>></span>
-    
-  <a href="/categories/%E9%81%A5%E6%84%9F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3/" class="category-chain-item">大气校正</a>
-  
-  
-
-  
 
       </span>
     
@@ -552,13 +566,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/GF-1/" class="print-no-link">#GF-1</a>
+        <a href="/tags/%E7%AD%89%E6%95%88%E9%81%A5%E6%84%9F%E5%8F%8D%E5%B0%84%E7%8E%87%E8%BD%AC%E6%8D%A2/" class="print-no-link">#等效遥感反射率转换</a>
       
-        <a href="/tags/ENVI/" class="print-no-link">#ENVI</a>
+        <a href="/tags/%E5%85%89%E8%B0%B1%E5%93%8D%E5%BA%94%E5%87%BD%E6%95%B0/" class="print-no-link">#光谱响应函数</a>
       
-        <a href="/tags/QUAC/" class="print-no-link">#QUAC</a>
-      
-        <a href="/tags/%E6%89%B9%E5%A4%84%E7%90%86/" class="print-no-link">#批处理</a>
+        <a href="/tags/%E9%AB%98%E5%85%89%E8%B0%B1%E5%8F%8D%E5%B0%84%E7%8E%87/" class="print-no-link">#高光谱反射率</a>
       
     </div>
   
@@ -570,8 +582,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>高分一号（GF-1 WFV）批量预处理（ENVI）</div>
-      <div>https://bingoodog.github.io/2024/09/01/高分一号预处理/</div>
+      <div>等效遥感反射率转换：从实测光谱到传感器波段的实现</div>
+      <div>https://bingoodog.github.io/2023/06/12/Equivalent Remote Sensing Reflectance Conversion/</div>
     </div>
     <div class="license-meta">
       
@@ -583,7 +595,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月1日</div>
+          <div>2023年6月12日</div>
         </div>
       
       
@@ -615,21 +627,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/09/30/%E9%AB%98%E5%88%86%E4%B8%80%E5%8F%B7%E5%A4%A7%E6%B0%94%E6%A0%A1%E6%AD%A3/" title="高分一号(GF-1)大气校正-基于py6s模型">
+                      <a href="/2023/09/29/GF%20Contest%202023/" title="高分对地观测比赛水体赛道-实现方案分享">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">高分一号(GF-1)大气校正-基于py6s模型</span>
+                        <span class="hidden-mobile">高分对地观测比赛水体赛道-实现方案分享</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2023/09/29/%E9%AB%98%E5%88%86%E5%AF%B9%E5%9C%B0%E8%A7%82%E6%B5%8B%E6%AF%94%E8%B5%9B2023/" title="高分对地观测比赛水体赛道-实现方案分享">
-                        <span class="hidden-mobile">高分对地观测比赛水体赛道-实现方案分享</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>
@@ -727,6 +733,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -951,6 +963,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
 
