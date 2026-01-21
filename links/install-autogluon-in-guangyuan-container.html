@@ -19,26 +19,27 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="">
   
-    <meta name="description" content="毕业半年，简单记录一下">
+    <meta name="description" content="光源基础镜像容器内安装 AutoGluon 的流程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="近况">
-<meta property="og:url" content="https://bingoodog.github.io/links/recent-status.html">
+<meta property="og:title" content="使用光源容器安装autogluon">
+<meta property="og:url" content="https://bingoodog.github.io/links/install-autogluon-in-guangyuan-container.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="毕业半年，简单记录一下">
+<meta property="og:description" content="光源基础镜像容器内安装 AutoGluon 的流程">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/f7409585983eae0202266b283e510596_720_1768544925536.suf">
-<meta property="article:published_time" content="2026-01-16T05:29:49.000Z">
-<meta property="article:modified_time" content="2026-01-17T14:54:19.798Z">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260121105835699_1768964315730.png">
+<meta property="article:published_time" content="2026-01-21T02:54:22.000Z">
+<meta property="article:modified_time" content="2026-01-21T03:02:26.225Z">
 <meta property="article:author" content="bin">
-<meta property="article:tag" content="就业">
-<meta property="article:tag" content="工作">
-<meta property="article:tag" content="生活">
+<meta property="article:tag" content="AutoGluon">
+<meta property="article:tag" content="DCU">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="PyTorch">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/f7409585983eae0202266b283e510596_720_1768544925536.suf">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260121105835699_1768964315730.png">
   
   
   
-  <title>近况 - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>使用光源容器安装autogluon - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -272,7 +273,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="近况"></span>
+            <span id="subtitle" data-typed-text="使用光源容器安装autogluon"></span>
           
         </div>
 
@@ -283,8 +284,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-01-16 13:29" pubdate>
-          2026年1月16日 下午
+        <time datetime="2026-01-21 10:54" pubdate>
+          2026年1月21日 上午
         </time>
       </span>
     
@@ -295,7 +296,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          632 字
         
       </span>
     
@@ -306,7 +307,7 @@
         
         
         
-          11 分钟
+          6 分钟
         
       </span>
     
@@ -417,12 +418,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">近况</h1>
+            <h1 id="seo-header">使用光源容器安装autogluon</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年1月17日 晚上
+                    本文最后更新于 2026年1月21日 上午
                   
                 
               </p>
@@ -430,38 +431,52 @@
             
               <div class="markdown-body">
                 
-                <p>毕业半年，简单记录一下这段时间的经历与感受，也算给自己留个回顾的锚点。</p>
-<h2 id="求职与选择"><a href="#求职与选择" class="headerlink" title="求职与选择"></a>求职与选择</h2><p>研三这一整年基本都在找工作，陆续参加了几次事业单位考试。2025 年 4 月参加人才引进，被引进到湖南某县城的自然资源事务中心。去现场提交材料的那天就有点后悔：总觉得周边县市的发展并没有真正“带上”它。</p>
-<p>犹豫了很久，最终还是放弃了。后面导师推荐我去做科研助理，我答应之后就没有再继续找工作。</p>
-<h2 id="答辩后"><a href="#答辩后" class="headerlink" title="答辩后"></a>答辩后</h2><p>答辩结束后，看着同学们陆续离校，但我这边一直没有明确的入职时间。我就留在学校，帮老师做些杂活，一直待到八月份。</p>
-<p>到了八月仍然没有等到具体通知，我决定先去找工作：在各大招聘网站投简历，投了几家地信公司的岗位。最后入职了一家地信公司，工作内容主要是<strong>遥感模型训练</strong>相关（数据处理、模型搭建与调参等）。</p>
-<h2 id="驻场项目"><a href="#驻场项目" class="headerlink" title="驻场项目"></a>驻场项目</h2><p>9 月去公司总部报道，一周时间熟悉文档后就南下广州。实际上是到客户单位驻场办公。</p>
-<p>到现场后才发现项目推进并不顺利，主要卡在两点：</p>
-<ul>
-<li><strong>数据不全</strong>：关键数据缺失，导致训练与验证链条不完整；</li>
-<li><strong>流程不规范</strong>：客户现有的数据处理流程不统一，很多环节需要重新对齐口径。</li>
+                <h2 id="使用光源容器安装-AutoGluon（基于海光-DTK）"><a href="#使用光源容器安装-AutoGluon（基于海光-DTK）" class="headerlink" title="使用光源容器安装 AutoGluon（基于海光 DTK）"></a>使用光源容器安装 AutoGluon（基于海光 DTK）</h2><p>本文档记录在“光源”基础镜像容器内安装 AutoGluon 的推荐流程，目标是：在满足 DTK&#x2F;驱动约束的前提下，尽量复用镜像自带的 PyTorch 生态版本，减少依赖冲突。</p>
+<h2 id="0-前置条件"><a href="#0-前置条件" class="headerlink" title="0. 前置条件"></a>0. 前置条件</h2><ul>
+<li>已完成海光 DTK 开发环境安装与 Docker 环境部署</li>
+<li>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/JulyLi2019/article/details/153266775">https://blog.csdn.net/JulyLi2019/article/details/153266775</a></li>
 </ul>
-<p>前期花了不少时间沟通需求、梳理数据现状。有点难绷的是：项目已经临近交付节点，但模型精度只能说“勉强可用”，距离客户要求还有差距。只能继续迭代优化、调整参数，希望在最后关头把指标再抬一抬。</p>
-<p>几轮调整和测试后，效果确实有所提升，但仍没达到客户预期。最后只能如实沟通现状，并给出后续改进方案。客户表示理解，但也希望我们尽快交付一个可用版本。</p>
-<h2 id="两头跑"><a href="#两头跑" class="headerlink" title="两头跑"></a>两头跑</h2><p>10 月底项目终于验收告一段落，但同事离职了。我被安排接手他的项目，去新的客户单位驻场办公。没办法，只能两头跑：</p>
+<h2 id="1-版本兼容性确认"><a href="#1-版本兼容性确认" class="headerlink" title="1. 版本兼容性确认"></a>1. 版本兼容性确认</h2><p>安装前先确认 AutoGluon 支持的 PyTorch 版本范围（避免选错镜像导致依赖不兼容）：</p>
 <ul>
-<li>这边继续优化之前的模型；</li>
-<li>那边进入售后保障阶段，工作量相对小一些，但仍需要盯现场。</li>
+<li><a target="_blank" rel="noopener" href="https://auto.gluon.ai/stable/whats_new/index.html">https://auto.gluon.ai/stable/whats_new/index.html</a></li>
 </ul>
-<p>其实两边的现场实施并不算难，培训一段时间基本能独立操作。最关键的问题是<strong>缺人</strong>：人手不够，工作量就直接翻倍。客户也不会给太多“学习时间”，只能边学边做、边做边补。</p>
-<h2 id="转前场"><a href="#转前场" class="headerlink" title="转前场"></a>转前场</h2><p>到了 11 月，公司调整发展方向，要求技术人员全部转前场做售前。说白了更像销售，而从我的能力结构和性格来说，这并不适合。</p>
-<p>挣扎了一段时间后，我还是决定离职。做不擅长的事情，短期也许能硬扛，但长期对个人发展没有好处。</p>
-<p>这里也顺便吐槽两句：地信行业的很多细分市场其实早就趋于饱和，现在才入场、再去转云服务和售前，只能说有点晚。更现实的是，很多技术同事并不适合销售型工作，转型成功率并不高。再加上竞争激烈、需求碎片化，如果公司拿不出足够有竞争力的产品和交付能力，很难站稳。</p>
-<h2 id="科研助理"><a href="#科研助理" class="headerlink" title="科研助理"></a>科研助理</h2><p>离职后，我请老师帮忙重新联系之前的科研助理岗位。沟通后又回去做科研助理，工作内容和读研时差不多：协助处理科研项目相关事务。</p>
-<p>回到熟悉环境，节奏确实轻松不少，但工资一般，也有点“温水煮青蛙”的感觉。好处是至少不用再两头跑了。</p>
-<h2 id="一些感受与反思"><a href="#一些感受与反思" class="headerlink" title="一些感受与反思"></a>一些感受与反思</h2><p>虽然在私企待的时间不长，但感受很深：</p>
+<h2 id="2-拉取基础镜像"><a href="#2-拉取基础镜像" class="headerlink" title="2. 拉取基础镜像"></a>2. 拉取基础镜像</h2><p>从光源镜像仓库选择与目标 DTK&#x2F;Python 版本匹配的容器，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker pull harbor.sourcefind.cn:5443/dcu/admin/base/pytorch:2.7.1-ubuntu22.04-dtk25.04.2-py3.10-alpha<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>建议：后续 <code>docker run</code> 使用同一个镜像标签（tag），避免“pull 的镜像”和“run 的镜像”不一致。</p>
+</blockquote>
+<h2 id="3-启动容器（最小化配置示例）"><a href="#3-启动容器（最小化配置示例）" class="headerlink" title="3. 启动容器（最小化配置示例）"></a>3. 启动容器（最小化配置示例）</h2><p>按需调整挂载目录、镜像地址与 tag。以下为最小化启动命令示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -it \<br>	--network=host \<br>	--ipc=host \<br>	--shm-size=16G \<br>	--device=/dev/kfd \<br>	--device=/dev/mkfd \<br>	--device=/dev/dri \<br>	-v /opt/hyhal:/opt/hyhal \<br>	--group-add video \<br>	--cap-add=SYS_PTRACE \<br>	--security-opt seccomp=unconfined \<br>	harbor.sourcefind.cn:5443/dcu/admin/base/pytorch:2.7.1-ubuntu22.04-dtk25.04.2-py3.10-alpha \<br>	/bin/bash<br></code></pre></td></tr></table></figure>
+
+<h2 id="4-容器内：生成依赖约束（constraints）"><a href="#4-容器内：生成依赖约束（constraints）" class="headerlink" title="4. 容器内：生成依赖约束（constraints）"></a>4. 容器内：生成依赖约束（constraints）</h2><h3 id="4-1-查看容器当前库版本"><a href="#4-1-查看容器当前库版本" class="headerlink" title="4.1 查看容器当前库版本"></a>4.1 查看容器当前库版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip list<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-2-导出约束文件"><a href="#4-2-导出约束文件" class="headerlink" title="4.2 导出约束文件"></a>4.2 导出约束文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip freeze &gt; constraints.txt<br></code></pre></td></tr></table></figure>
+
+<p>说明：</p>
 <ul>
-<li>工作强度和压力普遍更大，需要更强的抗压与适应；</li>
-<li>节奏更快，要求快速响应、快速交付；</li>
-<li>对刚毕业的人来说，确实需要时间磨合。</li>
+<li><code>constraints.txt</code> 仅包含“包名&#x3D;&#x3D;版本号”，不包含依赖关系解析信息</li>
+<li>部分镜像内置&#x2F;自定义包可能无法通过公网 PyPI 直接安装；如安装时报错，需以 <code>pip list</code> 的版本为准手动修正</li>
 </ul>
-<p>另外也越来越感到：地信这碗饭变得更难吃了——项目少、竞争大、工资低，发展空间有限；回款慢、工资延发也并不稀奇，工作和生活更难平衡。</p>
-<p>目前这段状态也算过渡。职业规划真的很重要，东搞一下西搞一下，容易两头落空。到现在我仍不确定以后要做什么——先走一步看一步吧。</p>
+<p>示例（以镜像内版本为准）：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs txt">torch==2.7.1+das.opt1.dtk25042<br>torchvision==0.22.0+das.opt1.dtk25042<br>transformer_engine==2.7.0+das.opt1.dtk25042<br>triton==3.1+das.opt1.dtk25042<br></code></pre></td></tr></table></figure>
+
+<h2 id="5-容器内：安装-AutoGluon"><a href="#5-容器内：安装-AutoGluon" class="headerlink" title="5. 容器内：安装 AutoGluon"></a>5. 容器内：安装 AutoGluon</h2><h3 id="5-1-配置-pip-镜像源（可选）"><a href="#5-1-配置-pip-镜像源（可选）" class="headerlink" title="5.1 配置 pip 镜像源（可选）"></a>5.1 配置 pip 镜像源（可选）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip config <span class="hljs-built_in">set</span> global.index-url https://pypi.tuna.tsinghua.edu.cn/simple<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-2-按约束安装（两种方式任选其一）"><a href="#5-2-按约束安装（两种方式任选其一）" class="headerlink" title="5.2 按约束安装（两种方式任选其一）"></a>5.2 按约束安装（两种方式任选其一）</h3><h4 id="方式-A：使用-requirements-txt（推荐用于项目化复现）"><a href="#方式-A：使用-requirements-txt（推荐用于项目化复现）" class="headerlink" title="方式 A：使用 requirements.txt（推荐用于项目化复现）"></a>方式 A：使用 requirements.txt（推荐用于项目化复现）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install -r requirements.txt -c constraints.txt<br></code></pre></td></tr></table></figure>
+
+<h4 id="方式-B：模块化最小化安装（推荐用于快速验证）"><a href="#方式-B：模块化最小化安装（推荐用于快速验证）" class="headerlink" title="方式 B：模块化最小化安装（推荐用于快速验证）"></a>方式 B：模块化最小化安装（推荐用于快速验证）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install autogluon.tabular -c constraints.txt<br></code></pre></td></tr></table></figure>
+
+<h2 id="6-（可选）安装-Jupyter"><a href="#6-（可选）安装-Jupyter" class="headerlink" title="6.（可选）安装 Jupyter"></a>6.（可选）安装 Jupyter</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install jupyter -c constraints.txt<br></code></pre></td></tr></table></figure>
+
+<h2 id="7-快速验证（PyTorch-DCU）"><a href="#7-快速验证（PyTorch-DCU）" class="headerlink" title="7. 快速验证（PyTorch &#x2F; DCU）"></a>7. 快速验证（PyTorch &#x2F; DCU）</h2><p>在容器内执行以下代码，快速确认 PyTorch 版本以及设备是否可用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">python - &lt;&lt;<span class="hljs-string">&#x27;PY&#x27;</span><br>import torch<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;pytorch version:&#x27;</span>, torch.__version__)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;DCU is&#x27;</span>, torch.cuda.is_available())<br><span class="hljs-built_in">print</span>(torch.cuda.device_count())<br>PY<br></code></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>AutoGluon 官方文档：<a target="_blank" rel="noopener" href="https://auto.gluon.ai/stable/index.html">https://auto.gluon.ai/stable/index.html</a></li>
+<li>DCU快速上手步骤：<a target="_blank" rel="noopener" href="https://developer.sourcefind.cn/gitbook//dcu_tutorial/index.html">https://developer.sourcefind.cn/gitbook//dcu_tutorial/index.html</a></li>
+<li>光源容器镜像仓库：<a target="_blank" rel="noopener" href="https://developer.sourcefind.cn/servicelist">https://developer.sourcefind.cn/servicelist</a></li>
+</ul>
 
                 
               </div>
@@ -480,7 +495,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%BF%91%E5%86%B5/" class="category-chain-item">近况</a>
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
   
   
 
@@ -495,11 +510,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%B0%B1%E4%B8%9A/" class="print-no-link">#就业</a>
+        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
       
-        <a href="/tags/%E5%B7%A5%E4%BD%9C/" class="print-no-link">#工作</a>
+        <a href="/tags/PyTorch/" class="print-no-link">#PyTorch</a>
       
-        <a href="/tags/%E7%94%9F%E6%B4%BB/" class="print-no-link">#生活</a>
+        <a href="/tags/DCU/" class="print-no-link">#DCU</a>
+      
+        <a href="/tags/AutoGluon/" class="print-no-link">#AutoGluon</a>
       
     </div>
   
@@ -511,8 +528,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>近况</div>
-      <div>https://bingoodog.github.io/links/recent-status.html</div>
+      <div>使用光源容器安装autogluon</div>
+      <div>https://bingoodog.github.io/links/install-autogluon-in-guangyuan-container.html</div>
     </div>
     <div class="license-meta">
       
@@ -524,7 +541,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年1月16日</div>
+          <div>2026年1月21日</div>
         </div>
       
       
@@ -556,18 +573,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/links/install-autogluon-in-guangyuan-container.html" title="使用光源容器安装autogluon">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">使用光源容器安装autogluon</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/links/global-mineral-associated-soil-organic-carbon.html" title="全球矿物结合态土壤有机碳储量与固碳潜力研究">
-                        <span class="hidden-mobile">全球矿物结合态土壤有机碳储量与固碳潜力研究</span>
+                      <a href="/links/recent-status.html" title="近况">
+                        <span class="hidden-mobile">近况</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
