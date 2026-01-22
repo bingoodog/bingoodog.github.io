@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://bingoodog.github.io/links/install-python-libraries-in-guangyuan-container.html</loc>
+    <loc>https://bingoodog.github.io/links/gee-landsat-indices-batch.html</loc>
     
     <lastmod>2026-01-22</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://bingoodog.github.io/links/gee-landsat-indices-batch.html</loc>
+    <loc>https://bingoodog.github.io/links/install-python-libraries-in-guangyuan-container.html</loc>
     
     <lastmod>2026-01-22</lastmod>
     
@@ -219,27 +219,6 @@
   </url>
   
   <url>
-    <loc>https://bingoodog.github.io/tags/ENVI/</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bingoodog.github.io/tags/QUAC/</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bingoodog.github.io/tags/%E6%89%B9%E5%A4%84%E7%90%86/</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://bingoodog.github.io/tags/GEE/</loc>
     <lastmod>2026-01-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -275,63 +254,21 @@
   </url>
   
   <url>
-    <loc>https://bingoodog.github.io/tags/Docker/</loc>
+    <loc>https://bingoodog.github.io/tags/ENVI/</loc>
     <lastmod>2026-01-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://bingoodog.github.io/tags/PyTorch/</loc>
+    <loc>https://bingoodog.github.io/tags/QUAC/</loc>
     <lastmod>2026-01-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://bingoodog.github.io/tags/DCU/</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bingoodog.github.io/tags/AutoGluon/</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bingoodog.github.io/tags/%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3/</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bingoodog.github.io/tags/%E9%81%A5%E6%84%9F%E5%8F%8D%E6%BC%94/</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bingoodog.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bingoodog.github.io/tags/%E6%97%B6%E7%A9%BA%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2026-01-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://bingoodog.github.io/tags/%E6%95%B0%E5%AD%97%E5%9C%9F%E5%A3%A4%E5%88%B6%E5%9B%BE/</loc>
+    <loc>https://bingoodog.github.io/tags/%E6%89%B9%E5%A4%84%E7%90%86/</loc>
     <lastmod>2026-01-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -353,6 +290,13 @@
   
   <url>
     <loc>https://bingoodog.github.io/tags/mpspline2/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bingoodog.github.io/tags/%E5%9C%9F%E5%A3%A4%E6%9C%89%E6%9C%BA%E7%A2%B3/</loc>
     <lastmod>2026-01-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -381,6 +325,62 @@
   
   <url>
     <loc>https://bingoodog.github.io/tags/%E6%B0%94%E5%80%99%E5%8F%98%E5%8C%96/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bingoodog.github.io/tags/Docker/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bingoodog.github.io/tags/PyTorch/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bingoodog.github.io/tags/DCU/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bingoodog.github.io/tags/AutoGluon/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bingoodog.github.io/tags/%E9%81%A5%E6%84%9F%E5%8F%8D%E6%BC%94/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bingoodog.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bingoodog.github.io/tags/%E6%97%B6%E7%A9%BA%E5%88%86%E6%9E%90/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://bingoodog.github.io/tags/%E6%95%B0%E5%AD%97%E5%9C%9F%E5%A3%A4%E5%88%B6%E5%9B%BE/</loc>
     <lastmod>2026-01-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -480,7 +480,7 @@
   </url>
   
   <url>
-    <loc>https://bingoodog.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://bingoodog.github.io/categories/%E5%9C%9F%E5%A3%A4%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</loc>
     <lastmod>2026-01-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -501,7 +501,7 @@
   </url>
   
   <url>
-    <loc>https://bingoodog.github.io/categories/%E5%9C%9F%E5%A3%A4%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</loc>
+    <loc>https://bingoodog.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2026-01-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
