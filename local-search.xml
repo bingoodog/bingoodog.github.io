@@ -4,6 +4,41 @@
   
   
   <entry>
+    <title>ACOLITE大气校正</title>
+    <link href="/links/acolite-s2-atmospheric-correction.html"/>
+    <url>/links/acolite-s2-atmospheric-correction.html</url>
+    
+    <content type="html"><![CDATA[<h2 id="1-大气校正的基本原理"><a href="#1-大气校正的基本原理" class="headerlink" title="1. 大气校正的基本原理"></a>1. 大气校正的基本原理</h2><p>大气校正的目标是从卫星大气顶层（TOA）反射率中恢复地表（水体）反射率，核心在于补偿大气散射、吸收以及地表反射（如天空光、太阳光反射）带来的影响。对水体遥感而言，准确的水体反射率是反演叶绿素浓度、总悬浮固体浓度等下游产品的基础。</p><p>TOA 反射率可表示为：</p><p>$$<br>\rho_t(\lambda)&#x3D;t\hat{\rho}<em>w(\lambda)+[\rho_r(\lambda)+\rho_a(\lambda)+\rho</em>{ar}(\lambda)]<br>$$</p><p>其中：</p><ul><li>$t$ 为漫透射率；</li><li>$\rho_r(\lambda)$ 为瑞利散射反射率；</li><li>$\rho_a(\lambda)$ 为气溶胶散射反射率；</li><li>$\rho_{ar}(\lambda)$ 为瑞利-气溶胶多重散射项。</li></ul><p>不同大气校正方法可将括号内项整体视为未知路径辐射，也可分离估算瑞利与气溶胶贡献。气溶胶贡献的不确定性最大，微小误差会放大到水体反射率估计中。常见气溶胶参数获取方式包括：基于影像估算平均气溶胶厚度、使用 MODIS 气溶胶产品、以及实测气溶胶数据。    </p><h2 id="2-ACOLITE-简介"><a href="#2-ACOLITE-简介" class="headerlink" title="2. ACOLITE 简介"></a>2. ACOLITE 简介</h2><p>ACOLITE 由比利时皇家自然科学研究所 RBINS（Royal Belgian Institute of Natural Sciences）开发，是面向沿海与内陆水体的大气校正工具。内置两种方法：指数外推与暗光谱拟合（Dark Spectrum Fitting，DSF）。</p><p>DSF 方法假设近红外或短波红外波段水体地表反射率接近于零，从而估计气溶胶散射并完成校正。ACOLITE 会将影像重采样到 10 m 并与原网格对齐，同时自动掩膜非水体、云层以及异常高 TOA 反射率像元，提取更“干净”的水体光谱。</p><p>ACOLITE 以 Python 软件包形式提供，可命令行或脚本调用，也有 GUI 便于交互设置。下载地址：<a href="https://github.com/acolite/acolite">https://github.com/acolite/acolite</a>。核心输出参数为 <code>l2w_parameters=Rrs_*</code>，用于直接输出水体反射率产品。</p><h2 id="3-Sentinel-2-处理流程（示例）"><a href="#3-Sentinel-2-处理流程（示例）" class="headerlink" title="3. Sentinel-2 处理流程（示例）"></a>3. Sentinel-2 处理流程（示例）</h2><p>以下以 Sentinel-2 影像为例，展示基本流程：</p><ol><li>解压软件安装包。</li><li>使用 GUI 配置参数。</li></ol><p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/1_1769175321037.png"></p><ol start="3"><li>或直接编辑 settings 文件完成批量或自动化处理。</li></ol><h3 id="关键参数说明"><a href="#关键参数说明" class="headerlink" title="关键参数说明"></a>关键参数说明</h3><ul><li><code>l2w_parameters=Rrs_*</code>：输出水体反射率产品。</li><li><code>s2_target_res=10</code>：目标空间分辨率 10 m。</li><li><code>l2w_export_geotiff=True</code>：输出 GeoTIFF。</li><li><code>inputfile</code>：输入影像路径。</li><li><code>output</code>：输出目录。</li><li><code>polygon</code>：裁剪范围矢量（可选）。</li></ul><p>示例配置：</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs txt">## ACOLITE settings<br><br>## 核心参数<br>l2w_parameters=Rrs_*<br>s2_target_res=10<br>l2w_export_geotiff=True<br><br>## 运行参数<br>inputfile=./S2B_MSIL1C.SAFE<br>output=./output<br>polygon=./xxx.shp<br>rgb_rhot=True<br>rgb_rhos=True<br>map_l2w=True<br>new_path=None<br></code></pre></td></tr></table></figure><h2 id="4-批量处理思路"><a href="#4-批量处理思路" class="headerlink" title="4. 批量处理思路"></a>4. 批量处理思路</h2><p>可通过脚本批量生成多份 settings 文件，对多景 Sentinel-2 影像进行自动化处理。实践示例可参考：<br><a href="https://blog.csdn.net/mrzhy1/article/details/124739321">使用ACOLITE对OLCI影像进行大气校正+批处理</a></p><h2 id="5-小结与后续"><a href="#5-小结与后续" class="headerlink" title="5. 小结与后续"></a>5. 小结与后续</h2><p>ACOLITE 对 Sentinel-2 的支持已经较成熟，但对国产卫星（如高分系列）的适配仍不完善。后续将补充高分影像的处理流程与实操经验。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul><li><a href="https://github.com/acolite/acolite">ACOLITE</a></li><li><a href="https://en.wikipedia.org/wiki/Atmospheric_correction">大气校正 - 维基百科</a></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>遥感数据处理</category>
+      
+      <category>大气校正</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>ACOLITE</tag>
+      
+      <tag>Sentinel-2</tag>
+      
+      <tag>DSF</tag>
+      
+      <tag>水色遥感</tag>
+      
+      <tag>大气校正</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>使用 GEE 批量计算 Landsat 遥感指数</title>
     <link href="/links/gee-landsat-indices-batch.html"/>
     <url>/links/gee-landsat-indices-batch.html</url>
@@ -210,11 +245,11 @@
     
     <tags>
       
+      <tag>大气校正</tag>
+      
       <tag>py6s</tag>
       
       <tag>GF-1</tag>
-      
-      <tag>大气校正</tag>
       
       <tag>光谱响应函数</tag>
       
