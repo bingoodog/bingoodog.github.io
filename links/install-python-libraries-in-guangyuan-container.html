@@ -298,7 +298,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          642 字
+          636 字
         
       </span>
     
@@ -433,51 +433,69 @@
             
               <div class="markdown-body">
                 
-                <h2 id="使用光源容器安装-AutoGluon（基于海光-DTK）"><a href="#使用光源容器安装-AutoGluon（基于海光-DTK）" class="headerlink" title="使用光源容器安装 AutoGluon（基于海光 DTK）"></a>使用光源容器安装 AutoGluon（基于海光 DTK）</h2><p>本文档记录在“光源”基础镜像容器内安装 AutoGluon 的推荐流程，目标是：在满足 DTK&#x2F;驱动约束的前提下，尽量复用镜像自带的 PyTorch 生态版本，减少依赖冲突。</p>
-<h2 id="0-前置条件"><a href="#0-前置条件" class="headerlink" title="0. 前置条件"></a>0. 前置条件</h2><ul>
-<li>已完成海光 DTK 开发环境安装与 Docker 环境部署</li>
-<li>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/JulyLi2019/article/details/153266775">https://blog.csdn.net/JulyLi2019/article/details/153266775</a></li>
-</ul>
-<h2 id="1-版本兼容性确认"><a href="#1-版本兼容性确认" class="headerlink" title="1. 版本兼容性确认"></a>1. 版本兼容性确认</h2><p>安装前先确认 AutoGluon 支持的 PyTorch 版本范围（避免选错镜像导致依赖不兼容）：</p>
+                <h2 id="使用光源容器安装-autogluon基于海光-dtk">使用光源容器安装
+AutoGluon（基于海光 DTK）</h2>
+<p>本文档记录在“光源”基础镜像容器内安装 AutoGluon
+的推荐流程，目标是：在满足 DTK/驱动约束的前提下，尽量复用镜像自带的
+PyTorch 生态版本，减少依赖冲突。</p>
+<h2 id="前置条件">0. 前置条件</h2>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://auto.gluon.ai/stable/whats_new/index.html">https://auto.gluon.ai/stable/whats_new/index.html</a></li>
+<li>已完成海光 DTK 开发环境安装与 Docker 环境部署</li>
+<li>参考：https://blog.csdn.net/JulyLi2019/article/details/153266775</li>
 </ul>
-<h2 id="2-拉取基础镜像"><a href="#2-拉取基础镜像" class="headerlink" title="2. 拉取基础镜像"></a>2. 拉取基础镜像</h2><p>从光源镜像仓库选择与目标 DTK&#x2F;Python 版本匹配的容器，例如：</p>
+<h2 id="版本兼容性确认">1. 版本兼容性确认</h2>
+<p>安装前先确认 AutoGluon 支持的 PyTorch
+版本范围（避免选错镜像导致依赖不兼容）：</p>
+<ul>
+<li>https://auto.gluon.ai/stable/whats_new/index.html</li>
+</ul>
+<h2 id="拉取基础镜像">2. 拉取基础镜像</h2>
+<p>从光源镜像仓库选择与目标 DTK/Python 版本匹配的容器，例如：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker pull harbor.sourcefind.cn:5443/dcu/admin/base/pytorch:2.7.1-ubuntu22.04-dtk25.04.2-py3.10-alpha<br></code></pre></td></tr></table></figure>
-
 <blockquote>
-<p>建议：后续 <code>docker run</code> 使用同一个镜像标签（tag），避免“pull 的镜像”和“run 的镜像”不一致。</p>
+<p>建议：后续 <code>docker run</code>
+使用同一个镜像标签（tag），避免“pull 的镜像”和“run 的镜像”不一致。</p>
 </blockquote>
-<h2 id="3-启动容器（最小化配置示例）"><a href="#3-启动容器（最小化配置示例）" class="headerlink" title="3. 启动容器（最小化配置示例）"></a>3. 启动容器（最小化配置示例）</h2><p>按需调整挂载目录、镜像地址与 tag。以下为最小化启动命令示例：</p>
+<h2 id="启动容器最小化配置示例">3. 启动容器（最小化配置示例）</h2>
+<p>按需调整挂载目录、镜像地址与 tag。以下为最小化启动命令示例：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker run -it \<br>	--network=host \<br>	--ipc=host \<br>	--shm-size=16G \<br>	--device=/dev/kfd \<br>	--device=/dev/mkfd \<br>	--device=/dev/dri \<br>	-v /opt/hyhal:/opt/hyhal \<br>	--group-add video \<br>	--cap-add=SYS_PTRACE \<br>	--security-opt seccomp=unconfined \<br>	harbor.sourcefind.cn:5443/dcu/admin/base/pytorch:2.7.1-ubuntu22.04-dtk25.04.2-py3.10-alpha \<br>	/bin/bash<br></code></pre></td></tr></table></figure>
-
-<h2 id="4-容器内：生成依赖约束（constraints）"><a href="#4-容器内：生成依赖约束（constraints）" class="headerlink" title="4. 容器内：生成依赖约束（constraints）"></a>4. 容器内：生成依赖约束（constraints）</h2><h3 id="4-1-查看容器当前库版本"><a href="#4-1-查看容器当前库版本" class="headerlink" title="4.1 查看容器当前库版本"></a>4.1 查看容器当前库版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip list<br></code></pre></td></tr></table></figure>
-
-<h3 id="4-2-导出约束文件"><a href="#4-2-导出约束文件" class="headerlink" title="4.2 导出约束文件"></a>4.2 导出约束文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip freeze &gt; constraints.txt<br></code></pre></td></tr></table></figure>
-
+<h2 id="容器内生成依赖约束constraints">4.
+容器内：生成依赖约束（constraints）</h2>
+<h3 id="查看容器当前库版本">4.1 查看容器当前库版本</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip list<br></code></pre></td></tr></table></figure>
+<h3 id="导出约束文件">4.2 导出约束文件</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip freeze &gt; constraints.txt<br></code></pre></td></tr></table></figure>
 <p>说明：</p>
 <ul>
-<li><code>constraints.txt</code> 仅包含“包名&#x3D;&#x3D;版本号”，不包含依赖关系解析信息</li>
-<li>部分镜像内置&#x2F;自定义包可能无法通过公网 PyPI 直接安装；如安装时报错，需以 <code>pip list</code> 的版本为准手动修正</li>
+<li><code>constraints.txt</code>
+仅包含“包名==版本号”，不包含依赖关系解析信息</li>
+<li>部分镜像内置/自定义包可能无法通过公网 PyPI
+直接安装；如安装时报错，需以 <code>pip list</code>
+的版本为准手动修正</li>
 </ul>
 <p>示例（以镜像内版本为准）：</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs txt">fastpt==2.2.0+das.dtk25042<br>lightop==0.6.0+das.dtk25042<br>torch==2.7.1+das.opt1.dtk25042<br>torchvision==0.22.0+das.opt1.dtk25042<br>transformer_engine==2.7.0+das.opt1.dtk25042<br>triton==3.1+das.opt1.dtk25042<br></code></pre></td></tr></table></figure>
-
-<h2 id="5-容器内：安装-AutoGluon"><a href="#5-容器内：安装-AutoGluon" class="headerlink" title="5. 容器内：安装 AutoGluon"></a>5. 容器内：安装 AutoGluon</h2><h3 id="5-1-配置-pip-镜像源（可选）"><a href="#5-1-配置-pip-镜像源（可选）" class="headerlink" title="5.1 配置 pip 镜像源（可选）"></a>5.1 配置 pip 镜像源（可选）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip config <span class="hljs-built_in">set</span> global.index-url https://pypi.tuna.tsinghua.edu.cn/simple<br></code></pre></td></tr></table></figure>
-
-<h3 id="5-2-按约束安装（两种方式任选其一）"><a href="#5-2-按约束安装（两种方式任选其一）" class="headerlink" title="5.2 按约束安装（两种方式任选其一）"></a>5.2 按约束安装（两种方式任选其一）</h3><h4 id="方式-A：使用-requirements-txt（推荐用于项目化复现）"><a href="#方式-A：使用-requirements-txt（推荐用于项目化复现）" class="headerlink" title="方式 A：使用 requirements.txt（推荐用于项目化复现）"></a>方式 A：使用 requirements.txt（推荐用于项目化复现）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install -r requirements.txt -c constraints.txt<br></code></pre></td></tr></table></figure>
-
-<h4 id="方式-B：模块化最小化安装（推荐用于快速验证）"><a href="#方式-B：模块化最小化安装（推荐用于快速验证）" class="headerlink" title="方式 B：模块化最小化安装（推荐用于快速验证）"></a>方式 B：模块化最小化安装（推荐用于快速验证）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install autogluon.tabular -c constraints.txt<br></code></pre></td></tr></table></figure>
-
-<h2 id="6-（可选）安装-Jupyter"><a href="#6-（可选）安装-Jupyter" class="headerlink" title="6.（可选）安装 Jupyter"></a>6.（可选）安装 Jupyter</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install jupyter -c constraints.txt<br></code></pre></td></tr></table></figure>
-
-<h2 id="7-快速验证（PyTorch-DCU）"><a href="#7-快速验证（PyTorch-DCU）" class="headerlink" title="7. 快速验证（PyTorch &#x2F; DCU）"></a>7. 快速验证（PyTorch &#x2F; DCU）</h2><p>在容器内执行以下代码，快速确认 PyTorch 版本以及设备是否可用：</p>
+<h2 id="容器内安装-autogluon">5. 容器内：安装 AutoGluon</h2>
+<h3 id="配置-pip-镜像源可选">5.1 配置 pip 镜像源（可选）</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip config <span class="hljs-built_in">set</span> global.index-url https://pypi.tuna.tsinghua.edu.cn/simple<br></code></pre></td></tr></table></figure>
+<h3 id="按约束安装两种方式任选其一">5.2
+按约束安装（两种方式任选其一）</h3>
+<h4 id="方式-a使用-requirements.txt推荐用于项目化复现">方式 A：使用
+requirements.txt（推荐用于项目化复现）</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install -r requirements.txt -c constraints.txt<br></code></pre></td></tr></table></figure>
+<h4 id="方式-b模块化最小化安装推荐用于快速验证">方式
+B：模块化最小化安装（推荐用于快速验证）</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install autogluon.tabular -c constraints.txt<br></code></pre></td></tr></table></figure>
+<h2 id="可选安装-jupyter">6.（可选）安装 Jupyter</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install jupyter -c constraints.txt<br></code></pre></td></tr></table></figure>
+<h2 id="快速验证pytorch-dcu">7. 快速验证（PyTorch / DCU）</h2>
+<p>在容器内执行以下代码，快速确认 PyTorch 版本以及设备是否可用：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">python - &lt;&lt;<span class="hljs-string">&#x27;PY&#x27;</span><br>import torch<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;pytorch version:&#x27;</span>, torch.__version__)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;DCU is&#x27;</span>, torch.cuda.is_available())<br><span class="hljs-built_in">print</span>(torch.cuda.device_count())<br>PY<br></code></pre></td></tr></table></figure>
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li>AutoGluon 官方文档：<a target="_blank" rel="noopener" href="https://auto.gluon.ai/stable/index.html">https://auto.gluon.ai/stable/index.html</a></li>
-<li>DCU快速上手步骤：<a target="_blank" rel="noopener" href="https://developer.sourcefind.cn/gitbook//dcu_tutorial/index.html">https://developer.sourcefind.cn/gitbook//dcu_tutorial/index.html</a></li>
-<li>光源容器镜像仓库：<a target="_blank" rel="noopener" href="https://developer.sourcefind.cn/servicelist">https://developer.sourcefind.cn/servicelist</a></li>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li>AutoGluon 官方文档：https://auto.gluon.ai/stable/index.html</li>
+<li>DCU快速上手步骤：https://developer.sourcefind.cn/gitbook//dcu_tutorial/index.html</li>
+<li>光源容器镜像仓库：https://developer.sourcefind.cn/servicelist</li>
 </ul>
 
                 

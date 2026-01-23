@@ -432,21 +432,36 @@
             
               <div class="markdown-body">
                 
-                <h2 id="📖-背景与意义"><a href="#📖-背景与意义" class="headerlink" title="📖 背景与意义"></a>📖 背景与意义</h2><p>在遥感应用中，由于光谱分辨率、空间分辨率、大气影响等因素，野外实验获取的地面实测高光谱数据与卫星影像光谱数据存在一定差异。实现两者的有效转换和比对对于确保遥感数据质量和水质反演精度具有重要意义。</p>
-<p>光谱重采样技术可以将实测反射率数据拟合到传感器特定波段宽度，而大气校正可以降低卫星影像的大气影响。通过等效反射率转换，我们能够实现<strong>星地准同步观测的统一</strong>，为后续的水质参数反演提供可靠的数据基础<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="孔祥生, 张安定, 钱永刚, 董宇阳. (2011). 地物光谱反射率测量与行星反射率计算联合教学设计与实践. *测绘科学*, 36(5), 234-236. DOI: 10.16251/j.cnki.1009-2307.2011.05.087">[1]</span></a></sup>。</p>
-<h2 id="🧮-理论基础"><a href="#🧮-理论基础" class="headerlink" title="🧮 理论基础"></a>🧮 理论基础</h2><h3 id="转换公式"><a href="#转换公式" class="headerlink" title="转换公式"></a>转换公式</h3><p>等效遥感反射率转换的核心公式如下：</p>
-<p>$$<br>\rho_{rs}(\lambda_i) &#x3D; \frac{\int_{\lambda_1}^{\lambda_2} \rho(\lambda) \cdot SRF(\lambda)  d\lambda}{\int_{\lambda_1}^{\lambda_2} SRF(\lambda)  d\lambda}<br>$$</p>
-<p><strong>公式参数说明：</strong></p>
-<ul>
-<li>$\rho_{rs}(\lambda_i)$：传感器第 $i$ 波段中心波长 $\lambda_i$ 处的窄波段反射率</li>
-<li>$\rho(\lambda)$：实测光谱在波长 $\lambda$ 处的反射率</li>
-<li>$\lambda_1, \lambda_2$：传感器第 $i$ 波段的波长范围</li>
-<li>$SRF(\lambda)$：传感器的光谱响应函数</li>
-</ul>
-<h2 id="🛠️-Python代码实现"><a href="#🛠️-Python代码实现" class="headerlink" title="🛠️ Python代码实现"></a>🛠️ Python代码实现</h2><p>以下代码实现了从高光谱反射率到等效遥感反射率的完整转换过程：</p>
+                <h2 id="背景与意义">📖 背景与意义</h2>
+<p>在遥感应用中，由于光谱分辨率、空间分辨率、大气影响等因素，野外实验获取的地面实测高光谱数据与卫星影像光谱数据存在一定差异。实现两者的有效转换和比对对于确保遥感数据质量和水质反演精度具有重要意义。</p>
+<p>光谱重采样技术可以将实测反射率数据拟合到传感器特定波段宽度，而大气校正可以降低卫星影像的大气影响。通过等效反射率转换，我们能够实现<strong>星地准同步观测的统一</strong>，为后续的水质参数反演提供可靠的数据基础<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="孔祥生, 张安定, 钱永刚, 董宇阳. (2011). 地物光谱反射率测量与行星反射率计算联合教学设计与实践. *测绘科学*, 36(5), 234-236. DOI: 10.16251/j.cnki.1009-2307.2011.05.087">[1]</span></a></sup>。</p>
+<h2 id="理论基础">🧮 理论基础</h2>
+<h3 id="转换公式">转换公式</h3>
+<p>等效遥感反射率转换的核心公式如下：</p>
+<p><span class="math display">\[
+\rho_{rs}(\lambda_i) = \frac{\int_{\lambda_1}^{\lambda_2} \rho(\lambda)
+\cdot SRF(\lambda)  d\lambda}{\int_{\lambda_1}^{\lambda_2}
+SRF(\lambda)  d\lambda}
+\]</span></p>
+<p><strong>公式参数说明：</strong> - <span
+class="math inline">\(\rho_{rs}(\lambda_i)\)</span>：传感器第 <span
+class="math inline">\(i\)</span> 波段中心波长 <span
+class="math inline">\(\lambda_i\)</span> 处的窄波段反射率 - <span
+class="math inline">\(\rho(\lambda)\)</span>：实测光谱在波长 <span
+class="math inline">\(\lambda\)</span> 处的反射率 - <span
+class="math inline">\(\lambda_1, \lambda_2\)</span>：传感器第 <span
+class="math inline">\(i\)</span> 波段的波长范围 - <span
+class="math inline">\(SRF(\lambda)\)</span>：传感器的光谱响应函数</p>
+<h2 id="python代码实现">🛠️ Python代码实现</h2>
+<p>以下代码实现了从高光谱反射率到等效遥感反射率的完整转换过程：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">## 等效遥感反射率计算##</span><br><br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-comment"># 手动输入文件名</span><br>inputrrs = <span class="hljs-string">r&quot;\实测.xlsx&quot;</span>  <span class="hljs-comment"># 高光谱反射率excel文件名</span><br>inputSRF = <span class="hljs-string">r&quot;\WFV1.xlsx&quot;</span>  <span class="hljs-comment"># 卫星光谱响应函数excel文件名</span><br>output = <span class="hljs-string">r&quot;\WFV1.xlsx&quot;</span>  <span class="hljs-comment"># 设置输出等效遥感反射率文件名</span><br><br><span class="hljs-comment"># 读取数据</span><br><span class="hljs-keyword">try</span>:<br>    Rrs = pd.read_excel(inputrrs, header=<span class="hljs-literal">None</span>).values  <span class="hljs-comment"># 读取高光谱遥感反射率Rrs</span><br>    SRF = pd.read_excel(inputSRF, header=<span class="hljs-literal">None</span>).values  <span class="hljs-comment"># 读取传感器光谱响应函数SRF</span><br><span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;&gt;&gt;&gt;&gt;读取失败，请检查Rrs与SRF的excel文件名是否有误&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#x27;</span>)<br>    <span class="hljs-keyword">raise</span> e<br><br>sn = Rrs[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:]  <span class="hljs-comment"># 站点名station name</span><br>bn = SRF[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:]  <span class="hljs-comment"># 波段名band name</span><br><br>Rrs = Rrs[<span class="hljs-number">1</span>:, :].astype(<span class="hljs-built_in">float</span>)<br>SRF = SRF[<span class="hljs-number">1</span>:, :].astype(<span class="hljs-built_in">float</span>)<br><br>c1 = Rrs.shape[<span class="hljs-number">1</span>]  <span class="hljs-comment"># 高光谱反射率矩阵大小</span><br>c2 = SRF.shape[<span class="hljs-number">1</span>]  <span class="hljs-comment"># SRF矩阵大小</span><br><br><span class="hljs-comment"># 将光谱响应函数中可能存在的NaN值与小于0的值变为0</span><br>SRF[np.isnan(SRF)] = <span class="hljs-number">0</span><br>SRF[SRF &lt; <span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br>Rrs[np.isnan(Rrs)] = <span class="hljs-number">0</span><br>Rrs[Rrs &lt; <span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br><br><span class="hljs-comment"># 计算等效Rrs</span><br>er = np.zeros((c2 - <span class="hljs-number">1</span>, c1 - <span class="hljs-number">1</span>))  <span class="hljs-comment"># 创建存储等效Rrs的矩阵</span><br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, c2):<br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, c1):<br>        l1 = np.nonzero(SRF[:, i])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]  <span class="hljs-comment"># 积分下限</span><br>        l2 = np.nonzero(SRF[:, i])[<span class="hljs-number">0</span>][-<span class="hljs-number">1</span>]  <span class="hljs-comment"># 积分上限</span><br>        er[i - <span class="hljs-number">1</span>, j - <span class="hljs-number">1</span>] = (np.trapz(Rrs[np.where(Rrs[:, <span class="hljs-number">0</span>] == SRF[l1, <span class="hljs-number">0</span>])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]:np.where(Rrs[:, <span class="hljs-number">0</span>] == SRF[l2, <span class="hljs-number">0</span>])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] + <span class="hljs-number">1</span>, j] * SRF[l1:l2 + <span class="hljs-number">1</span>, i], dx=<span class="hljs-number">1</span>)) / (np.trapz(SRF[l1:l2 + <span class="hljs-number">1</span>, i], dx=<span class="hljs-number">1</span>))<br><br><span class="hljs-comment"># 数据保存</span><br><span class="hljs-comment"># 创建标好站点名和波段名的excel</span><br>temp = np.empty((c2, c1), dtype=<span class="hljs-built_in">object</span>)<br>temp[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:] = sn  <span class="hljs-comment"># 第一行是站点名</span><br>temp[<span class="hljs-number">1</span>:, <span class="hljs-number">0</span>] = bn  <span class="hljs-comment"># 第一列是波段名</span><br>temp[<span class="hljs-number">1</span>:, <span class="hljs-number">1</span>:] = er<br><br><span class="hljs-comment"># 输出</span><br>df = pd.DataFrame(temp)<br>df.to_excel(output, index=<span class="hljs-literal">False</span>, header=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="数据格式示例">📊 数据格式示例</h2>
+<h3 id="高光谱反射率数据-实测.xlsx">1. 高光谱反射率数据
+(<code>实测.xlsx</code>)</h3>
+<table>
 
-<h2 id="📊-数据格式示例"><a href="#📊-数据格式示例" class="headerlink" title="📊 数据格式示例"></a>📊 数据格式示例</h2><h3 id="1-高光谱反射率数据-实测-xlsx"><a href="#1-高光谱反射率数据-实测-xlsx" class="headerlink" title="1. 高光谱反射率数据 (实测.xlsx)"></a>1. 高光谱反射率数据 (<code>实测.xlsx</code>)</h3><table>
 <thead>
 <tr>
 <th>WaveLength</th>
@@ -457,7 +472,8 @@
 <th>Station 5</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>400</td>
 <td>0.0098442</td>
 <td>0.0097718</td>
@@ -473,18 +489,22 @@
 <td>0.0101987</td>
 <td>0.0099884</td>
 </tr>
-</tbody></table>
-<h3 id="2-光谱响应函数-SRF-xlsx"><a href="#2-光谱响应函数-SRF-xlsx" class="headerlink" title="2. 光谱响应函数 (SRF.xlsx)"></a>2. 光谱响应函数 (<code>SRF.xlsx</code>)</h3><table>
+</tbody>
+</table>
+<h3 id="光谱响应函数-srf.xlsx">2. 光谱响应函数
+(<code>SRF.xlsx</code>)</h3>
+<table>
 <thead>
 <tr>
-<th>波长&#x2F;nm</th>
+<th>波长/nm</th>
 <th>B1</th>
 <th>B2</th>
 <th>B3</th>
 <th>B4</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>400</td>
 <td>0.000282</td>
 <td>0.000558</td>
@@ -498,8 +518,10 @@
 <td>0.000757</td>
 <td>0.000114</td>
 </tr>
-</tbody></table>
-<h3 id="3-输出结果-WFV1-xlsx"><a href="#3-输出结果-WFV1-xlsx" class="headerlink" title="3. 输出结果 (WFV1.xlsx)"></a>3. 输出结果 (<code>WFV1.xlsx</code>)</h3><table>
+</tbody>
+</table>
+<h3 id="输出结果-wfv1.xlsx">3. 输出结果 (<code>WFV1.xlsx</code>)</h3>
+<table>
 <thead>
 <tr>
 <th>站点</th>
@@ -509,7 +531,8 @@
 <th>B4</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Station 1</td>
 <td>0.013824</td>
 <td>0.024703</td>
@@ -523,19 +546,37 @@
 <td>0.016537</td>
 <td>0.003900</td>
 </tr>
-</tbody></table>
-<h2 id="💡-应用价值与注意事项"><a href="#💡-应用价值与注意事项" class="headerlink" title="💡 应用价值与注意事项"></a>💡 应用价值与注意事项</h2><h3 id="🌟-技术优势"><a href="#🌟-技术优势" class="headerlink" title="🌟 技术优势"></a>🌟 技术优势</h3><ol>
+</tbody>
+</table>
+<h2 id="应用价值与注意事项">💡 应用价值与注意事项</h2>
+<h3 id="技术优势">🌟 技术优势</h3>
+<ol type="1">
 <li><strong>数据替代性</strong>：当缺少同步过境影像或影像质量不佳时，可用等效反射率替代影像反射率进行水质反演</li>
 <li><strong>效率提升</strong>：只需人工测量水质参数，通过影像反射率即可完成反演，减少实测光谱工作量</li>
 <li><strong>精度改善</strong>：结合实测光谱与遥感影像反射率，能有效提升水质反演的精度和可靠性</li>
 </ol>
-<h3 id="⚠️-注意事项"><a href="#⚠️-注意事项" class="headerlink" title="⚠️ 注意事项"></a>⚠️ 注意事项</h3><ol>
+<h3 id="注意事项">⚠️ 注意事项</h3>
+<ol type="1">
 <li><strong>大气校正影响</strong>：大气校正对影像反射率的影响非常大，转换后仍需进一步校正</li>
 <li><strong>传感器特性</strong>：需考虑不同传感器的特性和响应函数差异</li>
 <li><strong>环境因素</strong>：实际应用中还需考虑水体类型、气象条件等环境因素的影响</li>
 </ol>
-<h2 id="📚-参考文献"><a href="#📚-参考文献" class="headerlink" title="📚 参考文献"></a>📚 参考文献</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>孔祥生, 张安定, 钱永刚, 董宇阳. (2011). 地物光谱反射率测量与行星反射率计算联合教学设计与实践. <em>测绘科学</em>, 36(5), 234-236. DOI: 10.16251&#x2F;j.cnki.1009-2307.2011.05.087
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<h2 id="参考文献">📚 参考文献</h2>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span>孔祥生, 张安定, 钱永刚,
+董宇阳. (2011). 地物光谱反射率测量与行星反射率计算联合教学设计与实践.
+<em>测绘科学</em>, 36(5), 234-236. DOI:
+10.16251/j.cnki.1009-2307.2011.05.087
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
+
                 
               </div>
             
