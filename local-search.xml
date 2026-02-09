@@ -35,6 +35,8 @@
     
     <tags>
       
+      <tag>大气校正</tag>
+      
       <tag>ACOLITE</tag>
       
       <tag>Sentinel-2</tag>
@@ -42,8 +44,6 @@
       <tag>DSF</tag>
       
       <tag>水色遥感</tag>
-      
-      <tag>大气校正</tag>
       
     </tags>
     
@@ -258,11 +258,11 @@
     
     <tags>
       
-      <tag>大气校正</tag>
-      
       <tag>py6s</tag>
       
       <tag>GF-1</tag>
+      
+      <tag>大气校正</tag>
       
       <tag>光谱响应函数</tag>
       

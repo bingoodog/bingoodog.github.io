@@ -1,1 +1,10 @@
 https://bintodo.top/links/from-implementation-perspective-on-project-management.html
+https://bintodo.top/links/acolite-s2-atmospheric-correction.html
+https://bintodo.top/links/gee-landsat-indices-batch.html
+https://bintodo.top/links/install-python-libraries-in-guangyuan-container.html
+https://bintodo.top/links/soil-surface-interpolation.html
+https://bintodo.top/links/gf-1-preprocessing.html
+https://bintodo.top/links/gf-1-atmospheric-correction.html
+https://bintodo.top/links/soil-organic-carbon-inversion-plan.html
+https://bintodo.top/links/global-mineral-associated-soil-organic-carbon.html
+https://bintodo.top/links/recent-status.html
