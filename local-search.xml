@@ -44,6 +44,18 @@
     <content type="html"><![CDATA[<p>做项目最难的是什么？是怎么拿到项目。</p>]]></content>
     
     
+    <categories>
+      
+      <category>工作心得</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>项目管理</tag>
+      
+    </tags>
     
   </entry>
   
@@ -291,11 +303,11 @@
     
     <tags>
       
-      <tag>GF-1</tag>
-      
       <tag>大气校正</tag>
       
       <tag>py6s</tag>
+      
+      <tag>GF-1</tag>
       
       <tag>光谱响应函数</tag>
       
@@ -324,9 +336,9 @@
     
     <tags>
       
-      <tag>ENVI</tag>
-      
       <tag>GF-1</tag>
+      
+      <tag>ENVI</tag>
       
       <tag>QUAC</tag>
       
