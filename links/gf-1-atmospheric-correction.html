@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260116171926382_1768555166405.png">
 <meta property="article:published_time" content="2024-09-30T09:15:33.000Z">
-<meta property="article:modified_time" content="2026-01-17T14:54:52.999Z">
+<meta property="article:modified_time" content="2026-03-03T09:31:51.629Z">
 <meta property="article:author" content="bin">
 <meta property="article:tag" content="GF-1">
 <meta property="article:tag" content="py6s">
@@ -298,7 +298,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          753 字
+          748 字
         
       </span>
     
@@ -425,7 +425,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年1月17日 晚上
+                    本文最后更新于 2026年3月3日 下午
                   
                 
               </p>
@@ -447,9 +447,12 @@ target="_blank" rel="noopener" href="https://github.com/Zhaoguanhua/AtmosphericC
 <li><strong>2022年前数据</strong>：SolarZenith存储的是太阳高度角，需要转换为天顶角(90-高度角)</li>
 <li><strong>2022年后数据</strong>：SolarZenith直接存储太阳天顶角，无需转换</li>
 </ul>
-<p>建议处理流程： 1. 使用ENVI国产卫星工具或<a
-target="_blank" rel="noopener" href="https://data.cresda.cn/#/home">陆地观测卫星数据服务平台</a>确认数据版本
-2. 根据数据采集时间选择正确的参数处理方式</p>
+<p>建议处理流程：</p>
+<ol type="1">
+<li>使用ENVI国产卫星工具或<a
+target="_blank" rel="noopener" href="https://data.cresda.cn/#/home">陆地观测卫星数据服务平台</a>确认数据版本</li>
+<li>根据数据采集时间选择正确的参数处理方式</li>
+</ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 几何参数设置示例</span><br>s.geometry = Geometry.User()<br><br><span class="hljs-comment"># 太阳位置参数</span><br><span class="hljs-comment"># 注意：2022年后数据SolarZenith已经是天顶角，无需90-转换</span><br>s.geometry.solar_z = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SolarZenith&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br>s.geometry.solar_a = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SolarAzimuth&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br><br><span class="hljs-comment"># 卫星观测几何参数</span><br><span class="hljs-comment"># 建议使用实际观测角度而非默认值(0,0)</span><br>s.geometry.view_z = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SatelliteZenith&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br>s.geometry.view_a = <span class="hljs-built_in">float</span>(dom.getElementsByTagName(<span class="hljs-string">&#x27;SatelliteAzimuth&#x27;</span>)[<span class="hljs-number">0</span>].firstChild.data)<br></code></pre></td></tr></table></figure>
 <blockquote>
 <p>参考阅读：<a
@@ -457,16 +460,22 @@ target="_blank" rel="noopener" href="https://blog.csdn.net/VickyChenVC/article/d
 </blockquote>
 <h3 id="大气与地表参数">1.2 大气与地表参数</h3>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 气溶胶类型设置</span><br><span class="hljs-comment"># 大陆型气溶胶适用于大多数内陆地区</span><br>s.aero_profile = AtmosProfile.PredefinedType(AeroProfile.Continental)<br><br><span class="hljs-comment"># 下垫面反射率</span><br><span class="hljs-comment"># 0.36为典型植被覆盖区值，可根据实际地表类型调整</span><br>s.ground_reflectance = GroundReflectance.HomogeneousLambertian(<span class="hljs-number">0.36</span>)<br><br><span class="hljs-comment"># 气溶胶光学厚度(AOT)</span><br><span class="hljs-comment"># 此值对应能见度约40km，晴天条件</span><br><span class="hljs-comment"># 可通过MODIS等气溶胶产品获取更精确值</span><br>s.aot550 = <span class="hljs-number">0.14497</span><br></code></pre></td></tr></table></figure>
-<p><strong>参数选择建议</strong>： 1.
-沿海地区考虑使用海洋型气溶胶(AeroProfile.Maritime) 2.
-城市区域可考虑使用城市型气溶胶(AeroProfile.Urban) 3.
-气溶胶光学厚度建议使用同步的MODIS或VIIRS产品 ## 二、光谱响应函数更新</p>
+<p><strong>参数选择建议</strong>：</p>
+<ol type="1">
+<li>沿海地区考虑使用海洋型气溶胶(AeroProfile.Maritime)</li>
+<li>城市区域可考虑使用城市型气溶胶(AeroProfile.Urban)</li>
+<li>气溶胶光学厚度建议使用同步的MODIS或VIIRS产品</li>
+</ol>
+<h2 id="二光谱响应函数更新">二、光谱响应函数更新</h2>
 <p>高分一号卫星的光谱响应函数(SRF)是大气校正的关键参数，需要定期更新以确保精度。</p>
 <h3 id="获取最新参数">2.1 获取最新参数</h3>
-<p>官方资源下载： - <a
-target="_blank" rel="noopener" href="https://www.cresda.com/zgzywxyyzx/zlxz/article/20240416163618563132683.html">定标系数与光谱响应函数</a>
-- <a
-target="_blank" rel="noopener" href="https://data.cresda.cn/#/home">资源卫星应用中心数据下载</a></p>
+<p>官方资源下载：</p>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://www.cresda.com/zgzywxyyzx/zlxz/article/20240416163618563132683.html">定标系数与光谱响应函数</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://data.cresda.cn/#/home">资源卫星应用中心数据下载</a></li>
+</ul>
 <h3 id="配置文件更新方法">2.2 配置文件更新方法</h3>
 <ol type="1">
 <li>编辑<code>RadiometricCorrectionParameter.json</code>文件</li>

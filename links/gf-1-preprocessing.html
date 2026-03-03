@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133320766_1752557600800.png">
 <meta property="article:published_time" content="2024-09-01T14:10:06.000Z">
-<meta property="article:modified_time" content="2026-01-17T14:55:05.402Z">
+<meta property="article:modified_time" content="2026-03-03T09:29:36.836Z">
 <meta property="article:author" content="bin">
 <meta property="article:tag" content="ENVI">
 <meta property="article:tag" content="GF-1">
@@ -298,7 +298,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          731 字
+          730 字
         
       </span>
     
@@ -425,7 +425,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年1月17日 晚上
+                    本文最后更新于 2026年3月3日 下午
                   
                 
               </p>
@@ -460,9 +460,11 @@
 </ul>
 <h3 id="dem">1.2 DEM</h3>
 <ul>
-<li><strong>数字高程模型（DEM）</strong><br />
-&gt; 注意：<strong>建议使用外部下载的 DEM</strong>，不要使用 ENVI 自带
-DEM（在部分区域/分辨率条件下更容易出现匹配或精度问题）。</li>
+<li><p><strong>数字高程模型（DEM）</strong></p>
+<blockquote>
+<p>注意：<strong>建议使用外部下载的 DEM</strong>，不要使用 ENVI 自带
+DEM（在部分区域/分辨率条件下更容易出现匹配或精度问题）。</p>
+</blockquote></li>
 </ul>
 <p>从服务器下载辅助数据到本地（示例）：</p>
 <p><img
@@ -470,9 +472,11 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/2507151332534
 <hr />
 <h2 id="正射校正批处理">2. 正射校正（批处理）</h2>
 <h3 id="安装插件">2.1 安装插件</h3>
-<p>在 ENVI <strong>App Store</strong> 搜索并安装以下插件： -
-<strong>中国国产卫星支持工具</strong> - <strong>ENVI55
-自动找点正射校正批处理工具</strong></p>
+<p>在 ENVI <strong>App Store</strong> 搜索并安装以下插件：</p>
+<ul>
+<li><strong>中国国产卫星支持工具</strong></li>
+<li><strong>ENVI55 自动找点正射校正批处理工具</strong></li>
+</ul>
 <p><img
 src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133320766_1752557600800.png" srcset="/img/loading.gif" lazyload /></p>
 <h3 id="打开数据并自动识别元数据">2.2 打开数据并自动识别元数据</h3>
@@ -504,8 +508,10 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/2507151335337
 <h2 id="大气校正定标-quac">3. 大气校正（定标 + QUAC）</h2>
 <h3 id="批量辐射定标">3.1 批量辐射定标</h3>
 <h4 id="安装插件-1">3.1.1 安装插件</h4>
-<p>在 ENVI <strong>App Store</strong> 搜索并安装： -
-<strong>新版图像批处理工具包 V5.5</strong></p>
+<p>在 ENVI <strong>App Store</strong> 搜索并安装：</p>
+<ul>
+<li><strong>新版图像批处理工具包 V5.5</strong></li>
+</ul>
 <p><img
 src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715133940671_1752557980695.png" srcset="/img/loading.gif" lazyload /></p>
 <h4 id="批量定标操作">3.1.2 批量定标操作</h4>
@@ -533,11 +539,13 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/2507151340052
 src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2025-07/250715134027354_1752558027389.png" srcset="/img/loading.gif" lazyload /></p>
 <hr />
 <h2 id="结果检查">4. 结果检查</h2>
-<p>为避免“批量跑完但结果不可用”，建议抽查： -
-<strong>空间位置</strong>：与参考影像叠加检查偏移（边界、道路、水体等）
-- <strong>NoData/黑边</strong>：是否存在异常范围扩张或裁切问题 -
-<strong>影像值域</strong>：定标后、QUAC
-后直方图是否合理（避免全黑/全白）</p>
+<p>为避免“批量跑完但结果不可用”，建议抽查：</p>
+<ul>
+<li><strong>空间位置</strong>：与参考影像叠加检查偏移（边界、道路、水体等）</li>
+<li><strong>NoData/黑边</strong>：是否存在异常范围扩张或裁切问题</li>
+<li><strong>影像值域</strong>：定标后、QUAC
+后直方图是否合理（避免全黑/全白）</li>
+</ul>
 <hr />
 <h2 id="参考资料">参考资料</h2>
 <ul>
