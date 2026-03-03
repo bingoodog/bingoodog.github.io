@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://bintodo.top/links/soil-organic-carbon-inversion-plan.html</loc>
+    
+    <lastmod>2026-03-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://bintodo.top/links/from-implementation-perspective-on-project-management.html</loc>
     
     <lastmod>2026-02-14</lastmod>
@@ -84,15 +93,6 @@
   
   <url>
     <loc>https://bintodo.top/links/gf-1-atmospheric-correction.html</loc>
-    
-    <lastmod>2026-01-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://bintodo.top/links/soil-organic-carbon-inversion-plan.html</loc>
     
     <lastmod>2026-01-17</lastmod>
     
@@ -211,7 +211,7 @@
 
   <url>
     <loc>https://bintodo.top/</loc>
-    <lastmod>2026-02-14</lastmod>
+    <lastmod>2026-03-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
