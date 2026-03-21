@@ -19,28 +19,29 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="remote sensing, GIS, geospatial data analysis">
   
-    <meta name="description" content="介绍使用光谱响应函数将高光谱反射率转换为等效遥感反射率的原理、方法和Python代码实现">
+    <meta name="description" content="一次基于 DeepWaterMap 的水体提取实践记录：从数据准备到推理结果。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="等效遥感反射率转换：从实测光谱到传感器波段的实现">
-<meta property="og:url" content="https://bintodo.top/links/spectrum-resampling.html">
+<meta property="og:title" content="基于深度学习的水体提取">
+<meta property="og:url" content="https://bintodo.top/links/based-on-deep-learning-water-extraction.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="介绍使用光谱响应函数将高光谱反射率转换为等效遥感反射率的原理、方法和Python代码实现">
+<meta property="og:description" content="一次基于 DeepWaterMap 的水体提取实践记录：从数据准备到推理结果。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260117185013109_1768647013132.png">
-<meta property="article:published_time" content="2023-06-12T09:45:25.000Z">
-<meta property="article:modified_time" content="2026-03-03T09:17:39.725Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/isikdogan/deepwatermap/master/sample_data/sample_input_output.png">
+<meta property="article:published_time" content="2023-01-17T06:36:38.000Z">
+<meta property="article:modified_time" content="2026-03-21T12:09:42.373Z">
 <meta property="article:author" content="bin">
-<meta property="article:tag" content="光谱响应函数">
-<meta property="article:tag" content="等效遥感反射率转换">
-<meta property="article:tag" content="高光谱反射率">
+<meta property="article:tag" content="CNN">
+<meta property="article:tag" content="U-Net">
+<meta property="article:tag" content="水体提取">
+<meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-01/260117185013109_1768647013132.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/isikdogan/deepwatermap/master/sample_data/sample_input_output.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>等效遥感反射率转换：从实测光谱到传感器波段的实现 - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>基于深度学习的水体提取 - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -410,7 +411,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="等效遥感反射率转换：从实测光谱到传感器波段的实现"></span>
+            <span id="subtitle" data-typed-text="基于深度学习的水体提取"></span>
           
         </div>
 
@@ -421,8 +422,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-12 17:45" pubdate>
-          2023年6月12日 下午
+        <time datetime="2023-01-17 14:36" pubdate>
+          2023年1月17日 下午
         </time>
       </span>
     
@@ -433,7 +434,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          3.6k 字
         
       </span>
     
@@ -444,7 +445,7 @@
         
         
         
-          22 分钟
+          30 分钟
         
       </span>
     
@@ -557,12 +558,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">等效遥感反射率转换：从实测光谱到传感器波段的实现</h1>
+            <h1 id="seo-header">基于深度学习的水体提取</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月3日 下午
+                    本文最后更新于 2026年3月21日 晚上
                   
                 
               </p>
@@ -570,153 +571,55 @@
             
               <div class="markdown-body">
                 
-                <h2 id="背景与意义">📖 背景与意义</h2>
-<p>在遥感应用中，由于光谱分辨率、空间分辨率、大气影响等因素，野外实验获取的地面实测高光谱数据与卫星影像光谱数据存在一定差异。实现两者的有效转换和比对对于确保遥感数据质量和水质反演精度具有重要意义。</p>
-<p>光谱重采样技术可以将实测反射率数据拟合到传感器特定波段宽度，而大气校正可以降低卫星影像的大气影响。通过等效反射率转换，我们能够实现<strong>星地准同步观测的统一</strong>，为后续的水质参数反演提供可靠的数据基础<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
-class="hint--top hint--rounded"
-aria-label="孔祥生, 张安定, 钱永刚, 董宇阳. (2011). 地物光谱反射率测量与行星反射率计算联合教学设计与实践. *测绘科学*, 36(5), 234-236. DOI: 10.16251/j.cnki.1009-2307.2011.05.087">[1]</span></a></sup>。</p>
-<h2 id="理论基础">🧮 理论基础</h2>
-<h3 id="转换公式">转换公式</h3>
-<p>等效遥感反射率转换的核心公式如下：</p>
-<p><span class="math display">\[
-\rho_{rs}(\lambda_i) = \frac{\int_{\lambda_1}^{\lambda_2} \rho(\lambda)
-\cdot SRF(\lambda)  d\lambda}{\int_{\lambda_1}^{\lambda_2}
-SRF(\lambda)  d\lambda}
-\]</span></p>
-<p><strong>公式参数说明：</strong></p>
+                <h2 id="背景">背景</h2>
+<p>本科做毕设时，我用水体指数（NDWI）来提取水体边界。这个方法简单，但一旦遇到地形复杂、地物干扰多的场景，效果就不太理想。这段时间在学习深度学习，就想顺手试一下。我选了
+<a target="_blank" rel="noopener" href="https://github.com/isikdogan/deepwatermap">DeepWaterMap</a>
+来练手。它是针对多光谱影像做地表水体分割的网络，流程不复杂，比较适合快速上手。</p>
+<p><img
+src="https://raw.githubusercontent.com/isikdogan/deepwatermap/master/sample_data/sample_input_output.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="模型和输入数据">1. 模型和输入数据</h2>
+<p>DeepWaterMap 期望输入为多光谱影像，包含以下波段：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs text">B2: Blue<br>B3: Green<br>B4: Red<br>B5: Near Infrared (NIR)<br>B6: Shortwave Infrared 1 (SWIR1)<br>B7: Shortwave Infrared 2 (SWIR2)<br></code></pre></td></tr></table></figure>
+<p>模型结构比较简洁： <img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/260321192158428_1774092118481.png" srcset="/img/loading.gif" lazyload /></p>
+<p>网络主要由三个模块组成：</p>
 <ul>
-<li><span class="math inline">\(\rho_{rs}(\lambda_i)\)</span>：传感器第
-<span class="math inline">\(i\)</span> 波段中心波长 <span
-class="math inline">\(\lambda_i\)</span> 处的窄波段反射率</li>
-<li><span class="math inline">\(\rho(\lambda)\)</span>：实测光谱在波长
-<span class="math inline">\(\lambda\)</span> 处的反射率</li>
-<li><span class="math inline">\(\lambda_1, \lambda_2\)</span>：传感器第
-<span class="math inline">\(i\)</span> 波段的波长范围</li>
-<li><span
-class="math inline">\(SRF(\lambda)\)</span>：传感器的光谱响应函数</li>
+<li>下采样单元：通过步幅卷积做空间降采样。</li>
+<li>瓶颈单元：输出与输入维度一致的特征图。</li>
+<li>上采样单元：先做 depth-to-space，再通过卷积恢复空间分辨率。</li>
 </ul>
-<h2 id="python代码实现">🛠️ Python代码实现</h2>
-<p>以下代码实现了从高光谱反射率到等效遥感反射率的完整转换过程：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">## 等效遥感反射率计算##</span><br><br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-comment"># 手动输入文件名</span><br>inputrrs = <span class="hljs-string">r&quot;\实测.xlsx&quot;</span>  <span class="hljs-comment"># 高光谱反射率excel文件名</span><br>inputSRF = <span class="hljs-string">r&quot;\WFV1.xlsx&quot;</span>  <span class="hljs-comment"># 卫星光谱响应函数excel文件名</span><br>output = <span class="hljs-string">r&quot;\WFV1.xlsx&quot;</span>  <span class="hljs-comment"># 设置输出等效遥感反射率文件名</span><br><br><span class="hljs-comment"># 读取数据</span><br><span class="hljs-keyword">try</span>:<br>    Rrs = pd.read_excel(inputrrs, header=<span class="hljs-literal">None</span>).values  <span class="hljs-comment"># 读取高光谱遥感反射率Rrs</span><br>    SRF = pd.read_excel(inputSRF, header=<span class="hljs-literal">None</span>).values  <span class="hljs-comment"># 读取传感器光谱响应函数SRF</span><br><span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&gt;&gt;&gt;&gt;&gt;&gt;&gt;读取失败，请检查Rrs与SRF的excel文件名是否有误&lt;&lt;&lt;&lt;&lt;&lt;&lt;&#x27;</span>)<br>    <span class="hljs-keyword">raise</span> e<br><br>sn = Rrs[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:]  <span class="hljs-comment"># 站点名station name</span><br>bn = SRF[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:]  <span class="hljs-comment"># 波段名band name</span><br><br>Rrs = Rrs[<span class="hljs-number">1</span>:, :].astype(<span class="hljs-built_in">float</span>)<br>SRF = SRF[<span class="hljs-number">1</span>:, :].astype(<span class="hljs-built_in">float</span>)<br><br>c1 = Rrs.shape[<span class="hljs-number">1</span>]  <span class="hljs-comment"># 高光谱反射率矩阵大小</span><br>c2 = SRF.shape[<span class="hljs-number">1</span>]  <span class="hljs-comment"># SRF矩阵大小</span><br><br><span class="hljs-comment"># 将光谱响应函数中可能存在的NaN值与小于0的值变为0</span><br>SRF[np.isnan(SRF)] = <span class="hljs-number">0</span><br>SRF[SRF &lt; <span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br>Rrs[np.isnan(Rrs)] = <span class="hljs-number">0</span><br>Rrs[Rrs &lt; <span class="hljs-number">0</span>] = <span class="hljs-number">0</span><br><br><span class="hljs-comment"># 计算等效Rrs</span><br>er = np.zeros((c2 - <span class="hljs-number">1</span>, c1 - <span class="hljs-number">1</span>))  <span class="hljs-comment"># 创建存储等效Rrs的矩阵</span><br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, c2):<br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, c1):<br>        l1 = np.nonzero(SRF[:, i])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]  <span class="hljs-comment"># 积分下限</span><br>        l2 = np.nonzero(SRF[:, i])[<span class="hljs-number">0</span>][-<span class="hljs-number">1</span>]  <span class="hljs-comment"># 积分上限</span><br>        er[i - <span class="hljs-number">1</span>, j - <span class="hljs-number">1</span>] = (np.trapz(Rrs[np.where(Rrs[:, <span class="hljs-number">0</span>] == SRF[l1, <span class="hljs-number">0</span>])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]:np.where(Rrs[:, <span class="hljs-number">0</span>] == SRF[l2, <span class="hljs-number">0</span>])[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] + <span class="hljs-number">1</span>, j] * SRF[l1:l2 + <span class="hljs-number">1</span>, i], dx=<span class="hljs-number">1</span>)) / (np.trapz(SRF[l1:l2 + <span class="hljs-number">1</span>, i], dx=<span class="hljs-number">1</span>))<br><br><span class="hljs-comment"># 数据保存</span><br><span class="hljs-comment"># 创建标好站点名和波段名的excel</span><br>temp = np.empty((c2, c1), dtype=<span class="hljs-built_in">object</span>)<br>temp[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>:] = sn  <span class="hljs-comment"># 第一行是站点名</span><br>temp[<span class="hljs-number">1</span>:, <span class="hljs-number">0</span>] = bn  <span class="hljs-comment"># 第一列是波段名</span><br>temp[<span class="hljs-number">1</span>:, <span class="hljs-number">1</span>:] = er<br><br><span class="hljs-comment"># 输出</span><br>df = pd.DataFrame(temp)<br>df.to_excel(output, index=<span class="hljs-literal">False</span>, header=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure>
-<h2 id="数据格式示例">📊 数据格式示例</h2>
-<h3 id="高光谱反射率数据-实测.xlsx">1. 高光谱反射率数据
-(<code>实测.xlsx</code>)</h3>
-<table>
+<p>整体看下来，这个结构在计算量和分割效果之间做了一个比较好的平衡。</p>
+<h2 id="环境配置和推理">2. 环境配置和推理</h2>
+<p>创建新的 conda 环境后安装依赖：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install tensorflow==1.12.0 tifffile opencv-python<br></code></pre></td></tr></table></figure>
+<p>下载好权重文件后，就可以直接跑推理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">python inference.py --checkpoint_path checkpoints/cp.135.ckpt \<br>    --image_path sample_data/sentinel2_example.tif --save_path water_map.png<br></code></pre></td></tr></table></figure>
+<p>测试我用的是 Sentinel-2
+影像。原始数据需要先做波段组合，按模型要求把波段顺序整理好，再作为输入去推理。</p>
+<h2 id="批量推理">3. 批量推理</h2>
+<p>我把原始脚本稍微改了一下，用来批量推理：</p>
 
-<thead>
-<tr>
-<th>WaveLength</th>
-<th>Station 1</th>
-<th>Station 2</th>
-<th>Station 3</th>
-<th>Station 4</th>
-<th>Station 5</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>400</td>
-<td>0.0098442</td>
-<td>0.0097718</td>
-<td>0.0096756</td>
-<td>0.0102083</td>
-<td>0.0100013</td>
-</tr>
-<tr>
-<td>401</td>
-<td>0.0097854</td>
-<td>0.0097617</td>
-<td>0.0096686</td>
-<td>0.0101987</td>
-<td>0.0099884</td>
-</tr>
-</tbody>
-</table>
-<h3 id="光谱响应函数-srf.xlsx">2. 光谱响应函数
-(<code>SRF.xlsx</code>)</h3>
-<table>
-<thead>
-<tr>
-<th>波长/nm</th>
-<th>B1</th>
-<th>B2</th>
-<th>B3</th>
-<th>B4</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>400</td>
-<td>0.000282</td>
-<td>0.000558</td>
-<td>0.000706</td>
-<td>0.000130</td>
-</tr>
-<tr>
-<td>401</td>
-<td>0.000269</td>
-<td>0.000488</td>
-<td>0.000757</td>
-<td>0.000114</td>
-</tr>
-</tbody>
-</table>
-<h3 id="输出结果-wfv1.xlsx">3. 输出结果 (<code>WFV1.xlsx</code>)</h3>
-<table>
-<thead>
-<tr>
-<th>站点</th>
-<th>B1</th>
-<th>B2</th>
-<th>B3</th>
-<th>B4</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Station 1</td>
-<td>0.013824</td>
-<td>0.024703</td>
-<td>0.017775</td>
-<td>0.008289</td>
-</tr>
-<tr>
-<td>Station 2</td>
-<td>0.016768</td>
-<td>0.022395</td>
-<td>0.016537</td>
-<td>0.003900</td>
-</tr>
-</tbody>
-</table>
-<h2 id="应用价值与注意事项">💡 应用价值与注意事项</h2>
-<h3 id="技术优势">🌟 技术优势</h3>
-<ol type="1">
-<li><strong>数据替代性</strong>：当缺少同步过境影像或影像质量不佳时，可用等效反射率替代影像反射率进行水质反演</li>
-<li><strong>效率提升</strong>：只需人工测量水质参数，通过影像反射率即可完成反演，减少实测光谱工作量</li>
-<li><strong>精度改善</strong>：结合实测光谱与遥感影像反射率，能有效提升水质反演的精度和可靠性</li>
-</ol>
-<h3 id="注意事项">⚠️ 注意事项</h3>
-<ol type="1">
-<li><strong>大气校正影响</strong>：大气校正对影像反射率的影响非常大，转换后仍需进一步校正</li>
-<li><strong>传感器特性</strong>：需考虑不同传感器的特性和响应函数差异</li>
-<li><strong>环境因素</strong>：实际应用中还需考虑水体类型、气象条件等环境因素的影响</li>
-</ol>
-<h2 id="参考文献">📚 参考文献</h2>
-<section class="footnotes">
-<div class="footnote-list">
-<ol>
-<li>
-<span id="fn:1" class="footnote-text"><span>孔祥生, 张安定, 钱永刚,
-董宇阳. (2011). 地物光谱反射率测量与行星反射率计算联合教学设计与实践.
-<em>测绘科学</em>, 36(5), 234-236. DOI:
-10.16251/j.cnki.1009-2307.2011.05.087
-<a href="#fnref:1" rev="footnote" class="footnote-backref">
-↩︎</a></span></span>
-</li>
-</ol>
-</div>
-</section>
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-9c51fa20" role="button" aria-expanded="false" aria-controls="collapse-9c51fa20">
+        <div class="fold-arrow">▶</div>批量推理示例脚本
+      </div>
+      <div class="fold-collapse collapse" id="collapse-9c51fa20">
+        <div class="fold-content">
+          <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> argparse<br><span class="hljs-keyword">import</span> deepwatermap<br><span class="hljs-keyword">import</span> tifffile <span class="hljs-keyword">as</span> tiff<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> download_data <span class="hljs-keyword">import</span> download_from_gdrive<br><span class="hljs-keyword">from</span> projection <span class="hljs-keyword">import</span> set_projection<br><span class="hljs-keyword">import</span> glob<br><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">find_padding</span>(<span class="hljs-params">v, divisor=<span class="hljs-number">32</span></span>):<br>    v_divisible = <span class="hljs-built_in">max</span>(divisor, <span class="hljs-built_in">int</span>(divisor * np.ceil( v / divisor )))<br>    total_pad = v_divisible - v<br>    pad_1 = total_pad // <span class="hljs-number">2</span><br>    pad_2 = total_pad - pad_1<br>    <span class="hljs-keyword">return</span> pad_1, pad_2<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">predict</span>(<span class="hljs-params">checkpoint_path, image_path, save_path</span>):<br>    image = tiff.imread(image_path)<br>    pad_r = find_padding(image.shape[<span class="hljs-number">0</span>])<br>    pad_c = find_padding(image.shape[<span class="hljs-number">1</span>])<br>    image = np.pad(image, ((pad_r[<span class="hljs-number">0</span>], pad_r[<span class="hljs-number">1</span>]), (pad_c[<span class="hljs-number">0</span>], pad_c[<span class="hljs-number">1</span>]), (<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)), <span class="hljs-string">&#x27;reflect&#x27;</span>)<br>    image = image.astype(np.float32)<br>    image = image - np.<span class="hljs-built_in">min</span>(image)<br>    image = image / np.maximum(np.<span class="hljs-built_in">max</span>(image), <span class="hljs-number">1</span>)<br>    image = np.expand_dims(image, axis=<span class="hljs-number">0</span>)<br>    dwm = model.predict(image)<br>    dwm = np.squeeze(dwm)<br>    dwm = dwm[pad_r[<span class="hljs-number">0</span>]:-pad_r[<span class="hljs-number">1</span>], pad_c[<span class="hljs-number">0</span>]:-pad_c[<span class="hljs-number">1</span>]]<br>    dwm = <span class="hljs-number">1.</span>/(<span class="hljs-number">1</span>+np.exp(-(<span class="hljs-number">16</span>*(dwm-<span class="hljs-number">0.5</span>))))<br>    dwm = np.clip(dwm, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)<br>    cv2.imwrite(save_path, dwm * <span class="hljs-number">255</span>)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">load_model_gpus</span>(<span class="hljs-params">checkpoint_path</span>):<br>    strategy = tf.distribute.MirroredStrategy()<br>    <span class="hljs-keyword">with</span> strategy.scope():<br>        model = deepwatermap.model()<br>        model.load_weights(checkpoint_path) <br>    <span class="hljs-keyword">return</span> model<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    work_dir = os.path.dirname(os.path.abspath(__file__))<br>    in_image_folder = <span class="hljs-string">&quot;sample_data&quot;</span><br>    use_png_ext = <span class="hljs-literal">True</span><br>    output_dir = os.path.join(work_dir, <span class="hljs-string">&quot;results&quot;</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(output_dir):<br>        os.makedirs(output_dir)<br>    image_paths = glob.glob(os.path.join(work_dir, in_image_folder, <span class="hljs-string">&#x27;*.tif&#x27;</span>))<br><br>    <span class="hljs-comment"># 使用GPU进行计算</span><br>    gpus = tf.config.experimental.list_physical_devices(<span class="hljs-string">&#x27;GPU&#x27;</span>)<br>    <span class="hljs-keyword">if</span> gpus:<br>        <span class="hljs-keyword">try</span>:<br>            <span class="hljs-comment"># 设置GPU内存自增长</span><br>            <span class="hljs-keyword">for</span> gpu <span class="hljs-keyword">in</span> gpus:<br>                tf.config.experimental.set_memory_growth(gpu, <span class="hljs-literal">True</span>)<br>        <span class="hljs-keyword">except</span> RuntimeError <span class="hljs-keyword">as</span> e:<br>            <span class="hljs-built_in">print</span>(e)<br><br>    batch_size = <span class="hljs-number">4</span>  <span class="hljs-comment"># 每个GPU一次读取的影像数量</span><br>    checkpoint_path = os.path.join(work_dir, <span class="hljs-string">&quot;checkpoints/cp.135.ckpt&quot;</span>)<br>    model = load_model_gpus(checkpoint_path)<br>    num_gpus = <span class="hljs-built_in">len</span>(gpus)<br><br>    <span class="hljs-comment"># 平均分配影像给每个GPU</span><br>    image_per_gpu = <span class="hljs-built_in">len</span>(image_paths) // num_gpus<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_gpus):<br>        gpu_image_paths = image_paths[i * image_per_gpu : (i+<span class="hljs-number">1</span>) * image_per_gpu]<br>        <span class="hljs-comment"># 如果最后一个GPU处理的影像数与其他GPU不同，则把剩余的影像全交给最后一个GPU处理</span><br>        <span class="hljs-keyword">if</span> i == num_gpus - <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <span class="hljs-built_in">len</span>(image_paths) % num_gpus != <span class="hljs-number">0</span>:<br>            gpu_image_paths += image_paths[num_gpus * image_per_gpu:]<br>        <span class="hljs-keyword">for</span> in_image_path <span class="hljs-keyword">in</span> gpu_image_paths:<br>            basename, extension = os.path.splitext(os.path.basename(in_image_path))<br>            <span class="hljs-keyword">if</span> use_png_ext:<br>                extension = <span class="hljs-string">&quot;.png&quot;</span><br>            out_image_name = basename + <span class="hljs-string">&quot;_water&quot;</span> + extension<br>            out_image_path = os.path.join(output_dir, out_image_name)<br>            predict(checkpoint_path, in_image_path, out_image_path)<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> use_png_ext:<br>                set_projection(out_image_path, template_raster=in_image_path)<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nOutput path: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(out_image_path))<br></code></pre></td></tr></table></figure> 
+        </div>
+      </div>
+    </div>
+<h2 id="结果和感受">4. 结果和感受</h2>
+<p>输出结果可以通过阈值进一步调节，设置为 0.5 效果还行，0.3
+会更宽松一些，0.7 则更严格一些。</p>
+<p>从实际效果看，模型对主要水体区域识别得比较稳，边界也更清楚一些。实际上现在很多的地物分割只用
+RGB，结果也不差；如果用多光谱输入，光谱信息更完整，分割质量还能再往上提一点。</p>
+<h2 id="小结">5. 小结</h2>
+<ul>
+<li>传统指数法适合快速出图，但在复杂场景下鲁棒性会差一些。</li>
+<li>深度学习方法在边界表达和复杂背景区分上，确实更有潜力。</li>
+<li>数据预处理（波段顺序、归一化、阈值设置）对最终结果影响很大。</li>
+</ul>
 
                 
               </div>
@@ -735,7 +638,7 @@ class="math inline">\(SRF(\lambda)\)</span>：传感器的光谱响应函数</li
     
       <span class="category-chain">
         
-  <a href="/categories/%E9%81%A5%E6%84%9F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="category-chain-item">遥感数据处理</a>
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
   
   
 
@@ -750,11 +653,13 @@ class="math inline">\(SRF(\lambda)\)</span>：传感器的光谱响应函数</li
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%85%89%E8%B0%B1%E5%93%8D%E5%BA%94%E5%87%BD%E6%95%B0/" class="print-no-link">#光谱响应函数</a>
+        <a href="/tags/%E6%B0%B4%E4%BD%93%E6%8F%90%E5%8F%96/" class="print-no-link">#水体提取</a>
       
-        <a href="/tags/%E7%AD%89%E6%95%88%E9%81%A5%E6%84%9F%E5%8F%8D%E5%B0%84%E7%8E%87%E8%BD%AC%E6%8D%A2/" class="print-no-link">#等效遥感反射率转换</a>
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="print-no-link">#深度学习</a>
       
-        <a href="/tags/%E9%AB%98%E5%85%89%E8%B0%B1%E5%8F%8D%E5%B0%84%E7%8E%87/" class="print-no-link">#高光谱反射率</a>
+        <a href="/tags/CNN/" class="print-no-link">#CNN</a>
+      
+        <a href="/tags/U-Net/" class="print-no-link">#U-Net</a>
       
     </div>
   
@@ -766,8 +671,8 @@ class="math inline">\(SRF(\lambda)\)</span>：传感器的光谱响应函数</li
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>等效遥感反射率转换：从实测光谱到传感器波段的实现</div>
-      <div>https://bintodo.top/links/spectrum-resampling.html</div>
+      <div>基于深度学习的水体提取</div>
+      <div>https://bintodo.top/links/based-on-deep-learning-water-extraction.html</div>
     </div>
     <div class="license-meta">
       
@@ -779,7 +684,7 @@ class="math inline">\(SRF(\lambda)\)</span>：传感器的光谱响应函数</li
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月12日</div>
+          <div>2023年1月17日</div>
         </div>
       
       
@@ -811,21 +716,15 @@ class="math inline">\(SRF(\lambda)\)</span>：传感器的光谱响应函数</li
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/links/gf-competition-waterbody-solution.html" title="高分对地观测比赛水体赛道-实现方案分享">
+                      <a href="/links/spectrum-resampling.html" title="等效遥感反射率转换：从实测光谱到传感器波段的实现">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">高分对地观测比赛水体赛道-实现方案分享</span>
+                        <span class="hidden-mobile">等效遥感反射率转换：从实测光谱到传感器波段的实现</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/links/based-on-deep-learning-water-extraction.html" title="基于深度学习的水体提取">
-                        <span class="hidden-mobile">基于深度学习的水体提取</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>
@@ -923,12 +822,6 @@ class="math inline">\(SRF(\lambda)\)</span>：传感器的光谱响应函数</li
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -1217,49 +1110,6 @@ class="math inline">\(SRF(\lambda)\)</span>：传感器的光谱响应函数</li
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
 
