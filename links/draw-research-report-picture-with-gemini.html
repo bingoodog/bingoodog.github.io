@@ -19,28 +19,27 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="remote sensing, GIS, geospatial data analysis">
   
-    <meta name="description" content="记录研究区位图制作流程：数据准备、主副图布局、格网与整饰要素、图例优化。">
+    <meta name="description" content="用 Gemini 把内容拆解绘图，配合图像增强和 PPT 二次排版，快速做出能用且好看的展示图。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用 ArcGIS Pro 绘制研究区位图">
-<meta property="og:url" content="https://bintodo.top/links/draw-research-area-location-map-with-arcgispro.html">
+<meta property="og:title" content="使用Gemini绘制研究汇报展示图">
+<meta property="og:url" content="https://bintodo.top/links/draw-research-report-picture-with-gemini.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="记录研究区位图制作流程：数据准备、主副图布局、格网与整饰要素、图例优化。">
+<meta property="og:description" content="用 Gemini 把内容拆解绘图，配合图像增强和 PPT 二次排版，快速做出能用且好看的展示图。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/%E5%B8%83%E5%B1%80_1774441161648.png">
-<meta property="article:published_time" content="2026-03-24T06:02:10.000Z">
-<meta property="article:modified_time" content="2026-03-25T12:32:19.556Z">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/%E5%9B%BE%E7%89%875_1774599722026.png">
+<meta property="article:published_time" content="2026-03-27T08:09:25.000Z">
+<meta property="article:modified_time" content="2026-03-27T08:50:27.668Z">
 <meta property="article:author" content="bin">
-<meta property="article:tag" content="arcgispro">
-<meta property="article:tag" content="地图制作">
-<meta property="article:tag" content="研究区位图">
+<meta property="article:tag" content="Gemini">
+<meta property="article:tag" content="绘图">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/%E5%B8%83%E5%B1%80_1774441161648.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/%E5%9B%BE%E7%89%875_1774599722026.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>使用 ArcGIS Pro 绘制研究区位图 - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>使用Gemini绘制研究汇报展示图 - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -410,7 +409,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="使用 ArcGIS Pro 绘制研究区位图"></span>
+            <span id="subtitle" data-typed-text="使用Gemini绘制研究汇报展示图"></span>
           
         </div>
 
@@ -421,8 +420,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-03-24 14:02" pubdate>
-          2026年3月24日 下午
+        <time datetime="2026-03-27 16:09" pubdate>
+          2026年3月27日 下午
         </time>
       </span>
     
@@ -433,7 +432,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          1.3k 字
         
       </span>
     
@@ -444,7 +443,7 @@
         
         
         
-          21 分钟
+          11 分钟
         
       </span>
     
@@ -557,12 +556,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">使用 ArcGIS Pro 绘制研究区位图</h1>
+            <h1 id="seo-header">使用Gemini绘制研究汇报展示图</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月25日 晚上
+                    本文最后更新于 2026年3月27日 下午
                   
                 
               </p>
@@ -570,109 +569,120 @@
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p>地图是论文的“门面”。一张信息清楚、层次合理的区位图，能帮读者更快进入你的研究问题。</p>
+                <p>前两天，领导让我做一次近期工作汇报，要求很完整：研究背景、目标与内容、当前进展、存在问题、下一步计划。</p>
+<p>问题是，内容我倒是能讲清楚，但“背景图、流程图、结构图”这类可视化环节就很费时间。时间又紧，所以我尝试了一套更省时的办法：<strong>先让
+AI 帮我拆流程，再让 AI 按流程画图</strong>。</p>
+<p>这里记录一下我的具体做法。</p>
+<h2 id="一先明确目标不是直接让-ai-画图">一、先明确目标：不是直接让 AI
+画图</h2>
+<p>一开始我也试过直接输入“画一个研究背景图”，结果通常是：看起来很花，但不够贴合业务。</p>
+<p>后面我发现关键不在“画”，而在“先拆”。</p>
+<p>我的思路是：</p>
+<ol type="1">
+<li>先把自己做过的工作写成一段清晰文字。</li>
+<li>让 Gemini 把这段内容拆成结构化步骤。</li>
+<li>再让 Gemini 按步骤和视觉层级生成示意图。</li>
+</ol>
+<h2 id="二我给-ai-的原始工作内容">二、我给 AI 的原始工作内容</h2>
+<p>我先整理了这一段核心流程：</p>
+<blockquote>
+<p>整合多个土壤有机碳数据库（WoSIS、OpenLandMap-soildb、Open Soil
+Spectral Library），去重后得到全球土壤样本库；对蒙古高原按 100 km
+格网划分，每个格网随机生成 3 个点；在 GEE
+中提取全球点与随机点的嵌入向量并导出本地；在 Python
+中计算全球点与全部随机点的相似度，并取 90% 分位数作为最终相似度；最后在
+ArcGIS 中提取高相似点，构建迁移样本库。</p>
 </blockquote>
-<p>最近在做蒙古高原土壤有机碳反演，需要一张同时兼顾“研究区细节”和“区域区位关系”的地图。本文按实操流程记录一次完整制作过程。</p>
-<h2 id="开始之前先看参考图再开工">开始之前：先看参考图，再开工</h2>
-<p>正式制图前，我建议先快速看几篇同方向论文，重点关注三件事：</p>
+<p>这里有一句提示词特别关键：</p>
+<blockquote>
+<p>把这部分处理流程拆解成具体的项，然后根据这些项绘制示意图。</p>
+</blockquote>
+<h2 id="三gemini-先拆流程再给出制图框架">三、Gemini
+先拆流程，再给出制图框架</h2>
+<p>它给出的结构（我做了轻微整理）大致是这样：</p>
+<h3 id="全球数据集成与清洗">1. 全球数据集成与清洗</h3>
 <ul>
-<li>配色逻辑（底图、研究区、样点是否一眼可分）</li>
-<li>布局逻辑（主图和区位图的主次关系是否清晰）</li>
-<li>图面密度（要素是否过多、文字是否拥挤）</li>
+<li>多源汇聚：WoSIS、OpenLandMap-soildb、OSSL。</li>
+<li>标准化：统一坐标系、土层深度和 SOC 单位。</li>
+<li>去重整合：形成全球统一样本库。</li>
 </ul>
-<p>如果你常用 Google Scholar，可以用下面两个脚本辅助筛文：</p>
+<h3 id="研究区特征提取gee">2. 研究区特征提取（GEE）</h3>
 <ul>
-<li><a
-target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/447389-scihub-crx">OneScholar
-CRX</a>：查看期刊等级、影响因子</li>
-<li><a
-target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/542159-google-scholar-advanced-sorting-toolbox-year-cite">📚谷歌学术高级排序工具箱</a>：按年份、引用数排序</li>
+<li>研究区格网化：蒙古高原 <span class="math inline">\(100 \times
+100\text{ km}\)</span>。</li>
+<li>随机布点：每格网 3 个点。</li>
+<li>提取嵌入向量：关联多光谱、气候、地形协变量并导出。</li>
 </ul>
-<h2 id="数据准备清单">数据准备清单</h2>
-<p>制图之前先把数据准备齐，后面会顺很多。</p>
+<h3 id="相似度计算与筛选python">3. 相似度计算与筛选（Python）</h3>
 <ul>
-<li>研究区边界：shapefile 等矢量边界</li>
-<li>底图数据：影像、地形图，或 ArcGIS Pro 在线底图</li>
-<li>样点数据：CSV（经纬度 + 属性字段，如 SOC）</li>
-<li>DEM 数据：用于地形表达与图例制作</li>
+<li>计算每个全球点与研究区随机点集合的相似度。</li>
+<li>取 90% 分位数作为该全球点最终得分。</li>
+<li>输出高分候选样本。</li>
 </ul>
-<h2 id="一创建主地图">一、创建主地图</h2>
-<p>在 ArcGIS Pro
-新建项目并导入边界、底图和样点数据。主图建议先把研究区边界样式定下来，再调底图透明度和对比度，避免“底图抢戏”。</p>
-<p>我这里主底图使用“带标注的 Terrain”，兼顾地形感和可读性。</p>
-<p>研究区范围较大时，DEM 用 GEE 导出的 XYZ 服务很方便。ArcGIS Pro
-中可通过“从路径添加数据”直接加载；同时建议准备一份低分辨率本地
-DEM，用于后续图例管理。</p>
-
-    <div class="fold">
-      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-8f7bdefe" role="button" aria-expanded="false" aria-controls="collapse-8f7bdefe">
-        <div class="fold-arrow">▶</div>获取dem数据的gee代码
-      </div>
-      <div class="fold-collapse collapse" id="collapse-8f7bdefe">
-        <div class="fold-content">
-          <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 1. 研究区(替换为你的研究区边界数据)</span><br><span class="hljs-keyword">var</span> roi = ee.<span class="hljs-title class_">FeatureCollection</span>(<br>  <span class="hljs-string">&quot;projects/ee-zaixuexilushangdebin/assets/MGGY&quot;</span><br>);<br><br><span class="hljs-comment">// 2. Copernicus DEM（ImageCollection → Image）</span><br><span class="hljs-keyword">var</span> dem = ee.<span class="hljs-title class_">ImageCollection</span>(<span class="hljs-string">&quot;COPERNICUS/DEM/GLO30&quot;</span>)<br>  .<span class="hljs-title function_">select</span>(<span class="hljs-string">&#x27;DEM&#x27;</span>)<br>  .<span class="hljs-title function_">mosaic</span>()<br>  .<span class="hljs-title function_">clip</span>(roi);<br><br><span class="hljs-comment">// 3. 计算最大最小值</span><br><span class="hljs-keyword">var</span> stats = dem.<span class="hljs-title function_">reduceRegion</span>(&#123;<br>  <span class="hljs-attr">reducer</span>: ee.<span class="hljs-property">Reducer</span>.<span class="hljs-title function_">minMax</span>(),<br>  <span class="hljs-attr">geometry</span>: roi,<br>  <span class="hljs-attr">scale</span>: <span class="hljs-number">30</span>,      <span class="hljs-comment">// GLO-30 DEM 大约 30米</span><br>  <span class="hljs-attr">maxPixels</span>: <span class="hljs-number">1e13</span><br>&#125;);<br><br>stats.<span class="hljs-title function_">evaluate</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) &#123;<br><br>  <span class="hljs-keyword">var</span> demMin = s.<span class="hljs-property">DEM_min</span>;<br>  <span class="hljs-keyword">var</span> demMax = s.<span class="hljs-property">DEM_max</span>;<br><br>  <span class="hljs-comment">// print(&#x27;DEM min:&#x27;, demMin);</span><br>  <span class="hljs-comment">// print(&#x27;DEM max:&#x27;, demMax);</span><br><br>  <span class="hljs-keyword">var</span> vis = &#123;<br>    <span class="hljs-attr">min</span>: demMin,<br>    <span class="hljs-attr">max</span>: demMax,<br>    <span class="hljs-attr">palette</span>: [<br>      <span class="hljs-string">&#x27;081d58&#x27;</span>,<span class="hljs-string">&#x27;253494&#x27;</span>,<span class="hljs-string">&#x27;225ea8&#x27;</span>,<br>      <span class="hljs-string">&#x27;1d91c0&#x27;</span>,<span class="hljs-string">&#x27;41b6c4&#x27;</span>,<span class="hljs-string">&#x27;7fcdbb&#x27;</span>,<br>      <span class="hljs-string">&#x27;c7e9b4&#x27;</span>,<span class="hljs-string">&#x27;edf8b1&#x27;</span>,<span class="hljs-string">&#x27;ffffd9&#x27;</span><br>    ]<br>  &#125;;<br><br>  <span class="hljs-title class_">Map</span>.<span class="hljs-title function_">centerObject</span>(roi, <span class="hljs-number">5</span>);<br>  <span class="hljs-title class_">Map</span>.<span class="hljs-title function_">addLayer</span>(dem, vis, <span class="hljs-string">&#x27;Copernicus DEM&#x27;</span>);<br><br>  <span class="hljs-keyword">var</span> tiles = dem.<span class="hljs-title function_">getMap</span>(vis);<br>  <span class="hljs-title function_">print</span>(<span class="hljs-string">&#x27;XYZ tiles URL:&#x27;</span>, tiles.<span class="hljs-property">urlFormat</span>);<br><br>&#125;);<br></code></pre></td></tr></table></figure> 
-        </div>
-      </div>
-    </div>
-<p>基础数据加载后的效果如下： <img
-src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/1774438725400_1774438725461.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="二增加区位背景图副图">二、增加区位背景图（副图）</h2>
-<p>研究区跨度较大时，建议加一幅区位图，告诉读者“研究区在更大区域中的位置”。</p>
-<p>我的做法是新建一个名为“背景”的地图，添加 ArcGIS Pro
-自带“浅灰色画布”底图，再叠加研究区边界，并适当降低底图存在感。</p>
-<p><img
-src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/06e4bfe1-beb5-430e-bd8e-26503b16826f_1774439028692.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="三布局主图-区位图">三、布局：主图 + 区位图</h2>
-<p>创建 A4 布局后，把主图和背景图都放进来。常见且稳妥的做法是：</p>
+<h3 id="迁移样本库构建arcgis">4. 迁移样本库构建（ArcGIS）</h3>
 <ul>
-<li>主图占主要视觉空间</li>
-<li>区位图作为辅助，放角落但不遮挡主图信息</li>
+<li>按得分过滤高相似样本点。</li>
+<li>形成面向蒙古高原制图任务的迁移样本库。</li>
 </ul>
-<p>在“地图框”里分别指定主图和背景图，调整图框样式、边框和位置关系。</p>
-<p><img
-src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/b2594910-59cb-4fe7-83f1-e68b2660f791_1774439335678.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="四格网设置">四、格网设置</h2>
-<p>先激活对应地图框，再添加格网。主图建议使用经纬网或坐标网，间距不要太密，保证“辅助定位”而不是“视觉干扰”。</p>
-<p>我这里添加了黑色水平标注格网，之后在元素面板里微调线型、字体和标注样式。若默认样式不好改，可以将格网转为图形后再细调。</p>
-<p><img
-src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/208696b7-32b9-4023-8100-ed249de2456d_1774439741870.png" srcset="/img/loading.gif" lazyload /></p>
-<p>背景图也可以加格网，但要特别注意坐标系匹配。我的研究区位于蒙古高原，背景图格网坐标系设置为
-Asia South Lambert Conformal Conic，显示效果更自然。</p>
-<p>这一步的原则是：投影服务于表达，不是越“标准”越好，而是越“适合研究区位置和形态”越好。</p>
-<p><img
-src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/3892e1c1-35e9-4103-8f8e-fba26cc5bdae_1774439887235.png" srcset="/img/loading.gif" lazyload /></p>
-<h2
-id="五地图整饰指北针比例尺图例">五、地图整饰：指北针、比例尺、图例</h2>
-<p>从“地图整饰要素”里添加指北针和比例尺，样式尽量简洁，避免装饰过重。通常这两个元素放在图面边缘位置，更不容易干扰主体。</p>
-<p><img
-src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/15311d5e-004c-4a55-9cdd-34bb2ddc978e_1774440131800.png" srcset="/img/loading.gif" lazyload /></p>
-<p>图例建议“按需添加”，不要一次性全加。ArcGIS Pro
-有个很好用的细节：先选中目标图层，再插入图例，就会优先生成对应图例项，后续整理会轻松很多。</p>
-<p>如果对默认图例样式不满意，也可以转为图形后做精细化调整。</p>
-<h2 id="六导出建议">六、导出建议</h2>
-<p>区位图完成后，建议导出高分辨率 PNG 或
-PDF。论文排版场景下，常用参数：</p>
+<p>它还给了一个很实用的“示意图布局思路”：</p>
 <ul>
-<li>位图：300-600 dpi</li>
-<li>矢量：优先 PDF（便于后期排版）</li>
-<li>字体：导出前确认无缺字、无替换</li>
-<li>线宽：适度加粗，避免印刷后太细</li>
+<li>上：数据库输入层。</li>
+<li>中：格网与特征提取层（GEE）。</li>
+<li>下：相似度计算层（Python）。</li>
+<li>最终：输出高相似样本并回到研究区。</li>
 </ul>
-<h2 id="问题">问题</h2>
+<p>这个结构基本可以直接喂给 AI
+画图模型，生成结果会比“直接让它画”稳定很多。</p>
+<h2 id="四生成结果与后处理">四、生成结果与后处理</h2>
+<p>下面是我根据以上思路生成的一张流程图：</p>
+<figure>
+<img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/图片5_1774599722026.png" srcset="/img/loading.gif" lazyload
+alt="处理流程" />
+<figcaption aria-hidden="true">处理流程</figcaption>
+</figure>
+<p>如果觉得图有点糊，可以做两步后处理：</p>
+<ol type="1">
+<li>用<a
+target="_blank" rel="noopener" href="https://image.baidu.com/">百度图像增强</a>做一次清晰化。</li>
+<li>在 PPT 里重写文字：文本框叠加 +
+取色器吸原图颜色，整体风格会更统一。</li>
+</ol>
+<p>我个人实测，这一步非常关键，尤其是中文表述和术语可读性。</p>
+<h2 id="五其他示例">五、其他示例</h2>
+<figure>
+<img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/图片1_1774599732902.png" srcset="/img/loading.gif" lazyload
+alt="研究背景" />
+<figcaption aria-hidden="true">研究背景</figcaption>
+</figure>
+<figure>
+<img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/图片2_1774599730856.jpg" srcset="/img/loading.gif" lazyload
+alt="研究目标" />
+<figcaption aria-hidden="true">研究目标</figcaption>
+</figure>
+<figure>
+<img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/图片3_1774599728031.png" srcset="/img/loading.gif" lazyload
+alt="研究内容" />
+<figcaption aria-hidden="true">研究内容</figcaption>
+</figure>
+<h2 id="六结语">六、结语</h2>
+<p>赶汇报，可以试试这个顺序：</p>
+<p><strong>先拆流程，再画图，最后做人工修字和版式统一。</strong></p>
+<p>这样做的好处是：</p>
 <ul>
-<li><p>问题 1：图看起来“花”，信息不聚焦</p>
-<p>解决：先定主次关系，减少非关键图层饱和度。</p></li>
-<li><p>问题 2：格网很专业，但观感很乱</p>
-<p>解决：减小格网密度，统一字体和线型。</p></li>
-<li><p>问题 3：图例项目太多，读者找不到重点</p>
-<p>解决：只保留研究问题需要解释的图例项。</p></li>
+<li>图的逻辑更贴近你的真实工作流。</li>
+<li>不容易出现“好看但不对题”。</li>
+<li>可以在短时间内把汇报材料做得清楚、完整、能讲。</li>
 </ul>
-<p>到这里，一张可用于论文与汇报的研究区位图就完成了。</p>
-<p>在做大范围区域研究时，建议采用“主图 +
-区位图”的双层结构，表达效率会比单图高很多。</p>
+<p>自己画图，找素材，配色，排版，真的太折磨人了。AI
+虽然不是一键全自动，但作为“结构化助手 +
+初稿设计器”，已经非常好用了。</p>
+<p>AI 大法好！</p>
 <p><img
-src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/布局_1774441161648.png" srcset="/img/loading.gif" lazyload /></p>
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/1774601380770_1774601380807.png" srcset="/img/loading.gif" lazyload /></p>
 
                 
               </div>
@@ -691,7 +701,7 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/布局_177444
     
       <span class="category-chain">
         
-  <a href="/categories/Arcgis/" class="category-chain-item">Arcgis</a>
+  <a href="/categories/AI%E5%B7%A5%E5%85%B7/" class="category-chain-item">AI工具</a>
   
   
 
@@ -706,11 +716,9 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/布局_177444
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/arcgispro/" class="print-no-link">#arcgispro</a>
+        <a href="/tags/Gemini/" class="print-no-link">#Gemini</a>
       
-        <a href="/tags/%E7%A0%94%E7%A9%B6%E5%8C%BA%E4%BD%8D%E5%9B%BE/" class="print-no-link">#研究区位图</a>
-      
-        <a href="/tags/%E5%9C%B0%E5%9B%BE%E5%88%B6%E4%BD%9C/" class="print-no-link">#地图制作</a>
+        <a href="/tags/%E7%BB%98%E5%9B%BE/" class="print-no-link">#绘图</a>
       
     </div>
   
@@ -722,8 +730,8 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/布局_177444
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>使用 ArcGIS Pro 绘制研究区位图</div>
-      <div>https://bintodo.top/links/draw-research-area-location-map-with-arcgispro.html</div>
+      <div>使用Gemini绘制研究汇报展示图</div>
+      <div>https://bintodo.top/links/draw-research-report-picture-with-gemini.html</div>
     </div>
     <div class="license-meta">
       
@@ -735,7 +743,7 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/布局_177444
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年3月24日</div>
+          <div>2026年3月27日</div>
         </div>
       
       
@@ -767,18 +775,12 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/布局_177444
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/links/draw-research-report-picture-with-gemini.html" title="使用Gemini绘制研究汇报展示图">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">使用Gemini绘制研究汇报展示图</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/links/work-insights-technology-business-solutions.html" title="工作感悟：从技术思维到解决方案专家">
-                        <span class="hidden-mobile">工作感悟：从技术思维到解决方案专家</span>
+                      <a href="/links/draw-research-area-location-map-with-arcgispro.html" title="使用 ArcGIS Pro 绘制研究区位图">
+                        <span class="hidden-mobile">使用 ArcGIS Pro 绘制研究区位图</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
