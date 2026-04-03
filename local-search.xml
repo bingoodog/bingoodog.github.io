@@ -651,6 +651,33 @@
   
   
   <entry>
+    <title>书籍推荐：动手学深度学习</title>
+    <link href="/links/book-recommendation-d2l.html"/>
+    <url>/links/book-recommendation-d2l.html</url>
+    
+    <content type="html"><![CDATA[<p>去年入学时导师要求学习深度学习相关的知识，我找了不少资料，最后接触到了《动手学深度学习》这本书。读完之后，我觉得它比较适合想系统入门深度学习、又希望尽量把理论和实践结合起来的同学，所以整理一下我的学习感受，顺便做个推荐。</p><h2 id="适合谁">适合谁</h2><p>《<a href="https://zh.d2l.ai/">动手学深度学习</a>》（Dive into DeepLearning，D2L）是一本由李沐、阿斯顿·张、扎卡里·C·立顿和亚历山大·J·斯莫拉合著的深度学习教材。它的特点不是只讲概念，而是尽量把公式、代码和实际案例放在一起，帮助读者更快建立起对深度学习的整体认识。</p><p>这本书比较合适：</p><ul><li>想系统学习深度学习，但又不想只停留在“看懂名词”这一步。</li><li>希望边学边练，通过代码验证自己对概念的理解。</li><li>已经接触过一点机器学习，想进一步过渡到神经网络、卷积神经网络、循环神经网络等内容。</li><li>需要一本可以反复查阅、后面还能继续用得上的教材。</li></ul><p><img src="https://zh.d2l.ai/_images/front.png" style="width:40%; display:block; margin:0 auto;" /></p><h2 id="优点">优点</h2><p>这本书的优点，是它对“学习”和“动手”之间关系的处理比较自然。很多教材会把理论讲得很完整，但读完后还是不知道怎么开始做；D2L则是把每一节做成可以运行的 Jupyter记事本，读者可以直接改代码、调参数、看结果，这样理解会更扎实一些。</p><p>它还有几个比较明显的优点：</p><ul><li>内容组织清晰，文字、公式和图示搭配得比较好，读起来不会太散。</li><li>不只是讲“怎么用”，会从零开始解释一些常见模型和算法的实现思路。</li><li>提供了 PyTorch、NumPy/MXNet、TensorFlow 和 PaddlePaddle等不同版本的实现，方便按自己的环境选择。</li><li>真实数据和可交互代码结合，适合边学边验证。</li></ul><h2 id="全书结构">全书结构</h2><p>整本书按学习顺序大致分成三个部分：</p><p><img src="https://zh.d2l.ai/_images/book-org.svg" style="width:50%; display:block; margin:0 auto;" /></p><ul><li>第一部分是基础知识和预备知识，主要帮助读者建立后面的学习底座。</li><li>第二部分集中讲现代深度学习技术，是全书最核心的部分。</li><li>第三部分讨论可伸缩性、效率和应用，更偏向实际落地和工程思路。</li></ul><p>第一部分非常重要，学的时候会发现，前面的概念如果没有吃透，后面看卷积神经网络、循环神经网络这些内容会比较吃力。</p><p>第二部分需要认真学习，里面涵盖了很多常见的模型和算法，比如卷积神经网络（CNN）和循环神经网络（RNN）。</p><p>第三部分对有实际应用需求很有帮助，尤其在考虑模型效率、扩展性和部署问题时。</p><h2 id="重点章节">重点章节</h2><p>对于遥感方向的学生来说，我个人建议至少把第一章到第十三章认真看完。这样可以先把基础知识和视觉相关内容学扎实，后面的章节再根据自己的兴趣和研究方向有选择地学习。</p><p>如果时间比较紧，也可以优先保证以下内容：</p><ul><li>基础知识和预备知识</li><li>线性神经网络与多层感知机</li><li>卷积神经网络相关章节</li><li>如果后续有需要，再继续学习注意力机制、优化方法</li></ul><h2 id="使用建议">使用建议</h2><p>开始读这本书之前，要先把运行环境准备好。这样后面看代码、改参数、跑实验的时候会顺很多。</p><p>我自己当时先看的是 PaddlePaddle 版本的代码，不过 Paddle 和 Torch版本的主体内容差别不大。从生态、资料和使用体验来看，我还是更推荐PyTorch。</p><p>一般用 conda 管理环境，创建一个单独的学习环境：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建一个新的环境，命名为d2l，安装python 3.9版本</span><br>conda create -n d2l python=3.9 -y<br><span class="hljs-comment"># 激活环境</span><br>conda activate d2l<br></code></pre></td></tr></table></figure><p>安装好环境之后，安装相关的库：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 安装pytorch和torchvision</span><br>pip install torch==1.12.0<br>pip install torchvision==0.13.0<br><span class="hljs-comment"># 安装d2l包，以便调取书中的函数和类</span><br>pip install d2l==0.17.6<br><span class="hljs-comment"># 安装jupyter 用来在vscode中运行jupyter notebook</span><br>pip install jupyter<br></code></pre></td></tr></table></figure><p>把书中的代码克隆或者下载到本地，解压后用 VS Code 打开文件夹，安装Python 和 Jupyter 插件，再把 Notebook的内核切换到刚才创建的环境，就可以直接运行示例代码了。</p><h2 id="学习感受">学习感受</h2><p>研一课程比较多，学习这本书也断断续续花了半年。虽然进度不算快，但读完之后感觉收获还是比较明显的，尤其是对一些基础概念和常见算法的理解，比一开始只看零散文章时更系统了。</p><p>如果你也在找一本适合入门的深度学习教材，推荐《动手学深度学习》。</p><p>遇到不懂的地方，多看几遍，多跑几次代码，看看论坛的讨论，用用ai辅助理解，都能慢慢理顺。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>深度学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>动手学深度学习</tag>
+      
+      <tag>D2L</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>基于深度学习的水体提取</title>
     <link href="/links/based-on-deep-learning-water-extraction.html"/>
     <url>/links/based-on-deep-learning-water-extraction.html</url>
