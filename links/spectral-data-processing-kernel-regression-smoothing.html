@@ -19,21 +19,21 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="remote sensing, GIS, geospatial data analysis">
   
-    <meta name="description" content="做光谱建模时，原始反射率曲线几乎都会带有随机噪声。噪声来源很多，比如传感器误差、环境干扰、采集过程不稳定等。 如果直接拿这类数据建模，叶绿素 a 浓度反演模型通常会受到影响。一个常见且有效的做法，就是先做平滑，尽量压低噪声，同时保留真实的光谱变化趋势。 核回归平滑（Kernel Regression Smoothing）之所以常用于这类任务，核心原因是：  它是非参数方法，不依赖固定函">
+    <meta name="description" content="对光谱数据进行核回归平滑处理的MATLAB函数实现及应用示例。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="光谱数据处理：核回归平滑">
 <meta property="og:url" content="https://bintodo.top/links/spectral-data-processing-kernel-regression-smoothing.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="做光谱建模时，原始反射率曲线几乎都会带有随机噪声。噪声来源很多，比如传感器误差、环境干扰、采集过程不稳定等。 如果直接拿这类数据建模，叶绿素 a 浓度反演模型通常会受到影响。一个常见且有效的做法，就是先做平滑，尽量压低噪声，同时保留真实的光谱变化趋势。 核回归平滑（Kernel Regression Smoothing）之所以常用于这类任务，核心原因是：  它是非参数方法，不依赖固定函">
+<meta property="og:description" content="对光谱数据进行核回归平滑处理的MATLAB函数实现及应用示例。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://bintodo.top/">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/%E5%9B%BE2%20%20%E5%AE%9E%E6%B5%8B%E7%9A%84%E6%B0%B4%E4%BD%93%E5%85%89%E8%B0%B1%E4%B8%8E%E5%8F%B6%E7%BB%BF%E7%B4%A0a%E6%B5%93%E5%BA%A6%E6%95%B0%E6%8D%AE_1775389248675.png">
 <meta property="article:published_time" content="2023-06-15T10:41:54.000Z">
-<meta property="article:modified_time" content="2026-04-05T11:39:03.816Z">
+<meta property="article:modified_time" content="2026-04-05T11:41:26.622Z">
 <meta property="article:author" content="bin">
 <meta property="article:tag" content="光谱数据处理">
 <meta property="article:tag" content="核回归平滑">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://bintodo.top/">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/%E5%9B%BE2%20%20%E5%AE%9E%E6%B5%8B%E7%9A%84%E6%B0%B4%E4%BD%93%E5%85%89%E8%B0%B1%E4%B8%8E%E5%8F%B6%E7%BB%BF%E7%B4%A0a%E6%B5%93%E5%BA%A6%E6%95%B0%E6%8D%AE_1775389248675.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
