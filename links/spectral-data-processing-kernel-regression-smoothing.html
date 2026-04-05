@@ -19,16 +19,19 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="remote sensing, GIS, geospatial data analysis">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="做光谱建模时，原始反射率曲线几乎都会带有随机噪声。噪声来源很多，比如传感器误差、环境干扰、采集过程不稳定等。 如果直接拿这类数据建模，叶绿素 a 浓度反演模型通常会受到影响。一个常见且有效的做法，就是先做平滑，尽量压低噪声，同时保留真实的光谱变化趋势。 核回归平滑（Kernel Regression Smoothing）之所以常用于这类任务，核心原因是：  它是非参数方法，不依赖固定函">
+<meta property="og:type" content="article">
 <meta property="og:title" content="光谱数据处理：核回归平滑">
 <meta property="og:url" content="https://bintodo.top/links/spectral-data-processing-kernel-regression-smoothing.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
+<meta property="og:description" content="做光谱建模时，原始反射率曲线几乎都会带有随机噪声。噪声来源很多，比如传感器误差、环境干扰、采集过程不稳定等。 如果直接拿这类数据建模，叶绿素 a 浓度反演模型通常会受到影响。一个常见且有效的做法，就是先做平滑，尽量压低噪声，同时保留真实的光谱变化趋势。 核回归平滑（Kernel Regression Smoothing）之所以常用于这类任务，核心原因是：  它是非参数方法，不依赖固定函">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://bintodo.top/">
 <meta property="article:published_time" content="2023-06-15T10:41:54.000Z">
-<meta property="article:modified_time" content="2026-03-31T06:22:45.513Z">
+<meta property="article:modified_time" content="2026-04-05T11:39:03.816Z">
 <meta property="article:author" content="bin">
-<meta property="article:tag" content="remote sensing, GIS, geospatial data analysis">
+<meta property="article:tag" content="光谱数据处理">
+<meta property="article:tag" content="核回归平滑">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://bintodo.top/">
   
@@ -429,7 +432,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          5.3k 字
         
       </span>
     
@@ -440,7 +443,7 @@
         
         
         
-          1 分钟
+          45 分钟
         
       </span>
     
@@ -558,7 +561,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月31日 下午
+                    本文最后更新于 2026年4月5日 晚上
                   
                 
               </p>
@@ -566,7 +569,198 @@
             
               <div class="markdown-body">
                 
-                
+                <p>做光谱建模时，原始反射率曲线几乎都会带有随机噪声。噪声来源很多，比如传感器误差、环境干扰、采集过程不稳定等。</p>
+<p>如果直接拿这类数据建模，叶绿素 a
+浓度反演模型通常会受到影响。一个常见且有效的做法，就是先做平滑，尽量压低噪声，同时保留真实的光谱变化趋势。</p>
+<p>核回归平滑（Kernel Regression
+Smoothing）之所以常用于这类任务，核心原因是：</p>
+<ul>
+<li>它是非参数方法，不依赖固定函数形式。</li>
+<li>对非线性光谱特征的适应性更好。</li>
+<li>相比简单移动平均，更不容易把有效细节“抹平”。</li>
+</ul>
+<p>在水体叶绿素 a
+遥感反演中，核回归平滑通常能提升光谱一致性，从而提高模型稳定性和跨数据集泛化能力<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="程春梅,韦玉春,王国祥,等.使用光谱平滑提高浑浊水体叶绿素a浓度估算模型的应用精度[J].遥感技术与应用,2013,28(06):941-948.">[1]</span></a></sup>。</p>
+<h2 id="核回归函数matlab">1. 核回归函数（MATLAB）</h2>
+<p>首先先准备一个一维核回归函数 <code>ksr</code>（Nadaraya-Watson +
+高斯核）：</p>
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-8f7bdefe" role="button" aria-expanded="false" aria-controls="collapse-8f7bdefe">
+        <div class="fold-arrow">▶</div>核回归函数ksr.m
+      </div>
+      <div class="fold-collapse collapse" id="collapse-8f7bdefe">
+        <div class="fold-content">
+          <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">r</span>=<span class="hljs-title">ksr</span><span class="hljs-params">(x,y,h,N)</span></span><br><span class="hljs-comment">% KSR   Kernel smoothing regression</span><br><span class="hljs-comment">%</span><br><span class="hljs-comment">% r=ksr(x,y) returns the Gaussian kernel regression in structure r such that</span><br><span class="hljs-comment">%   r.f(r.x) = y(x) + e</span><br><span class="hljs-comment">% The bandwidth and number of samples are also stored in r.h and r.n</span><br><span class="hljs-comment">% respectively.</span><br><span class="hljs-comment">%</span><br><span class="hljs-comment">% r=ksr(x,y,h) performs the regression using the specified bandwidth, h.</span><br><span class="hljs-comment">%</span><br><span class="hljs-comment">% r=ksr(x,y,h,n) calculates the regression in n points (default n=100).</span><br><span class="hljs-comment">%</span><br><span class="hljs-comment">% Without output, ksr(x,y) or ksr(x,y,h) will display the regression plot.</span><br><span class="hljs-comment">%</span><br><span class="hljs-comment">% Algorithm</span><br><span class="hljs-comment">% The kernel regression is a non-parametric approach to estimate the</span><br><span class="hljs-comment">% conditional expectation of a random variable:</span><br><span class="hljs-comment">%</span><br><span class="hljs-comment">% E(Y|X) = f(X)</span><br><span class="hljs-comment">%</span><br><span class="hljs-comment">% where f is a non-parametric function. Based on the kernel density</span><br><span class="hljs-comment">% estimation, this code implements the Nadaraya-Watson kernel regression</span><br><span class="hljs-comment">% using the Gaussian kernel as follows:</span><br><span class="hljs-comment">%</span><br><span class="hljs-comment">% f(x) = sum(kerf((x-X)/h).*Y)/sum(kerf((x-X)/h))</span><br><span class="hljs-comment">%</span><br><span class="hljs-comment">% See also gkde, ksdensity</span><br><br><span class="hljs-comment">% Example 1: smooth curve with noise</span><br><span class="hljs-comment">%&#123;</span><br><span class="hljs-comment">x = 1:100;</span><br><span class="hljs-comment">y = sin(x/10)+(x/50).^2;</span><br><span class="hljs-comment">yn = y + 0.2*randn(1,100);</span><br><span class="hljs-comment">r=ksr(x,yn);</span><br><span class="hljs-comment">plot(x,y,&#x27;b-&#x27;,x,yn,&#x27;co&#x27;,r.x,r.f,&#x27;r--&#x27;,&#x27;linewidth&#x27;,2)</span><br><span class="hljs-comment">legend(&#x27;true&#x27;,&#x27;data&#x27;,&#x27;regression&#x27;,&#x27;location&#x27;,&#x27;northwest&#x27;);</span><br><span class="hljs-comment">title(&#x27;Gaussian kernel regression&#x27;)</span><br><span class="hljs-comment">%&#125;</span><br><span class="hljs-comment">% Example 2: with missing data</span><br><span class="hljs-comment">%&#123;</span><br><span class="hljs-comment">x = sort(rand(1,100)*99)+1;</span><br><span class="hljs-comment">y = sin(x/10)+(x/50).^2;</span><br><span class="hljs-comment">y(round(rand(1,20)*100)) = NaN;</span><br><span class="hljs-comment">yn = y + 0.2*randn(1,100);</span><br><span class="hljs-comment">r=ksr(x,yn);</span><br><span class="hljs-comment">plot(x,y,&#x27;b-&#x27;,x,yn,&#x27;co&#x27;,r.x,r.f,&#x27;r--&#x27;,&#x27;linewidth&#x27;,2)</span><br><span class="hljs-comment">legend(&#x27;true&#x27;,&#x27;data&#x27;,&#x27;regression&#x27;,&#x27;location&#x27;,&#x27;northwest&#x27;);</span><br><span class="hljs-comment">title(&#x27;Gaussian kernel regression with 20% missing data&#x27;)</span><br><span class="hljs-comment">%&#125;</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">% By Yi Cao at Cranfield University on 12 March 2008.</span><br><span class="hljs-comment">%</span><br><br><span class="hljs-comment">% Check input and output</span><br>error(nargchk(<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,nargin));<br>error(nargoutchk(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,nargout));<br><span class="hljs-keyword">if</span> <span class="hljs-built_in">numel</span>(x)~=<span class="hljs-built_in">numel</span>(y)<br>    error(<span class="hljs-string">&#x27;x and y are in different sizes.&#x27;</span>);<br><span class="hljs-keyword">end</span><br><br>x=x(:);<br>y=y(:);<br><span class="hljs-comment">% clean missing or invalid data points</span><br>inv=(x~=x)|(y~=y);<br>x(inv)=[];<br>y(inv)=[];<br><br><span class="hljs-comment">% Default parameters</span><br><span class="hljs-keyword">if</span> nargin&lt;<span class="hljs-number">4</span><br>    N=<span class="hljs-number">100</span>;<br><span class="hljs-keyword">elseif</span> ~<span class="hljs-built_in">isscalar</span>(N)<br>    error(<span class="hljs-string">&#x27;N must be a scalar.&#x27;</span>)<br><span class="hljs-keyword">end</span><br>r.n=<span class="hljs-built_in">length</span>(x);<br><span class="hljs-keyword">if</span> nargin&lt;<span class="hljs-number">3</span><br>    <span class="hljs-comment">% optimal bandwidth suggested by Bowman and Azzalini (1997) p.31</span><br>    hx=median(<span class="hljs-built_in">abs</span>(x-median(x)))/<span class="hljs-number">0.6745</span>*(<span class="hljs-number">4</span>/<span class="hljs-number">3</span>/r.n)^<span class="hljs-number">0.2</span>;<br>    hy=median(<span class="hljs-built_in">abs</span>(y-median(y)))/<span class="hljs-number">0.6745</span>*(<span class="hljs-number">4</span>/<span class="hljs-number">3</span>/r.n)^<span class="hljs-number">0.2</span>;<br>    h=<span class="hljs-built_in">sqrt</span>(hy*hx);<br>    <span class="hljs-keyword">if</span> h&lt;<span class="hljs-built_in">sqrt</span>(<span class="hljs-built_in">eps</span>)*N<br>        error(<span class="hljs-string">&#x27;There is no enough variation in the data. Regression is meaningless.&#x27;</span>)<br>    <span class="hljs-keyword">end</span><br><span class="hljs-keyword">elseif</span> ~<span class="hljs-built_in">isscalar</span>(h)<br>    error(<span class="hljs-string">&#x27;h must be a scalar.&#x27;</span>)<br><span class="hljs-keyword">end</span><br>r.h=h;<br><br><span class="hljs-comment">% Gaussian kernel function</span><br>kerf=@(z)<span class="hljs-built_in">exp</span>(-z.*z/<span class="hljs-number">2</span>)/<span class="hljs-built_in">sqrt</span>(<span class="hljs-number">2</span>*<span class="hljs-built_in">pi</span>);<br><br>r.x=<span class="hljs-built_in">linspace</span>(<span class="hljs-built_in">min</span>(x),<span class="hljs-built_in">max</span>(x),N);<br>r.f=<span class="hljs-built_in">zeros</span>(<span class="hljs-number">1</span>,N);<br><span class="hljs-keyword">for</span> k=<span class="hljs-number">1</span>:N<br>    z=kerf((r.x(k)-x)/h);<br>    r.f(k)=sum(z.*y)/sum(z);<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">% Plot</span><br><span class="hljs-keyword">if</span> ~nargout<br>    <span class="hljs-built_in">plot</span>(r.x,r.f,<span class="hljs-string">&#x27;r&#x27;</span>,x,y,<span class="hljs-string">&#x27;bo&#x27;</span>)<br>    ylabel(<span class="hljs-string">&#x27;f(x)&#x27;</span>)<br>    xlabel(<span class="hljs-string">&#x27;x&#x27;</span>)<br>    title(<span class="hljs-string">&#x27;Kernel Smoothing Regression&#x27;</span>);<br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure> 
+        </div>
+      </div>
+    </div>
+<p>这个函数适合把带噪声曲线平滑成趋势线，尤其适用于光谱曲线预处理。</p>
+<h2 id="ksr-的常见调用方式">2. <code>ksr</code> 的常见调用方式</h2>
+<p>最常用的是以下 4 种：</p>
+<ol type="1">
+<li><code>ksr(x, y)</code></li>
+</ol>
+<ul>
+<li>自动估计带宽 h</li>
+<li>默认在 100 个点上输出平滑结果</li>
+<li>如果不接收输出，会直接画图</li>
+</ul>
+<ol start="2" type="1">
+<li><code>r = ksr(x, y)</code></li>
+</ol>
+<ul>
+<li>返回结果结构体 r，不自动画图</li>
+<li>r 里有：
+<ul>
+<li>r.x：平滑后横坐标（等间距）</li>
+<li>r.f：平滑后纵坐标</li>
+<li>r.h：带宽</li>
+<li>r.n：用于回归的数据点数（剔除 NaN 后）</li>
+</ul></li>
+</ul>
+<ol start="3" type="1">
+<li><code>r = ksr(x, y, h)</code></li>
+</ol>
+<ul>
+<li>手动指定带宽 h（平滑强度）</li>
+<li>h 越大越平滑，细节越少</li>
+<li>h 越小越贴近原始数据，可能保留噪声</li>
+</ul>
+<ol start="4" type="1">
+<li><code>r = ksr(x, y, h, N)</code></li>
+</ol>
+<ul>
+<li>手动指定带宽和输出点数 N</li>
+<li>N 是结果曲线采样点数，不是原始数据点数</li>
+</ul>
+<h2 id="光谱数据中的典型用法">3. 光谱数据中的典型用法</h2>
+<p>波长 + 反射率的简单示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs matlab">x = wavelength;      <span class="hljs-comment">% 例如 400:2500</span><br>y = reflectance;     <span class="hljs-comment">% 与 x 等长</span><br>r = ksr(x, y, <span class="hljs-number">15</span>, <span class="hljs-built_in">numel</span>(x));<br><span class="hljs-built_in">plot</span>(x, y, <span class="hljs-string">&#x27;k.&#x27;</span>, r.x, r.f, <span class="hljs-string">&#x27;r-&#x27;</span>, <span class="hljs-string">&#x27;LineWidth&#x27;</span>, <span class="hljs-number">1.5</span>);<br></code></pre></td></tr></table></figure>
+<p>带宽选择可以按这个思路来：</p>
+<ol type="1">
+<li>先跑自动带宽：<code>r = ksr(x, y)</code></li>
+<li>再围绕自动结果微调 <code>h</code>（比如 0.5 x、1 x、2 x）</li>
+<li>如果希望输出点与原始波长一一对应，设 <code>N = numel(x)</code></li>
+</ol>
+<p>使用时还要注意：</p>
+<ol type="1">
+<li>x 和 y 必须等长</li>
+<li>这个函数会自动删除 NaN 数据点</li>
+<li>h 和 N 必须是标量</li>
+<li>如果数据几乎没有变化，函数会报“回归无意义”错误（带宽过小/数据无变异）</li>
+</ol>
+<h2 id="处理示例">4. 处理示例</h2>
+<p>先准备一段示例数据（350-357 nm）：</p>
+<table style="width:100%;">
+
+<thead>
+<tr>
+<th>样本</th>
+<th>350</th>
+<th>351</th>
+<th>352</th>
+<th>353</th>
+<th>354</th>
+<th>355</th>
+<th>356</th>
+<th>357</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.006236933</td>
+<td>0.006293467</td>
+<td>0.006349733</td>
+<td>0.006406133</td>
+<td>0.0064808</td>
+<td>0.0065554</td>
+<td>0.006630067</td>
+<td>0.006620733</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.0058478</td>
+<td>0.005906133</td>
+<td>0.005964333</td>
+<td>0.006022467</td>
+<td>0.006095667</td>
+<td>0.006168733</td>
+<td>0.006241933</td>
+<td>0.006241667</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.005712733</td>
+<td>0.0057696</td>
+<td>0.005826667</td>
+<td>0.005883667</td>
+<td>0.0059576</td>
+<td>0.0060316</td>
+<td>0.006105467</td>
+<td>0.0061084</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.005123643</td>
+<td>0.005191357</td>
+<td>0.005259357</td>
+<td>0.005326857</td>
+<td>0.005413929</td>
+<td>0.005501071</td>
+<td>0.005588143</td>
+<td>0.005599071</td>
+</tr>
+</tbody>
+</table>
+<p>下面对每组反射率进行核回归平滑，并导出为新的 Excel 文件：</p>
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-6ae3e036" role="button" aria-expanded="false" aria-controls="collapse-6ae3e036">
+        <div class="fold-arrow">▶</div>处理脚本示例
+      </div>
+      <div class="fold-collapse collapse" id="collapse-6ae3e036">
+        <div class="fold-content">
+          <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs matlab">[num, ~, ~] = xlsread(<span class="hljs-string">&#x27;data.xlsx&#x27;</span>);<br>wavelength = num(<span class="hljs-number">1</span>, :);<br>reflectance = num(<span class="hljs-number">2</span>:<span class="hljs-keyword">end</span>, :);<br><br><span class="hljs-comment">% 创建一个结构体数组，用于保存每组数据的回归结果</span><br>results = struct(<span class="hljs-string">&#x27;x&#x27;</span>, &#123;&#125;, <span class="hljs-string">&#x27;f&#x27;</span>, &#123;&#125;);<br><br><span class="hljs-comment">% 创建一个矩阵，用于保存整理后的回归结果</span><br>regression_results = <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>(reflectance));<br><br><span class="hljs-built_in">figure</span>; <span class="hljs-comment">% 初始化图形</span><br><span class="hljs-built_in">hold</span> on; <span class="hljs-comment">% 设置保持图形的状态</span><br><br><span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span>:<span class="hljs-built_in">size</span>(reflectance, <span class="hljs-number">1</span>)<br>    y = reflectance(<span class="hljs-built_in">i</span>, :);<br>    <br>    <span class="hljs-comment">% 进行内核平滑回归分析</span><br>    r = ksr(wavelength, y);<br>    <br>    <span class="hljs-comment">% 保存回归结果到结构体数组和矩阵</span><br>    results(<span class="hljs-built_in">i</span>).x = r.x;<br>    results(<span class="hljs-built_in">i</span>).f = r.f;<br>    regression_results(<span class="hljs-built_in">i</span>, :) = interp1(r.x, r.f, wavelength);<br>    <br>    <span class="hljs-comment">% 绘制当前组的回归曲线和原始数据点</span><br>    <span class="hljs-built_in">plot</span>(r.x, r.f, <span class="hljs-string">&#x27;r&#x27;</span>)<br>    <span class="hljs-built_in">scatter</span>(wavelength, y, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;filled&#x27;</span>)<br><span class="hljs-keyword">end</span><br><br><span class="hljs-built_in">hold</span> off; <span class="hljs-comment">% 完成所有绘图，释放图形状态</span><br><br>ylabel(<span class="hljs-string">&#x27;反射率&#x27;</span>)<br>xlabel(<span class="hljs-string">&#x27;波长&#x27;</span>)<br>title(<span class="hljs-string">&#x27;反射率的内核平滑回归&#x27;</span>)<br><br>regression_results = [wavelength; regression_results];<br><br><span class="hljs-comment">% 导出回归结果到 xlsx 文件</span><br>output_file = <span class="hljs-string">&#x27;data_hph.xlsx&#x27;</span>;<br>writematrix(regression_results, output_file); <span class="hljs-comment">% 或者使用 writecell 函数</span><br></code></pre></td></tr></table></figure> 
+        </div>
+      </div>
+    </div>
+<p>这段脚本完成了三件事：</p>
+<ol type="1">
+<li>对每组反射率逐行平滑</li>
+<li>将平滑结果插值回原始波长坐标</li>
+<li>输出到
+<code>data_hph.xlsx</code>，同时绘制原始点与平滑曲线做可视化对比</li>
+</ol>
+<h2 id="小结">5. 小结</h2>
+<p>核回归平滑是光谱预处理中很实用的一步：</p>
+<ul>
+<li>能在降噪和保留细节之间取得较好的平衡</li>
+<li>参数可解释性强（尤其是带宽 <code>h</code>）</li>
+<li>与后续建模流程衔接简单</li>
+</ul>
+<p>如果你在做水体、土壤或植被等光谱反演任务，这个方法通常值得先跑一版基线结果。</p>
+<p>对于光谱数据还可以考虑使用<a
+target="_blank" rel="noopener" href="https://github.com/FuSiry/OpenSA">OpenSA</a>。针对光谱分析过程中涉及的常用训练数据集分割、光谱预处理、波长选择和校准模型算法，建立了的完整的算法库，命名为
+opensa（开放光谱分析）。</p>
+<p><img
+src="https://camo.githubusercontent.com/bfc1b306aed550848218046c40832edada342330a66638c2b883b5f8a34bc870/68747470733a2f2f696d672d626c6f672e6373646e696d672e636e2f63663633653564383938303534326266383234636238383964303166326530302e706e673f782d6f73732d70726f636573733d696d6167652f77617465726d61726b2c747970655f643346354c58706c626d686c61512c736861646f775f35302c746578745f51314e455469424152574e6f623139446232526c2c73697a655f32302c636f6c6f725f4646464646462c745f37302c675f73652c785f3136" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="参考文献">参考文献</h2>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1"
+class="footnote-text"><span>程春梅,韦玉春,王国祥,等.使用光谱平滑提高浑浊水体叶绿素a浓度估算模型的应用精度[J].遥感技术与应用,2013,28(06):941-948.
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
 
                 
               </div>
@@ -575,6 +769,36 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%81%A5%E6%84%9F%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="category-chain-item">遥感数据处理</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%A0%B8%E5%9B%9E%E5%BD%92%E5%B9%B3%E6%BB%91/" class="print-no-link">#核回归平滑</a>
+      
+        <a href="/tags/%E5%85%89%E8%B0%B1%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="print-no-link">#光谱数据处理</a>
+      
+    </div>
   
 </div>
 
@@ -624,6 +848,29 @@
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/links/gf-competition-waterbody-solution.html" title="高分对地观测比赛水体赛道-实现方案分享">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">高分对地观测比赛水体赛道-实现方案分享</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/links/spectrum-resampling.html" title="等效遥感反射率转换：从实测光谱到传感器波段的实现">
+                        <span class="hidden-mobile">等效遥感反射率转换：从实测光谱到传感器波段的实现</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
