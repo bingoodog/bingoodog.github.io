@@ -19,27 +19,28 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="remote sensing, GIS, geospatial data analysis">
   
-    <meta name="description" content="用 Gemini 把内容拆解绘图，配合图像增强和 PPT 二次排版，快速做出能用且好看的展示图。">
+    <meta name="description" content="介绍了OpenLandMap-soildb 数据库的构建方法、主要结果以及其在土壤科学和环境监测中的重要意义。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Gemini绘制研究汇报展示图">
-<meta property="og:url" content="https://bintodo.top/links/draw-research-report-picture-with-gemini.html">
+<meta property="og:title" content="OpenLandMap-soildb：基于时空机器学习与统一整合的历史土壤样本和观测数据的2000–2022+年30米空间分辨率全球土壤信息数据库">
+<meta property="og:url" content="https://bintodo.top/links/OpenLandMap-soildb.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="用 Gemini 把内容拆解绘图，配合图像增强和 PPT 二次排版，快速做出能用且好看的展示图。">
+<meta property="og:description" content="介绍了OpenLandMap-soildb 数据库的构建方法、主要结果以及其在土壤科学和环境监测中的重要意义。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/%E5%9B%BE%E7%89%875_1774599722026.png">
-<meta property="article:published_time" content="2026-03-27T08:09:25.000Z">
-<meta property="article:modified_time" content="2026-03-28T08:13:26.715Z">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/260407204220336_1775565740386.png">
+<meta property="article:published_time" content="2026-04-07T12:37:44.000Z">
+<meta property="article:modified_time" content="2026-04-07T12:54:37.458Z">
 <meta property="article:author" content="bin">
-<meta property="article:tag" content="Gemini">
-<meta property="article:tag" content="绘图">
+<meta property="article:tag" content="全球土壤数据库">
+<meta property="article:tag" content="土壤信息">
+<meta property="article:tag" content="时空机器学习">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/%E5%9B%BE%E7%89%875_1774599722026.png">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/260407204220336_1775565740386.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>使用Gemini绘制研究汇报展示图 - 天上繁星无数，也许有一颗是我的名字</title>
+  <title>OpenLandMap-soildb：基于时空机器学习与统一整合的历史土壤样本和观测数据的2000–2022+年30米空间分辨率全球土壤信息数据库 - 天上繁星无数，也许有一颗是我的名字</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -409,7 +410,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="使用Gemini绘制研究汇报展示图"></span>
+            <span id="subtitle" data-typed-text="OpenLandMap-soildb：基于时空机器学习与统一整合的历史土壤样本和观测数据的2000–2022+年30米空间分辨率全球土壤信息数据库"></span>
           
         </div>
 
@@ -420,8 +421,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-03-27 16:09" pubdate>
-          2026年3月27日 下午
+        <time datetime="2026-04-07 20:37" pubdate>
+          2026年4月7日 晚上
         </time>
       </span>
     
@@ -432,7 +433,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          2.8k 字
         
       </span>
     
@@ -443,7 +444,7 @@
         
         
         
-          11 分钟
+          24 分钟
         
       </span>
     
@@ -556,12 +557,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">使用Gemini绘制研究汇报展示图</h1>
+            <h1 id="seo-header">OpenLandMap-soildb：基于时空机器学习与统一整合的历史土壤样本和观测数据的2000–2022+年30米空间分辨率全球土壤信息数据库</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月28日 下午
+                    本文最后更新于 2026年4月7日 晚上
                   
                 
               </p>
@@ -569,120 +570,170 @@
             
               <div class="markdown-body">
                 
-                <p>前两天，领导让我做一次近期工作汇报，要求很完整：研究背景、目标与内容、当前进展、存在问题、下一步计划。</p>
-<p>问题是，内容我倒是能讲清楚，但“背景图、流程图、结构图”这类可视化环节就很费时间。时间又紧，所以我尝试了一套更省时的办法：<strong>先让
-AI 帮我拆流程，再让 AI 按流程画图</strong>。</p>
-<p>这里记录一下我的具体做法。</p>
-<h2 id="一先明确目标不是直接让-ai-画图">一、先明确目标：不是直接让 AI
-画图</h2>
-<p>一开始我也试过直接输入“画一个研究背景图”，结果通常是：看起来很花，但不够贴合业务。</p>
-<p>后面我发现关键不在“画”，而在“先拆”。</p>
-<p>我的思路是：</p>
-<ol type="1">
-<li>先把自己做过的工作写成一段清晰文字。</li>
-<li>让 Gemini 把这段内容拆成结构化步骤。</li>
-<li>再让 Gemini 按步骤和视觉层级生成示意图。</li>
-</ol>
-<h2 id="二我给-ai-的原始工作内容">二、我给 AI 的原始工作内容</h2>
-<p>我先整理了这一段核心流程：</p>
+                <h2 id="论文信息速览">论文信息速览</h2>
+<ul>
+<li>文章标题：OpenLandMap-soildb: global soil information at 30 m
+spatial resolution for 2000-2022+ based on spatiotemporal Machine
+Learning and harmonized legacy soil samples and observations</li>
+<li>期刊名称：Earth System Science Data</li>
+<li>期刊级别：JCR Q1；中科院 1 区</li>
+<li>影响因子：11.6</li>
+<li>原文链接：<a
+target="_blank" rel="noopener" href="https://essd.copernicus.org/articles/18/989/2026/essd-18-989-2026.html">https://essd.copernicus.org/articles/18/989/2026/essd-18-989-2026.html</a></li>
+<li>DOI：<a
+target="_blank" rel="noopener" href="https://doi.org/10.5194/essd-18-989-2026">10.5194/essd-18-989-2026</a></li>
+</ul>
+<h2 id="这篇文章解决了什么问题">这篇文章解决了什么问题</h2>
+<p>土壤是粮食生产、水过滤、生态系统服务和气候缓解的基础，但现有全球土壤图在两个维度上都偏“慢”：</p>
+<ul>
+<li>空间分辨率往往不够高，难支撑地块尺度分析；</li>
+<li>时间维度更新不足，难跟上 10-30 m 全球遥感产品的节奏。</li>
+</ul>
+<p>同时，全球
+SOC（土壤有机碳）总量和变化估计在关键区域仍不稳定，尤其是高纬冻土、热带泥炭地、半干旱区。论文的核心意义在于：把全球土壤信息拉到
+30
+m、并且做成可跟踪时间变化的动态产品，为退化监测、碳核算和修复评估提供更可用的基础图层。</p>
 <blockquote>
-<p>整合多个土壤有机碳数据库（WoSIS、OpenLandMap-soildb、Open Soil
-Spectral Library），去重后得到全球土壤样本库；对蒙古高原按 100 km
-格网划分，每个格网随机生成 3 个点；在 GEE
-中提取全球点与随机点的嵌入向量并导出本地；在 Python
-中计算全球点与全部随机点的相似度，并取 90% 分位数作为最终相似度；最后在
-ArcGIS 中提取高相似点，构建迁移样本库。</p>
+<p>不是“再做一版全球土壤图”，而是把全球土壤制图推进到与现代遥感产品同尺度、同时序。</p>
 </blockquote>
-<p>这里有一句提示词特别关键：</p>
-<blockquote>
-<p>把这部分处理流程拆解成具体的项，然后根据这些项绘制示意图。</p>
-</blockquote>
-<h2 id="三gemini-先拆流程再给出制图框架">三、Gemini
-先拆流程，再给出制图框架</h2>
-<p>它给出的结构（我做了轻微整理）大致是这样：</p>
-<h3 id="全球数据集成与清洗">1. 全球数据集成与清洗</h3>
-<ul>
-<li>多源汇聚：WoSIS、OpenLandMap-soildb、OSSL。</li>
-<li>标准化：统一坐标系、土层深度和 SOC 单位。</li>
-<li>去重整合：形成全球统一样本库。</li>
-</ul>
-<h3 id="研究区特征提取gee">2. 研究区特征提取（GEE）</h3>
-<ul>
-<li>研究区格网化：蒙古高原 <span class="math inline">\(100 \times
-100\text{ km}\)</span>。</li>
-<li>随机布点：每格网 3 个点。</li>
-<li>提取嵌入向量：关联多光谱、气候、地形协变量并导出。</li>
-</ul>
-<h3 id="相似度计算与筛选python">3. 相似度计算与筛选（Python）</h3>
-<ul>
-<li>计算每个全球点与研究区随机点集合的相似度。</li>
-<li>取 90% 分位数作为该全球点最终得分。</li>
-<li>输出高分候选样本。</li>
-</ul>
-<h3 id="迁移样本库构建arcgis">4. 迁移样本库构建（ArcGIS）</h3>
-<ul>
-<li>按得分过滤高相似样本点。</li>
-<li>形成面向蒙古高原制图任务的迁移样本库。</li>
-</ul>
-<p>它还给了一个很实用的“示意图布局思路”：</p>
-<ul>
-<li>上：数据库输入层。</li>
-<li>中：格网与特征提取层（GEE）。</li>
-<li>下：相似度计算层（Python）。</li>
-<li>最终：输出高相似样本并回到研究区。</li>
-</ul>
-<p>这个结构基本可以直接喂给 AI
-画图模型，生成结果会比“直接让它画”稳定很多。</p>
-<h2 id="四生成结果与后处理">四、生成结果与后处理</h2>
-<p>下面是我根据以上思路生成的一张流程图：</p>
-<figure>
-<img
-src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/图片5_1774599722026.png" srcset="/img/loading.gif" lazyload
-alt="处理流程" />
-<figcaption aria-hidden="true">处理流程</figcaption>
-</figure>
-<p>如果觉得图有点糊，可以做两步后处理：</p>
+<h2 id="研究做法">研究做法</h2>
+<h3 id="研究目标">1) 研究目标</h3>
+<p>作者围绕四个问题展开：</p>
 <ol type="1">
-<li>用<a
-target="_blank" rel="noopener" href="https://image.baidu.com/">百度图像增强</a>做一次清晰化。</li>
-<li>在 PPT 里重写文字：文本框叠加 +
-取色器吸原图颜色，整体风格会更统一。</li>
+<li>Landsat 30 m 数据是否显著提升预测精度，关键指数是什么？</li>
+<li>全球模型在空间外推位置上的误差水平如何？</li>
+<li>SOC 变化受哪些驱动因子主导？</li>
+<li>全球 SOC 热点分布在哪里？</li>
 </ol>
-<p>我个人实测，这一步非常关键，尤其是中文表述和术语可读性。</p>
-<h2 id="五其他示例">五、其他示例</h2>
-<figure>
-<img
-src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/图片1_1774599732902.png" srcset="/img/loading.gif" lazyload
-alt="研究背景" />
-<figcaption aria-hidden="true">研究背景</figcaption>
-</figure>
-<figure>
-<img
-src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/图片2_1774599730856.jpg" srcset="/img/loading.gif" lazyload
-alt="研究目标" />
-<figcaption aria-hidden="true">研究目标</figcaption>
-</figure>
-<figure>
-<img
-src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/图片3_1774599728031.png" srcset="/img/loading.gif" lazyload
-alt="研究内容" />
-<figcaption aria-hidden="true">研究内容</figcaption>
-</figure>
-<h2 id="六结语">六、结语</h2>
-<p>赶汇报，可以试试这个顺序：</p>
-<p><strong>先拆流程，再画图，最后做人工修字和版式统一。</strong></p>
-<p>这样做的好处是：</p>
+<h3 id="建模框架">2) 建模框架</h3>
 <ul>
-<li>图的逻辑更贴近你的真实工作流。</li>
-<li>不容易出现“好看但不对题”。</li>
-<li>可以在短时间内把汇报材料做得清楚、完整、能讲。</li>
+<li>框架：EO-SoilMapper</li>
+<li>核心算法：Quantile Regression Random Forest（QRF）</li>
+<li>建模思路：3D+T（空间 + 深度 + 时间）</li>
+<li>输出形式：均值 + 68% 预测区间（下限/上限）</li>
 </ul>
-<p>自己画图，找素材，配色，排版，真的太折磨人了。AI
-虽然不是一键全自动，但作为“结构化助手 +
-初稿设计器”，已经非常好用了。</p>
-<p>AI 大法好！</p>
-<p><img
-src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/1774601380770_1774601380807.png" srcset="/img/loading.gif" lazyload /></p>
+<p>目标变量包括：SOC 含量、SOC 密度、土壤
+pH（H2O）、黏粉砂组分、容重、USDA 亚群土壤类型。</p>
+<h3 id="数据与协变量">3) 数据与协变量</h3>
+<ul>
+<li>土壤样本来源：多源历史土壤项目，统一标准化与谐调处理。</li>
+<li>样本规模：
+<ul>
+<li>SOC 密度：216000</li>
+<li>SOC 含量：408000</li>
+<li>pH（H2O）：272000</li>
+<li>黏粉砂含量：363000</li>
+<li>烘干容重：134000</li>
+</ul></li>
+<li>质量控制：对实验方法差异进行系统校正（如 SOC
+实验法统一转换），并插入伪观测（裸岩、流沙、永久冰雪）来约束特征边界。</li>
+<li>协变量体系：Landsat 时序、地形多尺度参数、CHELSA 气候、MODIS
+等，候选变量共 363 层。</li>
+</ul>
+<h3 id="验证策略">4) 验证策略</h3>
+<p>论文同时报告三类验证结果：</p>
+<ol type="1">
+<li>分层测试集</li>
+<li>空间分块交叉验证</li>
+<li>留一年（LOYO）时间交叉验证</li>
+</ol>
+<p>并评估不确定性覆盖表现（PICP/QCP）。</p>
+<h2 id="主要结果">主要结果</h2>
+<h3 id="产品层面">1) 产品层面</h3>
+<p>研究构建了覆盖 2000-2022+ 的 30 m 全球动态土壤产品。SOC 和土壤 pH 以
+5 年间隔制图；质地组分、容重和土壤类型主要针对近年制图。</p>
+<h3 id="精度表现">2) 精度表现</h3>
+<ul>
+<li>SOC 密度：RMSE 17.7 kg m−3（log 0.486），CCC 0.88</li>
+<li>SOC 含量：RMSE 51.3 g kg−1（log 0.574），CCC 0.87</li>
+<li>容重：RMSE 0.15 t m−3，CCC 0.92</li>
+<li>pH：RMSE 0.51，CCC 0.91</li>
+<li>黏粒：RMSE 8.4%，CCC 0.87</li>
+<li>粉粒：RMSE 9.9%，CCC 0.87</li>
+<li>砂粒：RMSE 12.6%，CCC 0.84</li>
+</ul>
+<p>不同深度（0-30、30-60、60-100 cm）间精度变化总体有限，SOC
+在表层略优。空间和时间交叉验证结果比分层测试更保守，提示常规测试可能偏乐观。</p>
+<h3 id="驱动因素与变化">3) 驱动因素与变化</h3>
+<ul>
+<li>SOC 密度关键协变量：土层深度、Landsat-GPP、NDVI、CHELSA
+生物气候指标。</li>
+<li>土壤 pH 关键因子：干旱指数、降水、盐渍化等级。</li>
+<li>土地覆被转换中，树木覆盖转为耕地/草地等类型与 SOC
+下降显著相关。</li>
+</ul>
+<h3 id="全球碳库估计">4) 全球碳库估计</h3>
+<ul>
+<li>2020-2022+ 时段，0-30 cm 全球 SOC 约 461 Pg。</li>
+<li>与早期相比，2000-2022+ 期间全球表土至少损失 11 Pg SOC。</li>
+</ul>
+<h2 id="主要图表">主要图表</h2>
+<h3 id="图1eo-soilmapper-总体处理流程">图1：EO-SoilMapper
+总体处理流程</h3>
+<p>展示了循环模块化流程（标准化样本、协变量层、计算引擎、前后端基础设施等关键步骤）。
+<img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/essd-18-989-2026-f01-web_1775565868798.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="图2导入土壤实验室数据集比较">图2：导入土壤实验室数据集比较</h3>
+<p>展示 SOC 含量与 SOC 密度关系、SOC-深度关系、转移函数及 SOC
+与容重的双峰分布。 <img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/essd-18-989-2026-f02-web_1775565872688.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="图3全球谐调后的-soc-和土壤-ph-密度图">图3：全球谐调后的 SOC
+和土壤 pH 密度图</h3>
+<p>显示 SOC 与容重双峰分布、不同土壤类型分离效果，以及 SOC 时间趋势。
+<img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/essd-18-989-2026-f03-web_1775565876417.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="图4土壤属性数据集分割方案">图4：土壤属性数据集分割方案</h3>
+<p>说明校准、训练和分层测试集划分（1:8:1）及验证流程。 <img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/essd-18-989-2026-f04-web_1775565878847.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="图5时空预测块方案">图5：时空预测块方案</h3>
+<p>演示从四个时空点生成预测，并汇总得到均值与预测区间。 <img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/essd-18-989-2026-f05-web_1775565881116.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="图6训练点密度">图6：训练点密度</h3>
+<ol type="a">
+<li>SOC 和/或 pH 样本分布；(b) 含土壤分类信息图层；(c)
+主要数据集时间覆盖。 <img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/essd-18-989-2026-f06-web_1775565883007.jpg" srcset="/img/loading.gif" lazyload /></li>
+</ol>
+<h3 id="图7soc-密度soc-含量和-ph-精度图">图7：SOC 密度、SOC 含量和 pH
+精度图</h3>
+<p>展示分层测试、空间交叉验证、时间交叉验证三类精度对比。 <img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/essd-18-989-2026-f07-web_1775565887524.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="图8沙粒粉粒黏粒精度图">图8：沙粒、粉粒、黏粒精度图</h3>
+<p>按相同三类验证方式组织，便于横向比较。 <img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/essd-18-989-2026-f08-web_1775565891143.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="图930-m-预测-soc-与土壤-ph">图9：30 m 预测 SOC 与土壤 pH</h3>
+<p>给出示例区域放大图与对应卫星影像，并展示 68% 概率预测区间。 <img
+src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/essd-18-989-2026-f09-web_1775565894338.jpg" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="数据与代码可用性">数据与代码可用性</h2>
+<ul>
+<li>结果数据：<a
+target="_blank" rel="noopener" href="https://doi.org/10.5281/zenodo.15470431">10.5281/zenodo.15470431</a>、<a
+target="_blank" rel="noopener" href="https://world.soils.app/">world.soils.app</a></li>
+<li>训练数据：<a
+target="_blank" rel="noopener" href="https://doi.org/10.5281/zenodo.4748499">10.5281/zenodo.4748499</a></li>
+<li>代码（MIT 许可）：<a
+target="_blank" rel="noopener" href="https://doi.org/10.5281/zenodo.15608971">10.5281/zenodo.15608971</a></li>
+</ul>
+<p>受 Zenodo 存储限制，Zenodo
+提供的是分桶与分辨率压缩版本（文中说明包含关键时期 120 m
+不确定性产品）；完整 30 m 全球镶嵌可通过 Google Earth Engine
+资产访问。</p>
+<h2 id="文章引用信息">文章引用信息</h2>
+<p>Hengl, T., Consoli, D., Tian, X., Nauman, T. W., Nussbaum, M., Isik,
+M. S., Parente, L., Ho, Y.-F., Simoes, R., Gupta, S., Samuel-Rosa, A.,
+Zborowski Horst, T., Safanelli, J. L., &amp; Harris, N. (2026).
+OpenLandMap-soildb: global soil information at 30 m spatial resolution
+for 2000-2022+ based on spatiotemporal Machine Learning and harmonized
+legacy soil samples and observations. Earth System Science Data, 18(2),
+989-1036. <a
+target="_blank" rel="noopener" href="https://doi.org/10.5194/essd-18-989-2026">https://doi.org/10.5194/essd-18-989-2026</a></p>
+<h2 id="小结">小结</h2>
+<p>这项工作的价值不只在于“分辨率更高”，更在于它把时间维度和不确定性表达一起带进了全球土壤产品体系：</p>
+<ul>
+<li>能看见细节，不代表就该直接拿像元值做硬阈值决策；</li>
+<li>预测区间应该和均值一起使用，避免“只看一张均值图”；</li>
+<li>长期监测网络（永久样点）仍是降低不确定性的基础设施。</li>
+</ul>
 
                 
               </div>
@@ -701,7 +752,7 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/1774601380770
     
       <span class="category-chain">
         
-  <a href="/categories/AI%E5%B7%A5%E5%85%B7/" class="category-chain-item">AI工具</a>
+  <a href="/categories/%E5%9C%9F%E5%A3%A4%E7%A7%91%E5%AD%A6/" class="category-chain-item">土壤科学</a>
   
   
 
@@ -716,9 +767,11 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/1774601380770
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Gemini/" class="print-no-link">#Gemini</a>
+        <a href="/tags/%E5%9C%9F%E5%A3%A4%E4%BF%A1%E6%81%AF/" class="print-no-link">#土壤信息</a>
       
-        <a href="/tags/%E7%BB%98%E5%9B%BE/" class="print-no-link">#绘图</a>
+        <a href="/tags/%E6%97%B6%E7%A9%BA%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="print-no-link">#时空机器学习</a>
+      
+        <a href="/tags/%E5%85%A8%E7%90%83%E5%9C%9F%E5%A3%A4%E6%95%B0%E6%8D%AE%E5%BA%93/" class="print-no-link">#全球土壤数据库</a>
       
     </div>
   
@@ -730,8 +783,8 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/1774601380770
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>使用Gemini绘制研究汇报展示图</div>
-      <div>https://bintodo.top/links/draw-research-report-picture-with-gemini.html</div>
+      <div>OpenLandMap-soildb：基于时空机器学习与统一整合的历史土壤样本和观测数据的2000–2022+年30米空间分辨率全球土壤信息数据库</div>
+      <div>https://bintodo.top/links/OpenLandMap-soildb.html</div>
     </div>
     <div class="license-meta">
       
@@ -743,7 +796,7 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/1774601380770
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年3月27日</div>
+          <div>2026年4月7日</div>
         </div>
       
       
@@ -775,18 +828,12 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/1774601380770
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/links/OpenLandMap-soildb.html" title="OpenLandMap-soildb：基于时空机器学习与统一整合的历史土壤样本和观测数据的2000–2022+年30米空间分辨率全球土壤信息数据库">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">OpenLandMap-soildb：基于时空机器学习与统一整合的历史土壤样本和观测数据的2000–2022+年30米空间分辨率全球土壤信息数据库</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/links/draw-research-area-location-map-with-arcgispro.html" title="使用 ArcGIS Pro 绘制研究区位图">
-                        <span class="hidden-mobile">使用 ArcGIS Pro 绘制研究区位图</span>
+                      <a href="/links/draw-research-report-picture-with-gemini.html" title="使用Gemini绘制研究汇报展示图">
+                        <span class="hidden-mobile">使用Gemini绘制研究汇报展示图</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -887,12 +934,6 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/1774601380770
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -1181,49 +1222,6 @@ src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-03/1774601380770
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
 
