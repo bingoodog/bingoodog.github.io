@@ -535,13 +535,13 @@
     
     <tags>
       
-      <tag>光谱响应函数</tag>
-      
       <tag>大气校正</tag>
       
-      <tag>py6s</tag>
+      <tag>光谱响应函数</tag>
       
       <tag>GF-1</tag>
+      
+      <tag>py6s</tag>
       
     </tags>
     
@@ -568,9 +568,9 @@
     
     <tags>
       
-      <tag>GF-1</tag>
-      
       <tag>ENVI</tag>
+      
+      <tag>GF-1</tag>
       
       <tag>QUAC</tag>
       
