@@ -19,20 +19,21 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="remote sensing, GIS, geospatial data analysis">
   
-    <meta name="description" content="最近应导师要求，学习深度学习相关的知识，遂查找相关资料，了解到百度开源的PaddleRS库，于是对其进行了一些了解。 PaddleRS是百度飞桨、遥感科研院所及相关高校共同开发的基于飞桨的遥感影像智能解译开发套件，支持图像分割、目标检测、场景分类、变化检测、图像复原等常见遥感任务。PaddleRS致力于帮助遥感领域科研从业者快速完成算法的研发、验证和调优。同时，PaddleRS也期望助力投身于产">
+    <meta name="description" content="遥感影像智能解译开发套件，支持图像分割、目标检测、场景分类、变化检测、图像复原等遥感领域的常见任务。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PaddleRS：遥感影像智能解译开发套件">
 <meta property="og:url" content="https://bintodo.top/links/PaddleRS-Awesome-Remote-Sensing-Toolkit-based-on-PaddlePaddle.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
-<meta property="og:description" content="最近应导师要求，学习深度学习相关的知识，遂查找相关资料，了解到百度开源的PaddleRS库，于是对其进行了一些了解。 PaddleRS是百度飞桨、遥感科研院所及相关高校共同开发的基于飞桨的遥感影像智能解译开发套件，支持图像分割、目标检测、场景分类、变化检测、图像复原等常见遥感任务。PaddleRS致力于帮助遥感领域科研从业者快速完成算法的研发、验证和调优。同时，PaddleRS也期望助力投身于产">
+<meta property="og:description" content="遥感影像智能解译开发套件，支持图像分割、目标检测、场景分类、变化检测、图像复原等遥感领域的常见任务。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://bintodo.top/">
+<meta property="og:image" content="https://github.com/PaddlePaddle/PaddleRS/raw/develop/docs/images/whole_picture.png">
 <meta property="article:published_time" content="2022-11-18T03:50:19.000Z">
-<meta property="article:modified_time" content="2026-04-03T07:57:34.829Z">
+<meta property="article:modified_time" content="2026-04-11T13:09:23.076Z">
 <meta property="article:author" content="bin">
-<meta property="article:tag" content="remote sensing, GIS, geospatial data analysis">
+<meta property="article:tag" content="PaddleRS">
+<meta property="article:tag" content="遥感解译">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://bintodo.top/">
+<meta name="twitter:image" content="https://github.com/PaddlePaddle/PaddleRS/raw/develop/docs/images/whole_picture.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -431,7 +432,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          235 字
+          2.9k 字
         
       </span>
     
@@ -442,7 +443,7 @@
         
         
         
-          2 分钟
+          25 分钟
         
       </span>
     
@@ -560,7 +561,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年4月3日 下午
+                    本文最后更新于 2026年4月11日 晚上
                   
                 
               </p>
@@ -568,12 +569,200 @@
             
               <div class="markdown-body">
                 
-                <p>最近应导师要求，学习深度学习相关的知识，遂查找相关资料，了解到百度开源的PaddleRS库，于是对其进行了一些了解。</p>
-<p><a
-target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS">PaddleRS</a>是百度飞桨、遥感科研院所及相关高校共同开发的基于飞桨的遥感影像智能解译开发套件，支持图像分割、目标检测、场景分类、变化检测、图像复原等常见遥感任务。PaddleRS致力于帮助遥感领域科研从业者快速完成算法的研发、验证和调优。同时，PaddleRS也期望助力投身于产业实践的开发者，便捷地实现从数据预处理到模型部署的全流程遥感深度学习应用。</p>
+                <blockquote>
+<p>应导师要求，学习深度学习相关知识，遂查找资料，了解到百度开源的PaddleRS，于是对其进行了一些学习。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS">PaddleRS</a>
+是百度飞桨、遥感科研院所及相关高校共同开发的<strong>遥感影像智能解译开发套件</strong>，基于飞桨框架打造。它支持图像分割、目标检测、场景分类、变化检测、图像复原等遥感领域的常见任务，致力于让科研和产业开发者都能快速完成从数据预处理、算法研发、模型验证到生产部署的全流程遥感深度学习应用。</p>
 <div data-align="center">
 <p><img src="https://user-images.githubusercontent.com/21275753/199727309-796b0b14-1af7-4cea-9a22-c5439766446b.gif" srcset="/img/loading.gif" lazyload  width = "2000" /></p>
 </div>
+<h2 id="paddlers-核心特点">PaddleRS 核心特点</h2>
+<p>PaddleRS
+是一个<strong>开箱即用</strong>的遥感深度学习模型库，具备以下特点：</p>
+<ul>
+<li><strong>预置模型</strong> — 内置多种遥感深度学习模型</li>
+<li><strong>灵活易用</strong> —
+用户既可直接使用这些模型进行训练和推理，也可在其基础上修改和优化</li>
+<li><strong>任务多样</strong> —
+支持从小样本到大规模数据的各类遥感解译任务</li>
+</ul>
+<h2 id="典型训练工作流">典型训练工作流</h2>
+<p>完整的遥感深度学习开发流程包括以下几个关键步骤:</p>
+<h3 id="数据准备">1. 数据准备</h3>
+<p>遥感影像与普通 RGB 图像有几个核心差异，需要在预处理阶段充分考虑：</p>
+<ul>
+<li><strong>多光谱特性</strong> — 遥感影像通常包含多个波段（非 RGB
+三通道），光谱反射率具有物理意义</li>
+<li><strong>存储格式</strong> — 常用 16 位 TIF 格式存储，相比 8
+位图像能保留更多信息</li>
+<li><strong>预处理流程</strong> —
+需要辐射校正、大气校正、几何校正等步骤</li>
+</ul>
+<p><strong>什么时候需要进行各种校正？</strong></p>
+<ul>
+<li>几何校正 + 裁剪：通常对大多数任务都是必需的</li>
+<li>辐射校正、大气校正：对于<strong>变化检测</strong>和<strong>图像复原</strong>任务特别关键；如果跳过大气校正，同一地物在不同时期的图像会出现明显色差</li>
+</ul>
+<p>PaddleRS 提供了<a
+target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS/blob/develop/docs/data/tools_cn.md">遥感影像处理工具集</a>来自动化这些流程。如果不熟悉
+Python 图像处理库，也可以用 ArcGIS Pro
+等专业遥感软件进行预处理，具有可视化界面，操作更直观。</p>
+<h3 id="模型选择">2. 模型选择</h3>
+<p>根据具体任务从 PaddleRS 提供的<a
+target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS/blob/develop/docs/intro/model_zoo_cn.md">模型库</a>中选择初始模型：</p>
+<ul>
+<li><strong>首先明确任务类型</strong> —
+是图像分割、目标检测、场景分类还是变化检测？</li>
+<li><strong>选择合适的基准模型</strong> — 例如分割任务可选
+U-Net、DeepLabV3+ 等</li>
+<li><strong>多模型对比</strong> —
+在私有数据集上，不同模型的性能表现差异通常很大，建议试验多个候选模型，选择最优者</li>
+</ul>
+<h3 id="模型训练">3. 模型训练</h3>
+<p>使用 PaddleRS 提供的<a
+target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS/tree/develop/tutorials/train">训练脚本</a>进行模型训练。以图像分割任务为例，可以使用<a
+target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS/blob/develop/tutorials/train/semantic_segmentation/unet.py">UNet
+训练脚本</a>。</p>
+<p>训练中的关键超参数调优包括：</p>
+<ul>
+<li><strong>学习率</strong> — 通常需要多次微调以找到最优值</li>
+<li><strong>批大小</strong> — 根据显存和数据特点调整</li>
+<li><strong>迭代次数</strong> — 根据数据量和任务复杂度设定</li>
+<li><strong>优化器与损失函数</strong> — 可查看<a
+target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS/blob/develop/paddlers/tasks/segmenter.py">模型函数定义</a>进行针对性调优</li>
+</ul>
+<h3 id="模型评估">4. 模型评估</h3>
+<p>在训练过程中，使用验证数据集 <code>eval_dataset</code>
+对模型进行定期评估，同时启用 VisualDL 进行可视化监控：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python">model.train(<br>    num_epochs=<span class="hljs-number">10</span>,<br>    train_dataset=train_dataset,    <br>    train_batch_size=<span class="hljs-number">4</span>,<br>    eval_dataset=eval_dataset,           <span class="hljs-comment"># 验证数据集</span><br>    save_interval_epochs=<span class="hljs-number">5</span>,              <span class="hljs-comment"># 每5轮保存一次检查点</span><br>    log_interval_steps=<span class="hljs-number">4</span>,                <span class="hljs-comment"># 每4步记录一次日志</span><br>    save_dir=EXP_DIR,<br>    learning_rate=<span class="hljs-number">0.001</span>,<br>    early_stop=<span class="hljs-literal">False</span>,                    <span class="hljs-comment"># 可选：精度不改善时提前停止</span><br>    use_vdl=<span class="hljs-literal">True</span>,                        <span class="hljs-comment"># 启用 VisualDL 日志</span><br>    resume_checkpoint=<span class="hljs-literal">None</span>               <span class="hljs-comment"># 如需继续训练，指定检查点路径</span><br>)<br></code></pre></td></tr></table></figure>
+<p>启动 <a
+target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS/blob/develop/tutorials/train/README_CN.md#%E4%BD%BF%E7%94%A8visualdl%E5%8F%AF%E8%A7%86%E5%8C%96%E8%AE%AD%E7%BB%83%E6%8C%87%E6%A0%87">VisualDL</a>
+查看实时训练指标：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">visualdl --logdir output/unet/vdl_log --port 8001<br></code></pre></td></tr></table></figure>
+<p>然后在浏览器访问 <code>http://localhost:8001</code>
+查看训练曲线等。</p>
+<h3 id="模型优化">5. 模型优化</h3>
+<p>根据评估结果迭代改进模型。优化策略包括：</p>
+<p><strong>数据层面</strong></p>
+<ul>
+<li>增加数据增强 — 应用随机裁剪、旋转、翻转等<a
+target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS/blob/develop/docs/intro/transforms_cn.md">数据变换算子</a>，扩展训练数据多样性</li>
+<li>继续训练 — 在之前最优检查点基础上继续训练，逐步提升模型性能</li>
+</ul>
+<p><strong>模型层面</strong></p>
+<ul>
+<li>调整架构 — 根据实验结果增减卷积层、池化层等结构性组件</li>
+<li>迁移学习 — 尝试用预训练权重初始化，加速收敛</li>
+</ul>
+<h3 id="模型部署">6. 模型部署</h3>
+<p>训练完成后，利用 PaddleRS 的<a
+target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS/blob/develop/deploy/export/README.md">部署工具</a>将模型部署到生产环境。</p>
+<p><strong>第一步：导出推理模型</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">python deploy/export/export_model.py \<br>    --model_dir=./output/unet/best_model/ \<br>    --save_dir=./inference_model/<br></code></pre></td></tr></table></figure>
+<p><strong>第二步：构建预测器并执行推理</strong></p>
+<p>导出完成后，inference_model目录下会生成部署格式的模型文件。接下来就可以使用PaddleRS提供的<a
+target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS/blob/develop/deploy/README.md#2-%E9%A2%84%E6%B5%8B%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8">预测接口</a>进行预测了。</p>
+<p>以变化检测任务为例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> paddlers.deploy <span class="hljs-keyword">import</span> Predictor<br><br><span class="hljs-comment"># 构建 Predictor 对象（支持 GPU/CPU 推理）</span><br>predictor = Predictor(<br>    model_dir=<span class="hljs-string">&quot;static_models/&quot;</span>,<br>    use_gpu=<span class="hljs-literal">True</span>,<br>    gpu_id=<span class="hljs-number">0</span><br>)<br><br><span class="hljs-comment"># 传入前后两期遥感影像，执行推理</span><br>pre_image = <span class="hljs-string">&quot;demo_data/A.png&quot;</span>    <span class="hljs-comment"># 前期影像</span><br>post_image = <span class="hljs-string">&quot;demo_data/B.png&quot;</span>   <span class="hljs-comment"># 后期影像</span><br>result = predictor.predict((pre_image, post_image))<br><br><span class="hljs-comment"># 解析结果</span><br>change_map = result[<span class="hljs-string">&#x27;label_map&#x27;</span>]  <span class="hljs-comment"># 变化/不变分类图</span><br>score_map = result[<span class="hljs-string">&#x27;score_map&#x27;</span>]   <span class="hljs-comment"># 概率图（两个通道）</span><br></code></pre></td></tr></table></figure>
+<p><strong>Predictor 关键参数说明</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>model_dir</code></td>
+<td>模型路径（必须是导出的部署或量化模型）</td>
+<td>必需</td>
+</tr>
+<tr>
+<td><code>use_gpu</code></td>
+<td>是否使用 GPU 推理</td>
+<td>False</td>
+</tr>
+<tr>
+<td><code>gpu_id</code></td>
+<td>使用的 GPU 设备 ID</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>cpu_thread_num</code></td>
+<td>CPU 推理线程数</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>use_trt</code></td>
+<td>是否启用 TensorRT 加速</td>
+<td>False</td>
+</tr>
+<tr>
+<td><code>memory_optimize</code></td>
+<td>是否启动内存优化</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+<p><strong>predict() 方法参数说明</strong></p>
+<table>
+
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>img_file</code></td>
+<td>输入影像：单张图像路径、numpy
+数组或列表；变化检测任务接受两张影像的元组</td>
+</tr>
+<tr>
+<td><code>topk</code></td>
+<td>场景分类任务中返回概率排名前 topk 的类别</td>
+</tr>
+<tr>
+<td><code>warmup_iters</code></td>
+<td>预热轮数（用于性能测试）</td>
+</tr>
+<tr>
+<td><code>repeats</code></td>
+<td>重复预测次数（用于性能测试）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>返回结果</strong></p>
+<p>对于分割和变化检测任务：</p>
+<ul>
+<li><code>label_map</code> —
+分类后的标签图，变化检测为二值（0=不变，1=变化）</li>
+<li><code>score_map</code> —
+概率图，变化检测包含两个通道（不变概率、变化概率）</li>
+</ul>
+<hr />
+<h2 id="总结">总结</h2>
+<p>PaddleRS
+提供了遥感深度学习的完整工具链，从初学者到研究者都可以快速构建、验证和部署模型。上述六步工作流涵盖了从原始数据到生产推理的全过程，每一步都可以根据具体需求灵活调整。</p>
+<blockquote>
+<p><strong>有多少人工就有多少智能：数据决定模型上限</strong></p>
+<p>深度学习模型的性能，在很大程度上由<strong>数据质量</strong>而非算法复杂度决定。与其盲目尝试更深更复杂的网络，不如先确保：</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>任务定义清晰无歧义</li>
+<li>标注标准一致且高质量</li>
+<li>数据预处理流程合理</li>
+<li>数据分布与实际应用场景吻合</li>
+</ul>
+<p>有时数据的投入往往能带来更显著的性能提升。</p>
+</blockquote>
+<p>PaddleRS
+是一个非常好的工具套件。代码的写作规范，库的结构清晰，文档详实，<del>社区活跃</del>，值得学习！</p>
 
                 
               </div>
@@ -582,6 +771,36 @@ target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS">P
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/PaddleRS/" class="print-no-link">#PaddleRS</a>
+      
+        <a href="/tags/%E9%81%A5%E6%84%9F%E8%A7%A3%E8%AF%91/" class="print-no-link">#遥感解译</a>
+      
+    </div>
   
 </div>
 
@@ -631,6 +850,29 @@ target="_blank" rel="noopener" href="https://github.com/PaddlePaddle/PaddleRS">P
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/links/based-on-deep-learning-water-extraction.html" title="基于深度学习的水体提取">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">基于深度学习的水体提取</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/links/simulate-urban-expansion-with-geosos.html" title="使用地理元胞自动机（GeoSOS）进行建成区扩张模拟">
+                        <span class="hidden-mobile">使用地理元胞自动机（GeoSOS）进行建成区扩张模拟</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
