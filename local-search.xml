@@ -535,13 +535,13 @@
     
     <tags>
       
-      <tag>光谱响应函数</tag>
+      <tag>GF-1</tag>
       
       <tag>py6s</tag>
       
-      <tag>GF-1</tag>
-      
       <tag>大气校正</tag>
+      
+      <tag>光谱响应函数</tag>
       
     </tags>
     
@@ -568,9 +568,9 @@
     
     <tags>
       
-      <tag>GF-1</tag>
-      
       <tag>ENVI</tag>
+      
+      <tag>GF-1</tag>
       
       <tag>QUAC</tag>
       
@@ -694,11 +694,36 @@
     
     <tags>
       
-      <tag>等效遥感反射率转换</tag>
-      
       <tag>光谱响应函数</tag>
       
+      <tag>等效遥感反射率转换</tag>
+      
       <tag>高光谱反射率</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>百度 AI Studio 平台介绍</title>
+    <link href="/links/baidu-aistudio-platform-introduction.html"/>
+    <url>/links/baidu-aistudio-platform-introduction.html</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>当实验室没有服务器，没有显卡的时候，你会怎么办？</p></blockquote><p>最近在尝试跑一些深度学习模型，但本地电脑配置比较低，基本跑不动，也没有现成服务器可用。刚好在学习PaddlePaddle 时，我发现了百度的 <ahref="https://aistudio.baidu.com/overview">AIStudio</a>：它提供在线编程环境和免费 GPU资源，适合在资源有限时快速开展实验。</p><h2id="一没有本地算力怎么继续做实验">一、没有本地算力，怎么继续做实验？</h2><p>飞桨 AI Studio 是基于 PaddlePaddle的人工智能学习与实训社区，支持在线开发、训练和部署。简单说，它把环境、算力和项目管理都放到了云端，开箱即可用。</p><p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/260413155433509_1776066873596.png" alt="AI Studio 平台概览" style="display: block; margin: 0 auto; width: 60%; height: auto;" /></p><p>AI Studio 的核心包括：</p><ul><li>在线编程环境：支持 Jupyter Notebook 和 VSCode，可直接在浏览器里写代码、调试和运行。</li><li>免费 GPU 资源：提供免费的 V100 GPU 资源。</li><li>开源项目资源：有大量公开项目和示例代码，方便入门与参考。</li></ul><h2 id="二在-ai-studio-中配置-torch-环境">二、在 AI Studio 中配置 Torch环境</h2><p>AI Studio 对 Paddle 生态支持非常完善，但很多深度学习项目是基于 Torch编写的。如果要跑 Torch 项目，就需要额外做环境隔离与安装。</p><p>下面是我实际使用的一套流程。</p><h3 id="创建项目并进入开发环境">1）创建项目并进入开发环境</h3><p>先在 AI Studio 创建一个新项目，然后选择“专业开发”中的运行环境。</p><p><img src="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/1776067386432_1776067386460.png" alt="AI Studio 项目创建界面" style="display: block; margin: 0 auto; width: auto; height: 40vh;" /></p><p>AI Studio 每天会赠送一定 GPU时长，但高峰期机器可能紧张，建议尽量错峰使用。</p><h3 id="使用虚拟环境隔离依赖">2）使用虚拟环境隔离依赖</h3><p>平台默认已经安装PaddlePaddle，不建议直接在系统环境里混装同类框架，容易出现依赖冲突。更稳妥的方式是新建一个Conda 虚拟环境来安装 Torch。</p><p>初始化 conda：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda init<br></code></pre></td></tr></table></figure><p>执行后重启终端，使 conda 生效。</p><p>创建虚拟环境（示例命名为 my_env）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda create -n my_env python=3.10 -y<br></code></pre></td></tr></table></figure><p>激活虚拟环境：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda activate my_env<br></code></pre></td></tr></table></figure><p>安装 Torch 相关依赖：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install torch torchvision<br></code></pre></td></tr></table></figure><p>安装 Jupyter：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install jupyter<br></code></pre></td></tr></table></figure><h2 id="三结果">三、结果</h2><p>完成上述步骤后，在 Notebook中选择刚创建的虚拟环境内核，就可以正常运行 Torch 代码。</p><h2 id="四小结">四、小结</h2><p>如果你也遇到“本地算力不够、又暂时没有服务器”的情况，AI Studio是一个很实用的过渡方案。它对 Paddle生态支持很完善，也可以通过虚拟环境兼容 Torch项目，整体上手成本不高。</p><blockquote><p>每天可以签到得积分，登录论坛也有积分，做任务也能拿积分，积分可以换算力卡，基本上还是够用的</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>深度学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>AI Studio</tag>
       
     </tags>
     
