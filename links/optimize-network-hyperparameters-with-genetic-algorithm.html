@@ -19,18 +19,22 @@
   <meta name="author" content="bin">
   <meta name="keywords" content="remote sensing, GIS, geospatial data analysis">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="从手动调参转向遗传算法自动搜索超参数，基于 scikit-opt 的代码实现。">
+<meta property="og:type" content="article">
 <meta property="og:title" content="使用遗传算法优化网络超参数">
 <meta property="og:url" content="https://bintodo.top/links/optimize-network-hyperparameters-with-genetic-algorithm.html">
 <meta property="og:site_name" content="天上繁星无数，也许有一颗是我的名字">
+<meta property="og:description" content="从手动调参转向遗传算法自动搜索超参数，基于 scikit-opt 的代码实现。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://bintodo.top/">
+<meta property="og:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/260417172504510_1776417904559.png">
 <meta property="article:published_time" content="2023-07-07T04:58:21.000Z">
-<meta property="article:modified_time" content="2026-03-31T06:23:02.728Z">
+<meta property="article:modified_time" content="2026-04-17T09:58:30.908Z">
 <meta property="article:author" content="bin">
-<meta property="article:tag" content="remote sensing, GIS, geospatial data analysis">
+<meta property="article:tag" content="scikit-opt">
+<meta property="article:tag" content="超参数优化">
+<meta property="article:tag" content="遗传算法">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://bintodo.top/">
+<meta name="twitter:image" content="https://fastly.jsdelivr.net/gh/bingoodog/picture@main/2026-04/260417172504510_1776417904559.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -429,7 +433,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          5.2k 字
         
       </span>
     
@@ -440,7 +444,7 @@
         
         
         
-          1 分钟
+          44 分钟
         
       </span>
     
@@ -558,7 +562,7 @@
               <p id="updated-time" class="note note-info" style="">
                 
                   
-                    本文最后更新于 2026年3月31日 下午
+                    本文最后更新于 2026年4月17日 下午
                   
                 
               </p>
@@ -566,7 +570,87 @@
             
               <div class="markdown-body">
                 
-                
+                <p>最近参加了一个十米级内陆水体参量 AI
+定量反演比赛，任务目标是根据光谱数据反演叶绿素 a
+浓度、悬浮物浓度等指标。</p>
+<p>光谱预处理我已经在前面两篇文章里整理过，这里就不重复展开了：</p>
+<ul>
+<li><a
+href="https://bintodo.top/links/spectral-data-processing-kernel-regression-smoothing.html">光谱数据处理：核回归平滑</a></li>
+<li><a
+href="https://bintodo.top/links/spectrum-resampling.html">等效遥感反射率转换：从实测光谱到传感器波段的实现</a></li>
+</ul>
+<h2 id="一问题背景">一、问题背景</h2>
+<p>刚开始接触这个任务时，我对“AI
+定量反演”并没有很完整的认识，所以先查了一些文献，把问题的技术路径理清楚。常见方法大致可以分成三类：</p>
+<ul>
+<li>经验统计模型：依赖叶绿素浓度与波段、波段组合之间的经验关系，通过回归分析建立反演公式。优点是简单直接，但可迁移性有限，往往需要针对具体水体做区域性校准。</li>
+<li>半分析模型：基于辐射传输理论，把水体光学特性拆成吸收和散射两部分，再根据光谱反射率反演叶绿素浓度。它的物理意义更强，但参数复杂，对水体光学性质也比较敏感，实际应用时常受限。</li>
+<li>机器学习模型：能够自动捕捉遥感光谱与水质参数之间的非线性关系，但也意味着模型选择、特征工程和超参数调优都会更重要，整个过程通常更费时。</li>
+</ul>
+<p>我拿到数据后先试过经验模型和半分析模型，效果都不理想。回到比赛要求本身，既然是
+AI
+定量反演，最终还是得把重点放到机器学习建模上。后来我参考了一个很有启发性的案例：<a
+target="_blank" rel="noopener" href="https://aistudio.baidu.com/projectdetail/6590697">基于紫外差分光谱与神经网络相结合的一氧化氮痕量检测</a>，它的数据类型和任务目标都和这次比赛比较接近，所以我就借鉴了它的思路来搭建模型。</p>
+<h2 id="二为什么用遗传算法">二、为什么用遗传算法</h2>
+<p>模型搭起来之后，很快就遇到了一个很现实的问题：超参数对模型性能影响很大。起初我主要是盯着训练集表现，手动调整学习率、隐藏层神经元数量等参数。这个方法不是完全没用，确实能看到提升，但问题也很突出：调参非常耗时间，而且并不一定能碰到真正合适的组合。</p>
+<p>于是我开始考虑自动搜索超参数。继续查资料后，我把目光放到了遗传算法上。它通过模拟自然选择、交叉和变异，在参数空间里做全局搜索，比较适合这种“目标函数不好手工求解析解，但可以通过验证集性能来评价”的问题。</p>
+<p>遗传算法用来调参时，可以把一组超参数看成一个“个体”，再把验证集误差或损失函数看成适应度。整体思路很自然：</p>
+<ol type="1">
+<li>随机初始化一批超参数组合。</li>
+<li>用每组参数训练模型，并计算验证集损失。</li>
+<li>保留表现较好的组合。</li>
+<li>对参数做交叉和变异，继续生成新组合。</li>
+<li>重复迭代，直到达到终止条件。</li>
+</ol>
+<p>这样做的好处是，超参数搜索不再完全依赖人工经验，而是变成一个可重复、可量化的优化过程。这里我使用的是
+<a target="_blank" rel="noopener" href="https://github.com/guofei9987/scikit-opt">scikit-opt</a>
+来实现遗传算法，它的接口比较直接，适合快速把一个优化问题跑起来。</p>
+<h2 id="三先看一个简单例子">三、先看一个简单例子</h2>
+<p>在正式做超参数搜索之前，先看一个最基础的遗传算法例子，帮助理解它的调用方式。</p>
+<h3 id="定义目标函数">1. 定义目标函数</h3>
+<p>下面这个例子是经典的 Schaffer
+函数，主要用来演示优化算法如何搜索最小值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">schaffer</span>(<span class="hljs-params">p</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;一个带有多个局部极小值的测试函数。&quot;&quot;&quot;</span><br>    x1, x2 = p<br>    part1 = np.square(x1) - np.square(x2)<br>    part2 = np.square(x1) + np.square(x2)<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0.5</span> + (np.square(np.sin(part1)) - <span class="hljs-number">0.5</span>) / np.square(<span class="hljs-number">1</span> + <span class="hljs-number">0.001</span> * part2)<br></code></pre></td></tr></table></figure>
+<h3 id="运行遗传算法">2. 运行遗传算法</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sko.GA <span class="hljs-keyword">import</span> GA<br><br><br>ga = GA(<br>    func=schaffer,<br>    n_dim=<span class="hljs-number">2</span>,<br>    size_pop=<span class="hljs-number">50</span>,<br>    max_iter=<span class="hljs-number">800</span>,<br>    prob_mut=<span class="hljs-number">0.001</span>,<br>    lb=[-<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>],<br>    ub=[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>],<br>    precision=<span class="hljs-number">1e-7</span>,<br>)<br><br>best_x, best_y = ga.run()<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;best_x:&quot;</span>, best_x)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;best_y:&quot;</span>, best_y)<br></code></pre></td></tr></table></figure>
+<h3 id="查看优化过程">3. 查看优化过程</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><br>Y_history = pd.DataFrame(ga.all_history_Y)<br><br>fig, ax = plt.subplots(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, figsize=(<span class="hljs-number">8</span>, <span class="hljs-number">6</span>))<br>ax[<span class="hljs-number">0</span>].plot(Y_history.index, Y_history.values, <span class="hljs-string">&quot;.&quot;</span>, color=<span class="hljs-string">&quot;red&quot;</span>)<br>ax[<span class="hljs-number">0</span>].set_title(<span class="hljs-string">&quot;Each generation&#x27;s fitness&quot;</span>)<br><br>Y_history.<span class="hljs-built_in">min</span>(axis=<span class="hljs-number">1</span>).cummin().plot(kind=<span class="hljs-string">&quot;line&quot;</span>, ax=ax[<span class="hljs-number">1</span>])<br>ax[<span class="hljs-number">1</span>].set_title(<span class="hljs-string">&quot;Best fitness so far&quot;</span>)<br><br>plt.tight_layout()<br>plt.show()<br></code></pre></td></tr></table></figure>
+<p><img src="https://img1.github.io/heuristic_algorithm/ga_1.png" srcset="/img/loading.gif" lazyload /></p>
+<p>这个例子很简单，但它已经把核心流程说明白了：先定义目标函数，再让遗传算法去搜索最优解。</p>
+<h2 id="四把遗传算法用于超参数优化">四、把遗传算法用于超参数优化</h2>
+<p>理解了基本用法之后，就可以把它迁移到模型调参上了。我的做法是把一组超参数编码成一个向量，让遗传算法直接搜索这个向量。这里为了演示，先把问题简化为“搜索多层感知机每一层的神经元数量”。</p>
+<h3 id="读取数据并划分数据集">1. 读取数据并划分数据集</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><br><br>data_path = <span class="hljs-string">r&quot;data.xlsx&quot;</span><br>data = pd.read_excel(data_path, header=<span class="hljs-literal">None</span>)<br><br><span class="hljs-comment"># 按列归一化，避免不同特征量纲差异过大</span><br>normalized_data = (data - data.<span class="hljs-built_in">min</span>()) / (data.<span class="hljs-built_in">max</span>() - data.<span class="hljs-built_in">min</span>())<br><br><span class="hljs-comment"># 划分训练集和验证集</span><br>train_data, val_data = train_test_split(<br>    normalized_data,<br>    test_size=<span class="hljs-number">0.2</span>,<br>    random_state=<span class="hljs-number">42</span>,<br>)<br></code></pre></td></tr></table></figure>
+<h3 id="封装数据集">2. 封装数据集</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> paddle.io <span class="hljs-keyword">import</span> Dataset, DataLoader<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyDataset</span>(<span class="hljs-title class_ inherited__">Dataset</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, data_frame</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        <span class="hljs-variable language_">self</span>.features = data_frame.iloc[:, :-<span class="hljs-number">1</span>].values.astype(<span class="hljs-string">&quot;float32&quot;</span>)<br>        <span class="hljs-variable language_">self</span>.labels = data_frame.iloc[:, -<span class="hljs-number">1</span>].values.astype(<span class="hljs-string">&quot;float32&quot;</span>)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getitem__</span>(<span class="hljs-params">self, index</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.features[index], <span class="hljs-variable language_">self</span>.labels[index]<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__len__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(<span class="hljs-variable language_">self</span>.features)<br><br><br>train_dataset = MyDataset(train_data)<br>val_dataset = MyDataset(val_data)<br><br>train_loader = DataLoader(train_dataset, batch_size=<span class="hljs-number">32</span>, shuffle=<span class="hljs-literal">True</span>)<br>val_loader = DataLoader(val_dataset, batch_size=<span class="hljs-number">32</span>, shuffle=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="定义回归模型">3. 定义回归模型</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> paddle<br><br><br>input_dim = train_data.shape[<span class="hljs-number">1</span>] - <span class="hljs-number">1</span><br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Regressor</span>(paddle.nn.Layer):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, hidden_nodes</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        <span class="hljs-variable language_">self</span>.fc1 = paddle.nn.Linear(input_dim, hidden_nodes[<span class="hljs-number">0</span>])<br>        <span class="hljs-variable language_">self</span>.fc2 = paddle.nn.Linear(hidden_nodes[<span class="hljs-number">0</span>], hidden_nodes[<span class="hljs-number">1</span>])<br>        <span class="hljs-variable language_">self</span>.fc3 = paddle.nn.Linear(hidden_nodes[<span class="hljs-number">1</span>], hidden_nodes[<span class="hljs-number">2</span>])<br>        <span class="hljs-variable language_">self</span>.fc4 = paddle.nn.Linear(hidden_nodes[<span class="hljs-number">2</span>], hidden_nodes[<span class="hljs-number">3</span>])<br>        <span class="hljs-variable language_">self</span>.fc5 = paddle.nn.Linear(hidden_nodes[<span class="hljs-number">3</span>], hidden_nodes[<span class="hljs-number">4</span>])<br>        <span class="hljs-variable language_">self</span>.fc6 = paddle.nn.Linear(hidden_nodes[<span class="hljs-number">4</span>], <span class="hljs-number">1</span>)<br>        <span class="hljs-variable language_">self</span>.relu = paddle.nn.ReLU()<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, inputs</span>):<br>        x = <span class="hljs-variable language_">self</span>.relu(<span class="hljs-variable language_">self</span>.fc1(inputs))<br>        x = <span class="hljs-variable language_">self</span>.relu(<span class="hljs-variable language_">self</span>.fc2(x))<br>        x = <span class="hljs-variable language_">self</span>.relu(<span class="hljs-variable language_">self</span>.fc3(x))<br>        x = <span class="hljs-variable language_">self</span>.relu(<span class="hljs-variable language_">self</span>.fc4(x))<br>        x = <span class="hljs-variable language_">self</span>.relu(<span class="hljs-variable language_">self</span>.fc5(x))<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.fc6(x)<br></code></pre></td></tr></table></figure>
+<h3 id="定义适应度函数">4. 定义适应度函数</h3>
+<p>适应度函数是遗传算法的核心。这里我直接用验证集最后一个 epoch
+的损失作为目标，损失越小，说明这组超参数越好。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sko.GA <span class="hljs-keyword">import</span> GA<br><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">LossCallback</span>(paddle.callbacks.Callback):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-built_in">super</span>().__init__()<br>        <span class="hljs-variable language_">self</span>.val_losses = []<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">on_eval_end</span>(<span class="hljs-params">self, logs=<span class="hljs-literal">None</span></span>):<br>        logs = logs <span class="hljs-keyword">or</span> &#123;&#125;<br>        <span class="hljs-variable language_">self</span>.val_losses.append(logs.get(<span class="hljs-string">&quot;loss&quot;</span>))<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">loss_func</span>(<span class="hljs-params">params</span>):<br>    <span class="hljs-comment"># 把遗传算法生成的连续变量转成整数，作为每层神经元数量</span><br>    hidden_nodes = [<span class="hljs-built_in">max</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">int</span>(x)) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> params]<br><br>    model = paddle.Model(Regressor(hidden_nodes))<br>    model.prepare(<br>        paddle.optimizer.Adam(learning_rate=<span class="hljs-number">0.01</span>, parameters=model.parameters()),<br>        paddle.nn.MSELoss(),<br>    )<br><br>    loss_log = LossCallback()<br>    model.fit(<br>        train_loader,<br>        val_loader,<br>        epochs=<span class="hljs-number">300</span>,<br>        verbose=<span class="hljs-number">0</span>,<br>        callbacks=[loss_log],<br>    )<br><br>    <span class="hljs-comment"># 返回最后一次验证损失，作为优化目标</span><br>    <span class="hljs-keyword">return</span> loss_log.val_losses[-<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]<br></code></pre></td></tr></table></figure>
+<h3 id="开始搜索超参数">5. 开始搜索超参数</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python">ga = GA(<br>    func=loss_func,<br>    n_dim=<span class="hljs-number">5</span>,<br>    size_pop=<span class="hljs-number">4</span>,<br>    max_iter=<span class="hljs-number">5</span>,<br>    prob_mut=<span class="hljs-number">0.15</span>,<br>    lb=[<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>],<br>    ub=[<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>],<br>    precision=<span class="hljs-number">1</span>,<br>)<br><br>best_x, best_y = ga.run()<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;best_x:&quot;</span>, best_x)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;best_y:&quot;</span>, best_y)<br></code></pre></td></tr></table></figure>
+<p>搜索完成后，就可以把 <code>best_x</code>
+代入模型，按这组超参数重新训练，再比较最终表现。</p>
+<h2 id="五一些实践体会">五、一些实践体会</h2>
+<p>遗传算法不是万能的，但它很适合这种“搜索空间大、人工调参成本高、目标函数又能直接评估”的场景。对我来说，它最大的价值不是一定能找到“绝对最优”，而是能先把一组比较靠谱的参数组合筛出来，减少大量重复试错。</p>
+<p>另外，超参数优化时要注意两点：</p>
+<ul>
+<li>目标函数计算成本会比较高，因为每次评估都要训练模型。</li>
+<li>不要把搜索空间设得过于宽泛，否则迭代次数有限时很难真正收敛到有意义的区域。</li>
+</ul>
+<p>后来我也看了其他超参数优化方案，比如 <a
+target="_blank" rel="noopener" href="https://github.com/microsoft/nni">NNI</a>。它也是一个不错的选择，只是当时比赛时间比较紧，就没有继续展开尝试了。</p>
+<h2 id="六总结">六、总结</h2>
+<p>超参数调优不应该只靠手感。只要目标函数定义清楚，遗传算法这类启发式搜索方法就能把原本很费人工的过程自动化掉。</p>
+<p>对于这个光谱反演任务，遗传算法做了两件事：</p>
+<ul>
+<li>把调参过程标准化。</li>
+<li>让我更系统地理解模型结构和验证集表现之间的关系。</li>
+</ul>
+<p>后面如果再遇到类似问题，我会优先考虑先把搜索空间设计好，再让算法去跑，而不是一开始就靠经验盲调。</p>
 
                 
               </div>
@@ -575,6 +659,38 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/" class="print-no-link">#遗传算法</a>
+      
+        <a href="/tags/%E8%B6%85%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96/" class="print-no-link">#超参数优化</a>
+      
+        <a href="/tags/scikit-opt/" class="print-no-link">#scikit-opt</a>
+      
+    </div>
   
 </div>
 
@@ -624,6 +740,29 @@
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/links/gf-competition-waterbody-solution.html" title="高分对地观测比赛水体赛道-实现方案分享">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">高分对地观测比赛水体赛道-实现方案分享</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/links/spectral-data-processing-kernel-regression-smoothing.html" title="光谱数据处理：核回归平滑">
+                        <span class="hidden-mobile">光谱数据处理：核回归平滑</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
