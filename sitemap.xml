@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://bintodo.top/links/from-big-model-to-remote-sensing-ai.html</loc>
+    
+    <lastmod>2026-05-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://bintodo.top/links/optimize-network-hyperparameters-with-genetic-algorithm.html</loc>
     
     <lastmod>2026-04-17</lastmod>
@@ -364,7 +373,7 @@
 
   <url>
     <loc>https://bintodo.top/</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
