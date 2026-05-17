@@ -1,0 +1,1938 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遥感/GIS/AI科研工程师 - 个人简历</title>
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP 动画库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- ECharts 图表库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <!-- Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS 滚动动画库 -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#0a192f',
+                            light: '#112240',
+                            dark: '#020c1b'
+                        },
+                        accent: {
+                            DEFAULT: '#64ffda',
+                            light: '#a8fff1',
+                            dark: '#17c3b2'
+                        },
+                        secondary: {
+                            DEFAULT: '#8892b0',
+                            light: '#ccd6f6',
+                            dark: '#495670'
+                        },
+                        glow: {
+                            DEFAULT: '0 0 10px rgba(100, 255, 218, 0.5)',
+                            strong: '0 0 20px rgba(100, 255, 218, 0.7)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    boxShadow: {
+                        'glow': '0 0 15px rgba(100, 255, 218, 0.3)',
+                        'glow-strong': '0 0 25px rgba(100, 255, 218, 0.5)'
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a192f;
+            color: #ccd6f6;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #64ffda, #17c3b2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card {
+            background: rgba(17, 34, 64, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+            border-color: rgba(100, 255, 218, 0.3);
+        }
+        
+        .timeline-item {
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, #64ffda, rgba(100, 255, 218, 0.1));
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -9px;
+            top: 24px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0a192f;
+            border: 2px solid #64ffda;
+            z-index: 1;
+        }
+        
+        .skill-tag {
+            background: rgba(100, 255, 218, 0.1);
+            color: #64ffda;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-tag:hover {
+            background: rgba(100, 255, 218, 0.2);
+            box-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+        }
+        
+        .project-card {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-thumb {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.82;
+            transform: scale(1.02);
+        }
+
+        .project-thumb::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 25, 47, 0.92), rgba(10, 25, 47, 0.18));
+            pointer-events: none;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(100, 255, 218, 0) 0%,
+                rgba(100, 255, 218, 0.1) 50%,
+                rgba(100, 255, 218, 0) 100%
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+        
+        .project-card:hover::before {
+            animation: shine 1.5s;
+            opacity: 1;
+        }
+        
+        @keyframes shine {
+            0% {
+                left: -100%;
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.1;
+            }
+            100% {
+                left: 100%;
+                opacity: 0;
+            }
+        }
+        
+        .glow-border {
+            position: relative;
+        }
+        
+        .glow-border::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(45deg, #64ffda, #17c3b2, #64ffda);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        
+        /* 粒子背景 */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        /* 地球网格背景 */
+        .earth-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: 
+                radial-gradient(circle at center, transparent 20%, rgba(100, 255, 218, 0.03) 20%, rgba(100, 255, 218, 0.03) 21%, transparent 21%, transparent 22%, rgba(100, 255, 218, 0.03) 22%, rgba(100, 255, 218, 0.03) 23%, transparent 23%, transparent 24%, rgba(100, 255, 218, 0.03) 24%, rgba(100, 255, 218, 0.03) 25%, transparent 25%),
+                linear-gradient(to right, rgba(100, 255, 218, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(100, 255, 218, 0.03) 1px, transparent 1px);
+            background-size: 100% 100%, 50px 50px, 50px 50px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        /* 滚动进度条 */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 3px;
+            background: transparent;
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 3px;
+            background: linear-gradient(90deg, #64ffda, #17c3b2);
+            width: 0%;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .timeline-item::before {
+                left: 20px;
+            }
+            
+            .timeline-dot {
+                left: 11px;
+            }
+        }
+        
+        /* 打字机效果 */
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid #64ffda;
+            white-space: normal;
+            margin: 0 auto;
+            display: inline-block;
+            animation: typing 1.2s ease-out, blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #64ffda }
+        }
+        
+        /* 鼠标跟随光效 */
+        .cursor-glow {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.3) 0%, rgba(100, 255, 218, 0) 70%);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, opacity 0.2s;
+            mix-blend-mode: screen;
+        }
+        
+        /* 数据流动画 */
+        .data-flow {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, #64ffda, transparent);
+            animation: dataFlow 3s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes dataFlow {
+            0% {
+                height: 0;
+                top: 0;
+            }
+            50% {
+                height: 100px;
+            }
+            100% {
+                height: 0;
+                top: 100%;
+            }
+        }
+
+        /* ========== 花哨新增 ========== */
+
+        /* 1. 彩虹渐变文字动画 */
+        .rainbow-text {
+            background: linear-gradient(90deg, #64ffda, #17c3b2, #b764ff, #ff64b7, #f0c040, #64ffda);
+            background-size: 400% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: rainbowMove 6s linear infinite;
+        }
+        @keyframes rainbowMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
+        }
+
+        /* 2. 霓虹辉光文字 */
+        .neon-glow {
+            text-shadow:
+                0 0 7px rgba(100, 255, 218, 0.6),
+                0 0 10px rgba(100, 255, 218, 0.4),
+                0 0 21px rgba(100, 255, 218, 0.2),
+                0 0 42px rgba(100, 255, 218, 0.1);
+        }
+        .neon-glow-pink {
+            text-shadow:
+                0 0 7px rgba(255, 100, 183, 0.6),
+                0 0 10px rgba(255, 100, 183, 0.4),
+                0 0 21px rgba(255, 100, 183, 0.2);
+        }
+        .neon-glow-purple {
+            text-shadow:
+                0 0 7px rgba(183, 100, 255, 0.6),
+                0 0 10px rgba(183, 100, 255, 0.4),
+                0 0 21px rgba(183, 100, 255, 0.2);
+        }
+
+        /* 3. 浮动彩色光晕背景 */
+        .floating-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.35;
+        }
+        .floating-blob:nth-child(1) {
+            width: 500px; height: 500px;
+            background: rgba(100, 255, 218, 0.12);
+            top: -10%; left: -10%;
+            animation: blobDrift1 30s ease-in-out infinite;
+        }
+        .floating-blob:nth-child(2) {
+            width: 450px; height: 450px;
+            background: rgba(183, 100, 255, 0.10);
+            top: 40%; right: -10%;
+            animation: blobDrift2 35s ease-in-out infinite;
+        }
+        .floating-blob:nth-child(3) {
+            width: 400px; height: 400px;
+            background: rgba(255, 100, 183, 0.08);
+            bottom: -10%; left: 20%;
+            animation: blobDrift3 25s ease-in-out infinite;
+        }
+        .floating-blob:nth-child(4) {
+            width: 350px; height: 350px;
+            background: rgba(240, 192, 64, 0.06);
+            top: 60%; left: -5%;
+            animation: blobDrift4 28s ease-in-out infinite;
+        }
+        @keyframes blobDrift1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(150px, 120px) scale(1.3); }
+            50% { transform: translate(-50px, 250px) scale(0.9); }
+            75% { transform: translate(100px, 80px) scale(1.15); }
+        }
+        @keyframes blobDrift2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(-120px, -80px) scale(1.2); }
+            50% { transform: translate(60px, -180px) scale(0.85); }
+            75% { transform: translate(-80px, -40px) scale(1.1); }
+        }
+        @keyframes blobDrift3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, -150px) scale(1.25); }
+            66% { transform: translate(-80px, -50px) scale(0.9); }
+        }
+        @keyframes blobDrift4 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-100px, 100px) scale(1.15); }
+            66% { transform: translate(50px, -80px) scale(0.9); }
+        }
+
+        /* 4. 固定星空粒子背景 */
+        .stars-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 5. 卡片 3D 悬浮 */
+        .tilt-card {
+            transition: transform 0.4s cubic-bezier(.03,.98,.52,.99);
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        /* 6. 鼠标拖尾闪烁粒子 */
+        .cursor-sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            border-radius: 50%;
+            animation: sparkleFade 0.9s ease-out forwards;
+            mix-blend-mode: screen;
+        }
+        @keyframes sparkleFade {
+            0%   { opacity: 1; transform: scale(1) translateY(0); }
+            100% { opacity: 0; transform: scale(0) translateY(-60px); }
+        }
+
+        /* 7. 数字滚动计数 */
+        .count-up {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #64ffda 0%, #b764ff 50%, #ff64b7 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            line-height: 1.2;
+        }
+        .count-label {
+            color: #8892b0;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* 8. 滚动技术条 */
+        .tech-marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            width: 100%;
+            padding: 1.2rem 0;
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+        .tech-marquee-inner {
+            display: inline-flex;
+            animation: marqueeScroll 40s linear infinite;
+            gap: 1.5rem;
+        }
+        .tech-marquee-inner span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            background: rgba(100, 255, 218, 0.06);
+            border: 1px solid rgba(100, 255, 218, 0.15);
+            border-radius: 2rem;
+            color: #ccd6f6;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .tech-marquee-inner span:hover {
+            background: rgba(100, 255, 218, 0.15);
+            border-color: #64ffda;
+            color: #64ffda;
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+        }
+        @keyframes marqueeScroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* 9. 脉冲光环 */
+        .pulse-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid rgba(100, 255, 218, 0.3);
+            animation: pulseRing 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            pointer-events: none;
+        }
+        @keyframes pulseRing {
+            0%   { transform: scale(0.8); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        /* 10. 渐变色边框动画 */
+        .gradient-border-card {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        .gradient-border-card::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: conic-gradient(
+                #64ffda, #17c3b2, #b764ff, #ff64b7, #f0c040, #64ffda
+            );
+            border-radius: inherit;
+            z-index: -1;
+            animation: conicSpin 4s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .gradient-border-card:hover::before {
+            opacity: 1;
+        }
+        .gradient-border-card::after {
+            content: '';
+            position: absolute;
+            top: 2px; left: 2px; right: 2px; bottom: 2px;
+            background: #0a192f;
+            border-radius: inherit;
+            z-index: -1;
+        }
+        @keyframes conicSpin {
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 11. 页面入场动画 */
+        .page-enter {
+            animation: pageFadeIn 1.2s ease-out forwards;
+        }
+        @keyframes pageFadeIn {
+            0%   { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 12. 多彩 skill-tag 变体 */
+        .skill-tag.rainbow-tag:nth-child(6n+1) { border-color: #64ffda; color: #64ffda; }
+        .skill-tag.rainbow-tag:nth-child(6n+2) { border-color: #b764ff; color: #b764ff; }
+        .skill-tag.rainbow-tag:nth-child(6n+3) { border-color: #ff64b7; color: #ff64b7; }
+        .skill-tag.rainbow-tag:nth-child(6n+4) { border-color: #f0c040; color: #f0c040; }
+        .skill-tag.rainbow-tag:nth-child(6n+5) { border-color: #17c3b2; color: #17c3b2; }
+        .skill-tag.rainbow-tag:nth-child(6n+6) { border-color: #ff8c64; color: #ff8c64; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- 浮动彩色光晕背景 -->
+    <div class="floating-blob"></div>
+    <div class="floating-blob"></div>
+    <div class="floating-blob"></div>
+    <div class="floating-blob"></div>
+
+    <!-- 星空粒子画布 -->
+    <canvas class="stars-canvas" id="starsCanvas"></canvas>
+
+    <!-- 滚动进度条 -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- 鼠标跟随光效 -->
+    <div class="cursor-glow hidden md:block"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 w-full bg-primary z-50 backdrop-blur-md bg-opacity-80 border-b border-accent/10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-accent font-mono text-lg font-bold">Abin</a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-secondary-light hover:text-accent transition-colors">关于我</a>
+                <a href="#education" class="text-secondary-light hover:text-accent transition-colors">教育经历</a>
+                <a href="#experience" class="text-secondary-light hover:text-accent transition-colors">工作经历</a>
+                <a href="#projects" class="text-secondary-light hover:text-accent transition-colors">科研项目</a>
+                <a href="#skills" class="text-secondary-light hover:text-accent transition-colors">技能</a>
+            </div>
+            
+            <button class="md:hidden text-accent focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-primary-light border-t border-accent/10" id="mobile-menu">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#about" class="text-secondary-light hover:text-accent transition-colors py-2">关于我</a>
+                <a href="#education" class="text-secondary-light hover:text-accent transition-colors py-2">教育经历</a>
+                <a href="#experience" class="text-secondary-light hover:text-accent transition-colors py-2">工作经历</a>
+                <a href="#projects" class="text-secondary-light hover:text-accent transition-colors py-2">科研项目</a>
+                <a href="#skills" class="text-secondary-light hover:text-accent transition-colors py-2">技能</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero 区域 -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+        <!-- 粒子背景 -->
+        <div id="particles-js"></div>
+        
+        <!-- 地球网格背景 -->
+        <div class="earth-grid"></div>
+        
+        <!-- 数据流效果 -->
+        <div class="data-flow" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="data-flow" style="left: 20%; animation-delay: 0.5s;"></div>
+        <div class="data-flow" style="left: 30%; animation-delay: 1s;"></div>
+        <div class="data-flow" style="left: 70%; animation-delay: 1.5s;"></div>
+        <div class="data-flow" style="left: 80%; animation-delay: 2s;"></div>
+        <div class="data-flow" style="left: 90%; animation-delay: 2.5s;"></div>
+        
+        <div class="container mx-auto px-4 z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center max-w-7xl mx-auto">
+                <div class="max-w-3xl mx-auto lg:mx-0 text-center lg:text-left" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="inline-block mb-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-mono">
+                        Abin · 遥感工程师
+                    </div>
+                    
+                    <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-4 mt-6">
+                        <span class="text-white neon-glow">Abin</span>
+                        <span class="gradient-text rainbow-text"> · 遥感工程师</span>
+                    </h1>
+                    
+                    <p class="text-lg md:text-xl text-secondary-light mb-8 max-w-xl mx-auto lg:mx-0 typewriter">
+                        专注于遥感数据处理、GIS空间分析与AI模型构建的科研工作者
+                    </p>
+                    
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-10">
+                        <a href="#contact" class="px-7 py-3 rounded-md bg-accent/10 border border-accent text-accent hover:bg-accent/20 transition-all hover:shadow-glow">
+                            <i class="fas fa-envelope mr-2"></i> 联系我
+                        </a>
+                    </div>
+                    
+                    <div class="flex justify-center lg:justify-start">
+                        <a href="https://bintodo.top" target="_blank" class="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-primary-light/70 px-4 py-2 text-secondary-light hover:text-accent hover:border-accent/40 hover:bg-accent/10 transition-all backdrop-blur-sm">
+                            <i class="fas fa-globe text-accent"></i>
+                            <span class="text-sm font-mono">https://bintodo.top</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative max-w-2xl mx-auto w-full" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="absolute -inset-8 bg-accent/10 blur-3xl rounded-full"></div>
+                    <div class="relative overflow-hidden rounded-[2rem] border border-accent/20 bg-primary-light shadow-2xl">
+                        <div class="aspect-[4/5] md:aspect-[5/6] relative">
+                            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.HdW4CtNH9iS_6JBSnpzfMgHaFj%3Fpid%3DApi&f=1&ipt=958d7159d307f9cda745f68b76affd8c6d0c4bb880778bf1ad09e86167625c48&ipo=images" alt="卫星遥感视角" class="w-full h-full object-cover object-center">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-primary via-primary/35 to-transparent"></div>
+                            <div class="absolute inset-x-0 bottom-0 p-6 md:p-8">
+                                <div class="inline-flex items-center gap-2 rounded-full border border-accent/20 bg-primary/70 px-3 py-1 text-xs font-mono text-accent backdrop-blur-sm">
+                                    <span class="h-2 w-2 rounded-full bg-accent"></span>
+                                    REMOTE SENSING / GIS / AI
+                                </div>
+                                <h3 class="mt-4 text-2xl md:text-3xl font-semibold text-white">从影像到信息</h3>
+                                <p class="mt-2 max-w-md text-sm md:text-base text-secondary-light">把多源遥感数据转成可以解释、可以落地的空间结果。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 grid grid-cols-3 gap-3">
+                        <div class="rounded-2xl border border-accent/10 bg-primary-light/80 px-4 py-3 text-center backdrop-blur-sm">
+                            <div class="text-accent font-semibold text-base">GIS</div>
+                            <div class="text-xs text-secondary-light mt-1">空间分析</div>
+                        </div>
+                        <div class="rounded-2xl border border-accent/10 bg-primary-light/80 px-4 py-3 text-center backdrop-blur-sm">
+                            <div class="text-accent font-semibold text-base">RS</div>
+                            <div class="text-xs text-secondary-light mt-1">遥感处理</div>
+                        </div>
+                        <div class="rounded-2xl border border-accent/10 bg-primary-light/80 px-4 py-3 text-center backdrop-blur-sm">
+                            <div class="text-accent font-semibold text-base">AI</div>
+                            <div class="text-xs text-secondary-light mt-1">模型反演</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <!-- 向下滚动指示 -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-accent">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about" class="py-20 relative">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span class="gradient-text">// </span>关于我
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="card rounded-lg p-6 glow-border" data-aos="fade-right" data-aos-duration="800">
+                    <h3 class="text-xl font-semibold mb-4 text-white flex items-center">
+                        <i class="fas fa-user-circle text-accent mr-3"></i> 基本信息
+                    </h3>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <span class="w-24 text-secondary">姓名：</span>
+                            <span class="text-white">abin</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-secondary">出生年月：</span>
+                            <span class="text-white">1999.07</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-secondary">性别：</span>
+                            <span class="text-white">男</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-secondary">籍贯：</span>
+                            <span class="text-white">湖南耒阳</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-secondary">学历：</span>
+                            <span class="text-white">硕士研究生</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-secondary">专业：</span>
+                            <span class="text-white">测绘工程</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-secondary">博客：</span>
+                            <a href="https://bintodo.top" target="_blank" class="text-accent hover:underline">
+                                https://bintodo.top
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card rounded-lg p-6 glow-border" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+                    <h3 class="text-xl font-semibold mb-4 text-white flex items-center">
+                        <i class="fas fa-comment-alt text-accent mr-3"></i> 自我评价
+                    </h3>
+                    
+                    <div class="relative pl-5 border-l-2 border-accent/30">
+                        <p class="text-secondary-light italic">
+                            本人性格开朗，有责任心，学习能力强，易于接受新事物，能够较为快速寻找针对性的方法对问题进行分析和处理，具备较强的动手能力和团队合作意识。
+                        </p>
+                        
+                        <div class="mt-6 grid grid-cols-2 gap-3">
+                            <div class="flex items-center">
+                                <i class="fas fa-brain text-accent mr-2"></i>
+                                <span>学习能力</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-users text-accent mr-2"></i>
+                                <span>团队协作</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-search text-accent mr-2"></i>
+                                <span>问题分析</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-flask text-accent mr-2"></i>
+                                <span>科研能力</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 card rounded-lg p-6 glow-border max-w-5xl mx-auto" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                <h3 class="text-xl font-semibold mb-4 text-white flex items-center">
+                    <i class="fas fa-heart text-accent mr-3"></i> 兴趣爱好
+                </h3>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 justify-center">
+                    <div class="rounded-2xl border border-accent/10 bg-primary-light/80 p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-accent/10 group">
+                        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 border border-accent/20">
+                            <i class="fas fa-table-tennis text-xl text-accent group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <div class="text-white font-medium">乒乓球</div>
+                        <div class="mt-1 text-xs text-secondary-light">反应与节奏</div>
+                    </div>
+                    <div class="rounded-2xl border border-accent/10 bg-primary-light/80 p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-accent/10 group">
+                        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 border border-accent/20">
+                            <i class="fas fa-swimmer text-xl text-accent group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <div class="text-white font-medium">游泳</div>
+                        <div class="mt-1 text-xs text-secondary-light">放松与耐力</div>
+                    </div>
+                    <div class="rounded-2xl border border-accent/10 bg-primary-light/80 p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-accent/10 group">
+                        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 border border-accent/20">
+                            <svg viewBox="0 0 24 24" class="w-6 h-6 text-accent group-hover:scale-110 transition-transform" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 3c2.5 2 4.2 4.8 5 8.2L12 18l-5-6.8C7.8 7.8 9.5 5 12 3Z" />
+                                <path d="M12 18v3" />
+                                <path d="M9.5 11.2l-3.4 2.1" />
+                                <path d="M14.5 11.2l3.4 2.1" />
+                                <path d="M11.2 8.2l-2.6 1.1" />
+                                <path d="M12.8 8.2l2.6 1.1" />
+                            </svg>
+                        </div>
+                        <div class="text-white font-medium">羽毛球</div>
+                        <div class="mt-1 text-xs text-secondary-light">速度与协调</div>
+                    </div>
+                    <div class="rounded-2xl border border-accent/10 bg-primary-light/80 p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-accent/10 group">
+                        <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 border border-accent/20">
+                            <i class="fas fa-mountain text-xl text-accent group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <div class="text-white font-medium">爬山</div>
+                        <div class="mt-1 text-xs text-secondary-light">风景与步伐</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 教育经历 -->
+    <section id="education" class="py-20 relative bg-primary-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span class="gradient-text">// </span>教育经历
+            </h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="relative pl-8 md:pl-12">
+                    <!-- 时间轴线 -->
+                    <div class="absolute left-0 top-0 h-full w-0.5 bg-gradient-to-b from-accent to-accent/10"></div>
+                    
+                    <!-- 硕士教育 -->
+                    <div class="timeline-item pl-8 mb-12 relative" data-aos="fade-up" data-aos-duration="800">
+                        <div class="timeline-dot"></div>
+                        
+                        <div class="card rounded-lg p-6 glow-border">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                <h3 class="text-xl font-semibold text-white">湖南科技大学</h3>
+                                <span class="text-accent font-mono text-sm">2022.09 - 2025.06</span>
+                            </div>
+                            
+                            <div class="text-secondary-light mb-3">测绘工程 · 专业硕士</div>
+                            
+                            <div>
+                                <h4 class="text-white mb-2 flex items-center">
+                                    <i class="fas fa-book text-accent mr-2"></i> 主修课程
+                                </h4>
+                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-secondary-light">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        现代地图学与地图制图
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        环境遥感
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        现代测量平差理论与方法
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        变形监测理论与方法
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 本科教育 -->
+                    <div class="timeline-item pl-8 relative" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                        <div class="timeline-dot"></div>
+                        
+                        <div class="card rounded-lg p-6 glow-border">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                <h3 class="text-xl font-semibold text-white">湖南科技大学</h3>
+                                <span class="text-accent font-mono text-sm">2017.09 - 2021.06</span>
+                            </div>
+                            
+                            <div class="text-secondary-light mb-3">测绘工程 · 工学学士</div>
+                            
+                            <div>
+                                <h4 class="text-white mb-2 flex items-center">
+                                    <i class="fas fa-book text-accent mr-2"></i> 主修课程
+                                </h4>
+                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-secondary-light">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        测量学
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        数字成图原理与方法
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        遥感原理与应用
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        摄影测量学
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        误差理论与测量平差基础
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 工作经历 -->
+    <section id="experience" class="py-20 relative">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span class="gradient-text">// </span>工作经历
+            </h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="relative pl-8 md:pl-12">
+                    <!-- 时间轴线 -->
+                    <div class="absolute left-0 top-0 h-full w-0.5 bg-gradient-to-b from-accent to-accent/10"></div>
+                    
+                    <!-- 中科院工作 -->
+                    <div class="timeline-item pl-8 mb-12 relative" data-aos="fade-up" data-aos-duration="800">
+                        <div class="timeline-dot"></div>
+                        
+                        <div class="card rounded-lg p-6 glow-border">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                <h3 class="text-xl font-semibold text-white">中国科学院地球环境研究所</h3>
+                                <span class="text-accent font-mono text-sm">2025.12 – 至今</span>
+                            </div>
+                            
+                            <div class="text-secondary-light mb-3">科研助理</div>
+                            
+                            <div>
+                                <h4 class="text-white mb-2 flex items-center">
+                                    <i class="fas fa-briefcase text-accent mr-2"></i> 工作内容
+                                </h4>
+                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-secondary-light">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        土壤有机碳数字制图研究
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        多源遥感数据处理
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        空间反演模型构建
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        数字制图与空间分析
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        项目报告撰写
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 北京吉威工作 -->
+                    <div class="timeline-item pl-8 relative" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                        <div class="timeline-dot"></div>
+                        
+                        <div class="card rounded-lg p-6 glow-border">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                                <h3 class="text-xl font-semibold text-white">北京吉威数源信息技术有限公司</h3>
+                                <span class="text-accent font-mono text-sm">2025.09 – 2025.12</span>
+                            </div>
+                            
+                            <div class="text-secondary-light mb-3">技术支持</div>
+                            
+                            <div>
+                                <h4 class="text-white mb-2 flex items-center">
+                                    <i class="fas fa-briefcase text-accent mr-2"></i> 工作内容
+                                </h4>
+                                <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-secondary-light">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        广东林业遥感监测
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        红树林变化检测
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        病虫害识别
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        软件部署与实施
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-accent/70 mr-2 text-sm"></i>
+                                        客户培训与技术支持
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 科研项目 -->
+    <section id="projects" class="py-20 relative bg-primary-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span class="gradient-text">// </span>科研项目
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- 项目1 -->
+                <div class="project-card card rounded-lg overflow-hidden" data-aos="fade-up" data-aos-duration="800">
+                    <div class="project-thumb h-40 bg-gradient-to-br from-primary to-primary-light relative overflow-hidden">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fq%3DPoyang%2BLake%2BChina%2Csatellite%2Bimage%26pid%3DApi%26mkt%3Den-US%26cc%3DUS%26setlang%3Den%26adlt%3Dmoderate%26t%3D1" alt="鄱阳湖卫星图像">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-water text-5xl text-accent/50 animate-float"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-primary to-transparent">
+                            <span class="text-xs text-accent font-mono">HBKT-2022018</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">基于多源遥感的东洞庭水环境参数模拟与应用</h3>
+                        
+                        <div class="mb-4">
+                            <h4 class="text-sm text-secondary mb-2">技术栈</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag px-2 py-1 rounded text-xs">Python</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">GDAL</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">ArcGIS</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">scikit-learn</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">Landsat</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">Sentinel</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-sm text-secondary mb-2">项目亮点</h4>
+                            <ul class="text-sm text-secondary-light space-y-1">
+                                <li class="flex items-center">
+                                    <i class="fas fa-star text-accent/70 mr-2 text-xs"></i>
+                                    多源遥感预处理
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-star text-accent/70 mr-2 text-xs"></i>
+                                    水质参数反演
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-star text-accent/70 mr-2 text-xs"></i>
+                                    随机森林建模
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-star text-accent/70 mr-2 text-xs"></i>
+                                    空间分析制图
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 项目2 -->
+                <div class="project-card card rounded-lg overflow-hidden" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="project-thumb h-40 bg-gradient-to-br from-primary to-primary-light relative overflow-hidden">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.4zjVVjtSrswrtYpca--ltQHaG7%3Fpid%3DApi&f=1&ipt=06bb48e539086d69f37da88ba7c4605237dea59e4e0e183d1720dab72f4bf420&ipo=images" alt="水质遥感监测图像">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-5xl text-accent/50 animate-float"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-primary to-transparent">
+                            <span class="text-xs text-accent font-mono">ZX2335 / S202310534185</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">东洞庭湖水体磷浓度遥感反演研究</h3>
+                        
+                        <div class="mb-4">
+                            <h4 class="text-sm text-secondary mb-2">技术栈</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag px-2 py-1 rounded text-xs">Pandas</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">NumPy</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">XGBoost</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">ArcGIS</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">ENVI</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-sm text-secondary mb-2">项目亮点</h4>
+                            <ul class="text-sm text-secondary-light space-y-1">
+                                <li class="flex items-center">
+                                    <i class="fas fa-star text-accent/70 mr-2 text-xs"></i>
+                                    特征工程
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-star text-accent/70 mr-2 text-xs"></i>
+                                    机器学习建模
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-star text-accent/70 mr-2 text-xs"></i>
+                                    精度优化
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-star text-accent/70 mr-2 text-xs"></i>
+                                    专题地图制作
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 项目3 -->
+                <div class="project-card card rounded-lg overflow-hidden" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                    <div class="project-thumb h-40 bg-gradient-to-br from-primary to-primary-light relative overflow-hidden">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.ESLzjmeM9FYAWJWYLk69-AHaE_%3Fr%3D0%26pid%3DApi&f=1&ipt=15ccda31f041e30c3f0d5cfe35efeef994ae0b5557aa954e2e545e2a16f2b8bd&ipo=images" alt="土地覆盖变化遥感图像">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-map-marked-alt text-5xl text-accent/50 animate-float"></i>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-primary to-transparent">
+                            <span class="text-xs text-accent font-mono">S20191053404</span>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">湖南省涟源市矿区生态环境遥感调查与监测</h3>
+                        
+                        <div class="mb-4">
+                            <h4 class="text-sm text-secondary mb-2">技术栈</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="skill-tag px-2 py-1 rounded text-xs">Landsat</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">ArcGIS</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">GeoSOS</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">LUCC</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-sm text-secondary mb-2">项目亮点</h4>
+                            <ul class="text-sm text-secondary-light space-y-1">
+                                <li class="flex items-center">
+                                    <i class="fas fa-star text-accent/70 mr-2 text-xs"></i>
+                                    NDVI时序分析
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-star text-accent/70 mr-2 text-xs"></i>
+                                    土地利用变化分析
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-star text-accent/70 mr-2 text-xs"></i>
+                                    生态敏感性评估
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-star text-accent/70 mr-2 text-xs"></i>
+                                    CA土地模拟
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 竞赛经历 -->
+    <section id="competitions" class="py-20 relative">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span class="gradient-text">// </span>竞赛经历
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                <!-- 竞赛1 -->
+                <div class="card rounded-lg p-6 glow-border" data-aos="fade-up" data-aos-duration="800">
+                    <div class="project-thumb h-32 rounded-xl mb-4 bg-gradient-to-br from-primary to-primary-light relative overflow-hidden">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.p1Ii_kE4Y14w2JhccRXD8wHaLH%3Fr%3D0%26pid%3DApi&f=1&ipt=d4533756289d541182a880fd6ffc4de9414e52ffb767d2f9cfd86b77a8e0080f&ipo=images" alt="竞赛获奖展示图像">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-transparent"></div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-award text-2xl text-accent"></i>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center mb-1">
+                                <h3 class="text-lg font-semibold text-white">中国高校地理科学展示大赛</h3>
+                                <span class="ml-2 px-2 py-0.5 bg-accent/10 text-accent text-xs rounded">三等奖</span>
+                            </div>
+
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                <span class="skill-tag px-2 py-1 rounded text-xs">深度学习</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">HRNet</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">变化检测</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 竞赛2 -->
+                <div class="card rounded-lg p-6 glow-border" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <div class="project-thumb h-32 rounded-xl mb-4 bg-gradient-to-br from-primary to-primary-light relative overflow-hidden">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.BvEZa5MXaBjfl1cWxhKwdQHaEJ%3Fr%3D0%26pid%3DApi&f=1&ipt=55caf2dffc01ef53d455fc2062e80d102087be3f4a1313898ee16705d4a25598&ipo=images" alt="高分对地观测竞赛图像">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-transparent"></div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-award text-2xl text-accent"></i>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center mb-1">
+                                <h3 class="text-lg font-semibold text-white">高分对地观测应用技术创新大赛</h3>
+                                <span class="ml-2 px-2 py-0.5 bg-accent/10 text-accent text-xs rounded">培育奖</span>
+                            </div>
+
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                <span class="skill-tag px-2 py-1 rounded text-xs">STANet</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">GF6</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">变化检测</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 竞赛3 -->
+                <div class="card rounded-lg p-6 glow-border" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="project-thumb h-32 rounded-xl mb-4 bg-gradient-to-br from-primary to-primary-light relative overflow-hidden">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.y-9gRI1_XIou6R_20vdr-AHaE8%3Fr%3D0%26pid%3DApi&f=1&ipt=7e46795aaa07eed857b753ee7e2dccc48111258d79e7625a7f29cb59ec6db65c&ipo=images" alt="吉林一号变化检测图像">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-transparent"></div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-award text-2xl text-accent"></i>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center mb-1">
+                                <h3 class="text-lg font-semibold text-white">吉林一号杯变化检测赛道</h3>
+                            </div>
+
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                <span class="skill-tag px-2 py-1 rounded text-xs">深度学习</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">变化检测</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 竞赛4 -->
+                <div class="card rounded-lg p-6 glow-border" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                    <div class="project-thumb h-32 rounded-xl mb-4 bg-gradient-to-br from-primary to-primary-light relative overflow-hidden">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%2Fid%2FOIP.wyCwDEtFIl9TvUcNIcmkLgHaEK%3Fr%3D0%26pid%3DApi&f=1&ipt=45dfd1060a31ccc021a9021513e2e99f05cdcf13313f4e654a220074d59282a6&ipo=images" alt="高分对地观测应用图像">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-transparent"></div>
+                    </div>
+
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-award text-2xl text-accent"></i>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center mb-1">
+                                <h3 class="text-lg font-semibold text-white">第二届高分对地观测应用技术创新大赛</h3>
+                                <span class="ml-2 px-2 py-0.5 bg-accent/10 text-accent text-xs rounded">应用潜力奖</span>
+                            </div>
+
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                <span class="skill-tag px-2 py-1 rounded text-xs">AutoGluon</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">GF6</span>
+                                <span class="skill-tag px-2 py-1 rounded text-xs">变化检测</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 科研成果 -->
+    <section id="achievements" class="py-20 relative bg-primary-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span class="gradient-text">// </span>科研成果
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- 论文 -->
+                <div class="card rounded-lg p-6 glow-border" data-aos="fade-right" data-aos-duration="800">
+                    <div class="project-thumb h-32 rounded-xl mb-4 bg-gradient-to-br from-primary to-primary-light relative overflow-hidden">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.eps_s0etd5bFnAR8p0QkNwHaHa%3Fr%3D0%26pid%3DApi&f=1&ipt=02f4fa6205d8dd0faa1719a0f8e7259d927e615b8748cd7e280635bba70d346e&ipo=images" alt="科研论文图像">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-transparent"></div>
+                    </div>
+
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                        <i class="fas fa-scroll text-accent mr-3"></i> 论文发表
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="p-4 bg-primary rounded-lg border border-accent/20 hover:border-accent/50 transition-colors">
+                            <h4 class="text-white font-medium mb-2">Retrieval of Chlorophyll-a Concentration in Nanyi Lake Using the AutoGluon Framework</h4>
+                            <div class="flex items-center text-sm text-secondary">
+                                <span class="bg-accent/10 text-accent px-2 py-0.5 rounded mr-2">一作</span>
+                                <span>2024</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 软著 -->
+                <div class="card rounded-lg p-6 glow-border" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+                    <div class="project-thumb h-32 rounded-xl mb-4 bg-gradient-to-br from-primary to-primary-light relative overflow-hidden">
+                        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%2Fid%2FOIP.b01X_aFSvwawGH1asCuO6gHaFW%3Fpid%3DApi&f=1&ipt=00e5e6b155d142a5dfde5fbbab4e1578f9e44443e12a57213eb1071941d9761d&ipo=images" alt="软件开发图像">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-transparent"></div>
+                    </div>
+
+                    <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                        <i class="fas fa-code text-accent mr-3"></i> 软件著作权
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="p-4 bg-primary rounded-lg border border-accent/20 hover:border-accent/50 transition-colors">
+                            <h4 class="text-white font-medium mb-2">水质多参数定量遥感监测软件</h4>
+                            <div class="flex items-center text-sm text-secondary">
+                                <span class="bg-accent/10 text-accent px-2 py-0.5 rounded mr-2">一作</span>
+                                <span>2023</span>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 bg-primary rounded-lg border border-accent/20 hover:border-accent/50 transition-colors">
+                            <h4 class="text-white font-medium mb-2">水位智能监测预警软件</h4>
+                            <div class="flex items-center text-sm text-secondary">
+                                <span class="bg-accent/10 text-accent px-2 py-0.5 rounded mr-2">三作</span>
+                                <span>2022</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 滚动技术栈 -->
+    <section class="py-6 relative overflow-hidden bg-primary-light/30">
+        <div class="tech-marquee">
+            <div class="tech-marquee-inner" id="techMarquee">
+                <span><i class="fab fa-python"></i> Python</span>
+                <span><i class="fas fa-satellite"></i> Remote Sensing</span>
+                <span><i class="fas fa-map"></i> ArcGIS</span>
+                <span><i class="fas fa-brain"></i> PyTorch</span>
+                <span><i class="fas fa-globe"></i> GEE</span>
+                <span><i class="fas fa-calculator"></i> MATLAB</span>
+                <span><i class="fas fa-robot"></i> Machine Learning</span>
+                <span><i class="fas fa-database"></i> GDAL</span>
+                <span><i class="fas fa-chart-line"></i> Deep Learning</span>
+                <span><i class="fas fa-cloud"></i> ENVI</span>
+                <span><i class="fas fa-file-alt"></i> LaTeX</span>
+                <span><i class="fas fa-network-wired"></i> SNAP</span>
+                <!-- 重复一份实现无缝滚动 -->
+                <span><i class="fab fa-python"></i> Python</span>
+                <span><i class="fas fa-satellite"></i> Remote Sensing</span>
+                <span><i class="fas fa-map"></i> ArcGIS</span>
+                <span><i class="fas fa-brain"></i> PyTorch</span>
+                <span><i class="fas fa-globe"></i> GEE</span>
+                <span><i class="fas fa-calculator"></i> MATLAB</span>
+                <span><i class="fas fa-robot"></i> Machine Learning</span>
+                <span><i class="fas fa-database"></i> GDAL</span>
+                <span><i class="fas fa-chart-line"></i> Deep Learning</span>
+                <span><i class="fas fa-cloud"></i> ENVI</span>
+                <span><i class="fas fa-file-alt"></i> LaTeX</span>
+                <span><i class="fas fa-network-wired"></i> SNAP</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能图谱 -->
+    <section id="skills" class="py-20 relative">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span class="gradient-text">// </span>技能图谱
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- 雷达图 -->
+                <div class="card rounded-lg p-6 glow-border" data-aos="fade-right" data-aos-duration="800">
+                    <h3 class="text-xl font-semibold text-white mb-4">专业技能评估</h3>
+                    <div id="skillsRadarChart" class="w-full h-80"></div>
+                </div>
+                
+                <!-- 技术栈标签墙 -->
+                <div class="card rounded-lg p-6 glow-border" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+                    <h3 class="text-xl font-semibold text-white mb-4">技术栈</h3>
+                    
+                    <div class="flex flex-wrap gap-3 rainbow-tags">
+                        <div class="skill-tag rainbow-tag px-3 py-2 rounded-md flex items-center cursor-pointer group">
+                            <i class="fas fa-map text-accent mr-2 group-hover:scale-110 transition-transform"></i>
+                            <span>ArcGIS</span>
+                        </div>
+                        <div class="skill-tag px-3 py-2 rounded-md flex items-center cursor-pointer group">
+                            <i class="fas fa-satellite text-accent mr-2 group-hover:scale-110 transition-transform"></i>
+                            <span>ENVI</span>
+                        </div>
+                        <div class="skill-tag px-3 py-2 rounded-md flex items-center cursor-pointer group">
+                            <i class="fas fa-globe text-accent mr-2 group-hover:scale-110 transition-transform"></i>
+                            <span>QGIS</span>
+                        </div>
+                        <div class="skill-tag px-3 py-2 rounded-md flex items-center cursor-pointer group">
+                            <i class="fas fa-network-wired text-accent mr-2 group-hover:scale-110 transition-transform"></i>
+                            <span>SNAP</span>
+                        </div>
+                        <div class="skill-tag px-3 py-2 rounded-md flex items-center cursor-pointer group">
+                            <i class="fab fa-python text-accent mr-2 group-hover:scale-110 transition-transform"></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="skill-tag px-3 py-2 rounded-md flex items-center cursor-pointer group">
+                            <i class="fas fa-calculator text-accent mr-2 group-hover:scale-110 transition-transform"></i>
+                            <span>MATLAB</span>
+                        </div>
+                        <div class="skill-tag px-3 py-2 rounded-md flex items-center cursor-pointer group">
+                            <i class="fas fa-cloud text-accent mr-2 group-hover:scale-110 transition-transform"></i>
+                            <span>GEE</span>
+                        </div>
+                        <div class="skill-tag px-3 py-2 rounded-md flex items-center cursor-pointer group">
+                            <i class="fas fa-brain text-accent mr-2 group-hover:scale-110 transition-transform"></i>
+                            <span>PyTorch</span>
+                        </div>
+                        <div class="skill-tag px-3 py-2 rounded-md flex items-center cursor-pointer group">
+                            <i class="fas fa-robot text-accent mr-2 group-hover:scale-110 transition-transform"></i>
+                            <span>PaddlePaddle</span>
+                        </div>
+                        <div class="skill-tag px-3 py-2 rounded-md flex items-center cursor-pointer group">
+                            <i class="fas fa-file-alt text-accent mr-2 group-hover:scale-110 transition-transform"></i>
+                            <span>LaTeX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 联系我 -->
+    <section id="contact" class="py-20 relative bg-primary-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span class="gradient-text">// </span>联系我
+            </h2>
+            
+            <div class="max-w-4xl mx-auto card rounded-2xl p-8 md:p-10 glow-border" data-aos="fade-up" data-aos-duration="800">
+                <div class="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 items-stretch">
+                    <div class="rounded-2xl border border-accent/10 bg-primary/60 p-6 md:p-8">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                                <i class="fas fa-envelope text-accent text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-white">邮箱联系</h3>
+                                <p class="text-secondary text-sm mt-1">如果你想交流合作、项目咨询或者简单问候，直接发邮件就行。</p>
+                            </div>
+                        </div>
+
+                        <a href="mailto:1871106349@qq.com" class="group inline-flex w-full items-center justify-between rounded-xl border border-accent/20 bg-primary-light/80 px-4 py-4 text-left transition-all hover:border-accent/50 hover:bg-accent/10">
+                            <div>
+                                <div class="text-secondary text-sm mb-1">我的邮箱</div>
+                                <div class="text-white text-lg font-medium group-hover:text-accent transition-colors">1871106349@qq.com</div>
+                            </div>
+                            <i class="fas fa-paper-plane text-accent text-lg"></i>
+                        </a>
+
+                        <div class="mt-5 flex flex-wrap gap-3 text-sm text-secondary-light">
+                            <span class="px-3 py-1 rounded-full bg-accent/10 border border-accent/20">合作交流</span>
+                            <span class="px-3 py-1 rounded-full bg-accent/10 border border-accent/20">项目咨询</span>
+                            <span class="px-3 py-1 rounded-full bg-accent/10 border border-accent/20">技术讨论</span>
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl border border-accent/10 bg-primary/60 p-6 md:p-8 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white mb-4">联系提示</h3>
+                            <p class="text-secondary-light leading-7">
+                                工作日通常会在看到邮件后尽快回复。若是项目合作，请尽量附上你的需求、时间安排和相关背景，方便我快速判断是否能直接对接。
+                            </p>
+                        </div>
+
+                        <div class="mt-8">
+                            <a href="mailto:1871106349@qq.com" class="inline-flex items-center justify-center w-full rounded-md bg-accent/10 border border-accent text-accent hover:bg-accent/20 transition-all py-3">
+                                发送邮件
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer class="py-8 bg-primary border-t border-accent/10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-accent font-mono text-lg font-bold">Abin</div>
+                    <div class="text-secondary text-sm mt-1">© 2026 abin. 保留所有权利.</div>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="https://bintodo.top" target="_blank" class="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center text-secondary-light hover:text-accent hover:bg-accent/10 transition-colors">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                    <a href="mailto:1871106349@qq.com" class="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center text-secondary-light hover:text-accent hover:bg-accent/10 transition-colors">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-accent/10 border border-accent text-accent flex items-center justify-center opacity-0 invisible transition-all z-50 hover:bg-accent/20">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- 粒子背景JS -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // 初始化AOS动画库
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // 初始化粒子背景
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: '#64ffda'
+                    },
+                    shape: {
+                        type: 'circle',
+                        stroke: {
+                            width: 0,
+                            color: '#000000'
+                        }
+                    },
+                    opacity: {
+                        value: 0.2,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 1,
+                            opacity_min: 0.1,
+                            sync: false
+                        }
+                    },
+                    size: {
+                        value: 3,
+                        random: true,
+                        anim: {
+                            enable: true,
+                            speed: 2,
+                            size_min: 0.1,
+                            sync: false
+                        }
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: '#64ffda',
+                        opacity: 0.1,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1,
+                        direction: 'none',
+                        random: true,
+                        straight: false,
+                        out_mode: 'out',
+                        bounce: false,
+                        attract: {
+                            enable: false,
+                            rotateX: 600,
+                            rotateY: 1200
+                        }
+                    }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: 'grab'
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: 'push'
+                        },
+                        resize: true
+                    },
+                    modes: {
+                        grab: {
+                            distance: 140,
+                            line_linked: {
+                                opacity: 0.3
+                            }
+                        },
+                        push: {
+                            particles_nb: 3
+                        }
+                    }
+                },
+                retina_detect: true
+            });
+            
+            // 初始化技能雷达图
+            const radarChart = echarts.init(document.getElementById('skillsRadarChart'));
+            
+            const radarOption = {
+                backgroundColor: 'transparent',
+                color: ['#64ffda'],
+                tooltip: {
+                    trigger: 'item',
+                    backgroundColor: 'rgba(17, 34, 64, 0.9)',
+                    borderColor: '#64ffda',
+                    textStyle: {
+                        color: '#ccd6f6'
+                    }
+                },
+                radar: {
+                    indicator: [
+                        { name: 'Python', max: 100 },
+                        { name: '遥感', max: 100 },
+                        { name: 'GIS', max: 100 },
+                        { name: '深度学习', max: 100 },
+                        { name: '数据分析', max: 100 },
+                        { name: '科研能力', max: 100 }
+                    ],
+                    shape: 'circle',
+                    splitNumber: 4,
+                    axisName: {
+                        color: '#ccd6f6'
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(100, 255, 218, 0.1)'
+                        }
+                    },
+                    splitArea: {
+                        show: true,
+                        areaStyle: {
+                            color: ['rgba(17, 34, 64, 0.2)', 'rgba(17, 34, 64, 0.4)', 'rgba(17, 34, 64, 0.6)', 'rgba(17, 34, 64, 0.8)']
+                        }
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(100, 255, 218, 0.2)'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: '技能评估',
+                        type: 'radar',
+                        data: [
+                            {
+                                value: [90, 95, 92, 85, 88, 90],
+                                name: '技能水平',
+                                areaStyle: {
+                                    color: 'rgba(100, 255, 218, 0.2)'
+                                },
+                                lineStyle: {
+                                    width: 2
+                                },
+                                itemStyle: {
+                                    color: '#64ffda'
+                                }
+                            }
+                        ]
+                    }
+                ]
+            };
+            
+            radarChart.setOption(radarOption);
+            
+            // 窗口大小改变时重新调整图表大小
+            window.addEventListener('resize', function() {
+                radarChart.resize();
+            });
+            
+            // 滚动进度条
+            window.onscroll = function() {
+                // 滚动进度条
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById('progressBar').style.width = scrolled + '%';
+                
+                // 返回顶部按钮显示/隐藏
+                const backToTopButton = document.getElementById('backToTop');
+                if (winScroll > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            };
+            
+            // 返回顶部按钮点击事件
+            const backToTop = document.getElementById('backToTop');
+            if (backToTop) {
+                backToTop.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // 移动端菜单切换
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // 鼠标跟随光效
+            const cursorGlow = document.querySelector('.cursor-glow');
+            document.addEventListener('mousemove', function(e) {
+                if (cursorGlow) {
+                    cursorGlow.style.left = e.clientX + 'px';
+                    cursorGlow.style.top = e.clientY + 'px';
+                }
+            });
+            
+            // 鼠标悬停在链接上时光效变化
+            const links = document.querySelectorAll('a, button');
+            links.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    if (cursorGlow) {
+                        cursorGlow.style.width = '40px';
+                        cursorGlow.style.height = '40px';
+                        cursorGlow.style.opacity = '0.5';
+                    }
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    if (cursorGlow) {
+                        cursorGlow.style.width = '20px';
+                        cursorGlow.style.height = '20px';
+                        cursorGlow.style.opacity = '0.3';
+                    }
+                });
+            });
+
+            /* ========== 花哨 JS 特效 ========== */
+
+            // 1. 彩虹文字
+            document.querySelectorAll('section h2 .gradient-text').forEach(el => {
+                el.classList.add('rainbow-text');
+            });
+
+            // 2. 星空粒子画布
+            (function initStars() {
+                const canvas = document.getElementById('starsCanvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let stars = [];
+
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+
+                for (let i = 0; i < 150; i++) {
+                    stars.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        r: Math.random() * 1.5 + 0.3,
+                        dx: (Math.random() - 0.5) * 0.15,
+                        dy: (Math.random() - 0.5) * 0.15,
+                        alpha: Math.random() * 0.7 + 0.3,
+                        alphaDir: Math.random() > 0.5 ? 1 : -1
+                    });
+                }
+
+                function drawStars() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    for (const s of stars) {
+                        ctx.beginPath();
+                        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(100, 255, 218, ${s.alpha})`;
+                        ctx.fill();
+
+                        s.x += s.dx;
+                        s.y += s.dy;
+
+                        s.alpha += 0.003 * s.alphaDir;
+                        if (s.alpha > 0.8 || s.alpha < 0.1) s.alphaDir *= -1;
+
+                        if (s.x < 0) s.x = canvas.width;
+                        if (s.x > canvas.width) s.x = 0;
+                        if (s.y < 0) s.y = canvas.height;
+                        if (s.y > canvas.height) s.y = 0;
+                    }
+                    requestAnimationFrame(drawStars);
+                }
+                drawStars();
+            })();
+
+            // 3. 鼠标拖尾闪烁粒子
+            (function initSparkleTrail() {
+                let lastSparkle = 0;
+                document.addEventListener('mousemove', function(e) {
+                    const now = Date.now();
+                    if (now - lastSparkle < 40) return;
+                    lastSparkle = now;
+
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'cursor-sparkle';
+                    const size = Math.random() * 6 + 3;
+                    const colors = ['#64ffda', '#b764ff', '#ff64b7', '#f0c040', '#17c3b2'];
+                    sparkle.style.cssText = `
+                        left: ${e.clientX}px;
+                        top: ${e.clientY}px;
+                        width: ${size}px;
+                        height: ${size}px;
+                        background: ${colors[Math.floor(Math.random() * colors.length)]};
+                        box-shadow: 0 0 ${size * 2}px ${colors[Math.floor(Math.random() * colors.length)]};
+                    `;
+                    document.body.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 900);
+                });
+            })();
+
+            // 4. 卡片 3D 倾斜效果
+            (function initCardTilt() {
+                document.querySelectorAll('.card.glow-border, .card.glow-border-card').forEach(card => {
+                    card.classList.add('tilt-card');
+                    card.addEventListener('mousemove', function(e) {
+                        const rect = this.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        const rotateX = (y - centerY) / centerY * -8;
+                        const rotateY = (x - centerX) / centerX * 8;
+                        this.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02,1.02,1.02)`;
+                    });
+                    card.addEventListener('mouseleave', function() {
+                        this.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+                    });
+                });
+            })();
+
+            // 5. 数字滚动计数
+            (function initCountUp() {
+                const counters = document.querySelectorAll('.count-up');
+                if (!counters.length) return;
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const el = entry.target;
+                            const target = parseInt(el.dataset.target) || 0;
+                            const suffix = el.dataset.suffix || '';
+                            let current = 0;
+                            const step = Math.ceil(target / 40);
+                            const timer = setInterval(() => {
+                                current += step;
+                                if (current >= target) {
+                                    el.textContent = target + suffix;
+                                    clearInterval(timer);
+                                } else {
+                                    el.textContent = current + suffix;
+                                }
+                            }, 30);
+                            observer.unobserve(el);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                counters.forEach(c => observer.observe(c));
+            })();
+
+        });
+    </script>
+</body>
+</html>
