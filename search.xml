@@ -595,9 +595,9 @@
             
             <tag> 光谱响应函数 </tag>
             
-            <tag> py6s </tag>
-            
             <tag> GF-1 </tag>
+            
+            <tag> py6s </tag>
             
             <tag> 大气校正 </tag>
             
@@ -626,9 +626,9 @@
       
         <tags>
             
-            <tag> GF-1 </tag>
-            
             <tag> ENVI </tag>
+            
+            <tag> GF-1 </tag>
             
             <tag> QUAC </tag>
             
@@ -690,8 +690,6 @@
       
         <tags>
             
-            <tag> 遗传算法 </tag>
-            
             <tag> 水质参数反演 </tag>
             
             <tag> 叶绿素 </tag>
@@ -701,6 +699,8 @@
             <tag> MLP </tag>
             
             <tag> K折交叉验证 </tag>
+            
+            <tag> 遗传算法 </tag>
             
         </tags>
       
